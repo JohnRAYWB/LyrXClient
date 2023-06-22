@@ -1,0 +1,8 @@
+.main {
+    margin-bottom: auto;
+    height: auto;
+    background-color: black;
+    color: white;
+    display: flex;
+    flex-direction: row;
+}
