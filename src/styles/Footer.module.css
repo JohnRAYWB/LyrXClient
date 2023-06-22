@@ -3,6 +3,101 @@
     height: auto;
     background-color: black;
     color: white;
+    width: 100%;
+    padding: 100px 50px;
+    display: flex;
+    flex-direction: column;
+}
+
+.topMain {
     display: flex;
     flex-direction: row;
+    justify-content: space-evenly;
+    align-items: flex-start;
+}
+
+.bottomMain {
+    margin-top: 100px;
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    font-size: 12px;
+    cursor: default;
+}
+
+.columnItems {
+    display: flex;
+    flex-direction: column;
+    width: 200px;
+    justify-content: center;
+    align-items: flex-start;
+}
+
+.listTitle {
+    color: #919496;
+    text-transform: uppercase;
+}
+
+.listColumn {
+    margin-top: 10px;
+    list-style-type: none;
+}
+
+.listLi {
+    margin: 20px 0;
+}
+
+.socialsList {
+    display: flex;
+    flex-direction: row;
+    list-style-type: none;
+}
+
+.socialsLi {
+    background-color: #222326;
+    border-radius: 50%;
+    width: 54px;
+    height: 54px;
+    display: inline-flex;
+    box-sizing: border-box;
+    justify-content: center;
+    align-items: center;
+    margin: 20px;
+}
+
+.listLi:hover {
+    color: #F64141;
+    transition-duration: 400ms;
+}
+
+.socialsLi:hover {
+    color: #F64141;
+    transition-duration: 400ms;
+}
+
+.bottomItem {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.bottomLinks {
+    display: flex;
+    flex-direction: row;
+    list-style-type: none;
+    color: #919496;
+}
+
+.linkLi {
+    margin: 0 20px;
+}
+
+.rights {
+    color: #919496;
+    margin: 0 30px 0 auto;
+}
+
+.linkLi:hover {
+    color: #F64141;
+    transition-duration: 400ms;
 }
