@@ -1,6 +1,6 @@
 .header {
     height: auto;
-    background-color: black;
+    background-color: #0a0a0a;
     display: flex;
     flex-direction: row;
     padding: 20px 100px;

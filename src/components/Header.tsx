@@ -1,8 +1,10 @@
 import styles from "../styles/Header.module.css"
 import Image from "next/image";
 import Link from "next/link";
+import {useRouter} from "next/router";
 
 const Header = () => {
+
     return (
         <div className={styles.header}>
             <Image width={180} height={63} src={'/../public/logo1.png'} alt={'logo'}/>
@@ -17,10 +19,10 @@ const Header = () => {
                     |
                 </li>
                 <li className={styles.linkNavbar}>
-                    <Link href={'/'}>Login</Link>
+                    <Link href={'/pth/auth?activeKey=1'}>Login</Link>
                 </li>
                 <li className={styles.linkNavbar}>
-                    <Link href={'/'}>Sign Up</Link>
+                    <Link href={'/pth/auth?activeKey=2'}>Sign Up</Link>
                 </li>
             </ul>
         </div>

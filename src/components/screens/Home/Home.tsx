@@ -1,4 +1,4 @@
-import styles from "@/components/screens/Home/Home.module.css";
+import styles from "./Home.module.css"
 import Image from "next/image";
 import Link from "next/link";
 import InstagramIcon from "@mui/icons-material/Instagram";
@@ -30,17 +30,17 @@ const HomePage = () => {
                     {<ul className={styles.bodyList}>
                         <li className={styles.listItem}>
                             <Image width={200} height={200} src={'/../public/body1.jpg'} alt={'body'}/>
-                            <h3 className={styles.itemText}>For everyone</h3>
-                            <p className={styles.itemText}>Parent control can protect our little friends</p>
+                            <h3 className={styles.itemText}>High quality sound</h3>
+                            <p className={styles.itemText}>Here you can find the best music in HD. It good value for money</p>
                         </li>
                         <li className={styles.listItem}>
                             <Image width={300} height={200} src={'/../public/body_4.jpg'} alt={'body'}/>
-                            <h3 className={styles.itemText}>Suit for your pocket</h3>
-                            <p className={styles.itemText}>You can take your little personal world anywhere you want</p>
+                            <h3 className={styles.itemText}>Download for listening in offline</h3>
+                            <p className={styles.itemText}>Play at your home or big party</p>
                         </li>
                         <li className={styles.listItem}>
                             <Image width={300} height={200} src={'/../public/body_3.jpg'} alt={'body'}/>
-                            <h3 className={styles.itemText}>Suit for your pocket</h3>
+                            <h3 className={styles.itemText}>Fits in your pocket</h3>
                             <p className={styles.itemText}>You can take your little personal world anywhere you want</p>
                         </li>
                         <li className={styles.listItem}>

@@ -1,0 +1,44 @@
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background-image: url("../../public/authBack.jpg");
+    background-position: center, center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    width: 100%;
+    height: auto;
+    padding-bottom: 70px;
+}
+
+.form {
+    margin-top: 70px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: 650px;
+    padding: 30px 75px;
+    background-color: #29292d;
+    border-radius: 10px;
+}
+
+.formImage {
+    margin: 40px 0;
+}
+
+.formItems {
+    width: 300px;
+    height: auto;
+}
+
+.formLink {
+    font-size: 13px;
+    color: #77787B;
+    margin-top: auto;
+}
+
+.formLink:hover {
+    color: #F64141;
+    transition-duration: 400ms;
+}
