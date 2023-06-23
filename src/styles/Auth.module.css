@@ -31,14 +31,3 @@
     width: 300px;
     height: auto;
 }
-
-.formLink {
-    font-size: 13px;
-    color: #77787B;
-    margin-top: auto;
-}
-
-.formLink:hover {
-    color: #F64141;
-    transition-duration: 400ms;
-}

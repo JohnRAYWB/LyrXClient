@@ -2,6 +2,7 @@ import styles from "./AuthForm.module.css"
 import React, {useEffect, useState} from "react";
 import {Button, Form, Input} from "antd";
 import {LockOutlined, UserOutlined} from "@ant-design/icons";
+import Link from "next/link";
 
 export const SignInForm: React.FC = () => {
 
@@ -18,6 +19,7 @@ export const SignInForm: React.FC = () => {
     };
 
     return (
+        <div className={styles.form}>
             <Form form={form} name="vertical_login" layout="vertical" onFinish={onFinish}>
                 <Form.Item
                     className={styles.holders}
@@ -53,7 +55,9 @@ export const SignInForm: React.FC = () => {
                         </Button>
                     )}
                 </Form.Item>
+                <Link className={styles.formLink} href={'/'}>Forgot your password?</Link>
             </Form>
+        </div>
     );
 };
 

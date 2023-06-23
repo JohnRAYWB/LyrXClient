@@ -19,10 +19,10 @@ const Header = () => {
                     |
                 </li>
                 <li className={styles.linkNavbar}>
-                    <Link href={'/pth/auth?activeKey=1'}>Login</Link>
+                    <Link href={'/pth/auth?form=signin'}>Sign In</Link>
                 </li>
                 <li className={styles.linkNavbar}>
-                    <Link href={'/pth/auth?activeKey=2'}>Sign Up</Link>
+                    <Link href={'/pth/auth?form=signup'}>Sign Up</Link>
                 </li>
             </ul>
         </div>

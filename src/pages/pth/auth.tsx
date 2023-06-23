@@ -5,14 +5,13 @@ import Head from "next/head";
 import {ConfigProvider, Tabs} from "antd";
 import styles from "../../styles/Auth.module.css"
 import Image from "next/image";
-import Link from "next/link";
 import SignUpForm from "@/components/screens/Auth/SignUpForm";
 import {useRouter} from "next/router";
 
 const Auth: NextPage = () => {
 
     const route = useRouter()
-    const activeKey = route.query.activeKey
+    const activeKey = route.query.form
 
     return (
         <>
@@ -28,24 +27,23 @@ const Auth: NextPage = () => {
                                 colorPrimary: '#F64141'}}}>
                             <Tabs
                                 tabBarStyle={{color: 'white'}}
-                                defaultActiveKey={activeKey.toString()}
+                                defaultActiveKey={activeKey}
                                 centered
                                 items={[
                                     {
                                         label: "Sign In",
-                                        key: '1',
+                                        key: 'signin',
                                         children: <SignInForm/>
                                     },
                                     {
                                         label: "Sign Up",
-                                        key: '2',
+                                        key: 'signup',
                                         children: <SignUpForm/>
                                     },
                                 ]}
                             />
                         </ConfigProvider>
                     </div>
-                    <Link className={styles.formLink} href={'/'}>Forgot your password?</Link>
                 </div>
             </div>
         </>
