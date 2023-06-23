@@ -9,15 +9,15 @@
     background-size: cover;
     width: 100%;
     height: auto;
-    padding-bottom: 70px;
+    padding-bottom: 50px;
 }
 
 .form {
-    margin-top: 70px;
+    margin-top: 50px;
     display: flex;
     flex-direction: column;
     align-items: center;
-    height: 650px;
+    height: 690px;
     padding: 30px 75px;
     background-color: #29292d;
     border-radius: 10px;
@@ -30,4 +30,18 @@
 .formItems {
     width: 300px;
     height: auto;
+}
+
+.formLink {
+    padding: 10px 20px;
+    border-radius: 5px;
+    background-color: inherit;
+    color: #77787B;
+    margin: auto 0 0 auto;
+}
+
+.formLink:hover {
+    background-color: #F64141;
+    color: white;
+    transition-duration: 400ms;
 }

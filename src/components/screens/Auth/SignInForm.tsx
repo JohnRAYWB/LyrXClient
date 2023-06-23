@@ -9,7 +9,6 @@ export const SignInForm: React.FC = () => {
     const [form] = Form.useForm();
     const [, forceUpdate] = useState({});
 
-    // To disable submit button at the beginning.
     useEffect(() => {
         forceUpdate({});
     }, []);

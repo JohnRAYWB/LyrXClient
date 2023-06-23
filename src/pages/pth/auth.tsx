@@ -7,6 +7,7 @@ import styles from "../../styles/Auth.module.css"
 import Image from "next/image";
 import SignUpForm from "@/components/screens/Auth/SignUpForm";
 import {useRouter} from "next/router";
+import Link from "next/link";
 
 const Auth: NextPage = () => {
 
@@ -44,6 +45,7 @@ const Auth: NextPage = () => {
                             />
                         </ConfigProvider>
                     </div>
+                    <Link className={styles.formLink} href={'/'}>Back</Link>
                 </div>
             </div>
         </>
