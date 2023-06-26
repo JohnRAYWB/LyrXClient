@@ -1,0 +1,70 @@
+.main {
+    color: white;
+    height: auto;
+    display: flex;
+    flex-direction: column;
+    user-select: none;
+}
+
+.container {
+    background-color: #121212;
+    border-radius: 10px;
+    padding: 10px 0 10px 24px;
+    width: 300px;
+    margin: 10px 0 0 10px;
+}
+
+.sideBarTop {
+    display: flex;
+    flex-direction: row;
+    padding: 5px;
+    align-items: center;
+}
+
+.sideBarTop:hover {
+    color: #F64141;
+}
+
+.sideBarTopElem {
+    margin-left: 20px;
+}
+
+.input {
+    padding: 0;
+    margin-left: 20px;
+    font-size: 18px;
+    background-color: inherit;
+    color: white;
+}
+
+.input::placeholder {
+    color: white;
+}
+
+.input:hover:focus {
+    color: #F64141;
+}
+
+.dropDown {
+    width: 300px;
+    color: white;
+    background-color: #121212;
+    margin: 10px 0 0 10px;
+    border-radius: 10px;
+    padding: 5px 0;
+}
+
+.logoutButton {
+    background-color: inherit;
+    border: none;
+    width: 100%;
+    cursor: pointer;
+    text-align: start;
+    padding: 10px 0;
+    color: white;
+    font-size: 16px;
+}
+
+.logoutButton:hover {
+    color: #F64141;
+}

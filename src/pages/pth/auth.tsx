@@ -25,7 +25,9 @@ const Auth: NextPage = () => {
                     <Image className={styles.formImage} width={224} height={79} src={'/../public/logo1.png'} alt={'logo'}/>
                     <div className={styles.formItems}>
                         <ConfigProvider theme={{token: {
-                                colorPrimary: '#F64141'}}}>
+                                colorPrimary: '#F64141',
+                                colorBgBase: '#383838',
+                        }}}>
                             <Tabs
                                 tabBarStyle={{color: 'white'}}
                                 defaultActiveKey={activeKey}

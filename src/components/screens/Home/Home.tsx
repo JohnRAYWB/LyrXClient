@@ -11,7 +11,7 @@ const HomePage = () => {
     return (
         <div>
             <title>LyrX | Welcome</title>
-            <div>
+            <div className={styles.main}>
                 <Header/>
                 <div className={styles.banner}>
                     <div className={styles.bannerContainer}>

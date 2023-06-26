@@ -1,20 +1,44 @@
 import React, {useEffect, useState} from 'react';
-import {Button, Form, Input} from "antd";
+import {Button, Form, Input, notification} from "antd";
 import styles from "@/components/screens/Auth/AuthForm.module.css";
-import {LockOutlined, UserOutlined} from "@ant-design/icons";
+import {LockOutlined, MailOutlined, UserOutlined} from "@ant-design/icons";
 import {useRouter} from "next/router";
+import * as Api from "@/api";
+import {setCookie} from "nookies";
+import {signUpDto} from "@/api/dto/auth.dto";
 
 const SignUpForm = () => {
     const [form] = Form.useForm();
     const [, forceUpdate] = useState({});
 
-    // To disable submit button at the beginning.
     useEffect(() => {
         forceUpdate({});
     }, []);
 
-    const onFinish = (values: any) => {
-        console.log('Finish:', values);
+    const onFinish = async (values: signUpDto) => {
+
+        try {
+            const {access_token} = await Api.auth.signUp(values)
+            notification.success({
+                message: 'Login success!',
+                description: 'Route to hub...',
+                duration: 2
+            })
+
+            setCookie(null, '_token', access_token, {
+                path: '/'
+            })
+
+            location.href = '/pth/hub'
+        } catch (e) {
+            console.warn('Err', e)
+
+            notification.error({
+                message: 'Denied',
+                description: 'Invalid email or password',
+                duration: 2
+            })
+        }
     };
 
     const router = useRouter()
@@ -26,14 +50,22 @@ const SignUpForm = () => {
                     name="email"
                     rules={[{ required: true, message: 'Please input your email!'}]}
                 >
-                    <Input bordered={false} placeholder="Email" />
+                    <Input
+                        prefix={<MailOutlined className="site-form-item-icon"/>}
+                        className={styles.holdersInput}
+                        bordered={false}
+                        placeholder="Email" />
                 </Form.Item>
                 <Form.Item
                     className={styles.holders}
                     name="username"
                     rules={[{ required: true, message: 'Please input your username!' }]}
                 >
-                    <Input bordered={false} placeholder="Username" />
+                    <Input
+                        prefix={<UserOutlined className="site-form-item-icon" />}
+                        className={styles.holdersInput}
+                        bordered={false}
+                        placeholder="Username" />
                 </Form.Item>
                 <Form.Item
                     className={styles.holders}
@@ -41,6 +73,7 @@ const SignUpForm = () => {
                     rules={[{ required: true, message: 'Please input your password!' }]}
                 >
                     <Input.Password
+                        className={styles.holdersInput}
                         bordered={false}
                         prefix={<LockOutlined className="site-form-item-icon" />}
                         type="password"
@@ -57,9 +90,8 @@ const SignUpForm = () => {
                                 !form.isFieldsTouched(true) ||
                                 !!form.getFieldsError().filter(({ errors }) => errors.length).length
                             }
-                            onClick={() => router.push('hub')}
                         >
-                            Log in
+                            Registration
                         </Button>
                     )}
                 </Form.Item>

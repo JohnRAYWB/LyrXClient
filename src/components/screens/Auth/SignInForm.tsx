@@ -1,8 +1,11 @@
-import styles from "./AuthForm.module.css"
 import React, {useEffect, useState} from "react";
-import {Button, Form, Input} from "antd";
-import {LockOutlined, UserOutlined} from "@ant-design/icons";
+import {Button, Form, Input, notification} from "antd";
+import {LockOutlined, MailOutlined} from "@ant-design/icons";
+import {setCookie} from "nookies";
 import Link from "next/link";
+import styles from "./AuthForm.module.css"
+import {signInDto} from "@/api/dto/auth.dto";
+import * as Api from "@/api"
 
 export const SignInForm: React.FC = () => {
 
@@ -13,10 +16,31 @@ export const SignInForm: React.FC = () => {
         forceUpdate({});
     }, []);
 
-    const onFinish = (values: any) => {
-        console.log('Finish:', values);
-    };
+    const onFinish = async (values: signInDto) => {
 
+        try {
+            const {access_token} = await Api.auth.signIn(values)
+            notification.success({
+                message: 'Login success!',
+                description: 'Route to hub...',
+                duration: 2
+            })
+
+            setCookie(null, '_token', access_token, {
+                path: '/'
+            })
+
+            location.href = '/pth/hub'
+        } catch (e) {
+            console.warn('Err', e)
+
+            notification.error({
+                message: 'Denied',
+                description: 'Invalid email or password',
+                duration: 2
+            })
+        }
+    };
     return (
         <div className={styles.form}>
             <Form form={form} name="vertical_login" layout="vertical" onFinish={onFinish}>
@@ -25,7 +49,10 @@ export const SignInForm: React.FC = () => {
                     name="email"
                     rules={[{ required: true, message: 'Please input your email!' }]}
                 >
-                    <Input bordered={false} prefix={<UserOutlined className="site-form-item-icon" />} placeholder="Email" />
+                    <Input
+                        className={styles.holdersInput}
+                        bordered={false}
+                        prefix={<MailOutlined className="site-form-item-icon" />} placeholder="Email" />
                 </Form.Item>
                 <Form.Item
                     className={styles.holders}
@@ -33,6 +60,7 @@ export const SignInForm: React.FC = () => {
                     rules={[{ required: true, message: 'Please input your password!' }]}
                 >
                     <Input.Password
+                        className={styles.holdersInput}
                         bordered={false}
                         prefix={<LockOutlined className="site-form-item-icon" />}
                         type="password"
@@ -50,7 +78,7 @@ export const SignInForm: React.FC = () => {
                                 !!form.getFieldsError().filter(({ errors }) => errors.length).length
                             }
                         >
-                            Log in
+                            Login
                         </Button>
                     )}
                 </Form.Item>
