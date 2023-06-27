@@ -46,6 +46,7 @@
 
 .listLi {
     margin: 20px 0;
+    transition-duration: 400ms;
 }
 
 .socialsList {
@@ -59,11 +60,13 @@
     border-radius: 50%;
     width: 54px;
     height: 54px;
-    display: inline-flex;
-    box-sizing: border-box;
+    padding-top: 4px;
+    display: flex;
+    flex-direction: row;
     justify-content: center;
     align-items: center;
     margin: 20px;
+    transition-duration: 400ms;
 }
 
 .listLi:hover {
@@ -91,6 +94,7 @@
 
 .linkLi {
     margin: 0 20px;
+    transition-duration: 400ms;
 }
 
 .rights {

@@ -1,3 +1,6 @@
+import {tracksListDto} from "@/api/dto/track.dto";
+import {playlistsCollectionDto} from "@/api/dto/playlist.dto";
+
 export interface signInDto {
     email: string,
     password: string
@@ -18,14 +21,25 @@ export interface User {
     about: string
     avatar: string
     birth: Date
-    roles: []
+    roles: rolesDto
     ban: boolean
-    tracks: []
-    tracksCollection: []
-    playlists: []
-    playlistsCollection: []
+    banReason: String[]
+    tracks: tracksListDto
+    tracksCollection: tracksListDto
+    playlists: playlistsCollectionDto
+    playlistsCollection: playlistsCollectionDto
     albums: []
     albumCollections: []
     followers: []
     followings: []
+}
+
+export interface roleDto {
+    _id: string
+    role: string
+    description: string
+}
+
+export interface rolesDto {
+    roles: roleDto[]
 }

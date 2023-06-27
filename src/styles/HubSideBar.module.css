@@ -19,10 +19,12 @@
     flex-direction: row;
     padding: 5px;
     align-items: center;
+    transition-duration: 400ms;
 }
 
 .sideBarTop:hover {
     color: #F64141;
+    transition-duration: 400ms;
 }
 
 .sideBarTopElem {
@@ -43,6 +45,7 @@
 
 .input:hover:focus {
     color: #F64141;
+    transition-duration: 400ms;
 }
 
 .dropDown {
@@ -51,7 +54,7 @@
     background-color: #121212;
     margin: 10px 0 0 10px;
     border-radius: 10px;
-    padding: 5px 0;
+    padding: 10px 0;
 }
 
 .logoutButton {
@@ -63,8 +66,4 @@
     padding: 10px 0;
     color: white;
     font-size: 16px;
-}
-
-.logoutButton:hover {
-    color: #F64141;
 }

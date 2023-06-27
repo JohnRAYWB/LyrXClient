@@ -1,0 +1,83 @@
+.main {
+    background-color: #121212;
+    border-radius: 10px;
+    padding: 10px 10px 10px 20px;
+    width: 300px;
+    margin: 10px 0 0 10px;
+    color: white;
+}
+
+.container {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 16px;
+    margin: 10px 0 10px 2px;
+    padding: 10px 10px 10px 5px;
+}
+
+.elem {
+    display: flex;
+    flex-direction: row;
+    transition-duration: 400ms;
+}
+
+.elem:hover {
+    color: #F64141;
+    transition-duration: 400ms;
+}
+
+.elemLink {
+    margin-left: 20px;
+}
+
+.elemAdd {
+    padding: 5px;
+    border-radius: 5px;
+    box-shadow: 0 0 3px #813232;
+    transition-duration: 500ms;
+}
+
+.elemAdd:hover {
+    box-shadow: 0 0 10px #813232;
+    transition-duration: 500ms;
+    background-color: #F64141;
+    border-radius: 5px;
+    padding: 5px;
+}
+
+.firstPlaylist {
+    background-color: #232323;
+    border-radius: 10px;
+    padding: 15px;
+    display: flex;
+    flex-direction: column;
+}
+
+.firstPlaylistText {
+    font-size: 15px;
+    margin: 5px 0;
+}
+
+.firstPlaylistLink {
+    display: flex;
+    justify-content: center;
+    background-color: inherit;
+    border-radius: 50px;
+    color: white;
+    padding: 10px;
+    margin: 15px 0 5px 0;
+    transition-duration: 400ms;
+    width: 150px;
+    font-size: 18px;
+    box-shadow: 0 0 5px #813232;
+}
+
+.firstPlaylistLink:hover {
+    background-color: #F64141;
+    box-shadow: 0 0 15px #813232;
+    color: white;
+    transition-duration: 400ms;
+
+}

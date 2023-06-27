@@ -49,6 +49,7 @@
     background-color: white;
     border-radius: 50%;
     color: black;
+    transition-duration: 400ms;
 }
 
 .icon:hover {

@@ -39,6 +39,7 @@
     background-color: inherit;
     color: #77787B;
     margin: auto 0 0 auto;
+    transition-duration: 400ms;
 }
 
 .formLink:hover {

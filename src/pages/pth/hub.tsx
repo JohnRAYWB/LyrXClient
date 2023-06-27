@@ -18,7 +18,7 @@ const Hub: NextPage = () => {
 };
 
 
-export const getServerSideProps = async (ctx: GetServerSidePropsContext) => {
+/*export const getServerSideProps = async (ctx: GetServerSidePropsContext) => {
 
     const authProps = await checkAuth(ctx)
 
@@ -29,6 +29,6 @@ export const getServerSideProps = async (ctx: GetServerSidePropsContext) => {
     return {
         props: {}
     }
-}
+}*/
 
 export default Hub;
