@@ -1,27 +1,28 @@
-import styles from "./Home.module.css"
+import styles from "./styles/Home.module.css"
 import Image from "next/image";
 import Link from "next/link";
 import InstagramIcon from "@mui/icons-material/Instagram";
 import TwitterIcon from "@mui/icons-material/Twitter";
 import FacebookIcon from "@mui/icons-material/Facebook";
-import Footer from "@/components/Footer";
-import Header from "@/components/Header";
+import HomeFooter from "./components/HomeFooter";
+import HomeHeader from "./components/HomeHeader";
+import {FacebookOutlined, InstagramOutlined, TwitterOutlined} from "@ant-design/icons";
 
 const HomePage = () => {
     return (
         <div>
             <title>LyrX | Welcome</title>
             <div className={styles.main}>
-                <Header/>
+                <HomeHeader/>
                 <div className={styles.banner}>
                     <div className={styles.bannerContainer}>
                         <h1 className={styles.secondTitle}>Let the music control your mood</h1>
                         <h1 className={styles.mainTitle}>music | LyrX | platform</h1>
                         <p className={styles.socialsTitle}>Check our socials</p>
                         <ul className={styles.socialsIcons}>
-                            <li><Link className={styles.icon} href={'/'}><InstagramIcon/></Link></li>
-                            <li><Link className={styles.icon} href={'/'}><TwitterIcon/></Link></li>
-                            <li><Link className={styles.icon} href={'/'}><FacebookIcon/></Link></li>
+                            <li><Link className={styles.icon} href={'/'}><InstagramOutlined/></Link></li>
+                            <li><Link className={styles.icon} href={'/'}><TwitterOutlined/></Link></li>
+                            <li><Link className={styles.icon} href={'/'}><FacebookOutlined/></Link></li>
                         </ul>
                     </div>
                 </div>
@@ -50,7 +51,7 @@ const HomePage = () => {
                         </li>
                     </ul>}
                 </div>
-                <Footer/>
+                <HomeFooter/>
             </div>
         </div>
     );

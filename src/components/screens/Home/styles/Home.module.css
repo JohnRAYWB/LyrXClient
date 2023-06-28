@@ -4,7 +4,7 @@
 
 .banner {
     padding: 50px 0;
-    background-image: url("../../../../public/banner_full.jpg");
+    background-image: url("../../../../../public/banner_full.jpg");
     background-position: center, center;
     background-repeat: no-repeat;
     background-size: cover;
@@ -44,6 +44,7 @@
 .icon {
     display: flex;
     flex-direction: row;
+    font-size: 24px;
     padding: 15px;
     margin: 0 15px;
     background-color: white;

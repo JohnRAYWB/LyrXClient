@@ -1,8 +1,8 @@
-import styles from "../styles/Header.module.css"
+import styles from "../styles/HomeHeader.module.css"
 import Image from "next/image";
 import Link from "next/link";
 
-const Header = () => {
+const HomeHeader = () => {
 
     return (
         <div className={styles.header}>
@@ -28,4 +28,4 @@ const Header = () => {
     );
 };
 
-export default Header;
+export default HomeHeader;

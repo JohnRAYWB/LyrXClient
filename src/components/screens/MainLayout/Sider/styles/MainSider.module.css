@@ -9,29 +9,36 @@
 .container {
     background-color: #121212;
     border-radius: 10px;
-    padding: 10px 0 10px 24px;
+    padding: 10px 0 10px 34px;
     width: 300px;
-    margin: 10px 0 0 10px;
+    margin: 10px;
 }
 
-.sideBarTop {
+.containerRow {
     display: flex;
     flex-direction: row;
-    padding: 5px;
+    padding: 10px 0 10px 0;
     align-items: center;
     transition-duration: 400ms;
 }
 
-.sideBarTop:hover {
+.containerRow:hover {
     color: #F64141;
     transition-duration: 400ms;
 }
 
-.sideBarTopElem {
+.rowElement {
     margin-left: 20px;
+    font-size: 16px;
+    transition-duration: 0ms;
 }
 
-.input {
+.rowElement:hover {
+    transition-duration: 400ms;
+    color: #F64141;
+}
+
+.rowInput {
     padding: 0;
     margin-left: 20px;
     font-size: 18px;
@@ -39,25 +46,24 @@
     color: white;
 }
 
-.input::placeholder {
+.rowInput::placeholder {
     color: white;
 }
 
-.input:hover:focus {
+.rowInput:hover {
     color: #F64141;
     transition-duration: 400ms;
 }
 
 .dropDown {
     width: 300px;
-    color: white;
     background-color: #121212;
-    margin: 10px 0 0 10px;
+    margin-left: 10px;
     border-radius: 10px;
     padding: 10px 0;
 }
 
-.logoutButton {
+.dropDownLogout {
     background-color: inherit;
     border: none;
     width: 100%;
@@ -65,5 +71,5 @@
     text-align: start;
     padding: 10px 0;
     color: white;
-    font-size: 16px;
+    font-size: 14px;
 }

@@ -1,11 +1,12 @@
-import styles from "../styles/Footer.module.css"
 import Image from "next/image";
 import Link from "next/link";
 import InstagramIcon from "@mui/icons-material/Instagram";
 import TwitterIcon from "@mui/icons-material/Twitter";
 import FacebookIcon from "@mui/icons-material/Facebook";
+import styles from "../styles/HomeFooter.module.css"
+import {FacebookOutlined, InstagramOutlined, TwitterOutlined} from "@ant-design/icons";
 
-const Footer = () => {
+const HomeFooter = () => {
     return (
         <div className={styles.main}>
             <div className={styles.topMain}>
@@ -30,9 +31,9 @@ const Footer = () => {
                 </div>
                 <div className={styles.columnItems}>
                     <ul className={styles.socialsList}>
-                        <li className={styles.socialsLi}><Link href={'/'}><InstagramIcon/></Link></li>
-                        <li className={styles.socialsLi}><Link href={'/'}><TwitterIcon/></Link></li>
-                        <li className={styles.socialsLi}><Link href={'/'}><FacebookIcon/></Link></li>
+                        <li className={styles.socialsLi}><Link href={'/'}><InstagramOutlined/></Link></li>
+                        <li className={styles.socialsLi}><Link href={'/'}><TwitterOutlined/></Link></li>
+                        <li className={styles.socialsLi}><Link href={'/'}><FacebookOutlined/></Link></li>
                     </ul>
                 </div>
             </div>
@@ -50,4 +51,4 @@ const Footer = () => {
     );
 };
 
-export default Footer;
+export default HomeFooter;

@@ -1,7 +1,6 @@
 .main {
     background-color: #121212;
     border-radius: 10px;
-    padding: 10px 10px 10px 20px;
     width: 300px;
     margin: 10px 0 0 10px;
     color: white;
@@ -14,7 +13,7 @@
     align-items: center;
     font-size: 16px;
     margin: 10px 0 10px 2px;
-    padding: 10px 10px 10px 5px;
+    padding: 20px 20px 20px 34px;
 }
 
 .elem {
@@ -30,6 +29,12 @@
 
 .elemLink {
     margin-left: 20px;
+    transition-duration: 0ms;
+}
+
+.elemLink:hover {
+    color: #F64141;
+    transition-duration: 400ms;
 }
 
 .elemAdd {
@@ -50,7 +55,8 @@
 .firstPlaylist {
     background-color: #232323;
     border-radius: 10px;
-    padding: 15px;
+    margin: 10px 20px 20px 20px;
+    padding: 20px;
     display: flex;
     flex-direction: column;
 }
@@ -68,16 +74,15 @@
     color: white;
     padding: 10px;
     margin: 15px 0 5px 0;
-    transition-duration: 400ms;
     width: 150px;
     font-size: 18px;
     box-shadow: 0 0 5px #813232;
+    transition-duration: 500ms;
 }
 
 .firstPlaylistLink:hover {
     background-color: #F64141;
     box-shadow: 0 0 15px #813232;
     color: white;
-    transition-duration: 400ms;
-
+    transition-duration: 500ms;
 }
