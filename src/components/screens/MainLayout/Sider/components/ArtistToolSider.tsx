@@ -8,7 +8,7 @@ const ArtistToolSider: React.FC<rolesDto> = ({roles}) => {
 
     if(roles.find(role => role.role === 'artist')) {
         return (
-            <main className={styles.main}>
+            <div className={styles.main}>
                 <div className={styles.title}>
                     <ToolOutlined className={styles.titleIcon}/>
                     Artist tool
@@ -37,7 +37,7 @@ const ArtistToolSider: React.FC<rolesDto> = ({roles}) => {
                         <Link href={'/'}><PlusOutlined className={styles.rowAdd}/></Link>
                     </div>
                 </div>
-            </main>
+            </div>
         );
     }
 

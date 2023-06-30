@@ -11,7 +11,6 @@ const MenuSider: React.FC<menuItems> = ({items}) => {
     const [current, setCurrent] = useState('')
 
     return (
-        <div>
             <div className={styles.main}>
                 <div>
                     <ConfigProvider theme={{
@@ -28,7 +27,6 @@ const MenuSider: React.FC<menuItems> = ({items}) => {
                     </ConfigProvider>
                 </div>
             </div>
-        </div>
     );
 };
 

@@ -2,6 +2,7 @@ import HomePage from "../components/screens/Home/Home"
 import {GetServerSidePropsContext} from "next";
 import nookies from "nookies"
 import axios from "@/core/axios";
+import React from "react";
 
 export default function Home() {
     return <HomePage/>

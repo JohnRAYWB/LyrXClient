@@ -1,7 +1,7 @@
 import React from 'react';
 import {MenuProps} from "antd";
 import {UserOutlined} from "@ant-design/icons";
-import styles from "../screens/MainLayout/Sider/styles/MainSider.module.css";
+import styles from "../../styles/MainSider.module.css";
 import {onClickLogout} from "@/hook/userHandlers";
 
 export const profileItems: MenuProps['items'] = [

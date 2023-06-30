@@ -13,7 +13,7 @@ const PlaylistSider: React.FC<playlistLength> = ({playlists= 0}) => {
 
     if (playlists.length !== 0) {
         return (
-            <main className={styles.main}>
+            <div className={styles.main}>
                 <div className={styles.container}>
                     <div className={styles.elem}>
                         <AppstoreOutlined rotate={45}/>
@@ -21,7 +21,7 @@ const PlaylistSider: React.FC<playlistLength> = ({playlists= 0}) => {
                     </div>
                     <Link className={styles.elemAdd} href={'/'}><PlusOutlined/></Link>
                 </div>
-            </main>
+            </div>
         )
     }
 
@@ -30,7 +30,7 @@ const PlaylistSider: React.FC<playlistLength> = ({playlists= 0}) => {
             <div className={styles.container}>
                 <div className={styles.elem}>
                     <AppstoreOutlined rotate={45}/>
-                    <Link className={styles.elemLink} href={'/'}>Playlist collection</Link>
+                    <Link className={styles.elemLink} href={'/pth/hub/track'}>Playlist collection</Link>
                 </div>
                 <Link href={'/'}><PlusOutlined className={styles.elemAdd}/></Link>
             </div>

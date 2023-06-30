@@ -1,8 +1,77 @@
 .main {
     background-color: #121212;
-    width: 1000px;
-    height: 50%;
-    margin: 10px;
     border-radius: 10px 10px 0 0;
+    margin-top: 10px;
+    user-select: none;
+}
+
+.container {
+    display: flex;
+    flex-direction: row;
     color: white;
+    align-items: center;
+    justify-content: space-between;
+    height: 90px;
+    padding: 0 50px;
+    font-size: 20px;
+}
+
+.linksContainer {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 250px;
+    font-size: 14px;
+}
+
+.link {
+    color: white;
+    text-transform: uppercase;
+    transition-duration: 400ms;
+}
+
+.link:hover {
+    color: #F64141;
+    transition-duration: 400ms;
+    text-shadow: 1px 1px 5px #F64141;
+}
+
+.navButtons {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    width: 80px;
+}
+
+.navButton {
+    background-color: inherit;
+    border: none;
+}
+
+.disabledButtonIcon {
+    background-color: #29292d;
+    padding: 10px;
+    border-radius: 50%;
+    font-size: 16px;
+    color: #353535;
+}
+
+.buttonIcon {
+    background-color: #29292d;
+    padding: 10px;
+    border-radius: 50%;
+    box-shadow: 0 0 3px #813232;
+    transition-duration: 400ms;
+}
+
+.buttonIcon:hover {
+    background-color: #F64141;
+    box-shadow: 0 0 3px #813232;
+    color: white;
+    transition-duration: 400ms;
+}
+
+.navName {
+    color: #404040;
 }

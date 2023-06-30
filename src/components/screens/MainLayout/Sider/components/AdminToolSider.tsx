@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 import MenuSider from "./MenuSider";
-import {albumItems, genreItems, playlistItems, trackItems, userItems} from "@/components/MenuItems/AdminItems";
+import {albumItems, genreItems, playlistItems, trackItems, userItems} from "./MenuItems/AdminItems";
 import styles from "../styles/ToolSider.module.css"
 import {rolesDto} from "@/api/dto/auth.dto";
 import {ToolOutlined} from "@ant-design/icons";
@@ -11,7 +11,7 @@ const AdminToolSider: React.FC<rolesDto> = ({roles}) => {
 
     if(roles.find(role => role.role === 'admin')) {
         return (
-            <main className={styles.main}>
+            <div className={styles.main}>
                 <div className={styles.title}>
                     <ToolOutlined className={styles.titleIcon}/>
                     Admin tool
@@ -23,7 +23,7 @@ const AdminToolSider: React.FC<rolesDto> = ({roles}) => {
                     <MenuSider items={playlistItems}/>
                     <MenuSider items={albumItems}/>
                 </div>
-            </main>
+            </div>
         )
     }
 

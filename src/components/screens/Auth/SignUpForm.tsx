@@ -41,8 +41,6 @@ const SignUpForm = () => {
         }
     };
 
-    const router = useRouter()
-
     return (
             <Form form={form} name="vertical_login" layout="vertical" onFinish={onFinish}>
                 <Form.Item

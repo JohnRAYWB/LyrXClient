@@ -1,0 +1,14 @@
+.main {
+    background-image: linear-gradient(to bottom, rgb(49, 49, 49), rgb(17, 17, 17));
+    margin: 0 50px;
+    padding: 30px;
+}
+
+.footer {
+    text-align: center;
+    background-color: #111111;
+    margin: 0 50px 10px 50px;
+    border-radius: 0 0 10px 10px;
+    color: #404040;
+    user-select: none;
+}

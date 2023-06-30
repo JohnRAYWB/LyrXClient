@@ -10,18 +10,13 @@ export interface trackDto {
     _id: string;
     name: string;
     description: string
-    artist: User;
+    artist: string;
     listens: number;
     favorites: number;
-    // genre: string; !!!!!!!!!!!!!
+    genre: [];
     audio: string;
-    picture: string
-    comments: commentDto[]
-    // albums: []; !!!!!!!!!!!!!
+    image: string
+    comments: []
+    albums: [];
     protectedDeletion: boolean
-}
-
-export interface tracksListDto {
-    tracks: trackDto[]
-    error: string
 }

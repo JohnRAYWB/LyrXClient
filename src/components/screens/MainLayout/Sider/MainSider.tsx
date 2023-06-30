@@ -7,7 +7,7 @@ import PlaylistSider from "./components/PlaylistSider";
 import {getUserProps, getPlaylistsCollection, onClickLogout} from "@/hook/userHandlers";
 import AdminToolSider from "./components/AdminToolSider";
 import MenuSider from "./components/MenuSider";
-import {profileItems} from "@/components/MenuItems/ProfileItem";
+import {profileItems} from "./components/MenuItems/ProfileItem";
 import ArtistToolSider from "./components/ArtistToolSider";
 
 const userAbstract = {

@@ -1,0 +1,40 @@
+.container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: #161616;
+    width: 180px;
+    padding: 15px;
+    border-radius: 5px;
+    user-select: none;
+}
+
+.image {
+    border-radius: 5px;
+    box-shadow: 0px 5px 10px black;
+}
+
+.textContainer {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    color: white;
+    margin-top: 20px;
+    transition-duration: 400ms;
+}
+
+.name {
+    font-size: 14px;
+}
+
+.description {
+    margin-top: 10px;
+    font-size: 12px;
+}
+
+.textContainer:hover {
+    transition-duration: 400ms;
+    color: #f54141;
+}

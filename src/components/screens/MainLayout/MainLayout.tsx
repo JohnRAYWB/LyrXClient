@@ -2,25 +2,26 @@ import React from 'react';
 import {Layout} from 'antd';
 import MainSider from "./Sider/MainSider";
 import Navigation from "./Navigation/Navigation";
+import styles from "./MainLayout.module.css"
 
 const {Header, Content, Footer, Sider} = Layout;
 
-const App: React.FC = ({children}) => {
+const App: React.FC = ({children, name}) => {
 
     return (
-        <Layout style={{backgroundColor: 'inherit'}}>
+            <Layout style={{backgroundColor: '#060606'}}>
                 <Sider style={{backgroundColor: 'inherit'}} width={320}>
                     <MainSider/>
                 </Sider>
-            <Layout className="site-layout" style={{backgroundColor: 'inherit'}}>
-                <Header style={{background: 'inherit'}}><Navigation/></Header>
-                <Content style={{margin: '24px 16px 0', overflow: 'initial'}}>
-                    {children}
-                </Content>
-                <Footer style={{backgroundColor: 'inherit', color: 'white', textAlign: 'center'}}>Ant Design ©2023 Created by Ant UED</Footer>
+                <Layout className="site-layout" style={{backgroundColor: 'inherit'}}>
+                    <Header style={{background: 'inherit', height: 100}}><Navigation name={name}/></Header>
+                    <Content className={styles.main}>
+                        {children}
+                    </Content>
+                    <Footer className={styles.footer}>© LyrX | All rights reserved</Footer>
+                </Layout>
             </Layout>
-        </Layout>
-    );
+    )
 };
 
 export default App;

@@ -1,0 +1,26 @@
+.main {
+    width: 100%;
+}
+
+.container {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding: 0 10px;
+    margin-top: 10px;
+}
+
+.title {
+    color: #ffffff;
+    font-size: 20px;
+}
+
+.link {
+    color: #a6a6a6;
+    transition-duration: 400ms;
+}
+
+.link:hover {
+    color: #F64141;
+    transition-duration: 400ms;
+}

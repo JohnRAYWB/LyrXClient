@@ -1,8 +1,5 @@
 import Image from "next/image";
 import Link from "next/link";
-import InstagramIcon from "@mui/icons-material/Instagram";
-import TwitterIcon from "@mui/icons-material/Twitter";
-import FacebookIcon from "@mui/icons-material/Facebook";
 import styles from "../styles/HomeFooter.module.css"
 import {FacebookOutlined, InstagramOutlined, TwitterOutlined} from "@ant-design/icons";
 

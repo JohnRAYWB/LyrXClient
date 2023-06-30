@@ -1,9 +1,6 @@
 import styles from "./styles/Home.module.css"
 import Image from "next/image";
 import Link from "next/link";
-import InstagramIcon from "@mui/icons-material/Instagram";
-import TwitterIcon from "@mui/icons-material/Twitter";
-import FacebookIcon from "@mui/icons-material/Facebook";
 import HomeFooter from "./components/HomeFooter";
 import HomeHeader from "./components/HomeHeader";
 import {FacebookOutlined, InstagramOutlined, TwitterOutlined} from "@ant-design/icons";
