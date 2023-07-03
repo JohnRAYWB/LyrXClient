@@ -1,11 +1,11 @@
 import React from 'react';
 import styles from "./styles/Playlist.module.css"
-import {playlistDto} from "@/api/dto/playlist.dto";
 import Image from "next/image";
 import useTextLength from "@/util/useTextLength";
+import {previewItemDto} from "@/api/dto/previewItem.dto";
 
 interface Playlist {
-    playlist: playlistDto
+    playlist: previewItemDto
 }
 
 const Playlist: React.FC<Playlist> = ({playlist}) => {
@@ -14,7 +14,7 @@ const Playlist: React.FC<Playlist> = ({playlist}) => {
 
     return (
         <div className={styles.main}>
-            <Image className={styles.image} priority={true} width={150} height={150} quality={50} src={playlist.image} alt={'playlist_logo'}/>
+            <Image className={styles.image} priority={true} width={160} height={160} quality={50} src={playlist.image} alt={'playlist_logo'}/>
             <div className={styles.textContainer}>
                 <h1 className={styles.name}>{playlist.name}</h1>
                 <p className={styles.description}>{textLength}</p>

@@ -1,24 +1,29 @@
 .main {
     display: flex;
+    flex: 0 0 18%;
     flex-direction: column;
     justify-content: center;
-    flex: 0 0 20%;
     align-items: center;
-    width: 200px;
-    padding: 10px 20px;
-    margin: 20px;
-    border-radius: 10px;
     background-color: #181818;
-    box-shadow: 0 0 10px black;
+    width: 180px;
+    margin: 15px 10px;
+    border-radius: 5px;
     user-select: none;
+    transition-duration: 500ms;
     cursor: pointer;
-    transition-duration: 400ms;
+    box-shadow: 0 0 10px black;
+    color: #888888;
+}
+
+.main > * {
+    margin: 10px 15px;
 }
 
 .main:hover {
-    background-color: #3d3d3d;
-    transform: scale(1.01);
-    transition-duration: 400ms;
+    color: white;
+    transform: scale(1.02);
+    background-color: #595959;
+    transition-duration: 500ms;
 }
 
 .image {
@@ -26,17 +31,12 @@
     box-shadow: 0 5px 20px black;
 }
 
-.textContainer {
-    margin-top: 10px;
-    color: #888888;
-}
-
-.textContainer:hover {
-    color: white;
+.textContainer > * {
+    margin: 5px 0;
 }
 
 .name {
-    font-size: 14px;
+    font-size: 16px;
 }
 
 .description {

@@ -345,9 +345,9 @@ export const playlists = [
     {
         "_id": "64995b5360d0a9014db1258d",
         "name": "Maslo",
-        "description": "Playlist for chill and vibes and you cool you know, i meen listen it!",
+        "description": "1000 Playlist for chill and vibes and you cool you know, i meen listen it!",
         "image": "/../public/logo_playlist.jpg",
-        "favorites": 1,
+        "favorites": 1000,
         "user": "648bf0189ad4746a044fa376",
         "genre": [],
         "tracks": [],
@@ -378,7 +378,7 @@ export const playlists = [
     {
         "_id": "649eb320e3d75c9ddfb075b1",
         "name": "Chill BabubibBobo",
-        "description": "10 Playlist for chill and vibes and you cool you know, i meen listen it!",
+        "description": "10/5 Playlist for chill and vibes and you cool you know, i meen listen it!",
         "image": "/../public/logo_playlist.jpg",
         "favorites": 10,
         "user": "648bf0189ad4746a044fa376",
@@ -389,7 +389,7 @@ export const playlists = [
     {
         "_id": "649eb320e3d75c9ddfb075b1",
         "name": "Chill BabubibBobo",
-        "description": "33 Playlist for chill and vibes and you cool you know, i meen listen it!",
+        "description": "33/4 Playlist for chill and vibes and you cool you know, i meen listen it!",
         "image": "/../public/logo_playlist.jpg",
         "favorites": 33,
         "user": "648bf0189ad4746a044fa376",
@@ -400,9 +400,9 @@ export const playlists = [
     {
         "_id": "649eb320e3d75c9ddfb075b1",
         "name": "Chill BabubibBobo",
-        "description": "5 Playlist for chill and vibes and you cool you know, i meen listen it!",
+        "description": "5/3 Playlist for chill and vibes and you cool you know, i meen listen it!",
         "image": "/../public/logo_playlist.jpg",
-        "favorites": 5,
+        "favorites": 0,
         "user": "648bf0189ad4746a044fa376",
         "genre": [],
         "tracks": [],
@@ -411,7 +411,7 @@ export const playlists = [
     {
         "_id": "649eb320e3d75c9ddfb075b1",
         "name": "Chill BabubibBobo",
-        "description": "55 Playlist for chill and vibes and you cool you know, i meen listen it!",
+        "description": "55/2 Playlist for chill and vibes and you cool you know, i meen listen it!",
         "image": "/../public/logo_playlist.jpg",
         "favorites": 55,
         "user": "648bf0189ad4746a044fa376",
@@ -422,7 +422,7 @@ export const playlists = [
     {
         "_id": "649eb320e3d75c9ddfb075b1",
         "name": "Chill BabubibBobo",
-        "description": "90 Playlist for chill and vibes and you cool you know, i meen listen it!",
+        "description": "90/1 Playlist for chill and vibes and you cool you know, i meen listen it!",
         "image": "/../public/logo_playlist.jpg",
         "favorites": 90,
         "user": "648bf0189ad4746a044fa376",

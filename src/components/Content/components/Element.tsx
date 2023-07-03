@@ -10,14 +10,15 @@ interface element {
 
 const Element: React.FC<element> = ({item}) => {
 
-    const textLength = useTextLength(item.description || '', 40)
+    const nameLength = useTextLength(item.name, 40)
+    const descriptionLength = useTextLength(item.description || '', 40)
 
     return (
         <div className={styles.container}>
-            <Image className={styles.image} priority={true} quality={50} width={150} height={150} src={item.image} alt={'logo'}/>
+            <Image className={styles.image} priority={true} quality={50} width={165} height={165} src={item.image} alt={'logo'}/>
             <div className={styles.textContainer}>
-                <h1 className={styles.name}>{item.name}</h1>
-                <p className={styles.description}>{textLength}</p>
+                <h1 className={styles.name}>{nameLength}</h1>
+                <p className={styles.description}>{descriptionLength}</p>
             </div>
         </div>
     );

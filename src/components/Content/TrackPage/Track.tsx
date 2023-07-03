@@ -35,9 +35,11 @@ const Track: React.FC<Track> = ({track, index}) => {
         }
     }
 
-    const textLength = useTextLength(track.album || '', 20)
-
     const [artist, trackName] = track.name.split(' - ')
+    const artistLength = useTextLength(artist, 20)
+    const trackLength = useTextLength(trackName, 20)
+    const albumLength = useTextLength(track.album || '', 20)
+
 
     return (
         <div className={styles.main}>
@@ -53,10 +55,10 @@ const Track: React.FC<Track> = ({track, index}) => {
                            alt={'track_log0'}/>
                 </div>
                 <div className={styles.trackContainer}>
-                    <p className={styles.trackName}>{trackName}</p>
-                    <p className={styles.trackArtist}>{artist}</p>
+                    <p className={styles.trackName}>{trackLength}</p>
+                    <p className={styles.trackArtist}>{artistLength}</p>
                 </div>
-                <p className={styles.album}>{textLength}</p>
+                <p className={styles.album}>{albumLength}</p>
                 <div className={styles.actionIcons}>
                     {
                         !fav ?

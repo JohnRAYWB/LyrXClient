@@ -1,0 +1,36 @@
+.main {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.fav {
+    display: flex;
+    flex-direction: column;
+}
+
+.favItems {
+    padding: 10px 15px;
+    background-color: #0e0e0e;
+    border-radius: 0 0 10px 10px;
+}
+
+.favText {
+    padding: 20px;
+    text-align: right;
+    background-color: #1c1c1c;
+    color: white;
+    font-size: 24px;
+    border-radius: 10px 10px 0 0;
+}
+
+.listText {
+    user-select: none;
+    margin: 25px 0 15px 0;
+    color: white;
+    font-size: 24px;
+}
+
+.arrow {
+    color: red;
+}

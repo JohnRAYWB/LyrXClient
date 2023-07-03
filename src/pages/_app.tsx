@@ -20,6 +20,9 @@ const App: FC<AppProps> = ({Component, ...rest}) => {
         '/pth/hub/profile': {
             title: 'Profile',
         },
+        '/pth/hub/profile/collection': {
+            title: 'Your collection',
+        },
         '/pth/hub/track': {
             title: 'Tracks',
         },

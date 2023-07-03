@@ -3,23 +3,23 @@ import Image from "next/image";
 import {ConfigProvider, Tabs, TabsProps} from "antd";
 import styles from "@/styles/Profile.module.css"
 import {InfoCircleOutlined} from "@ant-design/icons";
+import TrackList from "@/components/Content/TrackPage/TrackList";
+import AlbumRow from "@/components/Content/HubPage/AlbumRow";
+import PlaylistCollection from "@/components/Content/PlaylistPage/PlaylistCollection";
 
 import {userAbstract} from "@/api/dto/user.entity";
-import TrackList from "@/components/Content/TrackPage/TrackList";
-import PlaylistRow from "@/components/Content/HubPage/PlaylistRow";
-import AlbumRow from "@/components/Content/HubPage/AlbumRow";
+import Link from "next/link";
 
 const items: TabsProps['items'] = [
     {
         key: '1',
         label: 'TRACKS',
-        style: {width: '100%'},
-        children: <TrackList tracks={[].concat(userAbstract.tracks, userAbstract.tracksCollection)}/>
+        children: <TrackList tracks={[].concat(userAbstract.tracks, userAbstract.tracksCollection).slice(0, 10)}/>
     },
     {
         key: '2',
         label: 'PLAYLISTS',
-        children: <PlaylistRow/>
+        children: <PlaylistCollection playlists={[].concat(userAbstract.playlists, userAbstract.playlistsCollection)}/>
     },
     {
         key: '3',
@@ -28,7 +28,7 @@ const items: TabsProps['items'] = [
     },
 ]
 
-const Profile = () => {
+const Index = () => {
 
     const roles = userAbstract.roles.map(role => role.role).join(' | ')
 
@@ -73,9 +73,10 @@ const Profile = () => {
                         tabBarStyle={{color: '#888888'}}
                     />
                 </ConfigProvider>
-             </div>
+            </div>
+            <Link className={styles.collectionLink} href={'/pth/hub/profile/collection'}>See more</Link>
         </div>
     );
 };
 
-export default Profile;
+export default Index;

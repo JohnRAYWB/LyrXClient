@@ -9,14 +9,11 @@ interface trackItems {
 
 const Row: React.FC<trackItems> = ({items}) => {
 
-    const firstFive = items.map(element => ({image: element.image, name: element.name, description: element.description}))
-
     return (
         <div className={styles.main}>
-
-            {firstFive && firstFive.map((item,index) =>
+            {items && items.map(item =>
                 <Element
-                    key={index}
+                    key={item._id}
                     item={item}
                 />
             )}

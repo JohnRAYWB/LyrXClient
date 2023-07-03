@@ -1,4 +1,4 @@
-import {User} from "@/api/dto/auth.dto";
+import {User} from "@/api/dto/user.dto";
 
 export interface commentDto {
     _id: string
@@ -16,7 +16,7 @@ export interface trackDto {
     genre: [];
     audio: string;
     image: string
-    comments: []
+    comments: commentDto[]
     album: string;
     protectedDeletion: boolean
 }

@@ -109,6 +109,20 @@
 .collectionContainer {
     background-color: #151515;
     padding: 20px;
-    width: 100%;
     border-radius: 0 0 10px 10px;
+}
+
+.collectionLink {
+    border-radius: 0 0 10px 10px;
+    background-color: #151515;
+    width: 300px;
+    align-self: center;
+    text-align: center;
+    padding: 5px 10px 10px 10px;
+    font-size: 16px;
+    color: #888888;
+}
+
+.collectionLink:hover {
+    color: #F64141;
 }

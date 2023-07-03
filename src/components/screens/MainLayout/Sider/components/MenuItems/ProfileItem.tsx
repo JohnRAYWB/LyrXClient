@@ -19,7 +19,7 @@ export const profileItems: MenuProps['items'] = [
             },
             {
                 style: {fontSize: 14},
-                label: 'Your collection',
+                label: <Link href={'/pth/hub/profile/collection'}>Your collection</Link>,
                 key: 'option:2',
             },
             {
