@@ -3,16 +3,24 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    background-color: #161616;
-    width: 180px;
-    padding: 15px;
+    background-color: #181818;
+    width: 190px;
+    padding: 17px;
     border-radius: 5px;
     user-select: none;
+    transition-duration: 500ms;
+    cursor: pointer;
+}
+
+.container:hover{
+    transform: scale(1.02);
+    background-color: #3d3d3d;
+    transition-duration: 500ms;
 }
 
 .image {
     border-radius: 5px;
-    box-shadow: 0px 5px 10px black;
+    box-shadow: 0 5px 20px black;
 }
 
 .textContainer {

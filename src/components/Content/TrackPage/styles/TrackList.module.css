@@ -1,0 +1,27 @@
+.main {
+    display: flex;
+    flex-direction: row;
+    color: #77787B;
+    user-select: none;
+}
+
+.index {
+    margin-left: 28px;
+}
+
+.name {
+    margin-left: 168px;
+}
+
+.artist {
+    margin-left: 128px;
+}
+
+.album {
+    margin-left: 168px;
+}
+
+.divider {
+    border-bottom: 1px solid #343434;
+    margin: 10px 0 0 0;
+}

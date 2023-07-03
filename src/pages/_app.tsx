@@ -13,17 +13,28 @@ const App: FC<AppProps> = ({Component, ...rest}) => {
     const pathName = usePathname()
     const unwrappedPages = ['/', '/pth/auth']
 
-    const pagesNames = {
-        '/pth/hub': 'Hub',
-        '/pth/hub/track': 'Tracks',
-        '/pth/hub/playlist': 'Playlists',
-        '/pth/hub/album': 'Albums',
+    const pagesProps = {
+        '/pth/hub': {
+            title: 'Hub'
+        },
+        '/pth/hub/profile': {
+            title: 'Profile',
+        },
+        '/pth/hub/track': {
+            title: 'Tracks',
+        },
+        '/pth/hub/playlist': {
+            title: 'Playlists',
+        },
+        '/pth/hub/album': {
+            title: 'Albums',
+        },
     }
 
     return (
         <Provider store={store}>
             {!unwrappedPages.includes(pathName) ?
-                <MainLayout name={`${pagesNames[pathName]} | LyrX`}>
+                <MainLayout pageProps={pagesProps[pathName]}>
                     <style>{'body {background-color: #060606}'}</style>
                 <Component {...pageProps} />
                 </MainLayout>

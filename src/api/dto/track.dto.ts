@@ -17,6 +17,6 @@ export interface trackDto {
     audio: string;
     image: string
     comments: []
-    albums: [];
+    album: string;
     protectedDeletion: boolean
 }

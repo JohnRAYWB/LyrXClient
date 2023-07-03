@@ -23,13 +23,10 @@ const Navigation: React.FC<HeaderName> = ({name}) => {
                         </button>)
                         :
                         <LeftOutlined className={styles.disabledButtonIcon}/>}
-                    <button className={styles.navButton} onClick={() => router.forward()}><RightOutlined className={styles.buttonIcon}/></button>
+                    <button className={styles.navButton} onClick={() => router.forward()}><RightOutlined
+                        className={styles.buttonIcon}/></button>
                 </div>
-                <div className={styles.linksContainer}>
-                    <Link href={'/pth/hub/playlist'}><p className={styles.link}>Playlists</p></Link>
-                    <Link href={'/pth/hub/album'}><p className={styles.link}>Albums</p></Link>
-                </div>
-                    <p className={styles.navName}>{name}</p>
+                <p className={styles.navName}>{name}</p>
             </div>
         </div>
     );

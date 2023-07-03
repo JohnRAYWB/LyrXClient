@@ -3,16 +3,17 @@ import {GetServerSidePropsContext, NextPage} from "next";
 import {checkAuth} from "@/hook/checkAuth";
 import styles from "@/styles/Hub.module.css"
 import TrackRow from "@/components/Content/HubPage/TrackRow";
+import PlaylistRow from "@/components/Content/HubPage/PlaylistRow";
+import AlbumRow from "@/components/Content/HubPage/AlbumRow";
 
 
 const Hub: NextPage = () => {
 
     return (
         <div className={styles.main}>
-            <title>Hub | LyrX</title>
             <TrackRow/>
-            <TrackRow/>
-            <TrackRow/>
+            <PlaylistRow/>
+            <AlbumRow/>
         </div>
     );
 };

@@ -1,11 +1,13 @@
 import React from 'react';
-import MainLayout from "@/components/screens/MainLayout/MainLayout";
+import PlaylistCollection from "@/components/Content/PlaylistPage/PlaylistCollection";
+
+import {playlists} from "@/api/dto/tracks.entity"
 
 const Index = () => {
+
     return (
         <div>
-            <title>Playlists | LyrX</title>
-            Playlist page
+            <PlaylistCollection playlists={playlists}/>
         </div>
     );
 };

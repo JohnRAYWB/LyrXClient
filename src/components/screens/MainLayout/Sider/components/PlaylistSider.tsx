@@ -9,7 +9,6 @@ interface playlistLength {
 }
 
 const PlaylistSider: React.FC<playlistLength> = ({playlists= 0}) => {
-    console.log(playlists)
 
     if (playlists.length !== 0) {
         return (

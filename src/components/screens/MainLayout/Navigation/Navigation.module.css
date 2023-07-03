@@ -16,26 +16,6 @@
     font-size: 20px;
 }
 
-.linksContainer {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    width: 250px;
-    font-size: 14px;
-}
-
-.link {
-    color: white;
-    text-transform: uppercase;
-    transition-duration: 400ms;
-}
-
-.link:hover {
-    color: #F64141;
-    transition-duration: 400ms;
-    text-shadow: 1px 1px 5px #F64141;
-}
-
 .navButtons {
     display: flex;
     flex-direction: row;

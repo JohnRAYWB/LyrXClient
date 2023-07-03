@@ -3,6 +3,7 @@ import {MenuProps} from "antd";
 import {UserOutlined} from "@ant-design/icons";
 import styles from "../../styles/MainSider.module.css";
 import {onClickLogout} from "@/hook/userHandlers";
+import Link from "next/link";
 
 export const profileItems: MenuProps['items'] = [
     {
@@ -13,7 +14,7 @@ export const profileItems: MenuProps['items'] = [
         children: [
             {
                 style: {fontSize: 14},
-                label: 'Open profile',
+                label: <Link href={'/pth/hub/profile'}>Open profile</Link>,
                 key: 'option:1',
             },
             {
