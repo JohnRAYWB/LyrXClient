@@ -206,7 +206,6 @@ export const userAbstract = {
         },
     ],
     "followings": [
-
         {
             "_id": "648bf1eeb3f515230b3fc72f",
             "email": "maximum_black@gmail.com",
@@ -701,7 +700,83 @@ export const userAbstract = {
         },
     ],
     "albums": [],
-    "albumsCollection": [],
+    "albumsCollection": [
+        {
+            "_id": "649ead50097c2c3adeff3896",
+            "name": "Maslo",
+            "image": "/../public/logo_album.jpg",
+            "favorites": 3,
+            "genre": [],
+            "tracks": [
+                "649ead50097c2c3adeff3899",
+                "649ead50097c2c3adeff389a",
+                "649ead50097c2c3adeff3898"
+            ],
+            "description": "Prod.by.Max.Black 3",
+            "artist": "648bf0189ad4746a044fa376",
+            "__v": 0
+        },
+        {
+            "_id": "649ead50097c2c3adeff3896",
+            "name": "Maslo",
+            "image": "/../public/logo_album.jpg",
+            "favorites": 3,
+            "genre": [],
+            "tracks": [
+                "649ead50097c2c3adeff3899",
+                "649ead50097c2c3adeff389a",
+                "649ead50097c2c3adeff3898"
+            ],
+            "description": "Prod.by.Max.Black 3",
+            "artist": "648bf0189ad4746a044fa376",
+            "__v": 0
+        },
+        {
+            "_id": "649ead50097c2c3adeff3896",
+            "name": "Maslo",
+            "image": "/../public/logo_album.jpg",
+            "favorites": 3,
+            "genre": [],
+            "tracks": [
+                "649ead50097c2c3adeff3899",
+                "649ead50097c2c3adeff389a",
+                "649ead50097c2c3adeff3898"
+            ],
+            "description": "Prod.by.Max.Black 3",
+            "artist": "648bf0189ad4746a044fa376",
+            "__v": 0
+        },
+        {
+            "_id": "649ead50097c2c3adeff3896",
+            "name": "Maslo",
+            "image": "/../public/logo_album.jpg",
+            "favorites": 3,
+            "genre": [],
+            "tracks": [
+                "649ead50097c2c3adeff3899",
+                "649ead50097c2c3adeff389a",
+                "649ead50097c2c3adeff3898"
+            ],
+            "description": "Prod.by.Max.Black 3",
+            "artist": "648bf0189ad4746a044fa376",
+            "__v": 0
+        },
+        {
+            "_id": "649ead50097c2c3adeff3896",
+            "name": "Maslo",
+            "image": "/../public/logo_album.jpg",
+            "favorites": 15,
+            "genre": [],
+            "tracks": [
+                "649ead50097c2c3adeff3899",
+                "649ead50097c2c3adeff389a",
+                "649ead50097c2c3adeff3898"
+            ],
+            "description": "Prod.by.Max.Black 15",
+            "artist": "648bf0189ad4746a044fa376",
+            "__v": 0
+        },
+    ],
     "__v": 0,
     "about": "Im poo pi pi papa some textsome textsome textsome textsome textsome textsome textsome textsome textsome textsome textsome textsome textsome text",
     "avatar": "/../public/logo_track.jpg",

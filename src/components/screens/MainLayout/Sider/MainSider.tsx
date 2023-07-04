@@ -11,6 +11,7 @@ import {profileItems} from "./components/MenuItems/ProfileItem";
 import ArtistToolSider from "./components/ArtistToolSider";
 
 import {userAbstract} from "@/api/dto/user.entity";
+import Genre from "@/components/screens/MainLayout/Sider/components/Genre";
 
 const HubHeader: React.FC = () => {
 
@@ -39,6 +40,7 @@ const HubHeader: React.FC = () => {
                 <MenuSider items={profileItems}/>
             </div>
             <PlaylistSider playlists={userAbstract.playlistsCollection}/>
+            <Genre/>
             <AdminToolSider roles={userAbstract.roles}/>
             <ArtistToolSider roles={userAbstract.roles}/>
         </main>

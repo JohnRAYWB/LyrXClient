@@ -3,32 +3,28 @@ import {playlistDto} from "@/api/dto/playlist.dto";
 import {albumDto} from "@/api/dto/album.dto";
 
 export interface User {
-    _id: string
-    email: string
-    username: string
-    about: string
-    avatar: string
-    birth: Date
-    roles: rolesDto
-    ban: boolean
-    banReason: String[]
-    comments: commentDto[]
-    tracks: trackDto[]
-    tracksCollection: trackDto[]
-    playlists: playlistDto[]
-    playlistsCollection: playlistDto[]
-    albums: albumDto[]
-    albumCollections: albumDto[]
-    followers: User[]
-    followings: User[]
+    readonly _id: string
+    readonly email: string
+    readonly username: string
+    readonly about: string
+    readonly avatar: string
+    readonly birth: Date
+    readonly roles: roleDto[]
+    readonly ban: boolean
+    readonly banReason: String[]
+    readonly comments: commentDto[]
+    readonly tracks: trackDto[]
+    readonly tracksCollection: trackDto[]
+    readonly playlists: playlistDto[]
+    readonly playlistsCollection: playlistDto[]
+    readonly albums: albumDto[]
+    readonly albumCollections: albumDto[]
+    readonly followers: User[]
+    readonly followings: User[]
 }
 
 export interface roleDto {
-    _id: string
-    role: string
-    description: string
-}
-
-export interface rolesDto {
-    roles: roleDto[]
+    readonly _id: string
+    readonly role: string
+    readonly description: string
 }

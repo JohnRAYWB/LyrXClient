@@ -15,22 +15,32 @@ const App: FC<AppProps> = ({Component, ...rest}) => {
 
     const pagesProps = {
         '/pth/hub': {
-            title: 'Hub'
+            title: 'Hub',
+            description: 'Main page. Welcome to our music platform'
         },
         '/pth/hub/profile': {
             title: 'Profile',
+            description: 'Look at you! You are awesome'
         },
         '/pth/hub/profile/collection': {
             title: 'Your collection',
+            description: 'Collection of all your fav'
         },
         '/pth/hub/track': {
             title: 'Tracks',
+            description: 'Bests friends for your mood'
         },
         '/pth/hub/playlist': {
             title: 'Playlists',
+            description: 'Each user can share peace of own'
         },
         '/pth/hub/album': {
             title: 'Albums',
+            description: 'Artists place for their music'
+        },
+        '/pth/hub/genre': {
+            title: 'Genres',
+            description: 'Billions of tracks for any genre'
         },
     }
 

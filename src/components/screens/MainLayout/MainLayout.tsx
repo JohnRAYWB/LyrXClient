@@ -21,8 +21,8 @@ const App: React.FC<MainLayoutProps> = ({children, pageProps}) => {
     return (
         <>
             <Head>
-                <title>{pageProps.title} | LyX</title>
-                <meta name='description' content={'LyrX | Music platform. Your music species library. ' + pageProps.description}/>
+                <title>{`${pageProps.title} | LyX`}</title>
+                <meta name='description' content={`LyrX | Music platform. Your music species library. ${pageProps.description}`}/>
                 <meta name='robots' content={'index, follow'}/>
                 <meta name='keywords' content={pageProps.keywords || 'music, tracks, artists, albums, playlists'}/>
             </Head>

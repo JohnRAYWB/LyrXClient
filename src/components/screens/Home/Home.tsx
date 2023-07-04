@@ -8,8 +8,8 @@ import {FacebookOutlined, InstagramOutlined, TwitterOutlined} from "@ant-design/
 const HomePage = () => {
     return (
         <div>
-            <title>LyrX | Welcome</title>
-            <div className={styles.main}>
+            <title>Welcome | LyrX</title>
+            <div>
                 <HomeHeader/>
                 <div className={styles.banner}>
                     <div className={styles.bannerContainer}>

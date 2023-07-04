@@ -2,7 +2,6 @@
     display: flex;
     flex-direction: column;
     width: 100%;
-    user-select: none;
 }
 
 .editButton {
@@ -108,7 +107,7 @@
 
 .collectionContainer {
     background-color: #151515;
-    padding: 20px;
+    padding: 10px;
     border-radius: 0 0 10px 10px;
 }
 

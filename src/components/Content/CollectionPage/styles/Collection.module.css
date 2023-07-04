@@ -16,7 +16,7 @@
 }
 
 .favText {
-    padding: 20px;
+    padding: 30px 30px 20px 20px;
     text-align: right;
     background-color: #1c1c1c;
     color: white;
@@ -25,10 +25,11 @@
 }
 
 .listText {
-    user-select: none;
     margin: 25px 0 15px 0;
     color: white;
     font-size: 24px;
+    font-weight: bold;
+    text-transform: uppercase;
 }
 
 .arrow {

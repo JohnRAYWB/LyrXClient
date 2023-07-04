@@ -1,10 +1,10 @@
 export interface signInDto {
-    email: string,
-    password: string
+    readonly email: string,
+    readonly password: string
 }
 
 export interface signInResponseDto {
-    access_token: string
+    readonly access_token: string
 }
 
 export type signUpDto = signInDto & {username: string}

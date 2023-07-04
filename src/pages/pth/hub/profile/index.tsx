@@ -4,11 +4,10 @@ import {ConfigProvider, Tabs, TabsProps} from "antd";
 import styles from "@/styles/Profile.module.css"
 import {InfoCircleOutlined} from "@ant-design/icons";
 import TrackList from "@/components/Content/TrackPage/TrackList";
-import AlbumRow from "@/components/Content/HubPage/AlbumRow";
-import PlaylistCollection from "@/components/Content/PlaylistPage/PlaylistCollection";
+import {PlaylistCollectionRow, AlbumCollectionRow} from "@/components/Content/components/ProfileCollectionRow";
+import Link from "next/link";
 
 import {userAbstract} from "@/api/dto/user.entity";
-import Link from "next/link";
 
 const items: TabsProps['items'] = [
     {
@@ -19,12 +18,20 @@ const items: TabsProps['items'] = [
     {
         key: '2',
         label: 'PLAYLISTS',
-        children: <PlaylistCollection playlists={[].concat(userAbstract.playlists, userAbstract.playlistsCollection)}/>
+        children: [userAbstract.playlistsCollection.length ?
+            <PlaylistCollectionRow playlists={userAbstract.playlistsCollection}/>
+            :
+            <p>You don't have playlists yet</p>
+        ]
     },
     {
         key: '3',
         label: 'ALBUMS',
-        children: <AlbumRow/>,
+        children: [userAbstract.albumsCollection.length ?
+            <AlbumCollectionRow albums={userAbstract.albumsCollection}/>
+            :
+            <p>You don't have added albums yet</p>
+        ]
     },
 ]
 

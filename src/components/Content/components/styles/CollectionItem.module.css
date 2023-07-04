@@ -8,7 +8,6 @@
     width: 180px;
     margin: 15px 10px;
     border-radius: 5px;
-    user-select: none;
     transition-duration: 500ms;
     cursor: pointer;
     box-shadow: 0 0 10px black;
