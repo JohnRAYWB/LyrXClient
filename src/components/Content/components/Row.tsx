@@ -5,9 +5,10 @@ import {previewItemDto} from "@/api/dto/previewItem.dto";
 
 interface trackItems {
     items: previewItemDto[]
+    type: string
 }
 
-const Row: React.FC<trackItems> = ({items}) => {
+const Row: React.FC<trackItems> = ({items, type}) => {
 
     return (
         <div className={styles.main}>
@@ -15,6 +16,7 @@ const Row: React.FC<trackItems> = ({items}) => {
                 <Element
                     key={item._id}
                     item={item}
+                    type={type}
                 />
             )}
         </div>

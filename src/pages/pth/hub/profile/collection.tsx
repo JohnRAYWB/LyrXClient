@@ -1,6 +1,7 @@
 import React from 'react';
+import {NextPage} from "next";
 
-const Collection = () => {
+const Collection: NextPage = () => {
     return (
         <div>
             collection
@@ -8,4 +9,5 @@ const Collection = () => {
     );
 };
 
+Collection.displayName = 'Collection'
 export default Collection;

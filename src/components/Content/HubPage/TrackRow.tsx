@@ -18,10 +18,16 @@ const TrackRow = () => {
                 <Link className={styles.link} href={'/pth/hub/track'}>See all</Link>
             </div>
             <div className={styles.rowContainer}>
-                <Carousel>
-                    <Row items={preparedData.slice(0, 5)}/>
-                    <Row items={preparedData.slice(5, 10)}/>
-                </Carousel>
+                {preparedData.length > 5 ?
+                    <>
+                        <Carousel>
+                            <Row items={preparedData.slice(0, 5)} type={'track'}/>
+                            <Row items={preparedData.slice(5, 10)} type={'track'}/>
+                        </Carousel>
+                    </>
+                    :
+                    <Row items={preparedData} type={'track'}/>
+                }
             </div>
         </div>
     );

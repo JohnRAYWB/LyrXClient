@@ -1,0 +1,33 @@
+.main {
+
+}
+
+.infoContainer {
+    display: grid;
+    grid-template-columns: 300px 600px;
+    gap: 30px;
+    padding: 50px;
+    background-image: linear-gradient(to bottom, #151515, #0a0a0a);
+    border-radius: 10px 10px 0 0;
+}
+
+.image {
+    border: 2px solid #888888;
+    border-radius: 10px;
+    box-shadow: 0 0 10px #151515;
+}
+
+.infoText {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    padding: 10px;
+    color: white;
+    font-size: 16px;
+    font-weight: bold;
+}
+
+.infoText > * {
+    padding: 10px;
+}

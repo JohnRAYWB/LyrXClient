@@ -5,9 +5,10 @@ import CollectionItem from "@/components/Content/components/CollectionItem";
 
 interface CollectionItems {
     items: previewItemDto[]
+    type: string
 }
 
-const Collection: React.FC<CollectionItems> = ({items}) => {
+const Collection: React.FC<CollectionItems> = ({items, type}) => {
 
     return (
         <div className={styles.main}>
@@ -15,6 +16,7 @@ const Collection: React.FC<CollectionItems> = ({items}) => {
                 <CollectionItem
                     key={item._id}
                     item={item}
+                    type={type}
                 />
             )}
         </div>

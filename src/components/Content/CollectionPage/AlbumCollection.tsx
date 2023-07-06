@@ -22,16 +22,16 @@ const AlbumCollection: React.FC<AlbumCollection> = ({albums}) => {
                 {mostLiked.length > 5 ?
                     <>
                         <Carousel>
-                            <Row items={mostLiked.slice(0, 5)}/>
-                            <Row items={mostLiked.slice(5, 10)}/>
+                            <Row items={mostLiked.slice(0, 5)} type={'album'}/>
+                            <Row items={mostLiked.slice(5, 10)} type={'album'}/>
                         </Carousel>
                     </>
                     :
-                    <Row items={mostLiked}/>
+                    <Row items={mostLiked} type={'album'}/>
                 }
             </div>
             <p className={styles.listText}>Recently added</p>
-            <Collection items={preparedData}/>
+            <Collection items={preparedData} type={'album'}/>
         </div>
     );
 };

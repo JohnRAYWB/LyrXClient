@@ -12,6 +12,7 @@ import {trackDto} from "@/api/dto/track.dto";
 import styles from "./styles/Track.module.css"
 import {items} from "./components/TrackItems"
 import useTextLength from "@/util/useTextLength";
+import {useRouter} from "next/navigation";
 
 interface Track {
     track: trackDto
@@ -19,6 +20,8 @@ interface Track {
 }
 
 const Track: React.FC<Track> = ({track, index}) => {
+
+    const router = useRouter()
 
     const [fav, setFav] = useState(false)
     const [active, setActive] = useState(false)
@@ -42,14 +45,20 @@ const Track: React.FC<Track> = ({track, index}) => {
 
 
     return (
-        <div className={styles.main}>
+        <div className={styles.main} onClick={() => router.push(`/pth/hub/track/${track._id}`)}>
             <div className={styles.container}>
                 <div className={styles.imagePlayButtonContainer}>
                     <p>{index}</p>
                     {!active ?
-                        <PlayCircleOutlined onClick={() => setActive(true)} className={styles.playButton}/>
+                        <PlayCircleOutlined onClick={(e) => {
+                            e.stopPropagation()
+                            setActive(true)
+                        }} className={styles.playButton}/>
                         :
-                        <PauseOutlined onClick={() => setActive(false)} className={styles.playButton}/>
+                        <PauseOutlined onClick={(e) => {
+                            e.stopPropagation()
+                            setActive(false)
+                        }} className={styles.playButton}/>
                     }
                     <Image className={styles.image} priority={true} width={45} height={45} src={track.image}
                            alt={'track_log0'}/>
@@ -62,9 +71,15 @@ const Track: React.FC<Track> = ({track, index}) => {
                 <div className={styles.actionIcons}>
                     {
                         !fav ?
-                            <HeartOutlined onClick={addFavorite} className={styles.favIcon}/>
+                            <HeartOutlined onClick={e => {
+                                e.stopPropagation()
+                                addFavorite()
+                            }} className={styles.favIcon}/>
                             :
-                            <HeartFilled onClick={addFavorite} className={styles.favIconFill}/>
+                            <HeartFilled onClick={e => {
+                                e.stopPropagation()
+                                addFavorite()
+                            }} className={styles.favIconFill}/>
                     }
                     <ConfigProvider theme={{
                         token: {
@@ -75,7 +90,7 @@ const Track: React.FC<Track> = ({track, index}) => {
                         }
                     }}>
                         <Dropdown placement="bottomRight" menu={{items}} trigger={['click']}>
-                            <EllipsisOutlined className={styles.dots}/>
+                            <EllipsisOutlined onClick={e => e.stopPropagation()} className={styles.dots}/>
                         </Dropdown>
                     </ConfigProvider>
                 </div>

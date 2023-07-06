@@ -18,10 +18,16 @@ const AlbumRow = () => {
                 <Link className={styles.link} href={'/pth/hub/album'}>See all</Link>
             </div>
             <div className={styles.rowContainer}>
-                <Carousel>
-                    <Row items={preparedData.slice(0, 5)}/>
-                    <Row items={preparedData.slice(5, 10)}/>
-                </Carousel>
+                {preparedData.length > 5 ?
+                    <>
+                        <Carousel>
+                            <Row items={preparedData.slice(0, 5)} type={'album'}/>
+                            <Row items={preparedData.slice(5, 10)} type={'album'}/>
+                        </Carousel>
+                    </>
+                    :
+                    <Row items={preparedData} type={'album'}/>
+                }
             </div>
         </div>
     );

@@ -1,10 +1,12 @@
 import {User} from "@/api/dto/user.dto";
 import {genreDto} from "@/api/dto/genre.dto";
+import {albumDto} from "@/api/dto/album.dto";
 
 export interface commentDto {
     readonly _id: string
     readonly user: User
     readonly text: string
+    readonly __v: number
 }
 
 export interface trackDto {
@@ -18,6 +20,7 @@ export interface trackDto {
     readonly audio: string;
     readonly image: string
     readonly comments: commentDto[]
-    readonly album: string;
+    readonly album: albumDto;
     readonly protectedDeletion: boolean
+    readonly __v: number
 }

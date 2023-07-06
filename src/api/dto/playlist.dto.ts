@@ -9,4 +9,5 @@ export interface playlistDto {
     readonly favorites: number
     readonly user: User
     readonly tracks: trackDto[]
+    readonly __v: number
 }

@@ -1,11 +1,76 @@
 .main {
+    position: relative;
+    width: 200px;
+    height: 100px;
     display: flex;
+    align-items: center;
     justify-content: center;
-    background-image: url("../../../../../public/genre_back.png");
-    opacity: 0.5;
+    box-shadow: 0 0 10px black;
+    border-radius: 5px;
+    transition-duration: 400ms;
+    cursor: pointer;
+    background-image: linear-gradient(to bottom, #1e1e1e, #151515);
+}
+
+.main::before {
+    content: "";
+    background-image: url('../../../../../public/genre_back.png');
     background-size: cover;
-    width: 50px;
-    height: 50px;
-    padding: 50px 100px;
-    border: 2px solid red;
+    position: absolute;
+    top: 0px;
+    right: 0px;
+    bottom: 0px;
+    left: 0px;
+    opacity: 0.025;
+}
+
+.main:hover {
+    transition-duration: 400ms;
+    transform: scale(1.05);
+}
+
+.title {
+    text-shadow: 0 0 5px #000000;
+    font-size: 28px;
+    color: white;
+}
+
+.main:nth-child(10n+1):hover {
+    background-image: linear-gradient(to bottom, #ff0000, rgb(68, 0, 0));
+}
+
+.main:nth-child(10n+2):hover {
+    background-image: linear-gradient(to bottom, #00ff64, #005b39);
+}
+
+.main:nth-child(10n+3):hover {
+    background-image: linear-gradient(to bottom, #ff004e, #59001d);
+}
+
+.main:nth-child(10n+4):hover {
+    background-image: linear-gradient(to bottom, #00ffff, #005e5e);
+}
+
+.main:nth-child(10n+5):hover {
+    background-image: linear-gradient(to bottom, #ff4000, #621500);
+}
+
+.main:nth-child(10n+6):hover {
+    background-image: linear-gradient(to bottom, #ffff00, #505000);
+}
+
+.main:nth-child(10n+7):hover {
+    background-image: linear-gradient(to bottom, #8000ff, #36006b);
+}
+
+.main:nth-child(10n+8):hover {
+    background-image: linear-gradient(to bottom, #003cff, #001a79);
+}
+
+.main:nth-child(10n+9):hover {
+    background-image: linear-gradient(to bottom, #ff50b2, #ff29a2);
+}
+
+.main:nth-child(10n+10):hover {
+    background-image: linear-gradient(to bottom, #d82cff, #71118d);
 }

@@ -23,17 +23,17 @@ const PlaylistCollection: React.FC<PlaylistCollection> = ({playlists}) => {
                     {mostLiked.length > 5 ?
                         <>
                             <Carousel>
-                                <Row items={mostLiked.slice(0, 5)}/>
-                                <Row items={mostLiked.slice(5, 10)}/>
+                                <Row items={mostLiked.slice(0, 5)} type={'playlist'}/>
+                                <Row items={mostLiked.slice(5, 10)} type={'playlist'}/>
                             </Carousel>
                         </>
                         :
-                        <Row items={mostLiked}/>
+                        <Row items={mostLiked} type={'playlist'}/>
                     }
                 </div>
             </div>
             <p className={styles.listText}>Community playlists</p>
-            <Collection items={preparedData}/>
+            <Collection items={preparedData} type={'playlist'}/>
         </div>
     );
 };

@@ -5,19 +5,18 @@ import styles from "@/styles/Hub.module.css"
 import TrackRow from "@/components/Content/HubPage/TrackRow";
 import PlaylistRow from "@/components/Content/HubPage/PlaylistRow";
 import AlbumRow from "@/components/Content/HubPage/AlbumRow";
-
+import Head from "next/head";
 
 const Hub: NextPage = () => {
 
     return (
-        <div className={styles.main}>
-            <TrackRow/>
-            <PlaylistRow/>
-            <AlbumRow/>
-        </div>
+            <div className={styles.main}>
+                <TrackRow/>
+                <PlaylistRow/>
+                <AlbumRow/>
+            </div>
     );
 };
-
 
 /*export const getServerSideProps = async (ctx: GetServerSidePropsContext) => {
 
@@ -32,4 +31,5 @@ const Hub: NextPage = () => {
     }
 }*/
 
+Hub.displayName = 'Hub'
 export default Hub;

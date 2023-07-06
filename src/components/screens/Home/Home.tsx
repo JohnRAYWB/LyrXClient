@@ -4,11 +4,14 @@ import Link from "next/link";
 import HomeFooter from "./components/HomeFooter";
 import HomeHeader from "./components/HomeHeader";
 import {FacebookOutlined, InstagramOutlined, TwitterOutlined} from "@ant-design/icons";
+import Head from "next/head";
 
 const HomePage = () => {
     return (
         <div>
-            <title>Welcome | LyrX</title>
+            <Head>
+                <title>Welcome | LyrX</title>
+            </Head>
             <div>
                 <HomeHeader/>
                 <div className={styles.banner}>
@@ -24,7 +27,7 @@ const HomePage = () => {
                     </div>
                 </div>
                 <div className={styles.body}>
-                    <h1 className={styles.bodyTitle}>LyrX gives you access for more then billions audio from all world. You can do anything, anywhere, anytime you want! Your music can be with you for all time. Just tap the button</h1>
+                    <h1 className={styles.bodyTitle}>LyrX gives you access for more then billions audio. You can do anything, anywhere, anytime you want! Your music can be with you for all time. You just need tap the button</h1>
                     {<ul className={styles.bodyList}>
                         <li className={styles.listItem}>
                             <Image width={200} height={200} src={'/../public/body1.jpg'} alt={'body'}/>

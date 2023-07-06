@@ -8,6 +8,7 @@ import {PlaylistCollectionRow, AlbumCollectionRow} from "@/components/Content/co
 import Link from "next/link";
 
 import {userAbstract} from "@/api/dto/user.entity";
+import {NextPage} from "next";
 
 const items: TabsProps['items'] = [
     {
@@ -35,7 +36,7 @@ const items: TabsProps['items'] = [
     },
 ]
 
-const Index = () => {
+const Index: NextPage = () => {
 
     const roles = userAbstract.roles.map(role => role.role).join(' | ')
 
@@ -86,4 +87,5 @@ const Index = () => {
     );
 };
 
+Index.displayName = 'Profile'
 export default Index;

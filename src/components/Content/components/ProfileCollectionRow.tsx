@@ -24,12 +24,12 @@ export const PlaylistCollectionRow: React.FC<PlaylistItems> = ({playlists}) => {
             {preparedData.length > 5 ?
                 <>
                     <Carousel>
-                        <Row items={preparedData.slice(0, 5)}/>
-                        <Row items={preparedData.slice(5, 10)}/>
+                        <Row items={preparedData.slice(0, 5)} type={'playlist'}/>
+                        <Row items={preparedData.slice(5, 10)} type={'playlist'}/>
                     </Carousel>
                 </>
                 :
-                <Row items={preparedData.slice(0, 5)}/>
+                <Row items={preparedData.slice(0, 5)} type={'playlist'}/>
             }
         </div>
     );
@@ -44,12 +44,12 @@ export const AlbumCollectionRow: React.FC<AlbumItems> = ({albums}) => {
             {preparedData.length > 5 ?
                 <>
                     <Carousel>
-                        <Row items={preparedData.slice(0, 5)}/>
-                        <Row items={preparedData.slice(5, 10)}/>
+                        <Row items={preparedData.slice(0, 5)} type={'album'}/>
+                        <Row items={preparedData.slice(5, 10)} type={'album'}/>
                     </Carousel>
                 </>
                 :
-                <Row items={preparedData.slice(0, 5)}/>
+                <Row items={preparedData.slice(0, 5)} type={'album'}/>
             }
         </div>
     );

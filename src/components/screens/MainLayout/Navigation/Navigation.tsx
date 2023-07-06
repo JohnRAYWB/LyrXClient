@@ -1,6 +1,5 @@
-import React, {useEffect, useState} from 'react';
+import React from 'react';
 import styles from "./Navigation.module.css"
-import Link from "next/link";
 import {useRouter, usePathname} from "next/navigation";
 import {LeftOutlined, RightOutlined} from "@ant-design/icons";
 
@@ -26,7 +25,7 @@ const Navigation: React.FC<HeaderName> = ({name}) => {
                     <button className={styles.navButton} onClick={() => router.forward()}><RightOutlined
                         className={styles.buttonIcon}/></button>
                 </div>
-                <p className={styles.navName}>{name}</p>
+                <p className={styles.navName}>{`${name} | LyrX` || 'LyrX'}</p>
             </div>
         </div>
     );

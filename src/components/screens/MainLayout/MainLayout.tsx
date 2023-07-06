@@ -7,31 +7,23 @@ import Head from "next/head";
 
 const {Header, Content, Footer, Sider} = Layout;
 
-interface MainLayoutProps {
-    pageProps: {
-        title: string,
-        description?: string,
-        keywords?: string,
-    }
+interface NavName {
+    name: string
 }
 
-
-const App: React.FC<MainLayoutProps> = ({children, pageProps}) => {
+const App: React.FC<NavName> = ({children, name}) => {
 
     return (
         <>
             <Head>
-                <title>{`${pageProps.title} | LyX`}</title>
-                <meta name='description' content={`LyrX | Music platform. Your music species library. ${pageProps.description}`}/>
-                <meta name='robots' content={'index, follow'}/>
-                <meta name='keywords' content={pageProps.keywords || 'music, tracks, artists, albums, playlists'}/>
+                <title>{`${name} | LyrX`}</title>
             </Head>
             <Layout style={{backgroundColor: '#060606'}}>
                 <Sider style={{backgroundColor: 'inherit'}} width={320}>
                     <MainSider/>
                 </Sider>
                 <Layout className="site-layout" style={{backgroundColor: 'inherit'}}>
-                    <Header style={{background: 'inherit', height: 100}}><Navigation name={`${pageProps.title} | LyrX`}/></Header>
+                    <Header style={{background: 'inherit', height: 100}}><Navigation name={name}/></Header>
                     <Content className={styles.main}>
                         {children}
                     </Content>

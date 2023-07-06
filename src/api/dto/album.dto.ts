@@ -11,4 +11,5 @@ export interface albumDto {
     readonly genre: genreDto[]
     readonly user: User
     readonly tracks: trackDto[]
+    readonly __v: number
 }

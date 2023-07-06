@@ -21,10 +21,12 @@ export interface User {
     readonly albumCollections: albumDto[]
     readonly followers: User[]
     readonly followings: User[]
+    readonly __v: number
 }
 
 export interface roleDto {
     readonly _id: string
     readonly role: string
     readonly description: string
+    readonly __v: number
 }

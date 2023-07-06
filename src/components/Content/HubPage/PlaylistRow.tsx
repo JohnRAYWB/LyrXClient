@@ -18,10 +18,16 @@ const PlaylistRow = () => {
                 <Link className={styles.link} href={'/pth/hub/playlist'}>See all</Link>
             </div>
             <div className={styles.rowContainer}>
-                <Carousel>
-                    <Row items={preparedData.slice(0, 5)}/>
-                    <Row items={preparedData.slice(5, 10)}/>
-                </Carousel>
+                {preparedData.length > 5 ?
+                    <>
+                        <Carousel>
+                            <Row items={preparedData.slice(0, 5)} type={'playlist'}/>
+                            <Row items={preparedData.slice(5, 10)} type={'playlist'}/>
+                        </Carousel>
+                    </>
+                    :
+                    <Row items={preparedData} type={'playlist'}/>
+                }
             </div>
         </div>
     );
