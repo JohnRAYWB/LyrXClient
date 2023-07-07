@@ -1,0 +1,84 @@
+.headerMain {
+    display: flex;
+    flex-direction: column;
+    background-image: linear-gradient(to bottom, #232323, #0e0e0e);
+    gap: 10px;
+    padding: 20px 30px;
+    border-radius: 10px 10px 0 0;
+}
+
+.headerContainer {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+.image {
+    margin: 20px auto;
+    box-shadow: 0 0 10px #151515;
+    border: 1px solid transparent;
+}
+
+.headerText {
+    width: 700px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-end;
+    gap: 30px;
+    padding: 10px 0;
+}
+
+.textTitle {
+    font-size: 52px;
+    color: white;
+}
+
+.genre {
+    color: #afafaf;
+    font-size: 16px;
+}
+
+.description {
+    width: 700px;
+    display: flex;
+    font-size: 16px;
+    color: #505050;
+    gap: 20px;
+}
+
+.scoresContainer {
+    flex-wrap: wrap;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.scoresItem {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    box-shadow: 0 0 4px black;
+    border-radius: 10px;
+}
+
+.scoresItemLeft {
+    text-transform: uppercase;
+    padding: 10px 20px;
+    background-color: #F64141;
+    border-radius: 10px 0 0 10px;
+}
+
+.scoresItemRight {
+    margin-left: 2px;
+    padding: 10px 10px;
+    background-color: #F64141;
+    border-radius: 0 10px 10px 0;
+}
+
+.trackList {
+    padding: 20px;
+    background-color: #0e0e0e;
+}

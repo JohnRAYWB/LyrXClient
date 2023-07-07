@@ -1,33 +1,150 @@
 .main {
-
+    box-shadow: 5px 5px 15px black;
 }
 
 .infoContainer {
-    display: grid;
-    grid-template-columns: 300px 600px;
-    gap: 30px;
-    padding: 50px;
-    background-image: linear-gradient(to bottom, #151515, #0a0a0a);
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+    background-image: linear-gradient(to bottom, #232323, #0e0e0e);
     border-radius: 10px 10px 0 0;
 }
 
+.infoMain {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+
 .image {
-    border: 2px solid #888888;
-    border-radius: 10px;
+    margin: 20px auto;
     box-shadow: 0 0 10px #151515;
+    border: 1px solid black;
 }
 
 .infoText {
+    width: 700px;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: flex-start;
-    padding: 10px;
+    padding: 0 20px;
+    gap: 10px;
     color: white;
     font-size: 16px;
     font-weight: bold;
 }
 
-.infoText > * {
-    padding: 10px;
+.trackOwnerText {
+    font-size: 52px;
+    text-transform: uppercase;
+}
+
+.trackNameText {
+    font-size: 36px;
+}
+
+.trackInfo {
+    color: #a8a8a8;
+    font-size: 16px;
+}
+
+.link {
+    transition-duration: 400ms;
+}
+
+.link:hover {
+    transition-duration: 400ms;
+    color: #F64141;
+}
+
+.description {
+    display: flex;
+    padding: 20px;
+    font-size: 16px;
+    color: #505050;
+    gap: 20px;
+}
+
+.scoresContainer {
+    flex-wrap: wrap;
+    gap: 20px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding: 10px 20px;
+}
+
+.scoresItem {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    box-shadow: 0 0 4px black;
+    border-radius: 10px;
+}
+
+.scoresItemLeft {
+    text-transform: uppercase;
+    padding: 10px 20px;
+    background-color: #F64141;
+    border-radius: 10px 0 0 10px;
+}
+
+.scoresItemRight {
+    margin-left: 2px;
+    padding: 10px 10px;
+    background-color: #F64141;
+    border-radius: 0 10px 10px 0;
+}
+
+.commentContainer {
+    background-color: #0e0e0e;
+    padding: 20px;
+}
+
+.commentContainerEntities {
+    padding: 10px 100px;
+}
+
+.commentTitle {
+    color: white;
+    font-size: 28px;
+    text-transform: uppercase;
+    text-align: right;
+}
+
+.commentInputContainer {
+    color: white;
+    text-align: right;
+}
+
+.commentInputTitle {
+    font-size: 20px;
+    margin-bottom: 20px;
+    text-align: left;
+}
+
+.commentInput {
+    background-color: inherit;
+    padding: 20px 30px;
+    color: white;
+    margin-bottom: 20px;
+}
+
+.commentList {
+    display: grid;
+    grid-template-columns: repeat(1, 1fr);
+    gap: 30px;
+    margin: 10px 0;
+    color: white;
+}
+
+.commentItem {
+    padding: 0 30px 20px 30px;
+    border-radius: 10px;
+    border: 1px solid #565656;
+}
+
+.comment {
+    color: #cbcbcb;
 }
