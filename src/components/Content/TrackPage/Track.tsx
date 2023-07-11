@@ -29,20 +29,21 @@ const Track: React.FC<Track> = ({track, index}) => {
     const addFavorite = () => {
         if (track.favorites !== 0) {
             track.favorites--
-            console.log(track.favorites)
             return setFav(false)
         } else {
             track.favorites++
-            console.log(track.favorites)
             return setFav(true)
         }
     }
 
-    const [artist, trackName] = track.name.split(' - ')
-    const artistLength = useTextLength(artist, 20)
-    const trackLength = useTextLength(trackName, 20)
+    const artistLength = useTextLength(track.name[0], 20)
+    const trackLength = useTextLength(track.name[1], 20)
     const albumLength = useTextLength(track.album || '', 20)
 
+    let folder = 'track'
+    if (track.protectedDeletion) {
+        folder = 'album'
+    }
 
     return (
         <div className={styles.main} onClick={() => router.push(`/pth/hub/track/${track._id}`)}>
@@ -60,8 +61,14 @@ const Track: React.FC<Track> = ({track, index}) => {
                             setActive(false)
                         }} className={styles.playButton}/>
                     }
-                    <Image className={styles.image} priority={true} width={45} height={45} src={track.image}
-                           alt={'track_log0'}/>
+                    <Image
+                        className={styles.image}
+                        priority={true}
+                        width={45}
+                        height={45}
+                        src={`http://localhost:4221/${folder}/${track.name[0]}/${track.image}`}
+                        alt={'track_log0'}
+                    />
                 </div>
                 <div className={styles.trackContainer}>
                     <p className={styles.trackName}>{trackLength}</p>

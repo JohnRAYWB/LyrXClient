@@ -2,14 +2,13 @@ import React from 'react';
 import Link from "next/link";
 import Row from "@/components/Content/components/Row";
 import styles from "./styles/HubRows.module.css"
-
-import {albums} from "@/api/dto/tracks.entity"
-import {usePreparedDataHub} from "@/util/usePreparedDataHub";
 import {Carousel} from "antd";
+import {useFetchMostLikedQuery} from "@/store/reducer/AlbumApi";
 
 const AlbumRow = () => {
 
-    const preparedData = usePreparedDataHub(albums, 'album')
+    const {data: firstLiked} = useFetchMostLikedQuery(0)
+    const {data: secondLiked} = useFetchMostLikedQuery(5)
 
     return (
         <div className={styles.main}>
@@ -18,16 +17,10 @@ const AlbumRow = () => {
                 <Link className={styles.link} href={'/pth/hub/album'}>See all</Link>
             </div>
             <div className={styles.rowContainer}>
-                {preparedData.length > 5 ?
-                    <>
-                        <Carousel>
-                            <Row items={preparedData.slice(0, 5)} type={'album'}/>
-                            <Row items={preparedData.slice(5, 10)} type={'album'}/>
-                        </Carousel>
-                    </>
-                    :
-                    <Row items={preparedData} type={'album'}/>
-                }
+                <Carousel>
+                    <Row items={firstLiked} type={'album'}/>
+                    <Row items={secondLiked} type={'album'}/>
+                </Carousel>
             </div>
         </div>
     );

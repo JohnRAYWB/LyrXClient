@@ -1,15 +1,15 @@
 import React from 'react';
 import Link from "next/link";
 import Row from "@/components/Content/components/Row";
+import {Carousel} from "antd";
 import styles from "./styles/HubRows.module.css"
 
-import {tracks} from "@/api/dto/tracks.entity"
-import {usePreparedDataHub} from "@/util/usePreparedDataHub";
-import {Carousel} from "antd";
+import {useFetchMostLikedQuery} from "@/store/reducer/TrackApi";
 
 const TrackRow = () => {
 
-    const preparedData = usePreparedDataHub(tracks, 'track')
+    const {data: trackFirst} = useFetchMostLikedQuery(0)
+    const {data: trackSecond} = useFetchMostLikedQuery(5)
 
     return (
         <div className={styles.main}>
@@ -18,16 +18,10 @@ const TrackRow = () => {
                 <Link className={styles.link} href={'/pth/hub/track'}>See all</Link>
             </div>
             <div className={styles.rowContainer}>
-                {preparedData.length > 5 ?
-                    <>
-                        <Carousel>
-                            <Row items={preparedData.slice(0, 5)} type={'track'}/>
-                            <Row items={preparedData.slice(5, 10)} type={'track'}/>
-                        </Carousel>
-                    </>
-                    :
-                    <Row items={preparedData} type={'track'}/>
-                }
+                <Carousel>
+                    <Row items={trackFirst} type={'track'}/>
+                    <Row items={trackSecond} type={'track'}/>
+                </Carousel>
             </div>
         </div>
     );

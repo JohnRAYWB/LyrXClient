@@ -5,33 +5,25 @@ import {albumDto} from "@/api/dto/album.dto";
 import {usePreparedAlbumEntities} from "@/util/usePreparedDataEntity";
 import Row from "@/components/Content/components/Row";
 import {Carousel} from "antd";
+import {useFetchAllAndSearchQuery, useFetchMostLikedQuery} from "@/store/reducer/AlbumApi";
 
-interface AlbumCollection {
-    albums: albumDto[]
-}
+const AlbumCollection: React.FC = () => {
 
-const AlbumCollection: React.FC<AlbumCollection> = ({albums}) => {
-
-    const preparedData = usePreparedAlbumEntities(albums)
-    const mostLiked = preparedData.sort((a, b) => b.favorites - a.favorites).slice(0, 10)
+    const {data: albums} = useFetchAllAndSearchQuery('')
+    const {data: firstLiked} = useFetchMostLikedQuery(0)
+    const {data: secondLiked} = useFetchMostLikedQuery(5)
 
     return (
         <div className={styles.main}>
             <p className={styles.favText}>Most popular albums</p>
             <div className={styles.favItems}>
-                {mostLiked.length > 5 ?
-                    <>
-                        <Carousel>
-                            <Row items={mostLiked.slice(0, 5)} type={'album'}/>
-                            <Row items={mostLiked.slice(5, 10)} type={'album'}/>
-                        </Carousel>
-                    </>
-                    :
-                    <Row items={mostLiked} type={'album'}/>
-                }
+                <Carousel>
+                    <Row items={firstLiked} type={'album'}/>
+                    <Row items={secondLiked} type={'album'}/>
+                </Carousel>
             </div>
             <p className={styles.listText}>Recently added</p>
-            <Collection items={preparedData} type={'album'}/>
+            <Collection items={albums} type={'album'}/>
         </div>
     );
 };

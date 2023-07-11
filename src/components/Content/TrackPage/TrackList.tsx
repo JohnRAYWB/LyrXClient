@@ -9,6 +9,7 @@ interface TrackList {
 }
 
 const TrackList: React.FC<TrackList> = ({tracks}) => {
+
     return (
         <div>
             <div className={styles.main}>

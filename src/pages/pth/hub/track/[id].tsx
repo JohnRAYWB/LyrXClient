@@ -1,50 +1,51 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {NextPage} from "next";
 import Image from "next/image";
 import styles from "@/styles/TrackPage.module.css"
 import Link from "next/link";
-import {InfoCircleOutlined} from "@ant-design/icons";
-import useTextLength from "@/util/useTextLength";
 import {Button, ConfigProvider, Divider, Input, Popover} from "antd";
+import {trackDto} from "@/api/dto/track.dto";
+import axios from "axios";
 
-import {track} from "@/api/dto/tracks.entity";
+const TrackPage: NextPage = ({serverTrack}) => {
 
-const TrackPage: NextPage = () => {
-
-    const [artistName, trackName] = track.name.split(' - ')
-    const genres = track.genre.map(gen => [].concat(gen.name)).join(' | ')
-    const descriptionLength = useTextLength(track.description, 270)
+    const [track, setTrack] = useState<trackDto>(serverTrack)
+    let folder = 'track'
+    track.protectedDeletion ? folder = 'album' : folder
 
     return (
         <div className={styles.main}>
             <div className={styles.infoContainer}>
                 <div className={styles.infoMain}>
                     <div className={styles.infoText}>
-                        <h1 className={styles.trackOwnerText}><Link className={styles.link}
-                                                                    href={`/pth/hub/profile/${track.artist}`}>{artistName}</Link>
+                        <h1 className={styles.trackOwnerText}>
+                            <Link
+                                className={styles.link}
+                                href={`/pth/hub/profile/${track.artist._id}`}>{track.name[0]}</Link>
                         </h1>
-                        <h1 className={styles.trackNameText}>{trackName}</h1>
-                        {track.album.name ? <p className={styles.trackInfo}>ALBUM: <Link
+                        <h1 className={styles.trackNameText}>{track.name[1]}</h1>
+                        {track.album ? <p className={styles.trackInfo}>ALBUM: <Link
                             className={styles.link}
                             href={`/pth/hub/album/${track.album._id}`}>
                             {track.album.name}
                         </Link>
                         </p> : null}
-                        {genres.length !== 0 ? <p className={styles.trackInfo}>GENRES: {genres}</p> : null}
+                        {track.genre.length !== 0 ? <p className={styles.trackInfo}>GENRES: {track.genre}</p> : null}
                     </div>
-                    <Image className={styles.image} priority={true} width={260} height={260} src={track.image}
-                           alt={'track_logo'}/>
+                    <Image
+                        className={styles.image}
+                        priority={true}
+                        width={260}
+                        height={260}
+                        src={`http://localhost:4221/${folder}/${track.name[0]}/${track.image}`}
+                        alt={'track_logo'}
+                    />
                 </div>
                 <div className={styles.description}>
-                    {track.description.length > 270 ?
-                        <>
-                            <Popover overlayStyle={{width: 600}} content={track.description}>
-                                <InfoCircleOutlined/>
-                            </Popover>
-                            <p>DESCRIPTION: {descriptionLength}</p>
-                        </>
+                    {track.description && track.description.length !== '' ?
+                        <p>DESCRIPTION: {track.description}</p>
                         :
-                        <p>DESCRIPTION: {descriptionLength}</p>
+                        null
                     }
                 </div>
                 <div className={styles.scoresContainer}>
@@ -99,3 +100,14 @@ const TrackPage: NextPage = () => {
 
 TrackPage.displayName = 'Track Page'
 export default TrackPage;
+
+export const getServerSideProps: ({params}) => Promise<{ props: { serverTrack: trackDto } }> = async ({params}) => {
+    const response = await axios.get(`http://localhost:4221/tracks/${params.id}/current`)
+    const track = response.data
+    track.genre.map(gen => ({name: gen.name}))
+    return {
+        props: {
+            serverTrack: response.data
+        }
+    }
+}

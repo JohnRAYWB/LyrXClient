@@ -38,7 +38,7 @@ export const PlaylistCollectionRow: React.FC<PlaylistItems> = ({playlists}) => {
 export const AlbumCollectionRow: React.FC<AlbumItems> = ({albums}) => {
 
     const preparedData = usePreparedAlbumEntities(albums).slice(0, 10)
-    console.log(preparedData)
+
     return (
         <div className={styles.list}>
             {preparedData.length > 5 ?

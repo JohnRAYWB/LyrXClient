@@ -1,15 +1,14 @@
 import React from 'react';
 import Link from "next/link";
+import {Carousel} from "antd";
 import Row from "@/components/Content/components/Row";
 import styles from "./styles/HubRows.module.css"
-
-import {playlists} from "@/api/dto/tracks.entity"
-import {usePreparedDataHub} from "@/util/usePreparedDataHub";
-import {Carousel} from "antd";
+import {useFetchMostLikedQuery} from "@/store/reducer/PlaylistApi";
 
 const PlaylistRow = () => {
 
-    const preparedData = usePreparedDataHub(playlists, 'playlist')
+    const {data: firstLiked} = useFetchMostLikedQuery(0)
+    const {data: secondLiked} = useFetchMostLikedQuery(5)
 
     return (
         <div className={styles.main}>
@@ -18,16 +17,10 @@ const PlaylistRow = () => {
                 <Link className={styles.link} href={'/pth/hub/playlist'}>See all</Link>
             </div>
             <div className={styles.rowContainer}>
-                {preparedData.length > 5 ?
-                    <>
-                        <Carousel>
-                            <Row items={preparedData.slice(0, 5)} type={'playlist'}/>
-                            <Row items={preparedData.slice(5, 10)} type={'playlist'}/>
-                        </Carousel>
-                    </>
-                    :
-                    <Row items={preparedData} type={'playlist'}/>
-                }
+                <Carousel>
+                    <Row items={firstLiked} type={'playlist'}/>
+                    <Row items={secondLiked} type={'playlist'}/>
+                </Carousel>
             </div>
         </div>
     );

@@ -103,7 +103,7 @@
 }
 
 .commentContainerEntities {
-    padding: 10px 100px;
+    padding: 10px 50px;
 }
 
 .commentTitle {
@@ -132,19 +132,19 @@
 }
 
 .commentList {
-    display: grid;
-    grid-template-columns: repeat(1, 1fr);
-    gap: 30px;
     margin: 10px 0;
     color: white;
 }
 
 .commentItem {
+    margin: 20px auto;
     padding: 0 30px 20px 30px;
     border-radius: 10px;
-    border: 1px solid #565656;
+    border: 1px solid #232323;
 }
 
 .comment {
+    text-align: start;
+    word-wrap: break-word;
     color: #cbcbcb;
 }
