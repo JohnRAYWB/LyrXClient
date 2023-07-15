@@ -1,7 +1,8 @@
 import React from 'react';
-import {NextPage} from "next";
+import MainLayout from "@/components/screens/MainLayout/MainLayout";
+import {NextPageWithLayout} from "@/pages/_app";
 
-const Collection: NextPage = () => {
+const Collection: NextPageWithLayout = () => {
     return (
         <div>
             collection
@@ -9,5 +10,7 @@ const Collection: NextPage = () => {
     );
 };
 
-Collection.displayName = 'Collection'
+Collection.getLayout = (page: React.ReactNode) => {
+    return <MainLayout name={'Collection'}>{page}</MainLayout>
+}
 export default Collection;

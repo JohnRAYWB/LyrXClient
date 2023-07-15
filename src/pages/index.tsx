@@ -1,7 +1,6 @@
 import HomePage from "../components/screens/Home/Home"
 import {GetServerSidePropsContext} from "next";
 import nookies from "nookies"
-import axios from "@/core/axios";
 import React from "react";
 
 export default function Home() {
@@ -10,9 +9,9 @@ export default function Home() {
 
 export const getServerSideProps = async (ctx: GetServerSidePropsContext) => {
 
-    const {_token} = nookies.get(ctx)
+    const {access_token} = nookies.get(ctx)
 
-    if(_token) {
+    if(access_token) {
         return {
             redirect: {
                 destination: '/pth/hub',

@@ -1,18 +1,15 @@
 .headerMain {
     display: flex;
     flex-direction: column;
-    background-image: linear-gradient(to bottom, #232323, #0e0e0e);
-    gap: 10px;
     padding: 20px 30px;
+    background-image: linear-gradient(to bottom, #232323, #0e0e0e);
     border-radius: 10px 10px 0 0;
 }
 
 .headerContainer {
     display: flex;
     flex-direction: row;
-    justify-content: space-between;
     flex-wrap: wrap;
-    gap: 20px;
 }
 
 .image {
@@ -27,7 +24,7 @@
     flex-direction: column;
     justify-content: center;
     align-items: flex-end;
-    gap: 30px;
+    gap: 20px;
     padding: 10px 0;
 }
 
@@ -36,15 +33,36 @@
     color: white;
 }
 
+.userLink {
+    font-size: 36px;
+    color: white;
+    transition-duration: 400ms;
+}
+
+.userLink:hover {
+    color: #F64141;
+    transition-duration: 400ms;
+}
+
 .genre {
-    color: #afafaf;
+    color: #a8a8a8;
     font-size: 16px;
 }
 
+.link {
+    margin-left: 5px;
+    transition-duration: 400ms;
+}
+
+.link:hover {
+    transition-duration: 400ms;
+    color: #F64141;
+}
+
 .description {
-    width: 700px;
     display: flex;
     font-size: 16px;
+    padding: 20px;
     color: #505050;
     gap: 20px;
 }

@@ -1,32 +1,29 @@
 import '@/styles/globals.css'
 import type {AppProps} from 'next/app'
-import {FC} from "react";
-import {wrapper} from "@/store/store";
+import React, {FC, ReactElement, ReactNode} from "react";
+import {store, wrapper} from "@/store/store";
 import {Provider} from "react-redux";
-import MainLayout from "@/components/screens/MainLayout/MainLayout";
-import {usePathname} from "next/navigation";
+import {NextPage} from "next";
 
-const App: FC<AppProps> = ({Component, ...rest}) => {
-
-    const {store, props} = wrapper.useWrappedStore(rest)
-    const {pageProps} = props
-
-    const pathName = usePathname()
-
-    const unwrappedPages = ['/', '/pth/auth']
-
-    return (
-        <Provider store={store}>
-            {!unwrappedPages.includes(pathName) ?
-                <MainLayout name={Component.displayName}>
-                    <style>{'body {background-color: #060606}'}</style>
-                <Component {...pageProps} />
-                </MainLayout>
-                :
-                <Component {...pageProps} />
-            }
-        </Provider>
-    )
+interface Props extends AppProps {
+    Component: AppProps["Component"] & {
+        getLayout: (page: React.ReactElement) => React.ReactNode
+    }
 }
 
-export default App
+export type NextPageWithLayout<P = {}, IP = P> = NextPage<P, IP> & {
+    getLayout?: (page: ReactElement) => ReactNode
+}
+
+type AppPropsWithLayout = AppProps & {
+    Component: NextPageWithLayout
+}
+
+const App = ({Component, pageProps}: AppPropsWithLayout) => {
+
+    const getLayout = Component.getLayout ?? ((page) => page)
+
+    return getLayout(<Component {...pageProps}/>)
+}
+
+export default wrapper.withRedux(App)

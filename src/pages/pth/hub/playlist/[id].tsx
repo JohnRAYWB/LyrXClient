@@ -1,28 +1,43 @@
-import React from 'react';
-import {NextPage} from "next";
+import React, {useState} from 'react';
 import CollectionHeader from "@/components/Content/CollectionSelfPage/CollectionHeader";
-import TrackList from "@/components/Content/TrackPage/TrackList";
+import {playlistDto} from "@/api/dto/playlist.dto";
+import axios from "axios";
+import MainLayout from "@/components/screens/MainLayout/MainLayout";
+import {NextPageWithLayout} from "@/pages/_app";
 
-import {playlist} from "@/api/dto/tracks.entity";
+const PlaylistPage: NextPageWithLayout = ({serverPlaylist}) => {
 
-const PlaylistPage: NextPage = () => {
-
-    const {image, name, description, favorites, tracks, genre} = playlist
+    const [playlist, setPlaylist] = useState<playlistDto>(serverPlaylist)
+    const {image, name, description, favorites, user, tracks, genre} = playlist
+    const collectionImage = `playlist/${name[0]}/${image}`
 
     return (
         <div>
             <CollectionHeader
-                image={image}
+                image={collectionImage}
                 name={name}
                 description={description}
                 favorites={favorites}
+                user={user}
                 tracks={tracks}
                 genre={genre}
             />
         </div>
     );
 }
-    ;
 
-    PlaylistPage.displayName = 'Playlist Page'
-    export default PlaylistPage;
+PlaylistPage.getLayout = (page: React.ReactNode) => {
+    return <MainLayout name={'Playlist'}>{page}</MainLayout>
+}
+export default PlaylistPage;
+
+export const getServerSideProps: ({params}) => Promise<{ props: { serverTrack: playlistDto } }> = async ({params}) => {
+    const response = await axios.get(`http://localhost:4221/playlists/${params.id}/current`)
+    const playlist = response.data
+
+    return {
+        props: {
+            serverPlaylist: playlist
+        }
+    }
+}

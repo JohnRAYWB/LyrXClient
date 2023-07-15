@@ -2,7 +2,7 @@ import {commentDto, trackDto} from "@/api/dto/track.dto";
 import {playlistDto} from "@/api/dto/playlist.dto";
 import {albumDto} from "@/api/dto/album.dto";
 
-export interface User {
+export interface userDto {
     readonly _id: string
     readonly email: string
     readonly username: string
@@ -18,9 +18,9 @@ export interface User {
     readonly playlists: playlistDto[]
     readonly playlistsCollection: playlistDto[]
     readonly albums: albumDto[]
-    readonly albumCollections: albumDto[]
-    readonly followers: User[]
-    readonly followings: User[]
+    readonly albumsCollections: albumDto[]
+    readonly followers: userDto[]
+    readonly followings: userDto[]
     readonly __v: number
 }
 

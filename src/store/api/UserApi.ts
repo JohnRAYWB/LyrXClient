@@ -25,3 +25,7 @@ const UserApi = createApi({
         })
     })
 })
+
+export const {useFetchAllAndSearchQuery, useFetchByIdQuery} = UserApi
+
+export default UserApi

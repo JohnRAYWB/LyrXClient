@@ -5,7 +5,7 @@ import {playlistDto} from "@/api/dto/playlist.dto";
 import {Carousel} from "antd";
 import Row from "@/components/Content/components/Row";
 import Collection from "@/components/Content/components/Collection";
-import {useFetchAllAndSearchQuery, useFetchMostLikedQuery} from "@/store/reducer/PlaylistApi";
+import {useFetchAllAndSearchQuery, useFetchMostLikedQuery} from "@/store/api/PlaylistApi";
 
 const PlaylistCollection: React.FC = () => {
 

@@ -35,12 +35,21 @@
     font-weight: bold;
 }
 
+.infoTextFooter {
+    margin-top: 50px;
+}
+
+.infoTextFooter > * {
+    margin: 10px 0;
+}
+
 .trackOwnerText {
     font-size: 52px;
     text-transform: uppercase;
 }
 
 .trackNameText {
+    margin-left: 5px;
     font-size: 36px;
 }
 
@@ -50,6 +59,7 @@
 }
 
 .link {
+    margin-left: 5px;
     transition-duration: 400ms;
 }
 

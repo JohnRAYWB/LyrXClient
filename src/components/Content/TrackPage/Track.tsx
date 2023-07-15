@@ -38,7 +38,8 @@ const Track: React.FC<Track> = ({track, index}) => {
 
     const artistLength = useTextLength(track.name[0], 20)
     const trackLength = useTextLength(track.name[1], 20)
-    const albumLength = useTextLength(track.album || '', 20)
+    let albumLength = ''
+    track.album ? albumLength = useTextLength(track.album.name[1] || '', 20) : ''
 
     let folder = 'track'
     if (track.protectedDeletion) {

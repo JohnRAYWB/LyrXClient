@@ -48,8 +48,7 @@
 
 .roles {
     text-transform: uppercase;
-    margin-bottom: 10px;
-    color: #a1a1a1;
+    color: #585858;
     font-size: 14px;
 }
 
@@ -60,11 +59,16 @@
     padding: 10px 0;
 }
 
+.infoEmail {
+    color: #888888;
+}
+
 .description {
     display: flex;
     flex-direction: row;
     color: #77787B;
     font-size: 20px;
+    margin-top: 20px;
 }
 
 .infoDescription {
@@ -109,6 +113,12 @@
     background-color: #151515;
     padding: 10px;
     border-radius: 0 0 10px 10px;
+}
+
+.collectionEmpty {
+    padding: 20px;
+    text-transform: uppercase;
+    color: white;
 }
 
 .collectionLink {

@@ -6,8 +6,15 @@ import Link from "next/link";
 import styles from "./AuthForm.module.css"
 import {signInDto} from "@/api/dto/auth.dto";
 import * as Api from "@/api"
+import {useAppDispatch} from "@/hook/redux";
+import {setUserData} from "@/store/slice/user";
+import {useRouter} from "next/navigation";
 
 export const SignInForm: React.FC = () => {
+
+    const dispatch = useAppDispatch()
+
+    const router = useRouter()
 
     const [form] = Form.useForm();
     const [, forceUpdate] = useState({});
@@ -19,18 +26,21 @@ export const SignInForm: React.FC = () => {
     const onFinish = async (values: signInDto) => {
 
         try {
-            const {access_token} = await Api.auth.signIn(values)
+            const data = await Api.auth.signIn(values)
             notification.success({
                 message: 'Login success!',
                 description: 'Route to hub...',
                 duration: 2
             })
 
-            setCookie(null, '_token', access_token, {
+            setCookie(null, 'access_token', data.access_token, {
+                maxAge: 30 * 24 * 60 * 60,
                 path: '/'
             })
 
-            location.href = '/pth/hub'
+            router.push('/pth/hub')
+
+            dispatch(setUserData(data.access_token))
         } catch (e) {
             console.warn('Err', e)
 

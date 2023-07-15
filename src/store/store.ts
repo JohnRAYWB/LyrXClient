@@ -1,13 +1,17 @@
-import {combineReducers, configureStore} from "@reduxjs/toolkit";
+import {Action, combineReducers, configureStore, ThunkAction} from "@reduxjs/toolkit";
 import {createWrapper, HYDRATE} from "next-redux-wrapper";
-import TrackApi from "@/store/reducer/TrackApi";
-import PlaylistApi from "@/store/reducer/PlaylistApi";
-import AlbumApi from "@/store/reducer/AlbumApi";
+import TrackApi from "@/store/api/TrackApi";
+import PlaylistApi from "@/store/api/PlaylistApi";
+import AlbumApi from "@/store/api/AlbumApi";
+import UserApi from "@/store/api/UserApi";
+import {userReducer} from "./slice/user"
 
 export const rootReducer = combineReducers({
-    [TrackApi.reducerPath]: TrackApi.reducer,
+    /*[TrackApi.reducerPath]: TrackApi.reducer,
     [PlaylistApi.reducerPath]: PlaylistApi.reducer,
     [AlbumApi.reducerPath]: AlbumApi.reducer,
+    [UserApi.reducerPath]: UserApi.reducer,*/
+    user: userReducer
 })
 
 export const reducer = (state, action) => {
@@ -23,14 +27,24 @@ export const reducer = (state, action) => {
     }
 }
 
-export const setupStore = () => configureStore({
-    reducer: reducer,
-    devTools: true,
-    middleware: getDefaultMiddleware => getDefaultMiddleware().concat(TrackApi.middleware, PlaylistApi.middleware, AlbumApi.middleware)
-})
+export function makeStore() {
+    return configureStore({
+        reducer: reducer,
+        middleware: getDefaultMiddleware => getDefaultMiddleware()
+            .concat(
+                TrackApi.middleware,
+                PlaylistApi.middleware,
+                AlbumApi.middleware,
+                UserApi.middleware
+            )
+    })
+}
 
-export const wrapper = createWrapper<AppStore>(setupStore, {debug: true})
+export const store = makeStore()
 
-export type RootState = ReturnType<typeof setupStore>
-export type AppStore = ReturnType<typeof setupStore>
-export type AppDispatch = AppStore['dispatch']
+export type RootStore = ReturnType<typeof makeStore>
+export type RootState = ReturnType<RootStore['getState']>
+export type AppDispatch = typeof store.dispatch
+export type AppThunk<ReturnType = void> = ThunkAction<ReturnType, RootState, unknown, Action<string>>
+
+export const wrapper = createWrapper<RootState>(makeStore, {debug: true})

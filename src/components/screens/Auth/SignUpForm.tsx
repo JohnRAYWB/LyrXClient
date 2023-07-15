@@ -2,12 +2,19 @@ import React, {useEffect, useState} from 'react';
 import {Button, Form, Input, notification} from "antd";
 import styles from "@/components/screens/Auth/AuthForm.module.css";
 import {LockOutlined, MailOutlined, UserOutlined} from "@ant-design/icons";
-import {useRouter} from "next/router";
 import * as Api from "@/api";
 import {setCookie} from "nookies";
 import {signUpDto} from "@/api/dto/auth.dto";
+import {setUserData} from "@/store/slice/user";
+import {useAppDispatch} from "@/hook/redux";
+import {useRouter} from "next/navigation";
 
 const SignUpForm = () => {
+
+    const router = useRouter()
+
+    const dispatch = useAppDispatch()
+
     const [form] = Form.useForm();
     const [, forceUpdate] = useState({});
 
@@ -18,18 +25,21 @@ const SignUpForm = () => {
     const onFinish = async (values: signUpDto) => {
 
         try {
-            const {access_token} = await Api.auth.signUp(values)
+            const data = await Api.auth.signUp(values)
             notification.success({
                 message: 'Login success!',
                 description: 'Route to hub...',
                 duration: 2
             })
 
-            setCookie(null, '_token', access_token, {
+            setCookie(null, 'access_token', data.access_token, {
+                maxAge: 30 * 24 * 60 * 60,
                 path: '/'
             })
 
-            location.href = '/pth/hub'
+            router.push('/pth/hub')
+
+            dispatch(setUserData(data.access_token))
         } catch (e) {
             console.warn('Err', e)
 

@@ -1,17 +1,24 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {Layout} from 'antd';
 import MainSider from "./Sider/MainSider";
 import Navigation from "./Navigation/Navigation";
 import styles from "./MainLayout.module.css"
 import Head from "next/head";
+import {GetServerSidePropsContext} from "next";
+import {checkAuth} from "@/hook/checkAuth";
+import * as Api from "@/api"
+import {userDto} from "@/api/dto/user.dto";
 
 const {Header, Content, Footer, Sider} = Layout;
 
 interface NavName {
     name: string
+    userData: userDto
 }
 
-const App: React.FC<NavName> = ({children, name}) => {
+const App: React.FC<NavName> = ({children, name, userData}) => {
+
+    const [user, setUser] = useState(userData)
 
     return (
         <>
@@ -35,3 +42,8 @@ const App: React.FC<NavName> = ({children, name}) => {
 };
 
 export default App;
+
+export const getServerSideProps = async (ctx: GetServerSidePropsContext) => {
+
+    console.log(ctx)
+}

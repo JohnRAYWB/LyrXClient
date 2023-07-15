@@ -1,19 +1,22 @@
 import axios from "@/core/axios";
-import {signInDto, signInResponseDto, signUpDto, signUpResponseDto, User} from "@/api/dto/auth.dto";
+import {responseUserDto, signInDto, signUpDto} from "@/api/dto/auth.dto";
 import {destroyCookie} from "nookies";
+import {userDto} from "@/api/dto/user.dto";
 
-export const signIn = async (values: signInDto): Promise<signInResponseDto> => {
+export const signIn = async (values: signInDto): Promise<responseUserDto> => {
     return (await axios.post('/auth/login', values)).data
 }
 
-export const signUp = async (values: signUpDto): Promise<signUpResponseDto> => {
+export const signUp = async (values: signUpDto): Promise<responseUserDto> => {
     return (await axios.post('/auth/reg', values)).data
 }
 
-export const getProfile = async (): Promise<User> => {
-    return (await axios.get('/users/profile')).data
-}
+export const getProfile = async (token: string) => {
+    const {data} = await axios.get<userDto>('/users/profile', {
+        headers: {
+            Authorization: `Bearer ${token}`
+        }
+    })
 
-export const logout = async () => {
-    destroyCookie(null, '_token', {path: '/'})
+    return data
 }

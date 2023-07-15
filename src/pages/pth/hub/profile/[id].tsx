@@ -1,7 +1,8 @@
 import React from 'react';
-import {NextPage} from "next";
+import MainLayout from "@/components/screens/MainLayout/MainLayout";
+import {NextPageWithLayout} from "@/pages/_app";
 
-const UserProfile: NextPage = () => {
+const UserProfile: NextPageWithLayout = () => {
     return (
         <div>
             hello another user
@@ -9,5 +10,7 @@ const UserProfile: NextPage = () => {
     );
 };
 
-UserProfile.displayName = 'User Profile'
+UserProfile.getLayout = (page: React.ReactNode) => {
+    return <MainLayout name={'UserProfile'}>{page}</MainLayout>
+}
 export default UserProfile;

@@ -1,11 +1,12 @@
-import React, {useEffect, useState} from 'react';
-import {NextPage} from "next";
+import React from 'react';
 import {ConfigProvider, Tabs, TabsProps} from "antd";
 import TrackList from "@/components/Content/TrackPage/TrackList";
 import Collection from "@/components/Content/components/Collection";
 import Pagination from "@/util/pagination";
 
 import {genre} from "@/api/dto/genre.entity";
+import MainLayout from "@/components/screens/MainLayout/MainLayout";
+import {NextPageWithLayout} from "@/pages/_app";
 
 const items: TabsProps['items'] = [
     {
@@ -26,7 +27,7 @@ const items: TabsProps['items'] = [
 ]
 
 
-const GenrePage: NextPage = () => {
+const GenrePage: NextPageWithLayout = () => {
 
     return (
         <div>
@@ -50,5 +51,7 @@ const GenrePage: NextPage = () => {
     );
 };
 
-GenrePage.displayName = 'Genre Page'
+GenrePage.getLayout = (page: React.ReactNode) => {
+    return <MainLayout name={'Genre Page'}>{page}</MainLayout>
+}
 export default GenrePage;

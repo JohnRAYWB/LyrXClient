@@ -4,7 +4,7 @@ import Row from "@/components/Content/components/Row";
 import {Carousel} from "antd";
 import styles from "./styles/HubRows.module.css"
 
-import {useFetchMostLikedQuery} from "@/store/reducer/TrackApi";
+import {useFetchMostLikedQuery} from "@/store/api/TrackApi";
 
 const TrackRow = () => {
 

@@ -3,7 +3,7 @@ import Link from "next/link";
 import Row from "@/components/Content/components/Row";
 import styles from "./styles/HubRows.module.css"
 import {Carousel} from "antd";
-import {useFetchMostLikedQuery} from "@/store/reducer/AlbumApi";
+import {useFetchMostLikedQuery} from "@/store/api/AlbumApi";
 
 const AlbumRow = () => {
 

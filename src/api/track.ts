@@ -5,6 +5,6 @@ export const tracks = async (): Promise<trackDto[]> => {
     return (await axios.get('http://localhost:4221/tracks')).data
 }
 
-export const track = async (): Promise<trackDto> => {
+export const fetchTrack = async (): Promise<trackDto> => {
     return (await axios.get('/tracks/:id/current')).data
 }

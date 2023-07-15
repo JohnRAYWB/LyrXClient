@@ -5,7 +5,7 @@ import {albumDto} from "@/api/dto/album.dto";
 import {usePreparedAlbumEntities} from "@/util/usePreparedDataEntity";
 import Row from "@/components/Content/components/Row";
 import {Carousel} from "antd";
-import {useFetchAllAndSearchQuery, useFetchMostLikedQuery} from "@/store/reducer/AlbumApi";
+import {useFetchAllAndSearchQuery, useFetchMostLikedQuery} from "@/store/api/AlbumApi";
 
 const AlbumCollection: React.FC = () => {
 

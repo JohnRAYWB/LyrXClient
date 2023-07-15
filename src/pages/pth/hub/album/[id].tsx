@@ -1,21 +1,24 @@
-import React from 'react';
-import {NextPage} from "next";
+import React, {useState} from 'react';
 import CollectionHeader from "@/components/Content/CollectionSelfPage/CollectionHeader";
-import TrackList from "@/components/Content/TrackPage/TrackList";
+import axios from "axios";
+import {albumDto} from "@/api/dto/album.dto";
+import MainLayout from "@/components/screens/MainLayout/MainLayout";
+import {NextPageWithLayout} from "@/pages/_app";
 
-import {album} from "@/api/dto/tracks.entity";
+const AlbumPage: NextPageWithLayout = ({serverAlbum}) => {
 
-const AlbumPage: NextPage = () => {
-
-    const {image, name, description, favorites, tracks, genre} = album
+    const [album, setAlbum] = useState<albumDto>(serverAlbum)
+    const {image, name, description, favorites, artist, tracks, genre} = album
+    const collectionImage = `album/${name[0]}/${image}`
 
     return (
         <div>
             <CollectionHeader
-                image={image}
+                image={collectionImage}
                 name={name}
                 description={description}
                 favorites={favorites}
+                user={artist}
                 tracks={tracks}
                 genre={genre}
             />
@@ -23,5 +26,18 @@ const AlbumPage: NextPage = () => {
     );
 };
 
-AlbumPage.displayName = 'Album Page'
+AlbumPage.getLayout = (page: React.ReactNode) => {
+    return <MainLayout name={'Album Page'}>{page}</MainLayout>
+}
 export default AlbumPage;
+
+export const getServerSideProps: ({params}) => Promise<{ props: { serverTrack: albumDto } }> = async ({params}) => {
+    const response = await axios.get(`http://localhost:4221/albums/${params.id}/current`)
+    const album = response.data
+
+    return {
+        props: {
+            serverAlbum: album
+        }
+    }
+}

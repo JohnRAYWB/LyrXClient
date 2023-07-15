@@ -1,24 +1,55 @@
 import React, {useState} from 'react';
 import styles from './styles/MainSider.module.css'
 import Link from "next/link";
-import {HomeFilled, SearchOutlined} from "@ant-design/icons";
-import {Input} from "antd";
+import {HomeFilled, SearchOutlined, UserOutlined} from "@ant-design/icons";
+import {Input, MenuProps} from "antd";
 import PlaylistSider from "./components/PlaylistSider";
-import {getUserProps, getPlaylistsCollection, onClickLogout} from "@/hook/userHandlers";
 import AdminToolSider from "./components/AdminToolSider";
 import MenuSider from "./components/MenuSider";
-import {profileItems} from "./components/MenuItems/ProfileItem";
 import ArtistToolSider from "./components/ArtistToolSider";
 
 import {userAbstract} from "@/api/dto/user.entity";
 import Genre from "@/components/screens/MainLayout/Sider/components/Genre";
+import {destroyCookie} from "nookies";
+import {useRouter} from "next/navigation";
 
 const HubHeader: React.FC = () => {
 
     const [current, setCurrent] = useState('')
 
-    /*const user = getUserProps()
-    const playlists = getPlaylistsCollection()*/
+    const router = useRouter()
+
+    const profileItems: MenuProps['items'] = [
+        {
+            label: 'Profile',
+            key: 'SubMenu',
+            style: {fontSize: 16, width: 280},
+            icon: <UserOutlined style={{fontSize: 16, marginRight: 10}}/>,
+            children: [
+                {
+                    style: {fontSize: 14},
+                    label: <Link href={'/pth/hub/profile'}>Open profile</Link>,
+                    key: 'option:1',
+                },
+                {
+                    style: {fontSize: 14},
+                    label: <Link href={'/pth/hub/profile/collection'}>Your collection</Link>,
+                    key: 'option:2',
+                },
+                {
+                    label: (
+                        <button className={styles.dropDownLogout} onClick={() => {
+                            if (window.confirm("Are you sure to logout?")) {
+                                destroyCookie(null, 'access_token', {path: '/'})
+                                router.push('/')
+                            }
+                        }}>Logout</button>
+                    ),
+                    key: 'option:3',
+                }
+            ],
+        },
+    ];
 
     return (
         <main className={styles.main}>

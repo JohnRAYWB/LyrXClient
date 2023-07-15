@@ -1,17 +1,25 @@
 import React, {useState} from 'react';
-import {NextPage} from "next";
 import Image from "next/image";
 import styles from "@/styles/TrackPage.module.css"
 import Link from "next/link";
 import {Button, ConfigProvider, Divider, Input, Popover} from "antd";
 import {trackDto} from "@/api/dto/track.dto";
 import axios from "axios";
+import useTextLength from "@/util/useTextLength";
+import {InfoCircleOutlined} from "@ant-design/icons";
+import MainLayout from "@/components/screens/MainLayout/MainLayout";
+import {NextPageWithLayout} from "@/pages/_app";
 
-const TrackPage: NextPage = ({serverTrack}) => {
+const TrackPage: NextPageWithLayout = ({serverTrack}) => {
 
     const [track, setTrack] = useState<trackDto>(serverTrack)
+
     let folder = 'track'
     track.protectedDeletion ? folder = 'album' : folder
+
+    let descriptionLength = ''
+
+    track.description ? descriptionLength = useTextLength(track.description, 240) : ''
 
     return (
         <div className={styles.main}>
@@ -24,13 +32,37 @@ const TrackPage: NextPage = ({serverTrack}) => {
                                 href={`/pth/hub/profile/${track.artist._id}`}>{track.name[0]}</Link>
                         </h1>
                         <h1 className={styles.trackNameText}>{track.name[1]}</h1>
-                        {track.album ? <p className={styles.trackInfo}>ALBUM: <Link
-                            className={styles.link}
-                            href={`/pth/hub/album/${track.album._id}`}>
-                            {track.album.name}
-                        </Link>
-                        </p> : null}
-                        {track.genre.length !== 0 ? <p className={styles.trackInfo}>GENRES: {track.genre}</p> : null}
+                        <div className={styles.infoTextFooter}>
+                            {track.album ?
+                                <>
+                                    <p className={styles.trackInfo}>
+                                        ALBUM:
+                                        <Link
+                                            className={styles.link}
+                                            href={`/pth/hub/album/${track.album._id}`}>
+                                            {track.album.name[1]}
+                                        </Link></p>
+
+                                </>
+                                :
+                                null}
+                            {
+                                track.genre.length !== 0 ?
+                                    <p className={styles.trackInfo}>
+                                        GENRES:
+                                        {track.genre.map((genre, index) =>
+                                            <Link
+                                                href={`/pth/hub/genre/${genre._id}`}
+                                                key={index}
+                                                className={styles.link}>
+                                                {genre.name}
+                                            </Link>
+                                        )}
+                                    </p>
+                                    :
+                                    null
+                            }
+                        </div>
                     </div>
                     <Image
                         className={styles.image}
@@ -42,10 +74,22 @@ const TrackPage: NextPage = ({serverTrack}) => {
                     />
                 </div>
                 <div className={styles.description}>
-                    {track.description && track.description.length !== '' ?
-                        <p>DESCRIPTION: {track.description}</p>
-                        :
-                        null
+                    {
+                        track.description && track.description.length > 240 ?
+                            <>
+                                <Popover overlayStyle={{width: 600}} content={track.description}>
+                                    <InfoCircleOutlined/>
+                                </Popover>
+                                <p>DESCRIPTION: {descriptionLength}</p>
+                            </>
+                            :
+                            null
+                    }
+                    {
+                        track.description && track.description.length < 240 ?
+                            <p>DESCRIPTION: {track.description}</p>
+                            :
+                            null
                     }
                 </div>
                 <div className={styles.scoresContainer}>
@@ -82,12 +126,20 @@ const TrackPage: NextPage = ({serverTrack}) => {
                              orientation={"right"}>Reactions</Divider>
                     <div className={styles.commentList}>
                         {
-                            track.comments.map(com =>
-                                <div className={styles.commentItem}>
+                            track.comments.map(comment =>
+                                <div
+                                    key={comment._id}
+                                    className={styles.commentItem}
+                                >
                                     <Divider style={{color: "white", border: "#343434"}} orientation={"left"}>
-                                        {com.user}
+                                        <Link
+                                            href={`/pth/hub/profile/${comment.user._id}`}
+                                            className={styles.link}
+                                        >
+                                            {comment.user.username}
+                                        </Link>
                                     </Divider>
-                                    <p className={styles.comment}>{com.text}</p>
+                                    <p className={styles.comment}>{comment.text}</p>
                                 </div>
                             )
                         }
@@ -98,16 +150,18 @@ const TrackPage: NextPage = ({serverTrack}) => {
     );
 };
 
-TrackPage.displayName = 'Track Page'
+TrackPage.getLayout = (page: React.ReactNode) => {
+    return <MainLayout name={'Track Page'}>{page}</MainLayout>
+}
 export default TrackPage;
 
 export const getServerSideProps: ({params}) => Promise<{ props: { serverTrack: trackDto } }> = async ({params}) => {
     const response = await axios.get(`http://localhost:4221/tracks/${params.id}/current`)
     const track = response.data
-    track.genre.map(gen => ({name: gen.name}))
+
     return {
         props: {
-            serverTrack: response.data
+            serverTrack: track
         }
     }
 }

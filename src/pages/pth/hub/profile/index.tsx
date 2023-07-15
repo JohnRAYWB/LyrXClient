@@ -1,67 +1,89 @@
 import React from 'react';
 import Image from "next/image";
-import {ConfigProvider, Tabs, TabsProps} from "antd";
+import {ConfigProvider, Popover, Tabs, TabsProps} from "antd";
 import styles from "@/styles/Profile.module.css"
 import {InfoCircleOutlined} from "@ant-design/icons";
 import TrackList from "@/components/Content/TrackPage/TrackList";
 import {PlaylistCollectionRow, AlbumCollectionRow} from "@/components/Content/components/ProfileCollectionRow";
 import Link from "next/link";
+import MainLayout from "@/components/screens/MainLayout/MainLayout";
+import useTextLength from "@/util/useTextLength";
+import {useAppSelector} from "@/hook/redux";
+import {selectUserData} from "@/store/slice/user";
+import {NextPageWithLayout} from "@/pages/_app";
 
-import {userAbstract} from "@/api/dto/user.entity";
-import {NextPage} from "next";
+const Index: NextPageWithLayout = () => {
 
-const items: TabsProps['items'] = [
-    {
-        key: '1',
-        label: 'TRACKS',
-        children: <TrackList tracks={[].concat(userAbstract.tracks, userAbstract.tracksCollection).slice(0, 10)}/>
-    },
-    {
-        key: '2',
-        label: 'PLAYLISTS',
-        children: [userAbstract.playlistsCollection.length ?
-            <PlaylistCollectionRow playlists={userAbstract.playlistsCollection}/>
-            :
-            <p>You don't have playlists yet</p>
-        ]
-    },
-    {
-        key: '3',
-        label: 'ALBUMS',
-        children: [userAbstract.albumsCollection.length ?
-            <AlbumCollectionRow albums={userAbstract.albumsCollection}/>
-            :
-            <p>You don't have added albums yet</p>
-        ]
-    },
-]
+    const user = useAppSelector(selectUserData)
 
-const Index: NextPage = () => {
+    const roles = user.roles.map(role => role.role).join(' | ')
 
-    const roles = userAbstract.roles.map(role => role.role).join(' | ')
+    let about = user.about
+    about.length > 150 ? about = useTextLength(user.about, 150) : about
+
+    const items: TabsProps['items'] = [
+        {
+            key: '1',
+            label: 'TRACKS',
+            children: <TrackList tracks={[].concat(user.tracks, user.tracksCollection).slice(0, 10)}/>
+        },
+        {
+            key: '2',
+            label: 'PLAYLISTS',
+            children: [user.playlistsCollection ?
+                <PlaylistCollectionRow playlists={[].concat(user.playlists, user.playlistsCollection)}/>
+                :
+                <p className={styles.collectionEmpty}>You don't have playlists yet</p>
+            ]
+        },
+        {
+            key: '3',
+            label: 'ALBUMS',
+            children: [user.albumsCollections ?
+                <AlbumCollectionRow albums={user.albumsCollections}/>
+                :
+                <p className={styles.collectionEmpty}>You don't have added albums yet</p>
+            ]
+        },
+    ]
 
     return (
         <div className={styles.main}>
             <div className={styles.container}>
-                <Image priority={true} className={styles.avatar} width={200} height={200} src={userAbstract.avatar}
-                       alt={'avatar'}/>
+                <Image
+                    priority={true}
+                    className={styles.avatar}
+                    width={200}
+                    height={200}
+                    src={`http:localhost:4221/profile/${user.username}/${user.avatar}`}
+                    alt={'avatar'}/>
                 <div className={styles.infoContainer}>
+                    <p className={styles.roles}>{roles}</p>
+                    <h1 className={styles.infoUsername}>{user.username}</h1>
+                    <h1 className={styles.infoEmail}>{user.email}</h1>
                     <div className={styles.description}>
-                        <p className={styles.roles}>{roles}</p>
-                    </div>
-                    <h1 className={styles.infoUsername}>{userAbstract.username}</h1>
-                    <div className={styles.description}>
-                        <InfoCircleOutlined/>
-                        <p className={styles.infoDescription}>{userAbstract.about}</p>
+                        {about.length > 150 ?
+                            <>
+                                <Popover overlayStyle={{width: 600}} content={user.about}>
+                                    <InfoCircleOutlined/>
+                                </Popover>
+                                <p className={styles.infoDescription}>{about}</p>
+                            </>
+                        :
+                            <>
+                                <InfoCircleOutlined/>
+                                <p className={styles.infoDescription}>{about}</p>
+                            </>
+                        }
                     </div>
                     <div className={styles.followContainer}>
                         <div className={styles.followElement}>
                             <h1 className={styles.followText}>Followers:</h1>
-                            <button className={styles.followButton}>{userAbstract.followers.length}</button>
+                            <button className={styles.followButton}>{user.followers.length}</button>
                         </div>
                         <div className={styles.followElement}>
                             <h1 className={styles.followText}>Followings:</h1>
-                            <button className={styles.followButton}>{userAbstract.followings.length}</button>
+                            <button className={styles.followButton}>{user.followings.length}</button>
                         </div>
                     </div>
                 </div>
@@ -87,5 +109,8 @@ const Index: NextPage = () => {
     );
 };
 
-Index.displayName = 'Profile'
+Index.getLayout = (page: React.ReactNode) => {
+    return <MainLayout name={'Profile'}>{page}</MainLayout>
+}
+
 export default Index;

@@ -2,13 +2,13 @@ import React from 'react';
 import styles from "../styles/PlaylistSider.module.css"
 import Link from "next/link";
 import {AppstoreOutlined, PlusOutlined} from "@ant-design/icons";
-import {playlistsCollectionDto} from "@/api/dto/playlist.dto";
+import {playlistDto} from "@/api/dto/playlist.dto";
 
 interface playlistLength {
-    playlists: playlistsCollectionDto
+    playlists: playlistDto[]
 }
 
-const PlaylistSider: React.FC<playlistLength> = ({playlists= 0}) => {
+const PlaylistSider: React.FC<playlistLength> = ({playlists}) => {
 
     if (playlists.length !== 0) {
         return (
