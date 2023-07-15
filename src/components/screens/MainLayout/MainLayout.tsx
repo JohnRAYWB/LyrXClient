@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {ReactNode, useState} from 'react';
 import {Layout} from 'antd';
 import MainSider from "./Sider/MainSider";
 import Navigation from "./Navigation/Navigation";
@@ -12,13 +12,11 @@ import {userDto} from "@/api/dto/user.dto";
 const {Header, Content, Footer, Sider} = Layout;
 
 interface NavName {
+    children: ReactNode
     name: string
-    userData: userDto
 }
 
-const App: React.FC<NavName> = ({children, name, userData}) => {
-
-    const [user, setUser] = useState(userData)
+const App: React.FC<NavName> = ({children, name}) => {
 
     return (
         <>
@@ -42,8 +40,3 @@ const App: React.FC<NavName> = ({children, name, userData}) => {
 };
 
 export default App;
-
-export const getServerSideProps = async (ctx: GetServerSidePropsContext) => {
-
-    console.log(ctx)
-}

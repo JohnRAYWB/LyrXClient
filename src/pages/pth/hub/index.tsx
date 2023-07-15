@@ -6,8 +6,7 @@ import AlbumRow from "@/components/Content/HubPage/AlbumRow";
 import MainLayout from "@/components/screens/MainLayout/MainLayout";
 import {wrapper} from "@/store/store";
 import {parseCookies} from "nookies";
-import * as Api from "@/api"
-import {selectUserData, setUserData} from "@/store/slice/user";
+import {selectUserData} from "@/store/slice/user";
 import {useAppSelector} from "@/hook/redux";
 import {NextPageWithLayout} from "@/pages/_app";
 
@@ -17,10 +16,9 @@ const Hub: NextPageWithLayout = () => {
 
     return (
             <div className={styles.main}>
-                hub
-                {/*<TrackRow/>
+                <TrackRow/>
                 <PlaylistRow/>
-                <AlbumRow/>*/}
+                <AlbumRow/>
             </div>
     );
 };
@@ -43,17 +41,8 @@ export const getServerSideProps = wrapper.getServerSideProps((store) => async (c
             }
         }
 
-        const userData = await Api.auth.getProfile(access_token)
-
-        store.dispatch(setUserData(userData))
-        return {
-            props: {
-
-            }
-        }
     } catch (e) {
         console.log(e)
-        return {props: {}}
     }
 })
 

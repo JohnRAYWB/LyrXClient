@@ -6,7 +6,7 @@ import {genres} from "@/api/dto/genre.entity";
 import MainLayout from "@/components/screens/MainLayout/MainLayout";
 import {NextPageWithLayout} from "@/pages/_app";
 
-const Index: NextPageWithLayout = () => {
+const Genre: NextPageWithLayout = () => {
     return (
         <div className={styles.main}>
             <h1 className={styles.title}>Billions of tracks for any genre</h1>
@@ -15,7 +15,7 @@ const Index: NextPageWithLayout = () => {
     );
 };
 
-Index.getLayout = (page: React.ReactNode) => {
+Genre.getLayout = (page: React.ReactNode) => {
     return <MainLayout name={'Genres'}>{page}</MainLayout>
 }
-export default Index;
+export default Genre;

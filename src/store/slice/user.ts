@@ -8,7 +8,7 @@ export interface UserState {
 }
 
 const initialState: UserState = {
-    data: null
+    data: null,
 }
 
 export const userSlice = createSlice({

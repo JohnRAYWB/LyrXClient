@@ -4,8 +4,10 @@ import styles from "@/styles/Track.module.css"
 import {useFetchAllAndSearchQuery} from "@/store/api/TrackApi";
 import MainLayout from "@/components/screens/MainLayout/MainLayout";
 import {NextPageWithLayout} from "@/pages/_app";
+import {wrapper} from "@/store/store";
+import {parseCookies} from "nookies";
 
-const Index: NextPageWithLayout = () => {
+const Track: NextPageWithLayout = () => {
 
     const [query, setQuery] = useState('')
     const {data: tracks} = useFetchAllAndSearchQuery(query)
@@ -17,7 +19,27 @@ const Index: NextPageWithLayout = () => {
     );
 };
 
-Index.getLayout = (page: React.ReactNode) => {
+Track.getLayout = (page: React.ReactNode) => {
     return <MainLayout name={'Tracks'}>{page}</MainLayout>
 }
-export default Index;
+
+export const getServerSideProps = wrapper.getServerSideProps((store) => async (ctx) => {
+
+    try {
+        const {access_token} = parseCookies(ctx)
+
+        if(!access_token) {
+            return {
+                redirect: {
+                    destination: "/",
+                    permanent: false
+                }
+            }
+        }
+
+    } catch (e) {
+        console.log(e)
+    }
+})
+
+export default Track;

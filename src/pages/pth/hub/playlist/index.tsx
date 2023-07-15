@@ -3,14 +3,14 @@ import PlaylistCollection from "@/components/Content/CollectionPage/PlaylistColl
 import MainLayout from "@/components/screens/MainLayout/MainLayout";
 import {NextPageWithLayout} from "@/pages/_app";
 
-const Index: NextPageWithLayout = () => {
+const Playlist: NextPageWithLayout = () => {
 
     return (
         <PlaylistCollection/>
     );
 };
 
-Index.getLayout = (page: React.ReactNode) => {
+Playlist.getLayout = (page: React.ReactNode) => {
     return <MainLayout name={'Playlists'}>{page}</MainLayout>
 }
-export default Index;
+export default Playlist;

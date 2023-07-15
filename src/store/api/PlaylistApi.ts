@@ -1,31 +1,30 @@
-import {createApi, fetchBaseQuery} from "@reduxjs/toolkit/query/react";
+import {createApi} from "@reduxjs/toolkit/query/react";
 import {HYDRATE} from "next-redux-wrapper";
-
-const baseUrl = 'http://localhost:4221/playlists'
+import {baseQuery} from "@/store/api/headers";
 
 const PlaylistApi = createApi({
     reducerPath: 'playlistApi',
     tagTypes: ['Playlist'],
-    baseQuery: fetchBaseQuery({baseUrl}),
     extractRehydrationInfo(action, {reducerPath}) {
         if (action.type === HYDRATE) {
             return action.payload[reducerPath]
         }
     },
+    baseQuery: baseQuery,
     endpoints: (build) => ({
         fetchAllAndSearch: build.query({
             query: (query) => ({
-                url: `search?name=${query}`
+                url: `playlists/search?name=${query}`
             })
         }),
         fetchMostLiked: build.query({
             query: (page) => ({
-                url: `top?page=${page}`
+                url: `playlists/top?page=${page}`
             })
         }),
         fetchById: build.query({
             query: (pId) => ({
-                url: `${pId}/current`
+                url: `playlists/${pId}/current`
             })
         })
     })

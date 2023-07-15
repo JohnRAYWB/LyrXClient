@@ -1,6 +1,5 @@
 import axios from "@/core/axios";
 import {responseUserDto, signInDto, signUpDto} from "@/api/dto/auth.dto";
-import {destroyCookie} from "nookies";
 import {userDto} from "@/api/dto/user.dto";
 
 export const signIn = async (values: signInDto): Promise<responseUserDto> => {

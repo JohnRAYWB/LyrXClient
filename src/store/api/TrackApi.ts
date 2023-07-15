@@ -1,27 +1,27 @@
-import {createApi, fetchBaseQuery} from "@reduxjs/toolkit/query/react";
+import {createApi} from "@reduxjs/toolkit/query/react";
 import {HYDRATE} from "next-redux-wrapper";
-import {trackDto} from "@/api/dto/track.dto";
+import {baseQuery} from "@/store/api/headers";
 
 const baseUrl = 'http://localhost:4221'
 
 const TrackApi = createApi({
     reducerPath: 'trackApi',
     tagTypes: ['Tracks'],
-    baseQuery: fetchBaseQuery({baseUrl}),
     extractRehydrationInfo(action, {reducerPath}) {
         if (action.type === HYDRATE) {
             return action.payload[reducerPath]
         }
     },
+    baseQuery: baseQuery,
     endpoints: (build) => ({
         fetchAllAndSearch: build.query({
             query: (query) => ({
-                url: `tracks/search?name=${query}`
+                url: `tracks/search?name=${query}`,
             })
         }),
         fetchMostLiked: build.query<number>({
             query: (page) => ({
-                url: `tracks/top?page=${page}`
+                url: `tracks/top?page=${page}`,
             })
         }),
         fetchById: build.query({

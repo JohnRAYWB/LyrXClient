@@ -17,7 +17,7 @@ interface AlbumItems {
 
 export const PlaylistCollectionRow: React.FC<PlaylistItems> = ({playlists}) => {
 
-    const preparedData = usePreparedPlaylistEntities(playlists).slice(0, 10)
+    const preparedData = playlists.slice(0, 10)
 
     return (
         <div className={styles.list}>
@@ -37,7 +37,7 @@ export const PlaylistCollectionRow: React.FC<PlaylistItems> = ({playlists}) => {
 
 export const AlbumCollectionRow: React.FC<AlbumItems> = ({albums}) => {
 
-    const preparedData = usePreparedAlbumEntities(albums).slice(0, 10)
+    const preparedData = albums.slice(0, 10)
 
     return (
         <div className={styles.list}>

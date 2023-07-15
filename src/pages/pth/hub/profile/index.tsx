@@ -11,8 +11,10 @@ import useTextLength from "@/util/useTextLength";
 import {useAppSelector} from "@/hook/redux";
 import {selectUserData} from "@/store/slice/user";
 import {NextPageWithLayout} from "@/pages/_app";
+import {wrapper} from "@/store/store";
+import {parseCookies} from "nookies";
 
-const Index: NextPageWithLayout = () => {
+const Profile: NextPageWithLayout = () => {
 
     const user = useAppSelector(selectUserData)
 
@@ -23,24 +25,34 @@ const Index: NextPageWithLayout = () => {
 
     const items: TabsProps['items'] = [
         {
+            tabKey: 'track',
             key: '1',
             label: 'TRACKS',
-            children: <TrackList tracks={[].concat(user.tracks, user.tracksCollection).slice(0, 10)}/>
-        },
-        {
-            key: '2',
-            label: 'PLAYLISTS',
-            children: [user.playlistsCollection ?
-                <PlaylistCollectionRow playlists={[].concat(user.playlists, user.playlistsCollection)}/>
+            children: [user.tracks || user.tracksCollection ?
+                <TrackList
+                    tracks={[].concat(user.tracks, user.tracksCollection).slice(0, 10).filter(track => track !== undefined)}/>
                 :
-                <p className={styles.collectionEmpty}>You don't have playlists yet</p>
+                <p className={styles.collectionEmpty}>You don't have added tracks yet</p>
             ]
         },
         {
+            tabKey: 'playlist',
+            key: '2',
+            label: 'PLAYLISTS',
+            children: [user.playlists || user.playlistsCollection ?
+                <PlaylistCollectionRow
+                    playlists={[].concat(user.playlists, user.playlistsCollection).filter(playlist => playlist !== undefined)}/>
+                :
+                <p className={styles.collectionEmpty}>You don't have added playlists yet</p>
+            ]
+        },
+        {
+            tabKey: 'album',
             key: '3',
             label: 'ALBUMS',
-            children: [user.albumsCollections ?
-                <AlbumCollectionRow albums={user.albumsCollections}/>
+            children: [user.albums || user.albumsCollections ?
+                <AlbumCollectionRow
+                    albums={[].concat(user.albums, user.albumsCollections).filter(album => album !== undefined)}/>
                 :
                 <p className={styles.collectionEmpty}>You don't have added albums yet</p>
             ]
@@ -69,7 +81,7 @@ const Index: NextPageWithLayout = () => {
                                 </Popover>
                                 <p className={styles.infoDescription}>{about}</p>
                             </>
-                        :
+                            :
                             <>
                                 <InfoCircleOutlined/>
                                 <p className={styles.infoDescription}>{about}</p>
@@ -98,7 +110,7 @@ const Index: NextPageWithLayout = () => {
                 }}>
                     <Tabs
                         centered
-                        defaultActiveKey={'1'}
+                        defaultActiveKey={'track'}
                         items={items}
                         tabBarStyle={{color: '#888888'}}
                     />
@@ -109,8 +121,27 @@ const Index: NextPageWithLayout = () => {
     );
 };
 
-Index.getLayout = (page: React.ReactNode) => {
+Profile.getLayout = (page: React.ReactNode) => {
     return <MainLayout name={'Profile'}>{page}</MainLayout>
 }
 
-export default Index;
+export const getServerSideProps = wrapper.getServerSideProps((store) => async (ctx) => {
+
+    try {
+        const {access_token} = parseCookies(ctx)
+
+        if (!access_token) {
+            return {
+                redirect: {
+                    destination: "/",
+                    permanent: false
+                }
+            }
+        }
+
+    } catch (e) {
+        console.log(e)
+    }
+})
+
+export default Profile

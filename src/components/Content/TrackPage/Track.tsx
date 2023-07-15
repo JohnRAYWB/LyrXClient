@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import Image from "next/image";
 import {
     EllipsisOutlined,
@@ -26,19 +26,10 @@ const Track: React.FC<Track> = ({track, index}) => {
     const [fav, setFav] = useState(false)
     const [active, setActive] = useState(false)
 
-    const addFavorite = () => {
-        if (track.favorites !== 0) {
-            track.favorites--
-            return setFav(false)
-        } else {
-            track.favorites++
-            return setFav(true)
-        }
-    }
-
     const artistLength = useTextLength(track.name[0], 20)
     const trackLength = useTextLength(track.name[1], 20)
     let albumLength = ''
+
     track.album ? albumLength = useTextLength(track.album.name[1] || '', 20) : ''
 
     let folder = 'track'
@@ -52,15 +43,9 @@ const Track: React.FC<Track> = ({track, index}) => {
                 <div className={styles.imagePlayButtonContainer}>
                     <p>{index}</p>
                     {!active ?
-                        <PlayCircleOutlined onClick={(e) => {
-                            e.stopPropagation()
-                            setActive(true)
-                        }} className={styles.playButton}/>
+                        <PlayCircleOutlined/>
                         :
-                        <PauseOutlined onClick={(e) => {
-                            e.stopPropagation()
-                            setActive(false)
-                        }} className={styles.playButton}/>
+                        <PauseOutlined/>
                     }
                     <Image
                         className={styles.image}
@@ -79,15 +64,9 @@ const Track: React.FC<Track> = ({track, index}) => {
                 <div className={styles.actionIcons}>
                     {
                         !fav ?
-                            <HeartOutlined onClick={e => {
-                                e.stopPropagation()
-                                addFavorite()
-                            }} className={styles.favIcon}/>
+                            <HeartOutlined className={styles.favIcon}/>
                             :
-                            <HeartFilled onClick={e => {
-                                e.stopPropagation()
-                                addFavorite()
-                            }} className={styles.favIconFill}/>
+                            <HeartFilled className={styles.favIconFill}/>
                     }
                     <ConfigProvider theme={{
                         token: {

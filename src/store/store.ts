@@ -5,13 +5,15 @@ import PlaylistApi from "@/store/api/PlaylistApi";
 import AlbumApi from "@/store/api/AlbumApi";
 import UserApi from "@/store/api/UserApi";
 import {userReducer} from "./slice/user"
+import {authReducer} from "@/store/slice/auth";
 
 export const rootReducer = combineReducers({
-    /*[TrackApi.reducerPath]: TrackApi.reducer,
+    [TrackApi.reducerPath]: TrackApi.reducer,
     [PlaylistApi.reducerPath]: PlaylistApi.reducer,
     [AlbumApi.reducerPath]: AlbumApi.reducer,
-    [UserApi.reducerPath]: UserApi.reducer,*/
-    user: userReducer
+    [UserApi.reducerPath]: UserApi.reducer,
+    user: userReducer,
+    auth: authReducer
 })
 
 export const reducer = (state, action) => {

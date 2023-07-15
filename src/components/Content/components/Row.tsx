@@ -16,9 +16,9 @@ const Row: React.FC<trackItems> = ({items, type}) => {
 
     return (
         <div className={styles.main}>
-            {items && items.map(item =>
+            {items && items.map((item, index) =>
                 <Element
-                    key={item._id}
+                    key={index}
                     item={item}
                     type={type}
                 />
