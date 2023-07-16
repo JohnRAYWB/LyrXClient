@@ -8,8 +8,14 @@ import {useFetchMostLikedQuery} from "@/store/api/TrackApi";
 
 const TrackRow = () => {
 
-    const {data: trackFirst} = useFetchMostLikedQuery(0)
-    const {data: trackSecond} = useFetchMostLikedQuery(5)
+    const {data: tracks, isLoading} = useFetchMostLikedQuery()
+
+    if(isLoading) {
+        return <></>
+    }
+
+    const firstRow = tracks.slice(0, 5)
+    const secondRow = tracks.slice(5, 10)
 
     return (
         <div className={styles.main}>
@@ -19,8 +25,8 @@ const TrackRow = () => {
             </div>
             <div className={styles.rowContainer}>
                 <Carousel>
-                    <Row items={trackFirst} type={'track'}/>
-                    <Row items={trackSecond} type={'track'}/>
+                    <Row items={firstRow} type={'track'}/>
+                    <Row items={secondRow} type={'track'}/>
                 </Carousel>
             </div>
         </div>

@@ -22,9 +22,9 @@ interface Items {
 
 const CollectionHeader: React.FC<Items> = ({image, name, description, favorites, user, tracks, genre}) => {
 
-    let descriptionLength = ''
-    description ? descriptionLength = useTextLength(description, 240) : ''
-    console.log(tracks)
+    let descriptionLength = description
+    descriptionLength ? descriptionLength = useTextLength(description, 240) : description
+
     return (
         <div>
             <div className={styles.headerMain}>

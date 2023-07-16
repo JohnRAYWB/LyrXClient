@@ -18,8 +18,8 @@ const PlaylistApi = createApi({
             })
         }),
         fetchMostLiked: build.query({
-            query: (page) => ({
-                url: `playlists/top?page=${page}`
+            query: () => ({
+                url: `playlists/top`
             })
         }),
         fetchById: build.query({

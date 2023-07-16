@@ -11,11 +11,11 @@ interface CollectionItem {
     type: string
 }
 
-const Playlist: React.FC<CollectionItem> = ({item, type}) => {
+const CollectionItem: React.FC<CollectionItem> = ({item, type}) => {
 
     const router = useRouter()
 
-    const nameLength = useTextLength(item.name, 40)
+    const nameLength = useTextLength(item.name[1], 40)
     const descriptionLength = useTextLength(item.description, 40)
 
     return (
@@ -26,14 +26,14 @@ const Playlist: React.FC<CollectionItem> = ({item, type}) => {
                 height={160}
                 quality={50}
                 src={`http://localhost:4221/${type}/${item.name[0]}/${item.image}`}
-                alt={'playlist_logo'}
+                alt={'collection_logo'}
             />
             <div className={styles.textContainer}>
-                <h1 className={styles.name}>{nameLength}</h1>
+                <h1 className={styles.name}>{`${item.name[0]} - ${nameLength}`}</h1>
                 <p className={styles.description}>{descriptionLength}</p>
             </div>
         </div>
     );
 };
 
-export default Playlist;
+export default CollectionItem;

@@ -18,8 +18,8 @@ const AlbumApi = createApi({
             })
         }),
         fetchMostLiked: build.query({
-            query: (page) => ({
-                url: `albums/top?page=${page}`
+            query: () => ({
+                url: `albums/top`
             })
         }),
         fetchById: build.query({

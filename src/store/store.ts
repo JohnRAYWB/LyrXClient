@@ -6,11 +6,13 @@ import AlbumApi from "@/store/api/AlbumApi";
 import UserApi from "@/store/api/UserApi";
 import {userReducer} from "./slice/user"
 import {authReducer} from "@/store/slice/auth";
+import GenreApi from "@/store/api/GenreApi";
 
 export const rootReducer = combineReducers({
     [TrackApi.reducerPath]: TrackApi.reducer,
     [PlaylistApi.reducerPath]: PlaylistApi.reducer,
     [AlbumApi.reducerPath]: AlbumApi.reducer,
+    [GenreApi.reducerPath]: GenreApi.reducer,
     [UserApi.reducerPath]: UserApi.reducer,
     user: userReducer,
     auth: authReducer
@@ -37,6 +39,7 @@ export function makeStore() {
                 TrackApi.middleware,
                 PlaylistApi.middleware,
                 AlbumApi.middleware,
+                GenreApi.middleware,
                 UserApi.middleware
             )
     })

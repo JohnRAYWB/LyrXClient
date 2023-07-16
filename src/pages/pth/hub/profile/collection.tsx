@@ -12,9 +12,7 @@ const Collection: NextPageWithLayout = () => {
     );
 };
 
-Collection.getLayout = (page: React.ReactNode) => {
-    return <MainLayout name={'Collection'}>{page}</MainLayout>
-}
+Collection.getLayout = (page: React.ReactNode) => <MainLayout name={'Collection'}>{page}</MainLayout>
 
 export const getServerSideProps = wrapper.getServerSideProps((store) => async (ctx) => {
 

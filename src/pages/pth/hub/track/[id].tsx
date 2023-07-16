@@ -1,18 +1,27 @@
-import React, {useState} from 'react';
+import React from 'react';
 import Image from "next/image";
 import styles from "@/styles/TrackPage.module.css"
 import Link from "next/link";
 import {Button, ConfigProvider, Divider, Input, Popover} from "antd";
-import {trackDto} from "@/api/dto/track.dto";
-import axios from "axios";
 import useTextLength from "@/util/useTextLength";
 import {InfoCircleOutlined} from "@ant-design/icons";
 import MainLayout from "@/components/screens/MainLayout/MainLayout";
 import {NextPageWithLayout} from "@/pages/_app";
+import {wrapper} from "@/store/store";
+import {parseCookies} from "nookies";
+import {useFetchByIdQuery} from "@/store/api/TrackApi";
 
-const TrackPage: NextPageWithLayout = ({serverTrack}) => {
+interface PageParams {
+    trackId: string
+}
 
-    const [track, setTrack] = useState<trackDto>(serverTrack)
+const TrackPage: NextPageWithLayout<PageParams> = ({trackId}) => {
+
+    const {data: track, isLoading} = useFetchByIdQuery(trackId)
+
+    if(isLoading) {
+        return <></>
+    }
 
     let folder = 'track'
     track.protectedDeletion ? folder = 'album' : folder
@@ -150,18 +159,31 @@ const TrackPage: NextPageWithLayout = ({serverTrack}) => {
     );
 };
 
-TrackPage.getLayout = (page: React.ReactNode) => {
-    return <MainLayout name={'Track Page'}>{page}</MainLayout>
-}
-export default TrackPage;
+TrackPage.getLayout = (page: React.ReactNode) => <MainLayout name={'Track Page'}>{page}</MainLayout>
 
-export const getServerSideProps: ({params}) => Promise<{ props: { serverTrack: trackDto } }> = async ({params}) => {
-    const response = await axios.get(`http://localhost:4221/tracks/${params.id}/current`)
-    const track = response.data
+export const getServerSideProps = wrapper.getServerSideProps((store) => async (ctx) => {
 
-    return {
-        props: {
-            serverTrack: track
+    try {
+        const {access_token} = parseCookies(ctx)
+
+        if(!access_token) {
+            return {
+                redirect: {
+                    destination: "/",
+                    permanent: false
+                }
+            }
         }
+
+        return {
+            props: {
+                trackId: ctx.params.id
+            }
+        }
+
+    } catch (e) {
+        console.log(e)
     }
-}
+})
+
+export default TrackPage;

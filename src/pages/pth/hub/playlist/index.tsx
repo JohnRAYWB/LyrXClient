@@ -10,7 +10,6 @@ const Playlist: NextPageWithLayout = () => {
     );
 };
 
-Playlist.getLayout = (page: React.ReactNode) => {
-    return <MainLayout name={'Playlists'}>{page}</MainLayout>
-}
+Playlist.getLayout = (page: React.ReactNode) => <MainLayout name={'Playlists'}>{page}</MainLayout>
+
 export default Playlist;

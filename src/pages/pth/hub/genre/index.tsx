@@ -1,12 +1,18 @@
 import React from 'react';
 import GenreList from "@/components/Content/GenrePage/GenreList";
 import styles from "@/styles/Genre.module.css"
-
-import {genres} from "@/api/dto/genre.entity";
 import MainLayout from "@/components/screens/MainLayout/MainLayout";
 import {NextPageWithLayout} from "@/pages/_app";
+import {useFetchAllQuery} from "@/store/api/GenreApi";
 
 const Genre: NextPageWithLayout = () => {
+
+    const {data: genres, isLoading} = useFetchAllQuery(0)
+
+    if(isLoading) {
+        return <></>
+    }
+
     return (
         <div className={styles.main}>
             <h1 className={styles.title}>Billions of tracks for any genre</h1>
@@ -15,7 +21,6 @@ const Genre: NextPageWithLayout = () => {
     );
 };
 
-Genre.getLayout = (page: React.ReactNode) => {
-    return <MainLayout name={'Genres'}>{page}</MainLayout>
-}
+Genre.getLayout = (page: React.ReactNode) => <MainLayout name={'Genres'}>{page}</MainLayout>
+
 export default Genre;

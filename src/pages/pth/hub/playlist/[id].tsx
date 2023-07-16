@@ -1,13 +1,23 @@
-import React, {useState} from 'react';
+import React from 'react';
 import CollectionHeader from "@/components/Content/CollectionSelfPage/CollectionHeader";
-import {playlistDto} from "@/api/dto/playlist.dto";
-import axios from "axios";
 import MainLayout from "@/components/screens/MainLayout/MainLayout";
 import {NextPageWithLayout} from "@/pages/_app";
+import {useFetchByIdQuery} from "@/store/api/PlaylistApi";
+import {wrapper} from "@/store/store";
+import {parseCookies} from "nookies";
 
-const PlaylistPage: NextPageWithLayout = ({serverPlaylist}) => {
+interface PageParams {
+    playlistId: string
+}
 
-    const [playlist, setPlaylist] = useState<playlistDto>(serverPlaylist)
+const PlaylistPage: NextPageWithLayout<PageParams> = ({playlistId}) => {
+
+    const {data: playlist, isLoading} = useFetchByIdQuery(playlistId)
+
+    if(isLoading) {
+        return <></>
+    }
+
     const {image, name, description, favorites, user, tracks, genre} = playlist
     const collectionImage = `playlist/${name[0]}/${image}`
 
@@ -26,18 +36,31 @@ const PlaylistPage: NextPageWithLayout = ({serverPlaylist}) => {
     );
 }
 
-PlaylistPage.getLayout = (page: React.ReactNode) => {
-    return <MainLayout name={'Playlist'}>{page}</MainLayout>
-}
-export default PlaylistPage;
+PlaylistPage.getLayout = (page: React.ReactNode) => <MainLayout name={'Playlist'}>{page}</MainLayout>
 
-export const getServerSideProps: ({params}) => Promise<{ props: { serverTrack: playlistDto } }> = async ({params}) => {
-    const response = await axios.get(`http://localhost:4221/playlists/${params.id}/current`)
-    const playlist = response.data
+export const getServerSideProps = wrapper.getServerSideProps((store) => async (ctx) => {
 
-    return {
-        props: {
-            serverPlaylist: playlist
+    try {
+        const {access_token} = parseCookies(ctx)
+
+        if(!access_token) {
+            return {
+                redirect: {
+                    destination: "/",
+                    permanent: false
+                }
+            }
         }
+
+        return {
+            props: {
+                playlistId: ctx.params.id
+            }
+        }
+
+    } catch (e) {
+        console.log(e)
     }
-}
+})
+
+export default PlaylistPage;

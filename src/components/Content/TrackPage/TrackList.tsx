@@ -4,11 +4,15 @@ import Track from "@/components/Content/TrackPage/Track";
 import styles from "./styles/TrackList.module.css"
 import {Divider} from "antd";
 
-interface TrackList {
+interface TrackListData {
     tracks: trackDto[]
 }
 
-const TrackList: React.FC<TrackList> = ({tracks}) => {
+const TrackList: React.FC<TrackListData> = ({tracks}) => {
+
+    if(tracks.length === 0) {
+        return <div className={styles.emptyList}>Here no added tracks yet</div>
+    }
 
     return (
         <div>

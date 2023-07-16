@@ -1,16 +1,19 @@
-import React, {useState} from 'react';
+import React from 'react';
 import TrackList from "@/components/Content/TrackPage/TrackList";
 import styles from "@/styles/Track.module.css"
-import {useFetchAllAndSearchQuery} from "@/store/api/TrackApi";
 import MainLayout from "@/components/screens/MainLayout/MainLayout";
 import {NextPageWithLayout} from "@/pages/_app";
 import {wrapper} from "@/store/store";
 import {parseCookies} from "nookies";
+import {useFetchAllAndSearchQuery} from "@/store/api/TrackApi";
 
 const Track: NextPageWithLayout = () => {
 
-    const [query, setQuery] = useState('')
-    const {data: tracks} = useFetchAllAndSearchQuery(query)
+    const {data: tracks, isLoading} = useFetchAllAndSearchQuery('')
+
+    if(isLoading) {
+        return <></>
+    }
 
     return (
         <div className={styles.main}>
@@ -19,9 +22,7 @@ const Track: NextPageWithLayout = () => {
     );
 };
 
-Track.getLayout = (page: React.ReactNode) => {
-    return <MainLayout name={'Tracks'}>{page}</MainLayout>
-}
+Track.getLayout = (page: React.ReactNode) => <MainLayout name={'Tracks'}>{page}</MainLayout>
 
 export const getServerSideProps = wrapper.getServerSideProps((store) => async (ctx) => {
 

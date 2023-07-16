@@ -7,8 +7,15 @@ import {useFetchMostLikedQuery} from "@/store/api/PlaylistApi";
 
 const PlaylistRow = () => {
 
-    const {data: firstLiked} = useFetchMostLikedQuery(0)
-    const {data: secondLiked} = useFetchMostLikedQuery(5)
+    const {data: playlists, isLoading} = useFetchMostLikedQuery()
+
+    if(isLoading) {
+        return <></>
+    }
+
+    const firstRow = playlists.slice(0, 5)
+    const secondRow = playlists.slice(5, 10)
+
 
     return (
         <div className={styles.main}>
@@ -18,8 +25,8 @@ const PlaylistRow = () => {
             </div>
             <div className={styles.rowContainer}>
                 <Carousel>
-                    <Row items={firstLiked} type={'playlist'}/>
-                    <Row items={secondLiked} type={'playlist'}/>
+                    <Row items={firstRow} type={'playlist'}/>
+                    <Row items={secondRow} type={'playlist'}/>
                 </Carousel>
             </div>
         </div>

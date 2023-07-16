@@ -1,13 +1,23 @@
-import React, {useState} from 'react';
+import React from 'react';
 import CollectionHeader from "@/components/Content/CollectionSelfPage/CollectionHeader";
-import axios from "axios";
-import {albumDto} from "@/api/dto/album.dto";
 import MainLayout from "@/components/screens/MainLayout/MainLayout";
 import {NextPageWithLayout} from "@/pages/_app";
+import {useFetchByIdQuery} from "@/store/api/AlbumApi";
+import {wrapper} from "@/store/store";
+import {parseCookies} from "nookies";
 
-const AlbumPage: NextPageWithLayout = ({serverAlbum}) => {
+interface PageParams {
+    albumId: string
+}
 
-    const [album, setAlbum] = useState<albumDto>(serverAlbum)
+const AlbumPage: NextPageWithLayout<PageParams> = ({albumId}) => {
+
+    const {data: album, isLoading} = useFetchByIdQuery(albumId)
+
+    if(isLoading) {
+        return <></>
+    }
+
     const {image, name, description, favorites, artist, tracks, genre} = album
     const collectionImage = `album/${name[0]}/${image}`
 
@@ -26,18 +36,31 @@ const AlbumPage: NextPageWithLayout = ({serverAlbum}) => {
     );
 };
 
-AlbumPage.getLayout = (page: React.ReactNode) => {
-    return <MainLayout name={'Album Page'}>{page}</MainLayout>
-}
-export default AlbumPage;
+AlbumPage.getLayout = (page: React.ReactNode) =>  <MainLayout name={'Album Page'}>{page}</MainLayout>
 
-export const getServerSideProps: ({params}) => Promise<{ props: { serverTrack: albumDto } }> = async ({params}) => {
-    const response = await axios.get(`http://localhost:4221/albums/${params.id}/current`)
-    const album = response.data
+export const getServerSideProps = wrapper.getServerSideProps((store) => async (ctx) => {
 
-    return {
-        props: {
-            serverAlbum: album
+    try {
+        const {access_token} = parseCookies(ctx)
+
+        if(!access_token) {
+            return {
+                redirect: {
+                    destination: "/",
+                    permanent: false
+                }
+            }
         }
+
+        return {
+            props: {
+                albumId: ctx.params.id
+            }
+        }
+
+    } catch (e) {
+        console.log(e)
     }
-}
+})
+
+export default AlbumPage;

@@ -7,8 +7,14 @@ import {useFetchMostLikedQuery} from "@/store/api/AlbumApi";
 
 const AlbumRow = () => {
 
-    const {data: firstLiked} = useFetchMostLikedQuery(0)
-    const {data: secondLiked} = useFetchMostLikedQuery(5)
+    const {data: albums, isLoading} = useFetchMostLikedQuery()
+
+    if(isLoading) {
+        return <></>
+    }
+
+    const firstRow = albums.slice(0, 5)
+    const secondRow = albums.slice(5, 10)
 
     return (
         <div className={styles.main}>
@@ -18,8 +24,8 @@ const AlbumRow = () => {
             </div>
             <div className={styles.rowContainer}>
                 <Carousel>
-                    <Row items={firstLiked} type={'album'}/>
-                    <Row items={secondLiked} type={'album'}/>
+                    <Row items={firstRow} type={'album'}/>
+                    <Row items={secondRow} type={'album'}/>
                 </Carousel>
             </div>
         </div>

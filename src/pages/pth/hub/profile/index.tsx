@@ -20,8 +20,14 @@ const Profile: NextPageWithLayout = () => {
 
     const roles = user.roles.map(role => role.role).join(' | ')
 
-    let about = user.about
-    about.length > 150 ? about = useTextLength(user.about, 150) : about
+    let about = ''
+    let emptyAbout = ''
+
+    if(user.about === undefined) {
+        emptyAbout = `You can add about yourself`
+    }
+
+    user.about !== undefined && user.about.length > 150 ? about = useTextLength(user.about, 150) : about = user.about
 
     const items: TabsProps['items'] = [
         {
@@ -74,18 +80,24 @@ const Profile: NextPageWithLayout = () => {
                     <h1 className={styles.infoUsername}>{user.username}</h1>
                     <h1 className={styles.infoEmail}>{user.email}</h1>
                     <div className={styles.description}>
-                        {about.length > 150 ?
-                            <>
-                                <Popover overlayStyle={{width: 600}} content={user.about}>
-                                    <InfoCircleOutlined/>
-                                </Popover>
-                                <p className={styles.infoDescription}>{about}</p>
-                            </>
-                            :
+                        {user.about === undefined ?
                             <>
                                 <InfoCircleOutlined/>
-                                <p className={styles.infoDescription}>{about}</p>
+                                <p className={styles.infoDescription}>{emptyAbout}</p>
                             </>
+                            :
+                            about.length > 150 ?
+                                    <>
+                                        <Popover overlayStyle={{width: 600}} content={user.about}>
+                                            <InfoCircleOutlined/>
+                                        </Popover>
+                                        <p className={styles.infoDescription}>{about}</p>
+                                    </>
+                                    :
+                                    <>
+                                        <InfoCircleOutlined/>
+                                        <p className={styles.infoDescription}>{about}</p>
+                                    </>
                         }
                     </div>
                     <div className={styles.followContainer}>
@@ -121,9 +133,7 @@ const Profile: NextPageWithLayout = () => {
     );
 };
 
-Profile.getLayout = (page: React.ReactNode) => {
-    return <MainLayout name={'Profile'}>{page}</MainLayout>
-}
+Profile.getLayout = (page: React.ReactNode) => <MainLayout name={'Profile'}>{page}</MainLayout>
 
 export const getServerSideProps = wrapper.getServerSideProps((store) => async (ctx) => {
 

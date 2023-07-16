@@ -9,9 +9,15 @@ import {useFetchAllAndSearchQuery, useFetchMostLikedQuery} from "@/store/api/Pla
 
 const PlaylistCollection: React.FC = () => {
 
-    const {data: playlists} = useFetchAllAndSearchQuery('')
-    const {data: firstLiked} = useFetchMostLikedQuery(0)
-    const {data: secondLiked} = useFetchMostLikedQuery(5)
+    const {data: playlists, isLoading} = useFetchAllAndSearchQuery('')
+    const {data: likedPlaylist, isFetching} = useFetchMostLikedQuery(null)
+
+    if(isLoading || isFetching) {
+        return <></>
+    }
+
+    const firstRow = likedPlaylist.slice(0, 5)
+    const secondRow = likedPlaylist.slice(5, 10)
 
     return (
         <div className={styles.main}>
@@ -19,8 +25,8 @@ const PlaylistCollection: React.FC = () => {
                 <p className={styles.favText}>Most popular playlists</p>
                 <div className={styles.favItems}>
                     <Carousel>
-                        <Row items={firstLiked} type={'playlist'}/>
-                        <Row items={secondLiked} type={'playlist'}/>
+                        <Row items={firstRow} type={'playlist'}/>
+                        <Row items={secondRow} type={'playlist'}/>
                     </Carousel>
                 </div>
             </div>

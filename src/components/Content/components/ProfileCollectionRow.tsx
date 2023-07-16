@@ -17,19 +17,17 @@ interface AlbumItems {
 
 export const PlaylistCollectionRow: React.FC<PlaylistItems> = ({playlists}) => {
 
-    const preparedData = playlists.slice(0, 10)
-
     return (
         <div className={styles.list}>
-            {preparedData.length > 5 ?
+            {playlists.length > 5 ?
                 <>
                     <Carousel>
-                        <Row items={preparedData.slice(0, 5)} type={'playlist'}/>
-                        <Row items={preparedData.slice(5, 10)} type={'playlist'}/>
+                        <Row items={playlists.slice(0, 5)} type={'playlist'}/>
+                        <Row items={playlists.slice(5, 10)} type={'playlist'}/>
                     </Carousel>
                 </>
                 :
-                <Row items={preparedData.slice(0, 5)} type={'playlist'}/>
+                <Row items={playlists.slice(0, 5)} type={'playlist'}/>
             }
         </div>
     );
@@ -37,19 +35,17 @@ export const PlaylistCollectionRow: React.FC<PlaylistItems> = ({playlists}) => {
 
 export const AlbumCollectionRow: React.FC<AlbumItems> = ({albums}) => {
 
-    const preparedData = albums.slice(0, 10)
-
     return (
         <div className={styles.list}>
-            {preparedData.length > 5 ?
+            {albums.length > 5 ?
                 <>
                     <Carousel>
-                        <Row items={preparedData.slice(0, 5)} type={'album'}/>
-                        <Row items={preparedData.slice(5, 10)} type={'album'}/>
+                        <Row items={albums.slice(0, 5)} type={'album'}/>
+                        <Row items={albums.slice(5, 10)} type={'album'}/>
                     </Carousel>
                 </>
                 :
-                <Row items={preparedData.slice(0, 5)} type={'album'}/>
+                <Row items={albums.slice(0, 5)} type={'album'}/>
             }
         </div>
     );

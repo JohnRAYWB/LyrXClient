@@ -24,3 +24,11 @@
     border-bottom: 1px solid #343434;
     margin: 10px 0 0 0;
 }
+
+.emptyList {
+    font-weight: bold;
+    font-size: 44px;
+    color: #888888;
+    text-align: center;
+    margin-bottom: 20px;
+}

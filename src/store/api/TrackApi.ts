@@ -2,8 +2,6 @@ import {createApi} from "@reduxjs/toolkit/query/react";
 import {HYDRATE} from "next-redux-wrapper";
 import {baseQuery} from "@/store/api/headers";
 
-const baseUrl = 'http://localhost:4221'
-
 const TrackApi = createApi({
     reducerPath: 'trackApi',
     tagTypes: ['Tracks'],
@@ -19,9 +17,9 @@ const TrackApi = createApi({
                 url: `tracks/search?name=${query}`,
             })
         }),
-        fetchMostLiked: build.query<number>({
-            query: (page) => ({
-                url: `tracks/top?page=${page}`,
+        fetchMostLiked: build.query({
+            query: () => ({
+                url: `tracks/top`,
             })
         }),
         fetchById: build.query({

@@ -23,9 +23,7 @@ const Hub: NextPageWithLayout = () => {
     );
 };
 
-Hub.getLayout = (page: React.ReactNode) => {
-    return <MainLayout name={'Hub'}>{page}</MainLayout>
-}
+Hub.getLayout = (page: React.ReactNode) => <MainLayout name={'Hub'}>{page}</MainLayout>
 
 export const getServerSideProps = wrapper.getServerSideProps((store) => async (ctx) => {
 

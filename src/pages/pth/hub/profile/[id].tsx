@@ -10,7 +10,6 @@ const UserProfile: NextPageWithLayout = () => {
     );
 };
 
-UserProfile.getLayout = (page: React.ReactNode) => {
-    return <MainLayout name={'UserProfile'}>{page}</MainLayout>
-}
+UserProfile.getLayout = (page: React.ReactNode) => <MainLayout name={'UserProfile'}>{page}</MainLayout>
+
 export default UserProfile;
