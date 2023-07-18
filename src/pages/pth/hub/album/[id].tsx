@@ -1,10 +1,11 @@
 import React from 'react';
-import CollectionHeader from "@/components/Content/CollectionSelfPage/CollectionHeader";
-import MainLayout from "@/components/screens/MainLayout/MainLayout";
-import {NextPageWithLayout} from "@/pages/_app";
-import {useFetchByIdQuery} from "@/store/api/AlbumApi";
 import {wrapper} from "@/store/store";
 import {parseCookies} from "nookies";
+import {NextPageWithLayout} from "@/pages/_app";
+import MainLayout from "@/components/screens/MainLayout/MainLayout";
+
+import {useFetchByIdQuery} from "@/store/api/AlbumApi";
+import CollectionHeader from "@/components/Content/CollectionSelfPage/CollectionHeader";
 
 interface PageParams {
     albumId: string

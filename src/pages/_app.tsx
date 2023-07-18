@@ -8,12 +8,6 @@ import * as Api from "@/api";
 import {setUserData} from "@/store/slice/user";
 import {setAuthToken} from "@/store/slice/auth";
 
-/*interface Props extends AppProps {
-    Component: AppProps["Component"] & {
-        getLayout: (page: React.ReactElement) => React.ReactNode
-    }
-}*/
-
 export type NextPageWithLayout<P = {}, IP = P> = NextPage<P, IP> & {
     getLayout?: (page: ReactElement) => ReactNode
 }

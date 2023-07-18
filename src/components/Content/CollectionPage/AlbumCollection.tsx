@@ -1,16 +1,21 @@
 import React from 'react';
-import Collection from "@/components/Content/components/Collection";
-import styles from "./styles/Collection.module.css"
-import Row from "@/components/Content/components/Row";
 import {Carousel} from "antd";
-import {useFetchAllAndSearchQuery, useFetchMostLikedQuery} from "@/store/api/AlbumApi";
 
-const AlbumCollection: React.FC = () => {
+import styles from "./styles/Collection.module.css"
+import {useFetchMostLikedQuery} from "@/store/api/AlbumApi";
+import Collection from "@/components/Content/components/Collection";
+import Row from "@/components/Content/components/Row";
+import {albumDto} from "@/api/dto/album.dto";
 
-    const {data: albums, isLoading} = useFetchAllAndSearchQuery('')
-    const {data: likedAlbums, isFetching} = useFetchMostLikedQuery(null)
+interface AlbumParams {
+    albums: albumDto[]
+}
 
-    if(isLoading || isFetching) {
+const AlbumCollection: React.FC<AlbumParams> = ({albums}) => {
+
+    const {data: likedAlbums, isLoading} = useFetchMostLikedQuery(null)
+
+    if(isLoading) {
         return <></>
     }
 
@@ -27,7 +32,12 @@ const AlbumCollection: React.FC = () => {
                 </Carousel>
             </div>
             <p className={styles.listText}>Recently added</p>
-            <Collection items={albums} type={'album'}/>
+            {
+                albums.length === 0 ?
+                    <p className={styles.notFound}>Album not found</p>
+                    :
+                    <Collection items={albums} type={'album'}/>
+            }
         </div>
     );
 };

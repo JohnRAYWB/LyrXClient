@@ -2,12 +2,14 @@ import React, {useState} from 'react';
 import MenuSider from "./MenuSider";
 import {albumItems, genreItems, playlistItems, trackItems, userItems} from "./MenuItems/AdminItems";
 import styles from "../styles/ToolSider.module.css"
-import {roleDto} from "@/api/dto/auth.dto";
+import {roleDto} from "@/api/dto/user.dto";
 import {ToolOutlined} from "@ant-design/icons";
 
-const AdminToolSider: React.FC<roleDto> = ({roles}) => {
+interface RolesController {
+    roles: roleDto[]
+}
 
-    const [current, setCurrent] = useState('')
+const AdminToolSider: React.FC<RolesController> = ({roles}) => {
 
     if(roles.find(role => role.role === 'admin')) {
         return (

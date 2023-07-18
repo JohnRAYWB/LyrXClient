@@ -1,0 +1,131 @@
+.container {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    background-color: #111111;
+    margin: 10px auto;
+    padding: 10px 50px;
+    border-radius: 10px;
+    justify-content: center;
+    align-items: center;
+    transition-duration: 400ms;
+}
+
+.container:hover {
+    background-color: #0e0e0e;
+    transition-duration: 400ms;
+}
+
+.avatar {
+    margin: 10px 40px 10px 10px;
+    border-radius: 50%;
+    border: 2px solid #222326;
+}
+
+.emptyAvatar {
+    margin: 10px 40px 10px 10px;
+    font-size: 75px;
+    padding: 20px;
+    color: #888888;
+    border: 5px solid #888888;
+    border-radius: 50%;
+}
+
+.textInfo {
+    display: flex;
+    flex-direction: column;
+    width: 300px;
+    justify-content: center;
+    align-items: flex-start;
+}
+
+.textUsername {
+    margin-bottom: 10px;
+    transition-duration: 400ms;
+    font-size: 24px;
+    color: #c7c7c7;
+    cursor: pointer;
+}
+
+.textEmail {
+    transition-duration: 400ms;
+    font-size: 14px;
+    color: #888888;
+    cursor: pointer;
+}
+
+.textUsername:hover {
+    transition-duration: 400ms;
+    color: #F64141;
+}
+
+.textEmail:hover {
+    transition-duration: 400ms;
+    color: #F64141;
+}
+
+.subContainer {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    margin-right: auto;
+    color: #b0b0b0;
+}
+
+.subLine {
+    display: flex;
+    flex-direction: row;
+    padding: 10px 15px;
+    background-color: #1a1a1a;
+    border-radius: 10px;
+}
+
+.subIcon {
+    font-size: 24px;
+    padding: 5px;
+    margin: 0 5px;
+}
+
+.subRow {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 5px;
+    border-radius: 7px;
+    margin: 0 5px;
+    background-color: #111111;
+}
+
+.subNum {
+    font-size: 18px;
+}
+
+.subText {
+    margin-top: 3px;
+    font-size: 12px;
+}
+
+.roleContainer {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.role {
+    text-align: center;
+    width: 75px;
+    margin: 5px;
+    padding: 5px 20px;
+    border-radius: 10px;
+    background-color: #2c2c2c;
+    color: #888888;
+    transition-duration: 400ms;
+}
+
+.role:hover {
+    color: #F64141;
+    transition-duration: 400ms;
+}

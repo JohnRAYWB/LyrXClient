@@ -1,35 +1,42 @@
-import React from 'react';
-import TrackList from "@/components/Content/TrackPage/TrackList";
-import styles from "@/styles/Track.module.css"
-import MainLayout from "@/components/screens/MainLayout/MainLayout";
-import {NextPageWithLayout} from "@/pages/_app";
+import React, {useState} from 'react';
 import {wrapper} from "@/store/store";
 import {parseCookies} from "nookies";
+import {NextPageWithLayout} from "@/pages/_app";
+import MainLayout from "@/components/screens/MainLayout/MainLayout";
+
 import {useFetchAllAndSearchQuery} from "@/store/api/TrackApi";
+import TrackList from "@/components/Content/TrackPage/TrackList";
+import styles from "@/styles/Track.module.css"
+import Search from "@/components/screens/MainLayout/Sider/components/Search";
 
 const Track: NextPageWithLayout = () => {
 
-    const {data: tracks, isLoading} = useFetchAllAndSearchQuery('')
+    const [query, setQuery] = useState('')
+    const {data: tracks, isLoading} = useFetchAllAndSearchQuery(query)
 
-    if(isLoading) {
+    if (isLoading) {
         return <></>
     }
 
+    const searchHandle = (e) => {
+        setQuery(e.target.value)
+    }
     return (
-        <div className={styles.main}>
-            <TrackList tracks={tracks}/>
-        </div>
+        <MainLayout name={'Tracks'} searchElement={<Search onChange={searchHandle}/>}>
+            <div className={styles.main}>
+                <TrackList tracks={tracks}/>
+            </div>
+        </MainLayout>
     );
 };
 
-Track.getLayout = (page: React.ReactNode) => <MainLayout name={'Tracks'}>{page}</MainLayout>
 
 export const getServerSideProps = wrapper.getServerSideProps((store) => async (ctx) => {
 
     try {
         const {access_token} = parseCookies(ctx)
 
-        if(!access_token) {
+        if (!access_token) {
             return {
                 redirect: {
                     destination: "/",

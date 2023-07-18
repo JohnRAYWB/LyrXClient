@@ -4,16 +4,20 @@ import {parseCookies} from "nookies";
 import {NextPageWithLayout} from "@/pages/_app";
 import MainLayout from "@/components/screens/MainLayout/MainLayout";
 
-import PlaylistCollection from "@/components/Content/CollectionPage/PlaylistCollection";
-import {useFetchAllAndSearchQuery} from "@/store/api/PlaylistApi";
+import {useFetchByIdQuery} from "@/store/api/UserApi";
+import UserList from "@/components/Content/UserPage/UserList";
 import Search from "@/components/screens/MainLayout/Sider/components/Search";
 
-const Playlist: NextPageWithLayout = () => {
+interface UserParam {
+    userId: string
+}
+
+const Followings: NextPageWithLayout<UserParam> = ({userId}) => {
 
     const [query, setQuery] = useState('')
-    const {data: playlists, isLoading} = useFetchAllAndSearchQuery(query)
+    const {data: user, isLoading} = useFetchByIdQuery(userId)
 
-    if(isLoading) {
+    if (isLoading) {
         return <></>
     }
 
@@ -21,10 +25,11 @@ const Playlist: NextPageWithLayout = () => {
         setQuery(e.target.value)
     }
     return (
-        <MainLayout name={'Playlists'} searchElement={<Search onChange={searchHandle}/>}>
-            <PlaylistCollection playlists={playlists}/>
+        <MainLayout name={'Followings'} searchElement={<Search onChange={searchHandle}/>}>
+            <UserList users={user.followings.filter(f => f.username.toLowerCase().includes(query.toLowerCase()))}
+                      type={'followings'}/>
         </MainLayout>
-    );
+    )
 };
 
 export const getServerSideProps = wrapper.getServerSideProps((store) => async (ctx) => {
@@ -41,9 +46,14 @@ export const getServerSideProps = wrapper.getServerSideProps((store) => async (c
             }
         }
 
+        return {
+            props: {
+                userId: ctx.params.id
+            }
+        }
     } catch (e) {
         console.log(e)
     }
 })
 
-export default Playlist;
+export default Followings

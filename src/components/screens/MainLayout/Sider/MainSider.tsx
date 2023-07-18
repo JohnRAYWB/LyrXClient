@@ -1,23 +1,34 @@
-import React, {useState} from 'react';
-import styles from './styles/MainSider.module.css'
+import React, {ReactElement, ReactNode} from 'react';
 import Link from "next/link";
 import {HomeFilled, SearchOutlined, UserOutlined} from "@ant-design/icons";
 import {Input, MenuProps} from "antd";
+import {destroyCookie} from "nookies";
+import {useRouter} from "next/navigation";
+
+import styles from './styles/MainSider.module.css'
+import {useAppSelector} from "@/hook/redux";
+import {selectUserData} from "@/store/slice/user";
 import PlaylistSider from "./components/PlaylistSider";
 import AdminToolSider from "./components/AdminToolSider";
 import MenuSider from "./components/MenuSider";
 import ArtistToolSider from "./components/ArtistToolSider";
-
-import {userAbstract} from "@/api/dto/user.entity";
 import Genre from "@/components/screens/MainLayout/Sider/components/Genre";
-import {destroyCookie} from "nookies";
-import {useRouter} from "next/navigation";
 
-const HubHeader: React.FC = () => {
+interface SiderComponent {
+    searchField: ReactNode
+}
 
-    const [current, setCurrent] = useState('')
+const HubHeader: React.FC<SiderComponent> = ({searchField}) => {
 
     const router = useRouter()
+
+    const user = useAppSelector(selectUserData)
+
+    if(!user) {
+        return <></>
+    }
+
+    const playlistLength = user.playlists.length
 
     const profileItems: MenuProps['items'] = [
         {
@@ -28,13 +39,18 @@ const HubHeader: React.FC = () => {
             children: [
                 {
                     style: {fontSize: 14},
-                    label: <Link href={'/pth/hub/profile'}>Open profile</Link>,
+                    label: <Link href={'/pth/hub/users'}>Users</Link>,
                     key: 'option:1',
                 },
                 {
                     style: {fontSize: 14},
-                    label: <Link href={'/pth/hub/profile/collection'}>Your collection</Link>,
+                    label: <Link href={'/pth/hub/profile'}>Open profile</Link>,
                     key: 'option:2',
+                },
+                {
+                    style: {fontSize: 14},
+                    label: <Link href={'/pth/hub/profile/collection'}>Your collection</Link>,
+                    key: 'option:3',
                 },
                 {
                     label: (
@@ -45,7 +61,7 @@ const HubHeader: React.FC = () => {
                             }
                         }}>Logout</button>
                     ),
-                    key: 'option:3',
+                    key: 'option:4',
                 }
             ],
         },
@@ -58,22 +74,17 @@ const HubHeader: React.FC = () => {
                     <HomeFilled/>
                     <Link className={styles.rowElement} href={'/pth/hub'}>Home</Link>
                 </div>
-                <div className={styles.containerRow}>
-                    <SearchOutlined/>
-                    <Input
-                        className={styles.rowInput}
-                        bordered={false}
-                        placeholder={'Search'}
-                    />
+                <div>
+                    {searchField}
                 </div>
             </div>
             <div className={styles.dropDown}>
                 <MenuSider items={profileItems}/>
             </div>
-            <PlaylistSider playlists={userAbstract.playlistsCollection}/>
+            <PlaylistSider playlists={playlistLength}/>
             <Genre/>
-            <AdminToolSider roles={userAbstract.roles}/>
-            <ArtistToolSider roles={userAbstract.roles}/>
+            <AdminToolSider roles={user.roles}/>
+            <ArtistToolSider roles={user.roles}/>
         </main>
     );
 };

@@ -5,12 +5,12 @@ import {AppstoreOutlined, PlusOutlined} from "@ant-design/icons";
 import {playlistDto} from "@/api/dto/playlist.dto";
 
 interface playlistLength {
-    playlists: playlistDto[]
+    playlists: number
 }
 
 const PlaylistSider: React.FC<playlistLength> = ({playlists}) => {
 
-    if (playlists.length !== 0) {
+    if (playlists !== 0) {
         return (
             <div className={styles.main}>
                 <div className={styles.container}>

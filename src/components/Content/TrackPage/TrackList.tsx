@@ -1,8 +1,9 @@
 import React from 'react';
+import {Divider} from "antd";
+
+import styles from "./styles/TrackList.module.css"
 import {trackDto} from "@/api/dto/track.dto";
 import Track from "@/components/Content/TrackPage/Track";
-import styles from "./styles/TrackList.module.css"
-import {Divider} from "antd";
 
 interface TrackListData {
     tracks: trackDto[]

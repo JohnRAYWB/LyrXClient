@@ -32,6 +32,9 @@
     text-transform: uppercase;
 }
 
-.arrow {
-    color: red;
+.notFound {
+    text-align: center;
+    font-size: 40px;
+    color: #888888;
+    margin-top: 40px;
 }

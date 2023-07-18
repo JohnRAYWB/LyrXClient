@@ -5,13 +5,13 @@
 }
 
 .editButton {
-    margin-bottom: auto;
     border: none;
     background-color: inherit;
     cursor: pointer;
     padding: 10px 20px;
     border-radius: 20px;
     color: #595959;
+    font-size: 16px;
     box-shadow: 0 0 2px #F64141;
     transition-duration: 400ms;
 }
@@ -24,9 +24,30 @@
     transition-duration: 400ms;
 }
 
+.subscribedButton {
+    border: none;
+    background-color: #1ac259;
+    cursor: pointer;
+    padding: 10px 20px;
+    border-radius: 20px;
+    color: #ffffff;
+    font-size: 16px;
+    box-shadow: 0 0 2px #1ac259;
+    transition-duration: 400ms;
+}
+
+.subscribedButton:hover {
+    background-color: #F64141;
+    transform: scale(1.05);
+    color: white;
+    box-shadow: 0 0 10px #813232;
+    transition-duration: 400ms;
+}
+
 .container {
     display: flex;
     flex-direction: row;
+    flex-wrap: wrap;
     padding: 30px 50px;
     justify-content: space-between;
     align-items: center;
@@ -37,13 +58,22 @@
 .avatar {
     border: 2px solid #222326;
     border-radius: 50%;
+    margin-bottom: 20px;
+}
+
+.emptyAvatar {
+    font-size: 70px;
+    padding: 60px;
+    color: #888888;
+    border: 5px solid #888888;
+    border-radius: 50%;
+    margin-bottom: 20px;
 }
 
 .infoContainer {
     display: flex;
     flex-direction: column;
-    width: 600px;
-    justify-content: space-between;
+    margin-bottom: 20px;
 }
 
 .roles {
@@ -74,6 +104,12 @@
 .infoDescription {
     padding: 10px;
     font-size: 14px;
+}
+
+.manageContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
 }
 
 .followContainer {
@@ -134,4 +170,9 @@
 
 .collectionLink:hover {
     color: #F64141;
+}
+
+.notification {
+    font-size: 16px;
+    color: white;
 }

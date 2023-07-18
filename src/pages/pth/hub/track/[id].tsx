@@ -1,14 +1,15 @@
 import React from 'react';
-import Image from "next/image";
-import styles from "@/styles/TrackPage.module.css"
-import Link from "next/link";
-import {Button, ConfigProvider, Divider, Input, Popover} from "antd";
-import useTextLength from "@/util/useTextLength";
-import {InfoCircleOutlined} from "@ant-design/icons";
-import MainLayout from "@/components/screens/MainLayout/MainLayout";
-import {NextPageWithLayout} from "@/pages/_app";
 import {wrapper} from "@/store/store";
 import {parseCookies} from "nookies";
+import {NextPageWithLayout} from "@/pages/_app";
+import MainLayout from "@/components/screens/MainLayout/MainLayout";
+import Image from "next/image";
+import Link from "next/link";
+import {Button, ConfigProvider, Divider, Input, Popover} from "antd";
+import {InfoCircleOutlined} from "@ant-design/icons";
+
+import useTextLength from "@/util/useTextLength";
+import styles from "@/styles/TrackPage.module.css"
 import {useFetchByIdQuery} from "@/store/api/TrackApi";
 
 interface PageParams {

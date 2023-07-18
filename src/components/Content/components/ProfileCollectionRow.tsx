@@ -1,10 +1,10 @@
 import React from 'react';
-import styles from "./styles/ProfileCollectionRow.module.css";
 import {Carousel} from "antd";
+
+import styles from "./styles/ProfileCollectionRow.module.css";
 import Row from "@/components/Content/components/Row";
 import {playlistDto} from "@/api/dto/playlist.dto";
 import {albumDto} from "@/api/dto/album.dto";
-import {usePreparedAlbumEntities, usePreparedPlaylistEntities} from "@/util/usePreparedDataEntity";
 
 interface PlaylistItems {
     playlists: playlistDto[]
@@ -16,6 +16,10 @@ interface AlbumItems {
 
 
 export const PlaylistCollectionRow: React.FC<PlaylistItems> = ({playlists}) => {
+
+    if(playlists.length === 0) {
+        return <div className={styles.emptyList}>Here no added playlists yet</div>
+    }
 
     return (
         <div className={styles.list}>
@@ -34,6 +38,10 @@ export const PlaylistCollectionRow: React.FC<PlaylistItems> = ({playlists}) => {
 };
 
 export const AlbumCollectionRow: React.FC<AlbumItems> = ({albums}) => {
+
+    if(albums.length === 0) {
+        return <div className={styles.emptyList}>Here no added albums yet</div>
+    }
 
     return (
         <div className={styles.list}>

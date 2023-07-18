@@ -4,16 +4,16 @@ import {parseCookies} from "nookies";
 import {NextPageWithLayout} from "@/pages/_app";
 import MainLayout from "@/components/screens/MainLayout/MainLayout";
 
-import PlaylistCollection from "@/components/Content/CollectionPage/PlaylistCollection";
-import {useFetchAllAndSearchQuery} from "@/store/api/PlaylistApi";
+import UserList from "@/components/Content/UserPage/UserList";
+import {useFetchAllAndSearchQuery} from "@/store/api/UserApi";
 import Search from "@/components/screens/MainLayout/Sider/components/Search";
 
-const Playlist: NextPageWithLayout = () => {
+const Users: NextPageWithLayout = () => {
 
     const [query, setQuery] = useState('')
-    const {data: playlists, isLoading} = useFetchAllAndSearchQuery(query)
+    const {data: users, isLoading} = useFetchAllAndSearchQuery(query)
 
-    if(isLoading) {
+    if (isLoading) {
         return <></>
     }
 
@@ -21,10 +21,10 @@ const Playlist: NextPageWithLayout = () => {
         setQuery(e.target.value)
     }
     return (
-        <MainLayout name={'Playlists'} searchElement={<Search onChange={searchHandle}/>}>
-            <PlaylistCollection playlists={playlists}/>
+        <MainLayout name={'Users'} searchElement={<Search onChange={searchHandle}/>}>
+            <UserList users={users} type={'users'}/>
         </MainLayout>
-    );
+    )
 };
 
 export const getServerSideProps = wrapper.getServerSideProps((store) => async (ctx) => {
@@ -46,4 +46,4 @@ export const getServerSideProps = wrapper.getServerSideProps((store) => async (c
     }
 })
 
-export default Playlist;
+export default Users;

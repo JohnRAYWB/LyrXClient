@@ -4,27 +4,25 @@ import {parseCookies} from "nookies";
 import {NextPageWithLayout} from "@/pages/_app";
 import MainLayout from "@/components/screens/MainLayout/MainLayout";
 
-import styles from "@/styles/Genre.module.css"
-import {useFetchAllQuery} from "@/store/api/GenreApi";
-import GenreList from "@/components/Content/GenrePage/GenreList";
+import {useFetchByIdQuery} from "@/store/api/UserApi";
+import ProfilePage from "@/components/Content/ProfilePage/ProfilePage";
 
-const Genre: NextPageWithLayout = () => {
+interface UserParam {
+    userId: string
+}
 
-    const {data: genres, isLoading} = useFetchAllQuery(0)
+const UserPage: NextPageWithLayout<UserParam> = ({userId}) => {
 
-    if (isLoading) {
+    const {data: user, isLoading} = useFetchByIdQuery(userId)
+
+    if(isLoading) {
         return <></>
     }
 
-    return (
-        <div className={styles.main}>
-            <h1 className={styles.title}>Billions of tracks for any genre</h1>
-            <GenreList genres={genres}/>
-        </div>
-    );
+    return <ProfilePage user={user} type={'user'}/>
 };
 
-Genre.getLayout = (page: React.ReactNode) => <MainLayout name={'Genres'}>{page}</MainLayout>
+UserPage.getLayout = (page: React.ReactNode) => <MainLayout name={'User Profile'}>{page}</MainLayout>
 
 export const getServerSideProps = wrapper.getServerSideProps((store) => async (ctx) => {
 
@@ -40,9 +38,15 @@ export const getServerSideProps = wrapper.getServerSideProps((store) => async (c
             }
         }
 
+        return {
+            props: {
+                userId: ctx.params.id
+            }
+        }
+
     } catch (e) {
         console.log(e)
     }
 })
 
-export default Genre;
+export default UserPage

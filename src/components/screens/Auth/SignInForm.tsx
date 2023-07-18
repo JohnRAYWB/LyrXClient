@@ -6,13 +6,9 @@ import Link from "next/link";
 import styles from "./AuthForm.module.css"
 import {signInDto} from "@/api/dto/auth.dto";
 import * as Api from "@/api"
-import {useAppDispatch} from "@/hook/redux";
-import {setUserData} from "@/store/slice/user";
 import {useRouter} from "next/navigation";
 
 export const SignInForm: React.FC = () => {
-
-    const dispatch = useAppDispatch()
 
     const router = useRouter()
 
@@ -40,7 +36,6 @@ export const SignInForm: React.FC = () => {
 
             router.push('/pth/hub')
 
-            dispatch(setUserData(data.access_token))
         } catch (e) {
             console.warn('Err', e)
 

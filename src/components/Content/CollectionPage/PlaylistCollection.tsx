@@ -1,18 +1,21 @@
 import React from 'react';
-import styles from "./styles/Collection.module.css"
-import {usePreparedPlaylistEntities} from "@/util/usePreparedDataEntity";
-import {playlistDto} from "@/api/dto/playlist.dto";
 import {Carousel} from "antd";
-import Row from "@/components/Content/components/Row";
+
+import styles from "./styles/Collection.module.css"
+import {useFetchMostLikedQuery} from "@/store/api/PlaylistApi";
 import Collection from "@/components/Content/components/Collection";
-import {useFetchAllAndSearchQuery, useFetchMostLikedQuery} from "@/store/api/PlaylistApi";
+import Row from "@/components/Content/components/Row";
+import {playlistDto} from "@/api/dto/playlist.dto";
 
-const PlaylistCollection: React.FC = () => {
+interface PlaylistParams {
+    playlists: playlistDto[]
+}
 
-    const {data: playlists, isLoading} = useFetchAllAndSearchQuery('')
-    const {data: likedPlaylist, isFetching} = useFetchMostLikedQuery(null)
+const PlaylistCollection: React.FC<PlaylistParams> = ({playlists}) => {
 
-    if(isLoading || isFetching) {
+    const {data: likedPlaylist, isLoading: loadLiked} = useFetchMostLikedQuery()
+
+    if(loadLiked) {
         return <></>
     }
 
@@ -31,7 +34,12 @@ const PlaylistCollection: React.FC = () => {
                 </div>
             </div>
             <p className={styles.listText}>Community playlists</p>
-            <Collection items={playlists} type={'playlist'}/>
+            {
+                playlists.length === 0 ?
+                    <p className={styles.notFound}>Playlist not found</p>
+                    :
+                    <Collection items={playlists} type={'playlist'}/>
+            }
         </div>
     );
 };

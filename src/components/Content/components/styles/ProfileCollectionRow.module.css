@@ -3,3 +3,11 @@
     background-color: #0e0e0e;
     border-radius: 10px;
 }
+
+.emptyList {
+    font-weight: bold;
+    font-size: 44px;
+    color: #888888;
+    text-align: center;
+    margin-bottom: 20px;
+}

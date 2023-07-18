@@ -7,12 +7,13 @@ import {
     PauseOutlined,
     PlayCircleOutlined
 } from "@ant-design/icons";
+import {useRouter} from "next/navigation";
 import {ConfigProvider, Divider, Dropdown} from "antd";
-import {trackDto} from "@/api/dto/track.dto";
+
 import styles from "./styles/Track.module.css"
+import {trackDto} from "@/api/dto/track.dto";
 import {items} from "./components/TrackItems"
 import useTextLength from "@/util/useTextLength";
-import {useRouter} from "next/navigation";
 
 interface Track {
     track: trackDto

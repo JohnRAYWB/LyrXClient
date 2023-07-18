@@ -1,31 +1,47 @@
-import {createApi, fetchBaseQuery} from "@reduxjs/toolkit/query/react";
+import {createApi} from "@reduxjs/toolkit/query/react";
 import {HYDRATE} from "next-redux-wrapper";
-
-const baseUrl = 'http://localhost:4221/users'
+import {baseQuery} from "@/store/api/headers";
+import {userDto} from "@/api/dto/user.dto";
 
 const UserApi = createApi({
     reducerPath: 'userApi',
     tagTypes: ['User'],
-    baseQuery: fetchBaseQuery({baseUrl}),
+    baseQuery: baseQuery,
     extractRehydrationInfo(action, {reducerPath}) {
         if (action.type === HYDRATE) {
             return action.payload[reducerPath]
         }
     },
     endpoints: (build) => ({
-        fetchAllAndSearch: build.query({
-            query: (query) => ({
-                url: `search?username=${query}`
-            })
+        fetchProfile: build.query<userDto, userDto>({
+            query: () => ({
+                url: 'users/profile'
+            }),
+            providesTags: result => ['User']
         }),
-        fetchById: build.query({
+        fetchAllAndSearch: build.query<userDto[], string>({
+            query: (query) => ({
+                url: `users/search?username=${query}`
+            }),
+            providesTags: result => ['User']
+        }),
+        fetchById: build.query<userDto, string>({
             query: (uId) => ({
-                url: `profile/${uId}`
-            })
+                url: `users/profile/${uId}`
+            }),
+            providesTags: result => ['User']
+        }),
+        subscribe: build.mutation<userDto, string>({
+            query: (uId) => ({
+                url: `users/subscribe/${uId}`,
+                method: 'POST',
+                responseHandler: (response) => response.text()
+            }),
+            invalidatesTags: result => ['User']
         })
     })
 })
 
-export const {useFetchAllAndSearchQuery, useFetchByIdQuery} = UserApi
+export const {useFetchProfileQuery, useFetchAllAndSearchQuery, useFetchByIdQuery, useSubscribeMutation} = UserApi
 
 export default UserApi

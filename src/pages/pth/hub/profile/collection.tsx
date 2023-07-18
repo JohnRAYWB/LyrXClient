@@ -1,8 +1,8 @@
 import React from 'react';
-import MainLayout from "@/components/screens/MainLayout/MainLayout";
-import {NextPageWithLayout} from "@/pages/_app";
 import {wrapper} from "@/store/store";
 import {parseCookies} from "nookies";
+import {NextPageWithLayout} from "@/pages/_app";
+import MainLayout from "@/components/screens/MainLayout/MainLayout";
 
 const Collection: NextPageWithLayout = () => {
     return (

@@ -11,3 +11,9 @@
     border-radius: 10px 10px 0 0;
     color: white;
 }
+
+.collectionContainer {
+    background-color: #151515;
+    padding: 10px;
+    border-radius: 0 0 10px 10px;
+}

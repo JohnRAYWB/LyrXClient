@@ -1,11 +1,13 @@
 import React from 'react';
-import {ConfigProvider, Tabs, TabsProps} from "antd";
-import TrackList from "@/components/Content/TrackPage/TrackList";
-import Collection from "@/components/Content/components/Collection";
-import MainLayout from "@/components/screens/MainLayout/MainLayout";
-import {NextPageWithLayout} from "@/pages/_app";
 import {wrapper} from "@/store/store";
 import {parseCookies} from "nookies";
+import {NextPageWithLayout} from "@/pages/_app";
+import MainLayout from "@/components/screens/MainLayout/MainLayout";
+import {ConfigProvider, Tabs, TabsProps} from "antd";
+
+import styles from "@/styles/Genre.module.css"
+import TrackList from "@/components/Content/TrackPage/TrackList";
+import Collection from "@/components/Content/components/Collection";
 import {useFetchByIdQuery} from "@/store/api/GenreApi";
 
 interface PageParams {
@@ -19,7 +21,7 @@ const GenrePage: NextPageWithLayout<PageParams> = ({genreId}) => {
     if(isLoading) {
         return <></>
     }
-    console.log(genre)
+
     const items: TabsProps['items'] = [
         {
             key: '1',
@@ -40,7 +42,7 @@ const GenrePage: NextPageWithLayout<PageParams> = ({genreId}) => {
 
     return (
         <div>
-            <div>
+            <div className={styles.collectionContainer}>
                 <ConfigProvider theme={{
                     token: {
                         colorPrimary: "#F64141",

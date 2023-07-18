@@ -1,10 +1,14 @@
 import React from 'react';
 import Link from "next/link";
 import {BorderOuterOutlined, PlusOutlined, ToolOutlined, UngroupOutlined} from "@ant-design/icons";
-import {rolesDto} from "@/api/dto/auth.dto";
+import {roleDto} from "@/api/dto/user.dto";
 import styles from "../styles/ToolSider.module.css"
 
-const ArtistToolSider: React.FC<rolesDto> = ({roles}) => {
+interface RolesController {
+    roles: roleDto[]
+}
+
+const ArtistToolSider: React.FC<RolesController> = ({roles}) => {
 
     if(roles.find(role => role.role === 'artist')) {
         return (
