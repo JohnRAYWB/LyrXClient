@@ -1,21 +1,9 @@
-.main {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-}
-
 .container {
     display: flex;
-    flex-direction: row;
-    align-items: center;
-    flex-wrap: wrap;
-    width: 100%;
-    font-size: 16px;
-    padding: 10px 25px;
-    color: #414141;
+    flex-flow: row wrap;
+    padding: 0 20px;
+    color: #888888;
     transition-duration: 400ms;
-    cursor: pointer;
 }
 
 .container:hover {
@@ -25,23 +13,24 @@
     transition-duration: 400ms;
 }
 
-.imagePlayButtonContainer {
-    width: 140px;
+.mediaContainer {
     display: flex;
-    flex-direction: row;
+    flex: 0 0 15%;
     justify-content: space-between;
     align-items: center;
+    gap: 20px;
+    margin: 10px;
 }
 
 .playButton {
     font-size: 30px;
-    transition-duration: 200ms;
+    transition-duration: 100ms;
 }
 
 .playButton:hover {
     color: #F64141;
     transform: scale(1.1);
-    transition-duration: 200ms;
+    transition-duration: 100ms;
 }
 
 .image {
@@ -53,57 +42,64 @@
 
 .trackContainer {
     display: flex;
-    flex-direction: row;
-    justify-content: space-between;
+    flex: 1 1 33%;
+    flex-flow: row wrap;
     align-items: center;
-    width: 400px;
-    margin-left: 40px;
+    gap: 20px;
+    margin: 10px 30px;
+    transition-duration: 100ms;
 }
 
-.trackName {
-    width: 150px;
+.trackContainer:hover {
+    color: #F64141;
+    transition-duration: 100ms;
+    cursor: pointer;
 }
 
-.trackArtist {
-    width: 200px;
+.name {
+    flex-flow: row wrap;
+    flex: 1;
+}
+
+.artist {
+    flex-flow: row wrap;
+    flex: 1;
 }
 
 .album {
-    width: 200px;
+    flex-flow: row wrap;
+    flex: 1;
 }
 
-.actionIcons {
+.actionContainer {
+    flex: 0 0 10%;
     display: flex;
     flex-direction: row;
     justify-content: space-between;
-    width: 75px;
-    margin-left: auto;
+    gap: 10px;
+    margin: 10px;
 }
 
 .favIcon {
-    font-size: 25px;
-    transition-duration: 400ms;
+    font-size: 28px;
 }
 
 .favIcon:hover {
     color: #F64141;
-    transform: scale(1.3);
-    transition-duration: 400ms;
+    transform: scale(1.2);
 }
 
 .favIconFill {
-    font-size: 25px;
+    font-size: 28px;
     color: #F64141;
-    transition-duration: 400ms;
 }
 
 .favIconFill:hover {
-    transform: scale(1.3);
-    transition-duration: 400ms;
+    transform: scale(1.2);
 }
 
 .dots {
-    font-size: 25px;
+    font-size: 28px;
 }
 
 .dots:hover {

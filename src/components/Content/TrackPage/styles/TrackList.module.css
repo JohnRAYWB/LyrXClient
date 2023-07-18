@@ -1,23 +1,37 @@
 .main {
     display: flex;
-    flex-direction: row;
+    flex-flow: row wrap;
     color: #77787B;
+    padding: 0 20px;
 }
 
 .index {
-    margin-left: 28px;
+    margin: 0 10px;
+    flex: 0 0 15%;
+}
+
+.titles {
+    display: flex;
+    flex: 1 1 33%;
+    margin: 0 30px;
+    gap: 20px;
 }
 
 .name {
-    margin-left: 168px;
+    flex: 1
 }
 
 .artist {
-    margin-left: 128px;
+    flex: 1
 }
 
 .album {
-    margin-left: 168px;
+    flex: 1
+}
+
+.actions {
+    flex: 0 0 10%;
+    margin: 0 10px;
 }
 
 .divider {

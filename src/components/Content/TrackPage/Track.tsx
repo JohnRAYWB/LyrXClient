@@ -8,12 +8,14 @@ import {
     PlayCircleOutlined
 } from "@ant-design/icons";
 import {useRouter} from "next/navigation";
-import {ConfigProvider, Divider, Dropdown} from "antd";
+import {ConfigProvider, Divider, Dropdown, MenuProps} from "antd";
+import Link from "next/link";
 
 import styles from "./styles/Track.module.css"
 import {trackDto} from "@/api/dto/track.dto";
-import {items} from "./components/TrackItems"
 import useTextLength from "@/util/useTextLength";
+import {useAppSelector} from "@/hook/redux";
+import {selectUserData} from "@/store/slice/user";
 
 interface Track {
     track: trackDto
@@ -23,6 +25,8 @@ interface Track {
 const Track: React.FC<Track> = ({track, index}) => {
 
     const router = useRouter()
+
+    const user = useAppSelector(selectUserData)
 
     const [fav, setFav] = useState(false)
     const [active, setActive] = useState(false)
@@ -38,15 +42,33 @@ const Track: React.FC<Track> = ({track, index}) => {
         folder = 'album'
     }
 
+    const items: MenuProps['items'] = [
+        {
+            label: [
+                (
+                    user._id === track.artist ?
+                        <Link href={`/pth/hub/profile`}>Go to artist</Link>
+                        :
+                        <Link href={`/pth/hub/users/${track.artist}`}>Go to artist</Link>
+                )
+            ],
+            key: '0',
+        },
+        {
+            label: 'Add to playlist',
+            key: '1',
+        }
+    ];
+
     return (
-        <div className={styles.main} onClick={() => router.push(`/pth/hub/track/${track._id}`)}>
+        <div>
             <div className={styles.container}>
-                <div className={styles.imagePlayButtonContainer}>
+                <div className={styles.mediaContainer}>
                     <p>{index}</p>
                     {!active ?
-                        <PlayCircleOutlined/>
+                        <PlayCircleOutlined className={styles.playButton}/>
                         :
-                        <PauseOutlined/>
+                        <PauseOutlined className={styles.playButton}/>
                     }
                     <Image
                         className={styles.image}
@@ -57,12 +79,12 @@ const Track: React.FC<Track> = ({track, index}) => {
                         alt={'track_log0'}
                     />
                 </div>
-                <div className={styles.trackContainer}>
-                    <p className={styles.trackName}>{trackLength}</p>
-                    <p className={styles.trackArtist}>{artistLength}</p>
+                <div className={styles.trackContainer} onClick={() => router.push(`/pth/hub/track/${track._id}`)}>
+                    <p className={styles.name}>{trackLength}</p>
+                    <p className={styles.artist}>{artistLength}</p>
+                    <p className={styles.album}>{albumLength}</p>
                 </div>
-                <p className={styles.album}>{albumLength}</p>
-                <div className={styles.actionIcons}>
+                <div className={styles.actionContainer}>
                     {
                         !fav ?
                             <HeartOutlined className={styles.favIcon}/>

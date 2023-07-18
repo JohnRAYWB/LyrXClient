@@ -11,6 +11,8 @@ import {InfoCircleOutlined} from "@ant-design/icons";
 import useTextLength from "@/util/useTextLength";
 import styles from "@/styles/TrackPage.module.css"
 import {useFetchByIdQuery} from "@/store/api/TrackApi";
+import {useAppSelector} from "@/hook/redux";
+import {selectUserData} from "@/store/slice/user";
 
 interface PageParams {
     trackId: string
@@ -19,6 +21,9 @@ interface PageParams {
 const TrackPage: NextPageWithLayout<PageParams> = ({trackId}) => {
 
     const {data: track, isLoading} = useFetchByIdQuery(trackId)
+
+    const user = useAppSelector(selectUserData)
+    console.log(track)
 
     if(isLoading) {
         return <></>
@@ -37,9 +42,12 @@ const TrackPage: NextPageWithLayout<PageParams> = ({trackId}) => {
                 <div className={styles.infoMain}>
                     <div className={styles.infoText}>
                         <h1 className={styles.trackOwnerText}>
-                            <Link
-                                className={styles.link}
-                                href={`/pth/hub/profile/${track.artist._id}`}>{track.name[0]}</Link>
+                            {
+                                track.artist._id === user._id ?
+                                    <Link className={styles.link} href={`/pth/hub/profile`}>{track.name[0]}</Link>
+                                    :
+                                    <Link className={styles.link} href={`/pth/hub/users/${track.artist._id}`}>{track.name[0]}</Link>
+                            }
                         </h1>
                         <h1 className={styles.trackNameText}>{track.name[1]}</h1>
                         <div className={styles.infoTextFooter}>

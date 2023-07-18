@@ -19,9 +19,12 @@ const TrackList: React.FC<TrackListData> = ({tracks}) => {
         <div>
             <div className={styles.main}>
                 <p className={styles.index}>#</p>
-                <p className={styles.name}>Track name</p>
-                <p className={styles.artist}>Artist</p>
-                <p className={styles.album}>Album</p>
+                <div className={styles.titles}>
+                    <p className={styles.name}>Track name</p>
+                    <p className={styles.artist}>Artist</p>
+                    <p className={styles.album}>Album</p>
+                </div>
+                <p className={styles.actions}>Actions</p>
             </div>
             <Divider style={{width: 50}} className={styles.divider}/>
             {tracks && tracks.map((track, index) =>

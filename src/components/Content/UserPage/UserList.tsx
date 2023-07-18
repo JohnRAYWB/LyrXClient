@@ -1,7 +1,7 @@
 import React from 'react';
 
-import User from "@/components/Content/UserPage/User";
 import styles from "./styles/UserList.module.css"
+import User from "@/components/Content/UserPage/User";
 import {userDto} from "@/api/dto/user.dto";
 import {useAppSelector} from "@/hook/redux";
 import {selectUserData} from "@/store/slice/user";
