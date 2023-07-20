@@ -2,6 +2,8 @@ import {createApi} from "@reduxjs/toolkit/query/react";
 import {HYDRATE} from "next-redux-wrapper";
 import {baseQuery} from "@/store/api/headers";
 import {userDto} from "@/api/dto/user.dto";
+import {trackDto} from "@/api/dto/track.dto";
+import
 
 const UserApi = createApi({
     reducerPath: 'userApi',
@@ -31,6 +33,28 @@ const UserApi = createApi({
             }),
             providesTags: result => ['User']
         }),
+        fetchCollection: build.query({
+            query: () => ({
+                url: 'users/collection'
+            }),
+            providesTags: result => ['User']
+        }),
+        addToCollection: build.mutation<trackDto, string>({
+            query: (tId) => ({
+                url: `tracks/collection/${tId}/add`,
+                method: 'POST',
+                responseHandler: (response) => response.text()
+            }),
+            invalidatesTags: result => ['User']
+        }),
+        removeFromCollection: build.mutation<trackDto, string>({
+            query: (tId) => ({
+                url: `tracks/collection/${tId}/remove`,
+                method: 'POST',
+                responseHandler: (response) => response.text()
+            }),
+            invalidatesTags: result => ['User']
+        }),
         subscribe: build.mutation<userDto, string>({
             query: (uId) => ({
                 url: `users/subscribe/${uId}`,
@@ -42,6 +66,14 @@ const UserApi = createApi({
     })
 })
 
-export const {useFetchProfileQuery, useFetchAllAndSearchQuery, useFetchByIdQuery, useSubscribeMutation} = UserApi
+export const {
+    useFetchProfileQuery,
+    useFetchCollectionQuery,
+    useFetchAllAndSearchQuery,
+    useFetchByIdQuery,
+    useAddToCollectionMutation,
+    useRemoveFromCollectionMutation,
+    useSubscribeMutation
+} = UserApi
 
 export default UserApi

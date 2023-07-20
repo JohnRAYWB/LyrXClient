@@ -21,6 +21,7 @@ const Track: NextPageWithLayout = () => {
     const searchHandle = (e) => {
         setQuery(e.target.value)
     }
+
     return (
         <MainLayout name={'Tracks'} searchElement={<Search onChange={searchHandle}/>}>
             <div className={styles.main}>

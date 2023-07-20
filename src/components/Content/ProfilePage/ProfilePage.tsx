@@ -22,6 +22,7 @@ interface UserParam {
 const Profile: React.FC<UserParam> = ({user, type}) => {
 
     const loggedUser: userDto = useAppSelector(selectUserData)
+    const [subscribe] = useSubscribeMutation()
 
     const router = useRouter()
 
@@ -59,8 +60,6 @@ const Profile: React.FC<UserParam> = ({user, type}) => {
                 albums={[].concat(user.albums, user.albumsCollections).filter(album => album !== undefined)}/>
         },
     ]
-
-    const [subscribe] = useSubscribeMutation()
 
     const subHandler = () => {
         try {

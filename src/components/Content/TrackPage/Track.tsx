@@ -1,21 +1,20 @@
-import React, {useEffect, useState} from 'react';
+import React from 'react';
 import Image from "next/image";
 import {
     EllipsisOutlined,
     HeartFilled,
-    HeartOutlined,
+    HeartOutlined, LoadingOutlined,
     PauseOutlined,
     PlayCircleOutlined
 } from "@ant-design/icons";
 import {useRouter} from "next/navigation";
-import {ConfigProvider, Divider, Dropdown, MenuProps} from "antd";
+import {ConfigProvider, Divider, Dropdown, MenuProps, notification} from "antd";
 import Link from "next/link";
 
 import styles from "./styles/Track.module.css"
 import {trackDto} from "@/api/dto/track.dto";
 import useTextLength from "@/util/useTextLength";
-import {useAppSelector} from "@/hook/redux";
-import {selectUserData} from "@/store/slice/user";
+import {useFetchProfileQuery, useAddToCollectionMutation, useRemoveFromCollectionMutation} from "@/store/api/UserApi";
 
 interface Track {
     track: trackDto
@@ -24,12 +23,15 @@ interface Track {
 
 const Track: React.FC<Track> = ({track, index}) => {
 
+    const {data: user, isLoading} = useFetchProfileQuery()
+    const [addTrack, {isLoading: addLoading}] = useAddToCollectionMutation()
+    const [removeTrack, {isLoading: removeLoading}] = useRemoveFromCollectionMutation()
+
+    if (isLoading) {
+        return <></>
+    }
+
     const router = useRouter()
-
-    const user = useAppSelector(selectUserData)
-
-    const [fav, setFav] = useState(false)
-    const [active, setActive] = useState(false)
 
     const artistLength = useTextLength(track.name[0], 20)
     const trackLength = useTextLength(track.name[1], 20)
@@ -41,7 +43,6 @@ const Track: React.FC<Track> = ({track, index}) => {
     if (track.protectedDeletion) {
         folder = 'album'
     }
-
     const items: MenuProps['items'] = [
         {
             label: [
@@ -60,15 +61,49 @@ const Track: React.FC<Track> = ({track, index}) => {
         }
     ];
 
+    const handleAddTrack = () => {
+        try {
+            addTrack(track._id)
+
+            notification.success({
+                style: {backgroundColor: "#646464", width: 300},
+                message: <p className={styles.notification}>Done!</p>,
+                description: <p className={styles.notification}>Track added successfully</p>,
+                placement: "bottomLeft",
+                duration: 2
+            })
+        } catch (e) {
+            console.log(e)
+        }
+    }
+
+    const handleRemoveTrack = () => {
+        try {
+            removeTrack(track._id)
+
+            notification.success({
+                style: {backgroundColor: "#646464", width: 300},
+                message: <p className={styles.notification}>Done!</p>,
+                description: <p className={styles.notification}>Track removed successfully</p>,
+                placement: "bottomLeft",
+                duration: 2
+            })
+        } catch (e) {
+            console.log(e)
+        }
+    }
+    console.log(addLoading)
+    console.log(removeLoading)
     return (
         <div>
             <div className={styles.container}>
                 <div className={styles.mediaContainer}>
                     <p>{index}</p>
-                    {!active ?
-                        <PlayCircleOutlined className={styles.playButton}/>
-                        :
-                        <PauseOutlined className={styles.playButton}/>
+                    {
+                        true ?
+                            <PlayCircleOutlined className={styles.playButton}/>
+                            :
+                            <PauseOutlined className={styles.playButton}/>
                     }
                     <Image
                         className={styles.image}
@@ -86,10 +121,10 @@ const Track: React.FC<Track> = ({track, index}) => {
                 </div>
                 <div className={styles.actionContainer}>
                     {
-                        !fav ?
-                            <HeartOutlined className={styles.favIcon}/>
+                        user.tracksCollection.findIndex(t => t._id === track._id) !== -1 ?
+                            <HeartFilled onClick={handleRemoveTrack} className={styles.favIconFill}/>
                             :
-                            <HeartFilled className={styles.favIconFill}/>
+                            <HeartOutlined onClick={handleAddTrack} className={styles.favIcon}/>
                     }
                     <ConfigProvider theme={{
                         token: {
@@ -100,7 +135,7 @@ const Track: React.FC<Track> = ({track, index}) => {
                         }
                     }}>
                         <Dropdown placement="bottomRight" menu={{items}} trigger={['click']}>
-                            <EllipsisOutlined onClick={e => e.stopPropagation()} className={styles.dots}/>
+                            <EllipsisOutlined className={styles.dots}/>
                         </Dropdown>
                     </ConfigProvider>
                 </div>

@@ -4,15 +4,14 @@ import {parseCookies} from "nookies";
 import {NextPageWithLayout} from "@/pages/_app";
 import MainLayout from "@/components/screens/MainLayout/MainLayout";
 
-import {useAppSelector} from "@/hook/redux";
-import {selectUserData} from "@/store/slice/user";
 import ProfilePage from "@/components/Content/ProfilePage/ProfilePage";
+import {useFetchProfileQuery} from "@/store/api/UserApi";
 
 const Profile: NextPageWithLayout = () => {
 
-    const user = useAppSelector(selectUserData)
+    const {data: user, isLoading} = useFetchProfileQuery()
 
-    if(!user) {
+    if(isLoading) {
         return <></>
     }
 
