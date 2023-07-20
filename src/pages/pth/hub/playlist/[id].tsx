@@ -4,7 +4,7 @@ import {parseCookies} from "nookies";
 import {NextPageWithLayout} from "@/pages/_app";
 import MainLayout from "@/components/screens/MainLayout/MainLayout";
 
-import {useFetchByIdQuery} from "@/store/api/PlaylistApi";
+import {useFetchPlaylistByIdQuery} from "@/store/api/PlaylistApi";
 import CollectionHeader from "@/components/Content/CollectionSelfPage/CollectionHeader";
 
 interface PageParams {
@@ -13,7 +13,7 @@ interface PageParams {
 
 const PlaylistPage: NextPageWithLayout<PageParams> = ({playlistId}) => {
 
-    const {data: playlist, isLoading} = useFetchByIdQuery(playlistId)
+    const {data: playlist, isLoading} = useFetchPlaylistByIdQuery(playlistId)
 
     if(isLoading) {
         return <></>

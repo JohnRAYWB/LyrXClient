@@ -4,7 +4,7 @@ import {parseCookies} from "nookies";
 import {NextPageWithLayout} from "@/pages/_app";
 import MainLayout from "@/components/screens/MainLayout/MainLayout";
 
-import {useFetchAllAndSearchQuery} from "@/store/api/TrackApi";
+import {useFetchAllTrackAndSearchQuery} from "@/store/api/TrackApi";
 import TrackList from "@/components/Content/TrackPage/TrackList";
 import styles from "@/styles/Track.module.css"
 import Search from "@/components/screens/MainLayout/Sider/components/Search";
@@ -12,7 +12,7 @@ import Search from "@/components/screens/MainLayout/Sider/components/Search";
 const Track: NextPageWithLayout = () => {
 
     const [query, setQuery] = useState('')
-    const {data: tracks, isLoading} = useFetchAllAndSearchQuery(query)
+    const {data: tracks, isLoading} = useFetchAllTrackAndSearchQuery(query)
 
     if (isLoading) {
         return <></>

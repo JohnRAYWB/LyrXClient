@@ -7,9 +7,7 @@ import {useRouter} from "next/navigation";
 
 import styles from "./styles/ProfilePage.module.css"
 import {userDto} from "@/api/dto/user.dto";
-import {useAppSelector} from "@/hook/redux";
-import {selectUserData} from "@/store/slice/user";
-import {useSubscribeMutation} from "@/store/api/UserApi";
+import {useFetchProfileQuery, useSubscribeUserMutation} from "@/store/api/UserApi";
 import TrackList from "@/components/Content/TrackPage/TrackList";
 import {PlaylistCollectionRow, AlbumCollectionRow} from "@/components/Content/components/ProfileCollectionRow";
 import useTextLength from "@/util/useTextLength";
@@ -21,8 +19,12 @@ interface UserParam {
 
 const Profile: React.FC<UserParam> = ({user, type}) => {
 
-    const loggedUser: userDto = useAppSelector(selectUserData)
-    const [subscribe] = useSubscribeMutation()
+    const {data: loggedUser, isLoading} = useFetchProfileQuery()
+    const [subscribe] = useSubscribeUserMutation()
+
+    if(isLoading) {
+        return <></>
+    }
 
     const router = useRouter()
 

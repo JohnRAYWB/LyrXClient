@@ -5,13 +5,13 @@ import {NextPageWithLayout} from "@/pages/_app";
 import MainLayout from "@/components/screens/MainLayout/MainLayout";
 
 import UserList from "@/components/Content/UserPage/UserList";
-import {useFetchAllAndSearchQuery} from "@/store/api/UserApi";
+import {useFetchAllUserAndSearchQuery} from "@/store/api/UserApi";
 import Search from "@/components/screens/MainLayout/Sider/components/Search";
 
 const Users: NextPageWithLayout = () => {
 
     const [query, setQuery] = useState('')
-    const {data: users, isLoading} = useFetchAllAndSearchQuery(query)
+    const {data: users, isLoading} = useFetchAllUserAndSearchQuery(query)
 
     if (isLoading) {
         return <></>

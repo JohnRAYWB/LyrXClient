@@ -3,11 +3,11 @@ import Link from "next/link";
 import {Carousel} from "antd";
 import Row from "@/components/Content/components/Row";
 import styles from "./styles/HubRows.module.css"
-import {useFetchMostLikedQuery} from "@/store/api/PlaylistApi";
+import {useFetchMostLikedPlaylistQuery} from "@/store/api/PlaylistApi";
 
 const PlaylistRow = () => {
 
-    const {data: playlists, isLoading} = useFetchMostLikedQuery()
+    const {data: playlists, isLoading} = useFetchMostLikedPlaylistQuery()
 
     if(isLoading) {
         return <></>

@@ -1,19 +1,8 @@
-import {createApi} from "@reduxjs/toolkit/query/react";
-import {HYDRATE} from "next-redux-wrapper";
-import {baseQuery} from "@/store/api/headers";
 import {userDto} from "@/api/dto/user.dto";
 import {trackDto} from "@/api/dto/track.dto";
-import
+import {apiSlice} from "./apiSlice"
 
-const UserApi = createApi({
-    reducerPath: 'userApi',
-    tagTypes: ['User'],
-    baseQuery: baseQuery,
-    extractRehydrationInfo(action, {reducerPath}) {
-        if (action.type === HYDRATE) {
-            return action.payload[reducerPath]
-        }
-    },
+export const UserApi = apiSlice.injectEndpoints({
     endpoints: (build) => ({
         fetchProfile: build.query<userDto, userDto>({
             query: () => ({
@@ -21,25 +10,25 @@ const UserApi = createApi({
             }),
             providesTags: result => ['User']
         }),
-        fetchAllAndSearch: build.query<userDto[], string>({
+        fetchAllUserAndSearch: build.query<userDto[], string>({
             query: (query) => ({
                 url: `users/search?username=${query}`
             }),
             providesTags: result => ['User']
         }),
-        fetchById: build.query<userDto, string>({
+        fetchUserById: build.query<userDto, string>({
             query: (uId) => ({
                 url: `users/profile/${uId}`
             }),
             providesTags: result => ['User']
         }),
-        fetchCollection: build.query({
+        fetchUserCollection: build.query({
             query: () => ({
                 url: 'users/collection'
             }),
             providesTags: result => ['User']
         }),
-        addToCollection: build.mutation<trackDto, string>({
+        addToUserCollection: build.mutation<trackDto, string>({
             query: (tId) => ({
                 url: `tracks/collection/${tId}/add`,
                 method: 'POST',
@@ -47,7 +36,7 @@ const UserApi = createApi({
             }),
             invalidatesTags: result => ['User']
         }),
-        removeFromCollection: build.mutation<trackDto, string>({
+        removeFromUserCollection: build.mutation<trackDto, string>({
             query: (tId) => ({
                 url: `tracks/collection/${tId}/remove`,
                 method: 'POST',
@@ -55,7 +44,7 @@ const UserApi = createApi({
             }),
             invalidatesTags: result => ['User']
         }),
-        subscribe: build.mutation<userDto, string>({
+        subscribeUser: build.mutation<userDto, string>({
             query: (uId) => ({
                 url: `users/subscribe/${uId}`,
                 method: 'POST',
@@ -68,12 +57,10 @@ const UserApi = createApi({
 
 export const {
     useFetchProfileQuery,
-    useFetchCollectionQuery,
-    useFetchAllAndSearchQuery,
-    useFetchByIdQuery,
-    useAddToCollectionMutation,
-    useRemoveFromCollectionMutation,
-    useSubscribeMutation
+    useFetchUserCollectionQuery,
+    useFetchAllUserAndSearchQuery,
+    useFetchUserByIdQuery,
+    useAddToUserCollectionMutation,
+    useRemoveFromUserCollectionMutation,
+    useSubscribeUserMutation
 } = UserApi
-
-export default UserApi

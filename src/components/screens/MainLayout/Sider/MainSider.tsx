@@ -1,18 +1,19 @@
-import React, {ReactElement, ReactNode} from 'react';
+import React, {ReactNode} from 'react';
 import Link from "next/link";
-import {HomeFilled, SearchOutlined, UserOutlined} from "@ant-design/icons";
-import {Input, MenuProps} from "antd";
+import {HomeFilled, UserOutlined} from "@ant-design/icons";
+import {MenuProps} from "antd";
 import {destroyCookie} from "nookies";
 import {useRouter} from "next/navigation";
 
 import styles from './styles/MainSider.module.css'
-import {useAppSelector} from "@/hook/redux";
-import {selectUserData} from "@/store/slice/user";
 import PlaylistSider from "./components/PlaylistSider";
 import AdminToolSider from "./components/AdminToolSider";
 import MenuSider from "./components/MenuSider";
 import ArtistToolSider from "./components/ArtistToolSider";
 import Genre from "@/components/screens/MainLayout/Sider/components/Genre";
+import {useFetchProfileQuery} from "@/store/api/UserApi";
+import {useAppSelector} from "@/hook/redux";
+import {selectUserData} from "@/store/slice/user";
 
 interface SiderComponent {
     searchField: ReactNode
@@ -20,14 +21,9 @@ interface SiderComponent {
 
 const HubHeader: React.FC<SiderComponent> = ({searchField}) => {
 
-    const router = useRouter()
-
     const user = useAppSelector(selectUserData)
 
-    if(!user) {
-        return <></>
-    }
-
+    const router = useRouter()
     const playlistLength = user.playlists.length
 
     const profileItems: MenuProps['items'] = [

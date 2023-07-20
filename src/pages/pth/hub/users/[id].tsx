@@ -4,7 +4,7 @@ import {parseCookies} from "nookies";
 import {NextPageWithLayout} from "@/pages/_app";
 import MainLayout from "@/components/screens/MainLayout/MainLayout";
 
-import {useFetchByIdQuery} from "@/store/api/UserApi";
+import {useFetchUserByIdQuery} from "@/store/api/UserApi";
 import ProfilePage from "@/components/Content/ProfilePage/ProfilePage";
 
 interface UserParam {
@@ -13,7 +13,7 @@ interface UserParam {
 
 const UserPage: NextPageWithLayout<UserParam> = ({userId}) => {
 
-    const {data: user, isLoading} = useFetchByIdQuery(userId)
+    const {data: user, isLoading} = useFetchUserByIdQuery(userId)
 
     if(isLoading) {
         return <></>

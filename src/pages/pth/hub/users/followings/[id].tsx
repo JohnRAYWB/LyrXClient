@@ -4,7 +4,7 @@ import {parseCookies} from "nookies";
 import {NextPageWithLayout} from "@/pages/_app";
 import MainLayout from "@/components/screens/MainLayout/MainLayout";
 
-import {useFetchByIdQuery} from "@/store/api/UserApi";
+import {useFetchUserByIdQuery} from "@/store/api/UserApi";
 import UserList from "@/components/Content/UserPage/UserList";
 import Search from "@/components/screens/MainLayout/Sider/components/Search";
 
@@ -15,7 +15,7 @@ interface UserParam {
 const Followings: NextPageWithLayout<UserParam> = ({userId}) => {
 
     const [query, setQuery] = useState('')
-    const {data: user, isLoading} = useFetchByIdQuery(userId)
+    const {data: user, isLoading} = useFetchUserByIdQuery(userId)
 
     if (isLoading) {
         return <></>

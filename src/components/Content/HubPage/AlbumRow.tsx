@@ -3,11 +3,11 @@ import Link from "next/link";
 import Row from "@/components/Content/components/Row";
 import styles from "./styles/HubRows.module.css"
 import {Carousel} from "antd";
-import {useFetchMostLikedQuery} from "@/store/api/AlbumApi";
+import {useFetchMostLikedAlbumQuery} from "@/store/api/AlbumApi";
 
 const AlbumRow = () => {
 
-    const {data: albums, isLoading} = useFetchMostLikedQuery()
+    const {data: albums, isLoading} = useFetchMostLikedAlbumQuery()
 
     if(isLoading) {
         return <></>

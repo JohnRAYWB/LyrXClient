@@ -1,61 +1,60 @@
-import {createApi} from "@reduxjs/toolkit/query/react";
-import {HYDRATE} from "next-redux-wrapper";
-import {baseQuery} from "@/store/api/headers";
+import {apiSlice} from "@/store/api/apiSlice";
 import {trackDto} from "@/api/dto/track.dto";
 
-const TrackApi = createApi({
-    reducerPath: 'trackApi',
-    tagTypes: ['Track', 'User'],
-    extractRehydrationInfo(action, {reducerPath}) {
-        if (action.type === HYDRATE) {
-            return action.payload[reducerPath]
-        }
-    },
-    baseQuery: baseQuery,
+export const TrackApi = apiSlice.injectEndpoints({
     endpoints: (build) => ({
-        fetchAllAndSearch: build.query<trackDto[], string>({
+        fetchAllTrackAndSearch: build.query<trackDto[], string>({
             query: (query) => ({
                 url: `tracks/search?name=${query}`,
             }),
             providesTags: result => ['Track']
         }),
-        fetchMostLiked: build.query<trackDto, trackDto>({
+        fetchMostLikedTrack: build.query<trackDto, trackDto>({
             query: () => ({
                 url: `tracks/top`,
             }),
             providesTags: result => ['Track']
         }),
-        fetchById: build.query<trackDto, string>({
+        fetchTrackById: build.query<trackDto, string>({
             query: (tId) => ({
                 url: `tracks/${tId}/current`
             }),
             providesTags: result => ['Track']
         }),
-        addToCollection: build.mutation<trackDto, string>({
-            query: (tId) => ({
-                url: `tracks/collection/${tId}/add`,
+        leaveComment: build.mutation({
+            query: ({tId, ...text}) => ({
+                url: `tracks/comment/${tId}`,
                 method: 'POST',
+                body: text,
                 responseHandler: (response) => response.text()
             }),
             invalidatesTags: result => ['Track']
         }),
-        removeFromCollection: build.mutation<trackDto, string>({
-            query: (tId) => ({
-                url: `tracks/collection/${tId}/remove`,
-                method: 'POST',
+        editComment: build.mutation({
+           query: ({cId, ...text}) => ({
+               url: `tracks/comment/${cId}/edit`,
+               method: 'PATCH',
+               body: text,
+               responseHandler: (response) => response.text()
+           }),
+            invalidatesTags: result => ['Track', 'User']
+        }),
+        deleteComment: build.mutation({
+            query: (cId) => ({
+                url: `tracks/comment/${cId}/delete`,
+                method: 'DELETE',
                 responseHandler: (response) => response.text()
             }),
             invalidatesTags: result => ['Track']
-        }),
+        })
     })
 })
 
 export const {
-    useFetchAllAndSearchQuery,
-    useFetchMostLikedQuery,
-    useFetchByIdQuery,
-    useAddToCollectionMutation,
-    useRemoveFromCollectionMutation
+    useFetchAllTrackAndSearchQuery,
+    useFetchMostLikedTrackQuery,
+    useFetchTrackByIdQuery,
+    useLeaveCommentMutation,
+    useEditCommentMutation,
+    useDeleteCommentMutation
 } = TrackApi
-
-export default TrackApi

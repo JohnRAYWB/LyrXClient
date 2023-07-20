@@ -5,8 +5,7 @@ import {useRouter} from "next/navigation";
 
 import styles from "./styles/User.module.css"
 import {userDto} from "@/api/dto/user.dto";
-import {useAppSelector} from "@/hook/redux";
-import {selectUserData} from "@/store/slice/user";
+import {useFetchProfileQuery} from "@/store/api/UserApi";
 
 interface UserParam {
     user: userDto
@@ -15,7 +14,11 @@ interface UserParam {
 const User: React.FC<UserParam> = ({user}) => {
 
     const router = useRouter()
-    const loggedUser = useAppSelector(selectUserData)
+    const {data: loggedUser, isLoading} = useFetchProfileQuery()
+
+    if(isLoading) {
+        return <></>
+    }
 
     return (
         <div className={styles.container}>
@@ -31,18 +34,18 @@ const User: React.FC<UserParam> = ({user}) => {
                 :
                 <UserOutlined className={styles.emptyAvatar}/>
             }
-            <div className={styles.textInfo}>
+            <div>
                 {
                     user._id === loggedUser._id ?
-                        <p className={styles.textUsername} onClick={() => router.push(`/pth/hub/profile`)}>{user.username}</p>
+                        <div className={styles.textInfo}>
+                            <p className={styles.textUsername} onClick={() => router.push(`/pth/hub/profile`)}>{user.username}</p>
+                            <p className={styles.textEmail} onClick={() => router.push(`/pth/hub/profile`)}>{user.email}</p>
+                        </div>
                         :
-                        <p className={styles.textUsername} onClick={() => router.push(`/pth/hub/users/${user._id}`)}>{user.username}</p>
-                }
-                {
-                    user._id === loggedUser._id ?
-                        <p className={styles.textEmail} onClick={() => router.push(`/pth/hub/profile`)}>{user.email}</p>
-                        :
-                        <p className={styles.textEmail} onClick={() => router.push(`/pth/hub/users/${user._id}`)}>{user.email}</p>
+                        <div className={styles.textInfo}>
+                            <p className={styles.textUsername} onClick={() => router.push(`/pth/hub/users/${user._id}`)}>{user.username}</p>
+                            <p className={styles.textEmail} onClick={() => router.push(`/pth/hub/users/${user._id}`)}>{user.email}</p>
+                        </div>
                 }
             </div>
             <div className={styles.subContainer}>

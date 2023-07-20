@@ -2,7 +2,7 @@ import React from 'react';
 import {Carousel} from "antd";
 
 import styles from "./styles/Collection.module.css"
-import {useFetchMostLikedQuery} from "@/store/api/PlaylistApi";
+import {useFetchMostLikedPlaylistQuery} from "@/store/api/PlaylistApi";
 import Collection from "@/components/Content/components/Collection";
 import Row from "@/components/Content/components/Row";
 import {playlistDto} from "@/api/dto/playlist.dto";
@@ -13,9 +13,9 @@ interface PlaylistParams {
 
 const PlaylistCollection: React.FC<PlaylistParams> = ({playlists}) => {
 
-    const {data: likedPlaylist, isLoading: loadLiked} = useFetchMostLikedQuery()
+    const {data: likedPlaylist, isLoading} = useFetchMostLikedPlaylistQuery()
 
-    if(loadLiked) {
+    if(isLoading) {
         return <></>
     }
 

@@ -3,8 +3,7 @@ import React from 'react';
 import styles from "./styles/UserList.module.css"
 import User from "@/components/Content/UserPage/User";
 import {userDto} from "@/api/dto/user.dto";
-import {useAppSelector} from "@/hook/redux";
-import {selectUserData} from "@/store/slice/user";
+import {useFetchProfileQuery} from "@/store/api/UserApi";
 
 interface Users {
     users: userDto[]
@@ -13,7 +12,11 @@ interface Users {
 
 const UserList: React.FC<Users> = ({users, type}) => {
 
-    const loggedUser = useAppSelector(selectUserData)
+    const {data: loggedUser, isLoading} = useFetchProfileQuery()
+
+    if(isLoading) {
+        return <></>
+    }
 
     if(users.length === 0) {
         return <p className={styles.notFound}>User not found!</p>

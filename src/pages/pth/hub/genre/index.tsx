@@ -5,12 +5,12 @@ import {NextPageWithLayout} from "@/pages/_app";
 import MainLayout from "@/components/screens/MainLayout/MainLayout";
 
 import styles from "@/styles/Genre.module.css"
-import {useFetchAllQuery} from "@/store/api/GenreApi";
+import {useFetchAllGenreQuery} from "@/store/api/GenreApi";
 import GenreList from "@/components/Content/GenrePage/GenreList";
 
 const Genre: NextPageWithLayout = () => {
 
-    const {data: genres, isLoading} = useFetchAllQuery(0)
+    const {data: genres, isLoading} = useFetchAllGenreQuery(0)
 
     if (isLoading) {
         return <></>

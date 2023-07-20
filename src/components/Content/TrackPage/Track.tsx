@@ -14,7 +14,7 @@ import Link from "next/link";
 import styles from "./styles/Track.module.css"
 import {trackDto} from "@/api/dto/track.dto";
 import useTextLength from "@/util/useTextLength";
-import {useFetchProfileQuery, useAddToCollectionMutation, useRemoveFromCollectionMutation} from "@/store/api/UserApi";
+import {useFetchProfileQuery, useAddToUserCollectionMutation, useRemoveFromUserCollectionMutation} from "@/store/api/UserApi";
 
 interface Track {
     track: trackDto
@@ -24,8 +24,8 @@ interface Track {
 const Track: React.FC<Track> = ({track, index}) => {
 
     const {data: user, isLoading} = useFetchProfileQuery()
-    const [addTrack, {isLoading: addLoading}] = useAddToCollectionMutation()
-    const [removeTrack, {isLoading: removeLoading}] = useRemoveFromCollectionMutation()
+    const [addTrack, {isLoading: addLoading}] = useAddToUserCollectionMutation()
+    const [removeTrack, {isLoading: removeLoading}] = useRemoveFromUserCollectionMutation()
 
     if (isLoading) {
         return <></>
@@ -43,6 +43,7 @@ const Track: React.FC<Track> = ({track, index}) => {
     if (track.protectedDeletion) {
         folder = 'album'
     }
+
     const items: MenuProps['items'] = [
         {
             label: [
@@ -92,8 +93,7 @@ const Track: React.FC<Track> = ({track, index}) => {
             console.log(e)
         }
     }
-    console.log(addLoading)
-    console.log(removeLoading)
+
     return (
         <div>
             <div className={styles.container}>

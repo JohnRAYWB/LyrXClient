@@ -5,13 +5,13 @@ import {NextPageWithLayout} from "@/pages/_app";
 import MainLayout from "@/components/screens/MainLayout/MainLayout";
 
 import AlbumCollection from "@/components/Content/CollectionPage/AlbumCollection";
-import {useFetchAllAndSearchQuery} from "@/store/api/AlbumApi";
+import {useFetchAllAlbumAndSearchQuery} from "@/store/api/AlbumApi";
 import Search from "@/components/screens/MainLayout/Sider/components/Search";
 
 const Album: NextPageWithLayout = () => {
 
     const [query, setQuery] = useState('')
-    const {data: albums, isLoading} = useFetchAllAndSearchQuery(query)
+    const {data: albums, isLoading} = useFetchAllAlbumAndSearchQuery(query)
 
     if (isLoading) {
         return <></>

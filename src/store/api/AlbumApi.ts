@@ -1,35 +1,30 @@
-import {createApi} from "@reduxjs/toolkit/query/react";
-import {HYDRATE} from "next-redux-wrapper";
-import {baseQuery} from "@/store/api/headers";
+import {apiSlice} from "@/store/api/apiSlice";
 
-const AlbumApi = createApi({
-    reducerPath: 'albumApi',
-    tagTypes: ['Album'],
-    extractRehydrationInfo(action, {reducerPath}) {
-        if (action.type === HYDRATE) {
-            return action.payload[reducerPath]
-        }
-    },
-    baseQuery: baseQuery,
+export const AlbumApi = apiSlice.injectEndpoints({
     endpoints: (build) => ({
-        fetchAllAndSearch: build.query({
+        fetchAllAlbumAndSearch: build.query({
             query: (query) => ({
                 url: `albums/search?name=${query}`
-            })
+            }),
+            providesTags: result => ['Album']
         }),
-        fetchMostLiked: build.query({
+        fetchMostLikedAlbum: build.query({
             query: () => ({
                 url: `albums/top`
-            })
+            }),
+            providesTags: result => ['Album']
         }),
-        fetchById: build.query({
+        fetchAlbumById: build.query({
             query: (aId) => ({
                 url: `albums/${aId}/current`
-            })
+            }),
+            providesTags: result => ['Album']
         })
     })
 })
 
-export const {useFetchAllAndSearchQuery, useFetchMostLikedQuery, useFetchByIdQuery} = AlbumApi
-
-export default AlbumApi
+export const {
+    useFetchAllAlbumAndSearchQuery,
+    useFetchMostLikedAlbumQuery,
+    useFetchAlbumByIdQuery
+} = AlbumApi

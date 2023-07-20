@@ -1,14 +1,15 @@
 import React from 'react';
+import Link from "next/link";
 import Image from "next/image";
-import useTextLength from "@/util/useTextLength";
 import {Popover} from "antd";
 import {InfoCircleOutlined} from "@ant-design/icons";
+
 import styles from './styles/CollectionHeader.module.css'
+import TrackList from "@/components/Content/TrackPage/TrackList";
+import useTextLength from "@/util/useTextLength";
+import {userDto} from "@/api/dto/user.dto";
 import {genreDto} from "@/api/dto/genre.dto";
 import {trackDto} from "@/api/dto/track.dto";
-import TrackList from "@/components/Content/TrackPage/TrackList";
-import Link from "next/link";
-import {userDto} from "@/api/dto/user.dto";
 
 interface Items {
     image: string

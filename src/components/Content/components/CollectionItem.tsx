@@ -1,6 +1,7 @@
 import React from 'react';
-import styles from "./styles/CollectionItem.module.css"
 import Image from "next/image";
+
+import styles from "./styles/CollectionItem.module.css"
 import useTextLength from "@/util/useTextLength";
 import {useRouter} from "next/navigation";
 import {playlistDto} from "@/api/dto/playlist.dto";

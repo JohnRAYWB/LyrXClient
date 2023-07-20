@@ -5,13 +5,13 @@ import {NextPageWithLayout} from "@/pages/_app";
 import MainLayout from "@/components/screens/MainLayout/MainLayout";
 
 import PlaylistCollection from "@/components/Content/CollectionPage/PlaylistCollection";
-import {useFetchAllAndSearchQuery} from "@/store/api/PlaylistApi";
+import {useFetchAllPlaylistAndSearchQuery} from "@/store/api/PlaylistApi";
 import Search from "@/components/screens/MainLayout/Sider/components/Search";
 
 const Playlist: NextPageWithLayout = () => {
 
     const [query, setQuery] = useState('')
-    const {data: playlists, isLoading} = useFetchAllAndSearchQuery(query)
+    const {data: playlists, isLoading} = useFetchAllPlaylistAndSearchQuery(query)
 
     if(isLoading) {
         return <></>

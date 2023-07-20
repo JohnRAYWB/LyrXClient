@@ -1,30 +1,20 @@
-import {createApi} from "@reduxjs/toolkit/query/react";
-import {HYDRATE} from "next-redux-wrapper";
-import {baseQuery} from "@/store/api/headers";
+import {apiSlice} from "@/store/api/apiSlice";
 
-const GenreApi = createApi({
-    reducerPath: 'genreApi',
-    tagTypes: ['Genre'],
-    extractRehydrationInfo(action, {reducerPath}) {
-        if (action.type === HYDRATE) {
-            return action.payload[reducerPath]
-        }
-    },
-    baseQuery: baseQuery,
+export const GenreApi = apiSlice.injectEndpoints({
     endpoints: (build) => ({
-        fetchAll: build.query({
+        fetchAllGenre: build.query({
             query: (page) => ({
                 url: `genres?limit=20&page=${page}`,
-            })
+            }),
+            providesTags: result => ['Genre']
         }),
-        fetchById: build.query({
+        fetchGenreById: build.query({
             query: (gId) => ({
                 url: `genres/${gId}`
-            })
+            }),
+            providesTags: result => ['Genre']
         })
     })
 })
 
-export const {useFetchAllQuery, useFetchByIdQuery} = GenreApi
-
-export default GenreApi
+export const {useFetchAllGenreQuery, useFetchGenreByIdQuery} = GenreApi

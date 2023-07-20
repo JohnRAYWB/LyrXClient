@@ -2,10 +2,10 @@ import React from 'react';
 import {Carousel} from "antd";
 
 import styles from "./styles/Collection.module.css"
-import {useFetchMostLikedQuery} from "@/store/api/AlbumApi";
 import Collection from "@/components/Content/components/Collection";
 import Row from "@/components/Content/components/Row";
 import {albumDto} from "@/api/dto/album.dto";
+import {useFetchMostLikedAlbumQuery} from "@/store/api/AlbumApi";
 
 interface AlbumParams {
     albums: albumDto[]
@@ -13,7 +13,7 @@ interface AlbumParams {
 
 const AlbumCollection: React.FC<AlbumParams> = ({albums}) => {
 
-    const {data: likedAlbums, isLoading} = useFetchMostLikedQuery(null)
+    const {data: likedAlbums, isLoading} = useFetchMostLikedAlbumQuery(null)
 
     if(isLoading) {
         return <></>

@@ -1,35 +1,26 @@
-import {createApi} from "@reduxjs/toolkit/query/react";
-import {HYDRATE} from "next-redux-wrapper";
-import {baseQuery} from "@/store/api/headers";
+import {apiSlice} from "@/store/api/apiSlice";
 
-const PlaylistApi = createApi({
-    reducerPath: 'playlistApi',
-    tagTypes: ['Playlist'],
-    extractRehydrationInfo(action, {reducerPath}) {
-        if (action.type === HYDRATE) {
-            return action.payload[reducerPath]
-        }
-    },
-    baseQuery: baseQuery,
+export const PlaylistApi = apiSlice.injectEndpoints({
     endpoints: (build) => ({
-        fetchAllAndSearch: build.query({
+        fetchAllPlaylistAndSearch: build.query({
             query: (query) => ({
                 url: `playlists/search?name=${query}`
-            })
+            }),
+            providesTags: result => ['Playlist']
         }),
-        fetchMostLiked: build.query({
+        fetchMostLikedPlaylist: build.query({
             query: () => ({
                 url: `playlists/top`
-            })
+            }),
+            providesTags: result => ['Playlist']
         }),
-        fetchById: build.query({
+        fetchPlaylistById: build.query({
             query: (pId) => ({
                 url: `playlists/${pId}/current`
-            })
+            }),
+            providesTags: result => ['Playlist']
         })
     })
 })
 
-export const {useFetchAllAndSearchQuery, useFetchMostLikedQuery, useFetchByIdQuery} = PlaylistApi
-
-export default PlaylistApi
+export const {useFetchAllPlaylistAndSearchQuery, useFetchMostLikedPlaylistQuery, useFetchPlaylistByIdQuery} = PlaylistApi

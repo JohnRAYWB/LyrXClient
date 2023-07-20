@@ -8,7 +8,6 @@ import styles from "@/styles/Hub.module.css"
 import TrackRow from "@/components/Content/HubPage/TrackRow";
 import PlaylistRow from "@/components/Content/HubPage/PlaylistRow";
 import AlbumRow from "@/components/Content/HubPage/AlbumRow";
-import Search from "@/components/screens/MainLayout/Sider/components/Search";
 
 const Hub: NextPageWithLayout = () => {
 
@@ -21,7 +20,7 @@ const Hub: NextPageWithLayout = () => {
     );
 };
 
-Hub.getLayout = (page: React.ReactNode) => <MainLayout searchElement={Search} name={'Hub'}>{page}</MainLayout>
+Hub.getLayout = (page: React.ReactNode) => <MainLayout name={'Hub'}>{page}</MainLayout>
 
 export const getServerSideProps = wrapper.getServerSideProps((store) => async (ctx) => {
 

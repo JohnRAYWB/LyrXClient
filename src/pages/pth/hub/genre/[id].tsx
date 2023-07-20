@@ -8,7 +8,7 @@ import {ConfigProvider, Tabs, TabsProps} from "antd";
 import styles from "@/styles/Genre.module.css"
 import TrackList from "@/components/Content/TrackPage/TrackList";
 import Collection from "@/components/Content/components/Collection";
-import {useFetchByIdQuery} from "@/store/api/GenreApi";
+import {useFetchGenreByIdQuery} from "@/store/api/GenreApi";
 
 interface PageParams {
     genreId: string
@@ -16,7 +16,7 @@ interface PageParams {
 
 const GenrePage: NextPageWithLayout<PageParams> = ({genreId}) => {
 
-    const {data: genre, isLoading} = useFetchByIdQuery(genreId)
+    const {data: genre, isLoading} = useFetchGenreByIdQuery(genreId)
 
     if(isLoading) {
         return <></>

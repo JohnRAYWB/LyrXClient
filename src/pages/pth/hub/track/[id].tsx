@@ -1,18 +1,21 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {wrapper} from "@/store/store";
 import {parseCookies} from "nookies";
 import {NextPageWithLayout} from "@/pages/_app";
 import MainLayout from "@/components/screens/MainLayout/MainLayout";
 import Image from "next/image";
 import Link from "next/link";
-import {Button, ConfigProvider, Divider, Input, Popover} from "antd";
+import {Button, ConfigProvider, Divider, Input, notification, Popover} from "antd";
 import {InfoCircleOutlined} from "@ant-design/icons";
 
 import useTextLength from "@/util/useTextLength";
 import styles from "@/styles/TrackPage.module.css"
-import {useFetchByIdQuery} from "@/store/api/TrackApi";
-import {useAppSelector} from "@/hook/redux";
-import {selectUserData} from "@/store/slice/user";
+import {
+    useFetchTrackByIdQuery,
+    useLeaveCommentMutation
+} from "@/store/api/TrackApi";
+import {useFetchProfileQuery} from "@/store/api/UserApi";
+import Comment from "@/components/Content/TrackPage/Comment";
 
 interface PageParams {
     trackId: string
@@ -20,12 +23,13 @@ interface PageParams {
 
 const TrackPage: NextPageWithLayout<PageParams> = ({trackId}) => {
 
-    const {data: track, isLoading} = useFetchByIdQuery(trackId)
+    const {data: track, isLoading: trackLoading} = useFetchTrackByIdQuery(trackId)
+    const {data: user, isLoading: userLoading} = useFetchProfileQuery()
+    const [leaveComment, {isLoading}] = useLeaveCommentMutation()
 
-    const user = useAppSelector(selectUserData)
-    console.log(track)
+    const [text, setText] = useState('')
 
-    if(isLoading) {
+    if (trackLoading || userLoading) {
         return <></>
     }
 
@@ -35,6 +39,10 @@ const TrackPage: NextPageWithLayout<PageParams> = ({trackId}) => {
     let descriptionLength = ''
 
     track.description ? descriptionLength = useTextLength(track.description, 240) : ''
+
+    const textHandle = (e) => {
+        setText(e.target.value)
+    }
 
     return (
         <div className={styles.main}>
@@ -46,7 +54,8 @@ const TrackPage: NextPageWithLayout<PageParams> = ({trackId}) => {
                                 track.artist._id === user._id ?
                                     <Link className={styles.link} href={`/pth/hub/profile`}>{track.name[0]}</Link>
                                     :
-                                    <Link className={styles.link} href={`/pth/hub/users/${track.artist._id}`}>{track.name[0]}</Link>
+                                    <Link className={styles.link}
+                                          href={`/pth/hub/users/${track.artist._id}`}>{track.name[0]}</Link>
                             }
                         </h1>
                         <h1 className={styles.trackNameText}>{track.name[1]}</h1>
@@ -135,9 +144,40 @@ const TrackPage: NextPageWithLayout<PageParams> = ({trackId}) => {
                                 colorPrimary: '#ff2929',
                             }
                         }}>
-                            <Input.TextArea autoSize={true} className={styles.commentInput}
-                                            placeholder={'Leave your comment'}/>
-                            <Button style={{color: '#606060', border: '1px solid #404040'}} ghost>Leave comment</Button>
+                            <Input.TextArea
+                                onChange={textHandle}
+                                autoSize={true}
+                                className={styles.commentInput}
+                                placeholder={'Leave your comment'}
+                                value={isLoading ? '' : text}
+                            />
+                            <Button
+                                style={{color: '#606060', border: '1px solid #404040'}}
+                                ghost
+                                onClick={() => {
+                                    if(text.length !== 0) {
+                                        leaveComment({tId: trackId, text: text})
+                                        notification.success({
+                                            style: {backgroundColor: "#646464", width: 300},
+                                            message: <p className={styles.notification}>Done!</p>,
+                                            description: <p className={styles.notification}>Comment add successfully</p>,
+                                            placement: "bottomLeft",
+                                            duration: 2
+                                        })
+                                        setText('')
+                                    } else {
+                                        notification.error({
+                                            style: {backgroundColor: "#646464", width: 300},
+                                            message: <p className={styles.notification}>Error!</p>,
+                                            description: <p className={styles.notification}>Please input text</p>,
+                                            placement: "bottomLeft",
+                                            duration: 2
+                                        })
+                                    }
+                                }}
+                            >
+                                Leave comment
+                            </Button>
                         </ConfigProvider>
                     </div>
                     <Divider style={{color: '#606060', border: '#232323FF', margin: '40px 0px'}}
@@ -145,20 +185,7 @@ const TrackPage: NextPageWithLayout<PageParams> = ({trackId}) => {
                     <div className={styles.commentList}>
                         {
                             track.comments.map(comment =>
-                                <div
-                                    key={comment._id}
-                                    className={styles.commentItem}
-                                >
-                                    <Divider style={{color: "white", border: "#343434"}} orientation={"left"}>
-                                        <Link
-                                            href={`/pth/hub/profile/${comment.user._id}`}
-                                            className={styles.link}
-                                        >
-                                            {comment.user.username}
-                                        </Link>
-                                    </Divider>
-                                    <p className={styles.comment}>{comment.text}</p>
-                                </div>
+                                <Comment comment={comment} user={user}/>
                             )
                         }
                     </div>
@@ -175,7 +202,7 @@ export const getServerSideProps = wrapper.getServerSideProps((store) => async (c
     try {
         const {access_token} = parseCookies(ctx)
 
-        if(!access_token) {
+        if (!access_token) {
             return {
                 redirect: {
                     destination: "/",

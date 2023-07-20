@@ -1,4 +1,5 @@
 .main {
+    border-radius: 10px;
     box-shadow: 5px 5px 15px black;
 }
 
@@ -157,4 +158,55 @@
     text-align: start;
     word-wrap: break-word;
     color: #cbcbcb;
+}
+
+.editButtons {
+    text-align: end;
+    margin: 10px auto 0 auto;
+    color: #39393d;
+}
+
+.editButtons > * {
+    margin: 0 5px;
+}
+
+.edit {
+    font-size: 14px;
+    margin-top: 20px;
+    padding: 7px 15px;
+    background-color: inherit;
+    color: #39393d;
+    border: 1px solid #39393d;
+    border-radius: 10px;
+    transition-duration: 200ms;
+    cursor: pointer;
+}
+
+.edit:hover {
+    color: #24fd78;
+    border: 1px solid #24fd78;
+    transition-duration: 200ms;
+}
+
+.iconDelete {
+    transition-duration: 200ms;
+}
+
+.iconEdit {
+    transition-duration: 200ms;
+}
+
+.iconDelete:hover {
+    color: #F64141;
+    transition-duration: 200ms
+}
+
+.iconEdit:hover {
+    color: #24fd78;
+    transition-duration: 200ms
+}
+
+.notification {
+    font-size: 16px;
+    color: white;
 }

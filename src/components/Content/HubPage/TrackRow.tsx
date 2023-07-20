@@ -4,11 +4,11 @@ import Row from "@/components/Content/components/Row";
 import {Carousel} from "antd";
 import styles from "./styles/HubRows.module.css"
 
-import {useFetchMostLikedQuery} from "@/store/api/TrackApi";
+import {useFetchMostLikedTrackQuery} from "@/store/api/TrackApi";
 
 const TrackRow = () => {
 
-    const {data: tracks, isLoading} = useFetchMostLikedQuery()
+    const {data: tracks, isLoading} = useFetchMostLikedTrackQuery()
 
     if(isLoading) {
         return <></>

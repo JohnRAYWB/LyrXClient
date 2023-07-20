@@ -1,19 +1,12 @@
 import {Action, combineReducers, configureStore, ThunkAction} from "@reduxjs/toolkit";
 import {createWrapper, HYDRATE} from "next-redux-wrapper";
-import TrackApi from "@/store/api/TrackApi";
-import PlaylistApi from "@/store/api/PlaylistApi";
-import AlbumApi from "@/store/api/AlbumApi";
-import UserApi from "@/store/api/UserApi";
 import {userReducer} from "./slice/user"
 import {authReducer} from "@/store/slice/auth";
-import GenreApi from "@/store/api/GenreApi";
+import {apiSlice} from "@/store/api/apiSlice";
 
 export const rootReducer = combineReducers({
-    [TrackApi.reducerPath]: TrackApi.reducer,
-    [PlaylistApi.reducerPath]: PlaylistApi.reducer,
-    [AlbumApi.reducerPath]: AlbumApi.reducer,
-    [GenreApi.reducerPath]: GenreApi.reducer,
-    [UserApi.reducerPath]: UserApi.reducer,
+    [apiSlice.reducerPath]: apiSlice.reducer,
+
     user: userReducer,
     auth: authReducer
 })
@@ -35,13 +28,7 @@ export function makeStore() {
     return configureStore({
         reducer: reducer,
         middleware: getDefaultMiddleware => getDefaultMiddleware()
-            .concat(
-                TrackApi.middleware,
-                PlaylistApi.middleware,
-                AlbumApi.middleware,
-                GenreApi.middleware,
-                UserApi.middleware
-            )
+            .concat(apiSlice.middleware,)
     })
 }
 

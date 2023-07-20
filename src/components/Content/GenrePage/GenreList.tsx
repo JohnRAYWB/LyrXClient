@@ -1,7 +1,8 @@
 import React from 'react';
-import {genreDto} from "@/api/dto/genre.dto";
-import Genre from "@/components/Content/GenrePage/Genre";
+
 import styles from "./styles/GenreList.module.css"
+import Genre from "@/components/Content/GenrePage/Genre";
+import {genreDto} from "@/api/dto/genre.dto";
 
 interface GenreList {
     genres: genreDto[]

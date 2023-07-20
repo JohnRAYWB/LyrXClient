@@ -4,7 +4,7 @@ import {parseCookies} from "nookies";
 import {NextPageWithLayout} from "@/pages/_app";
 import MainLayout from "@/components/screens/MainLayout/MainLayout";
 
-import {useFetchByIdQuery} from "@/store/api/AlbumApi";
+import {useFetchAlbumByIdQuery} from "@/store/api/AlbumApi";
 import CollectionHeader from "@/components/Content/CollectionSelfPage/CollectionHeader";
 
 interface PageParams {
@@ -13,7 +13,7 @@ interface PageParams {
 
 const AlbumPage: NextPageWithLayout<PageParams> = ({albumId}) => {
 
-    const {data: album, isLoading} = useFetchByIdQuery(albumId)
+    const {data: album, isLoading} = useFetchAlbumByIdQuery(albumId)
 
     if(isLoading) {
         return <></>
