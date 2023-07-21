@@ -172,6 +172,88 @@
     color: #F64141;
 }
 
+.editContainer {
+    flex: auto;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 20px;
+}
+
+.editAboutContainer {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    padding: 20px 30px;
+    border-radius: 10px;
+    background-color: #151515;
+}
+
+.editAboutText {
+    color: #7c7c7c;
+}
+
+.editAboutInput {
+    padding: 10px;
+    background-color: inherit;
+    color: #7c7c7c;
+}
+
+.editAboutInput:hover {
+    color: white;
+}
+
+.uploadFile {
+    width: 150px;
+    height: 150px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    background-color: inherit;
+    border: 2px dashed #29292d;
+    border-radius: 50%;
+    color: #7c7c7c;
+    font-size: 20px;
+    margin: 20px 0;
+    transition-duration: 200ms;
+    cursor: pointer;
+}
+
+.uploadFile:hover {
+    color: white;
+    border: 2px solid #F64141;
+    transition-duration: 200ms;
+}
+
+.uploadedFile {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    border: 2px dashed #69ee4a;
+    font-size: 32px;
+    color: #69ee4a;
+}
+
+.fetchingWarn {
+    color: #888888;
+    text-align: center;
+    font-size: 44px;
+    margin-top: 50px;
+}
+
+.fetchingWarn > * {
+    margin: 20px;
+}
+
 .notification {
     font-size: 16px;
     color: white;

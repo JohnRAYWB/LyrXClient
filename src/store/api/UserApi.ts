@@ -28,6 +28,26 @@ export const UserApi = apiSlice.injectEndpoints({
             }),
             providesTags: result => ['User']
         }),
+        uploadAbout: build.mutation({
+           query: (about) => ({
+               url: 'users/profile/about',
+               method: 'POST',
+               body: about,
+               responseHandler: response => response.text()
+           }),
+            invalidatesTags: result => ['User']
+        }),
+        uploadAvatar: build.mutation({
+            query: (avatar) => ({
+                url: 'users/profile/avatar',
+                method: 'POST',
+                file: avatar,
+                body: avatar,
+                formData: true,
+                responseHandler: (response) => response.text()
+            }),
+            invalidatesTags: result => ['User']
+        }),
         addToUserCollection: build.mutation<trackDto, string>({
             query: (tId) => ({
                 url: `tracks/collection/${tId}/add`,
@@ -60,6 +80,8 @@ export const {
     useFetchUserCollectionQuery,
     useFetchAllUserAndSearchQuery,
     useFetchUserByIdQuery,
+    useUploadAboutMutation,
+    useUploadAvatarMutation,
     useAddToUserCollectionMutation,
     useRemoveFromUserCollectionMutation,
     useSubscribeUserMutation

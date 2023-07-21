@@ -1,16 +1,23 @@
-import React from 'react';
+import React, {useState} from 'react';
 import Image from "next/image";
-import {ConfigProvider, notification, Popover, Tabs, TabsProps} from "antd";
-import {InfoCircleOutlined, UserAddOutlined, UserOutlined} from "@ant-design/icons";
+import {ConfigProvider, Input, notification, Popover, Tabs, TabsProps} from "antd";
+import {
+    CheckOutlined,
+    InfoCircleOutlined,
+    PlusOutlined,
+    UserAddOutlined,
+    UserOutlined
+} from "@ant-design/icons";
 import Link from "next/link";
 import {useRouter} from "next/navigation";
 
 import styles from "./styles/ProfilePage.module.css"
 import {userDto} from "@/api/dto/user.dto";
-import {useFetchProfileQuery, useSubscribeUserMutation} from "@/store/api/UserApi";
+import {useFetchProfileQuery, useSubscribeUserMutation, useUploadAboutMutation, useUploadAvatarMutation} from "@/store/api/UserApi";
 import TrackList from "@/components/Content/TrackPage/TrackList";
 import {PlaylistCollectionRow, AlbumCollectionRow} from "@/components/Content/components/ProfileCollectionRow";
 import useTextLength from "@/util/useTextLength";
+import FileUpload from "@/util/FileUpload";
 
 interface UserParam {
     user: userDto
@@ -20,9 +27,16 @@ interface UserParam {
 const Profile: React.FC<UserParam> = ({user, type}) => {
 
     const {data: loggedUser, isLoading} = useFetchProfileQuery()
+    const [uploadAvatar] = useUploadAvatarMutation()
+    const [uploadAbout] = useUploadAboutMutation()
     const [subscribe] = useSubscribeUserMutation()
 
-    if(isLoading) {
+    const [edit, setEdit] = useState(false)
+    const [editAvatar, setEditAvatar] = useState()
+    const [editAbout, setEditAbout] = useState(user.about)
+    const [loading, setLoading] = useState(false)
+
+    if (isLoading) {
         return <></>
     }
 
@@ -66,7 +80,7 @@ const Profile: React.FC<UserParam> = ({user, type}) => {
     const subHandler = () => {
         try {
             subscribe(user._id)
-            if(user.followers.findIndex(fellow => fellow._id === loggedUser._id) === -1) {
+            if (user.followers.findIndex(fellow => fellow._id === loggedUser._id) === -1) {
                 notification.success({
                     style: {backgroundColor: "#646464", width: 300},
                     message: <p className={styles.notification}>Done!</p>,
@@ -87,52 +101,110 @@ const Profile: React.FC<UserParam> = ({user, type}) => {
             console.log(e)
         }
     }
+    const handleEditDone = () => {
+        if (editAvatar || editAbout) {
+            const formData = new FormData()
+            formData.append('avatar', editAvatar)
+            uploadAvatar(formData)
+            uploadAbout({about: editAbout})
+            notification.success({
+                style: {backgroundColor: "#646464", width: 300},
+                message: <p className={styles.notification}>Done!</p>,
+                description: <p className={styles.notification}>Profile info edited</p>,
+                placement: "bottomLeft",
+                duration: 2
+            })
+        }
+    }
 
     return (
         <div className={styles.main}>
             <div className={styles.container}>
-                {user.avatar ?
-                    <Image
-                        priority={true}
-                        className={styles.avatar}
-                        width={200}
-                        height={200}
-                        src={`http:localhost:4221/profile/${user.username}/${user.avatar}`}
-                        alt={'avatar'}/>
-                    :
-                    <UserOutlined className={styles.emptyAvatar}/>
-                }
-                <div className={styles.infoContainer}>
-                    <p className={styles.roles}>{roles}</p>
-                    <h1 className={styles.infoUsername}>{user.username}</h1>
-                    <h1 className={styles.infoEmail}>{user.email}</h1>
-                    <div className={styles.description}>
-                        {user.about === undefined ?
-                            <>
-                                <InfoCircleOutlined/>
-                                <p className={styles.infoDescription}>{emptyAbout}</p>
-                            </>
+                {!edit ?
+                    <>
+                        {user.avatar ?
+                            <Image
+                                priority={true}
+                                className={styles.avatar}
+                                width={200}
+                                height={200}
+                                src={`http:localhost:4221/profile/${user.username}/${user.avatar}`}
+                                alt={'avatar'}/>
                             :
-                            about.length > 150 ?
-                                <>
-                                    <Popover overlayStyle={{width: 600}} content={user.about}>
-                                        <InfoCircleOutlined/>
-                                    </Popover>
-                                    <p className={styles.infoDescription}>{about}</p>
-                                </>
-                                :
-                                <>
-                                    <InfoCircleOutlined/>
-                                    <p className={styles.infoDescription}>{about}</p>
-                                </>
+                            <UserOutlined className={styles.emptyAvatar}/>
                         }
+                        <div className={styles.infoContainer}>
+                            <p className={styles.roles}>{roles}</p>
+                            <h1 className={styles.infoUsername}>{user.username}</h1>
+                            <h1 className={styles.infoEmail}>{user.email}</h1>
+                            <div className={styles.description}>
+                                {user.about === undefined ?
+                                    <>
+                                        <InfoCircleOutlined/>
+                                        <p className={styles.infoDescription}>{emptyAbout}</p>
+                                    </>
+                                    :
+                                    about.length > 150 ?
+                                        <>
+                                            <Popover overlayStyle={{width: 600}} content={user.about}>
+                                                <InfoCircleOutlined/>
+                                            </Popover>
+                                            <p className={styles.infoDescription}>{about}</p>
+                                        </>
+                                        :
+                                        <>
+                                            <InfoCircleOutlined/>
+                                            <p className={styles.infoDescription}>{about}</p>
+                                        </>
+                                }
+                            </div>
+                        </div>
+                    </>
+                    :
+                    <div className={styles.editContainer}>
+                        <FileUpload setFile={setEditAvatar} setStatus={setLoading} type={'image'}>
+                            {!loading ?
+                                <button className={styles.uploadFile}>
+                                    <PlusOutlined/>
+                                    <p>Upload</p>
+                                </button>
+                                :
+                                <div className={styles.uploadedFile}>
+                                    <CheckOutlined/>
+                                    <p>Done</p>
+                                </div>
+                            }
+                        </FileUpload>
+                        <div className={styles.editAboutContainer}>
+                            <p className={styles.editAboutText}>ABOUT</p>
+                            <ConfigProvider theme={{
+                                token: {
+                                    colorBorder: '#232323FF',
+                                    colorTextPlaceholder: '#404040',
+                                    colorPrimary: '#ff2929',
+                                }
+                            }}>
+                                <Input
+                                    size={"large"}
+                                    className={styles.editAboutInput}
+                                    onChange={(e) => setEditAbout(e.target.value)}
+                                    defaultValue={user.about}
+                                />
+                            </ConfigProvider>
+                        </div>
                     </div>
-
-                </div>
+                }
                 <div className={styles.manageContainer}>
                     {
                         type === 'profile' ?
-                            <button className={styles.editButton}>Edit profile</button>
+                            <>
+                                {!edit ?
+                                    <button onClick={() => setEdit(true)} className={styles.editButton}>Edit
+                                        profile</button>
+                                    :
+                                    <button onClick={handleEditDone} className={styles.editButton}>Done</button>
+                                }
+                            </>
                             :
                             <UserAddOutlined
                                 onClick={subHandler}
@@ -157,7 +229,6 @@ const Profile: React.FC<UserParam> = ({user, type}) => {
                         </div>
                     </div>
                 </div>
-
             </div>
             <div className={styles.collectionContainer}>
                 <ConfigProvider theme={{
