@@ -19,19 +19,11 @@ const AlbumPage: NextPageWithLayout<PageParams> = ({albumId}) => {
         return <></>
     }
 
-    const {image, name, description, favorites, artist, tracks, genre} = album
-    const collectionImage = `album/${name[0]}/${image}`
-
     return (
         <div>
             <CollectionHeader
-                image={collectionImage}
-                name={name}
-                description={description}
-                favorites={favorites}
-                user={artist}
-                tracks={tracks}
-                genre={genre}
+                type={'album'}
+                collection={album}
             />
         </div>
     );

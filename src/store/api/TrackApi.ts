@@ -19,7 +19,7 @@ export const TrackApi = apiSlice.injectEndpoints({
             query: (tId) => ({
                 url: `tracks/${tId}/current`
             }),
-            providesTags: result => ['Track']
+            providesTags: result => ['Track', 'User']
         }),
         leaveComment: build.mutation({
             query: ({tId, ...text}) => ({

@@ -48,21 +48,21 @@ export const UserApi = apiSlice.injectEndpoints({
             }),
             invalidatesTags: result => ['User']
         }),
-        addToUserCollection: build.mutation<trackDto, string>({
+        addTrackToUserCollection: build.mutation<trackDto, string>({
             query: (tId) => ({
                 url: `tracks/collection/${tId}/add`,
                 method: 'POST',
                 responseHandler: (response) => response.text()
             }),
-            invalidatesTags: result => ['User']
+            invalidatesTags: result => ['User', 'Track']
         }),
-        removeFromUserCollection: build.mutation<trackDto, string>({
+        removeTrackFromUserCollection: build.mutation<trackDto, string>({
             query: (tId) => ({
                 url: `tracks/collection/${tId}/remove`,
                 method: 'POST',
                 responseHandler: (response) => response.text()
             }),
-            invalidatesTags: result => ['User']
+            invalidatesTags: result => ['User', 'Track']
         }),
         subscribeUser: build.mutation<userDto, string>({
             query: (uId) => ({
@@ -82,7 +82,7 @@ export const {
     useFetchUserByIdQuery,
     useUploadAboutMutation,
     useUploadAvatarMutation,
-    useAddToUserCollectionMutation,
-    useRemoveFromUserCollectionMutation,
+    useAddTrackToUserCollectionMutation,
+    useRemoveTrackFromUserCollectionMutation,
     useSubscribeUserMutation
 } = UserApi

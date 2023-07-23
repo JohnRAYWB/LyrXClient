@@ -19,19 +19,11 @@ const PlaylistPage: NextPageWithLayout<PageParams> = ({playlistId}) => {
         return <></>
     }
 
-    const {image, name, description, favorites, user, tracks, genre} = playlist
-    const collectionImage = `playlist/${name[0]}/${image}`
-
     return (
         <div>
             <CollectionHeader
-                image={collectionImage}
-                name={name}
-                description={description}
-                favorites={favorites}
-                user={user}
-                tracks={tracks}
-                genre={genre}
+                type={'playlist'}
+                collection={playlist}
             />
         </div>
     );

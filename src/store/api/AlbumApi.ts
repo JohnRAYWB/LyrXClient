@@ -19,6 +19,22 @@ export const AlbumApi = apiSlice.injectEndpoints({
                 url: `albums/${aId}/current`
             }),
             providesTags: result => ['Album']
+        }),
+        addAlbumToUserCollection: build.mutation({
+            query: (pId) => ({
+                url: `albums/collection/${pId}/add`,
+                method: 'POST',
+                responseHandler: response => response.text()
+            }),
+            invalidatesTags: result => ['Album', 'User']
+        }),
+        removeAlbumFromUserCollection: build.mutation({
+            query: (pId) => ({
+                url: `albums/collection/${pId}/remove`,
+                method: 'POST',
+                responseHandler: response => response.text()
+            }),
+            invalidatesTags: result => ['Album', 'User']
         })
     })
 })
@@ -26,5 +42,7 @@ export const AlbumApi = apiSlice.injectEndpoints({
 export const {
     useFetchAllAlbumAndSearchQuery,
     useFetchMostLikedAlbumQuery,
-    useFetchAlbumByIdQuery
+    useFetchAlbumByIdQuery,
+    useAddAlbumToUserCollectionMutation,
+    useRemoveAlbumFromUserCollectionMutation
 } = AlbumApi

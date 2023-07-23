@@ -11,7 +11,6 @@ import AdminToolSider from "./components/AdminToolSider";
 import MenuSider from "./components/MenuSider";
 import ArtistToolSider from "./components/ArtistToolSider";
 import Genre from "@/components/screens/MainLayout/Sider/components/Genre";
-import {useFetchProfileQuery} from "@/store/api/UserApi";
 import {useAppSelector} from "@/hook/redux";
 import {selectUserData} from "@/store/slice/user";
 
@@ -22,8 +21,12 @@ interface SiderComponent {
 const HubHeader: React.FC<SiderComponent> = ({searchField}) => {
 
     const user = useAppSelector(selectUserData)
-
     const router = useRouter()
+
+    if(!user) {
+        return router.push('/')
+    }
+
     const playlistLength = user.playlists.length
 
     const profileItems: MenuProps['items'] = [

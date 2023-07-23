@@ -30,7 +30,7 @@ const TrackList: React.FC<TrackListData> = ({tracks}) => {
             {tracks && tracks.map((track, index) =>
                 <Track
                     index={index + 1}
-                    key={index}
+                    key={track._id}
                     track={track}
                 />
             )}

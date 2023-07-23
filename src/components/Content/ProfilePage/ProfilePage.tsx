@@ -73,7 +73,7 @@ const Profile: React.FC<UserParam> = ({user, type}) => {
             key: '3',
             label: 'ALBUMS',
             children: <AlbumCollectionRow
-                albums={[].concat(user.albums, user.albumsCollections).filter(album => album !== undefined)}/>
+                albums={[].concat(user.albums, user.albumsCollection).filter(album => album !== undefined)}/>
         },
     ]
 
@@ -101,6 +101,7 @@ const Profile: React.FC<UserParam> = ({user, type}) => {
             console.log(e)
         }
     }
+
     const handleEditDone = () => {
         if (editAvatar || editAbout) {
             const formData = new FormData()
@@ -208,7 +209,11 @@ const Profile: React.FC<UserParam> = ({user, type}) => {
                             :
                             <UserAddOutlined
                                 onClick={subHandler}
-                                className={user.followers.findIndex(fellow => fellow._id === loggedUser._id) !== -1 ? styles.subscribedButton : styles.editButton}/>
+                                className={user.followers.findIndex(fellow => fellow._id === loggedUser._id) !== -1 ?
+                                    styles.subscribedButton
+                                    :
+                                    styles.editButton}
+                            />
                     }
                     <div className={styles.followContainer}>
                         <div className={styles.followElement}>

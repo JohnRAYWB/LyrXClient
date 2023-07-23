@@ -9,7 +9,7 @@ export interface albumDto {
     readonly image: string
     readonly favorites: number
     readonly genre: genreDto[]
-    readonly user: userDto
+    readonly artist: userDto
     readonly tracks: trackDto[]
     readonly __v: number
 }

@@ -14,7 +14,11 @@ import Link from "next/link";
 import styles from "./styles/Track.module.css"
 import {trackDto} from "@/api/dto/track.dto";
 import useTextLength from "@/util/useTextLength";
-import {useFetchProfileQuery, useAddToUserCollectionMutation, useRemoveFromUserCollectionMutation} from "@/store/api/UserApi";
+import {
+    useFetchProfileQuery,
+    useAddTrackToUserCollectionMutation,
+    useRemoveTrackFromUserCollectionMutation
+} from "@/store/api/UserApi";
 
 interface Track {
     track: trackDto
@@ -24,8 +28,8 @@ interface Track {
 const Track: React.FC<Track> = ({track, index}) => {
 
     const {data: user, isLoading} = useFetchProfileQuery()
-    const [addTrack, {isLoading: addLoading}] = useAddToUserCollectionMutation()
-    const [removeTrack, {isLoading: removeLoading}] = useRemoveFromUserCollectionMutation()
+    const [addTrack, {isLoading: addLoading}] = useAddTrackToUserCollectionMutation()
+    const [removeTrack, {isLoading: removeLoading}] = useRemoveTrackFromUserCollectionMutation()
 
     if (isLoading) {
         return <></>
@@ -120,12 +124,31 @@ const Track: React.FC<Track> = ({track, index}) => {
                     <p className={styles.album}>{albumLength}</p>
                 </div>
                 <div className={styles.actionContainer}>
-                    {
-                        user.tracksCollection.findIndex(t => t._id === track._id) !== -1 ?
-                            <HeartFilled onClick={handleRemoveTrack} className={styles.favIconFill}/>
-                            :
-                            <HeartOutlined onClick={handleAddTrack} className={styles.favIcon}/>
+                    {user.tracks.findIndex(t => t._id === track._id) === -1 ?
+                        <div>
+                            {
+                                user.tracksCollection.findIndex(t => t._id === track._id) !== -1 ?
+                                    <>
+                                        {removeLoading ?
+                                            <LoadingOutlined className={styles.loading}/>
+                                            :
+                                            <HeartFilled onClick={handleRemoveTrack} className={styles.favIconFill}/>
+                                        }
+                                    </>
+                                    :
+                                    <>
+                                        {addLoading ?
+                                            <LoadingOutlined className={styles.loading}/>
+                                            :
+                                            <HeartOutlined onClick={handleAddTrack} className={styles.favIcon}/>
+                                        }
+                                    </>
+                            }
+                        </div>
+                        :
+                        null
                     }
+
                     <ConfigProvider theme={{
                         token: {
                             colorBgElevated: '#232323',

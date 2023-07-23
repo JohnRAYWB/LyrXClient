@@ -6,15 +6,26 @@ import MainLayout from "@/components/screens/MainLayout/MainLayout";
 import Image from "next/image";
 import Link from "next/link";
 import {Button, ConfigProvider, Divider, Input, notification, Popover} from "antd";
-import {InfoCircleOutlined} from "@ant-design/icons";
+import {
+    CaretRightOutlined,
+    HeartFilled,
+    HeartOutlined,
+    InfoCircleOutlined,
+    LoadingOutlined,
+    PlusOutlined
+} from "@ant-design/icons";
 
-import useTextLength from "@/util/useTextLength";
 import styles from "@/styles/TrackPage.module.css"
+import useTextLength from "@/util/useTextLength";
 import {
     useFetchTrackByIdQuery,
     useLeaveCommentMutation
 } from "@/store/api/TrackApi";
-import {useFetchProfileQuery} from "@/store/api/UserApi";
+import {
+    useAddTrackToUserCollectionMutation,
+    useFetchProfileQuery,
+    useRemoveTrackFromUserCollectionMutation
+} from "@/store/api/UserApi";
 import Comment from "@/components/Content/TrackPage/Comment";
 
 interface PageParams {
@@ -26,6 +37,8 @@ const TrackPage: NextPageWithLayout<PageParams> = ({trackId}) => {
     const {data: track, isLoading: trackLoading} = useFetchTrackByIdQuery(trackId)
     const {data: user, isLoading: userLoading} = useFetchProfileQuery()
     const [leaveComment, {isLoading}] = useLeaveCommentMutation()
+    const [addTrack, {isLoading: addLoading}] = useAddTrackToUserCollectionMutation()
+    const [removeTrack, {isLoading: removeLoading}] = useRemoveTrackFromUserCollectionMutation()
 
     const [text, setText] = useState('')
 
@@ -42,6 +55,39 @@ const TrackPage: NextPageWithLayout<PageParams> = ({trackId}) => {
 
     const textHandle = (e) => {
         setText(e.target.value)
+    }
+
+    const handleAddTrack = () => {
+        try {
+            addTrack(track._id)
+
+            notification.success({
+                style: {backgroundColor: "#646464", width: 300},
+                message: <p className={styles.notification}>Done!</p>,
+                description: <p className={styles.notification}>Track added successfully</p>,
+                placement: "bottomLeft",
+                duration: 2
+            })
+
+        } catch (e) {
+            console.log(e)
+        }
+    }
+
+    const handleRemoveTrack = () => {
+        try {
+            removeTrack(track._id)
+
+            notification.success({
+                style: {backgroundColor: "#646464", width: 300},
+                message: <p className={styles.notification}>Done!</p>,
+                description: <p className={styles.notification}>Track removed successfully</p>,
+                placement: "bottomLeft",
+                duration: 2
+            })
+        } catch (e) {
+            console.log(e)
+        }
     }
 
     return (
@@ -77,10 +123,10 @@ const TrackPage: NextPageWithLayout<PageParams> = ({trackId}) => {
                                 track.genre.length !== 0 ?
                                     <p className={styles.trackInfo}>
                                         GENRES:
-                                        {track.genre.map((genre, index) =>
+                                        {track.genre.map((genre) =>
                                             <Link
                                                 href={`/pth/hub/genre/${genre._id}`}
-                                                key={index}
+                                                key={genre._id}
                                                 className={styles.link}>
                                                 {genre.name}
                                             </Link>
@@ -124,9 +170,36 @@ const TrackPage: NextPageWithLayout<PageParams> = ({trackId}) => {
                         <p className={styles.scoresItemLeft}>Favorites</p>
                         <p className={styles.scoresItemRight}>{track.favorites}</p>
                     </div>
+                    <div>
+                        {user.tracks.findIndex(t => t._id === track._id) === -1 ?
+                            <div className={styles.actionButtons}>
+                                {user.tracksCollection.findIndex(t => t._id === track._id) !== -1 ?
+                                    <>
+                                        {removeLoading ?
+                                            <LoadingOutlined className={styles.loading}/>
+                                            :
+                                            <HeartFilled onClick={handleRemoveTrack} className={styles.addButtonFill}/>
+                                        }
+                                    </>
+                                    :
+                                    <>
+                                    {addLoading ?
+                                        <LoadingOutlined className={styles.loading}/>
+                                        :
+                                        <HeartOutlined onClick={handleAddTrack} className={styles.addButtonEmpty}/>
+                                    }
+                                    </>
+                                }
+                                <CaretRightOutlined className={styles.addButtonEmpty}/>
+                                <PlusOutlined className={styles.addButtonEmpty}/>
+                            </div>
+                            :
+                            null
+                        }
+                    </div>
                     <div className={styles.scoresItem}>
-                        <p className={styles.scoresItemLeft}>Listens</p>
-                        <p className={styles.scoresItemRight}>{track.listens}</p>
+                        <p className={styles.scoresItemLeft}>{track.listens}</p>
+                        <p className={styles.scoresItemRight}>Listens</p>
                     </div>
                 </div>
             </div>

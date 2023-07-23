@@ -1,16 +1,12 @@
 .main {
     display: flex;
-    flex: 0 0 18%;
-    flex-direction: column;
+    flex-flow: wrap column;
     justify-content: center;
-    align-items: center;
     background-color: #181818;
-    width: 180px;
     margin: 15px 10px;
-    padding: 10px;
+    padding: 7px 5px;
     border-radius: 5px;
-    transition-duration: 500ms;
-    cursor: pointer;
+    transition-duration: 200ms;
     box-shadow: 0 0 10px black;
     color: #888888;
 }
@@ -19,12 +15,14 @@
     color: white;
     transform: scale(1.02);
     background-color: #595959;
-    transition-duration: 500ms;
+    transition-duration: 200ms;
 }
 
 .image {
+    margin: 0 auto;
     border-radius: 5px;
     box-shadow: 0 5px 20px black;
+    cursor: pointer;
 }
 
 .textContainer {
@@ -33,15 +31,88 @@
     justify-content: center;
     align-items: flex-start;
     width: 170px;
-    margin-top: 20px;
+    margin: 10px auto 5px auto;
     padding: 0 10px 5px 10px;
+    cursor: pointer;
 }
 
 .name {
     font-size: 14px;
+    transition-duration: 200ms;
+}
+
+.name:hover {
+    color: #F64141;
+    transition-duration: 200ms;
 }
 
 .description {
-    margin-top: 10px;
+    margin-top: 5px;
     font-size: 12px;
+    transition-duration: 200ms;
+}
+
+.description:hover {
+    color: #ff5252;
+    transition-duration: 200ms;
+}
+
+.actionContainer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 10px;
+}
+
+.favInfo {
+    display: flex;
+    flex-flow: row wrap;
+    color: white;
+    margin-top: 5px;
+}
+
+.favText {
+    padding: 5px;
+    background-color: #333333;
+    border-radius: 5px 0 0 5px;
+}
+
+.favScore {
+    padding: 5px;
+    margin-left: 2px;
+    background-color: #333333;
+    border-radius: 0 5px 5px 0;
+}
+
+.favActionEmpty {
+    font-size: 20px;
+    cursor: pointer;
+    transition-duration: 200ms;
+}
+
+.favActionEmpty:hover {
+    color: #F64141;
+    transform: scale(1.2);
+    transition-duration: 200ms;
+}
+
+.favActionFill {
+    font-size: 20px;
+    color: #F64141;
+    transition-duration: 200ms;
+}
+
+.favActionFill:hover {
+    transform: scale(1.2);
+    transition-duration: 200ms;
+}
+
+.loading {
+    font-size: 20px;
+    color: #F64141;
+}
+
+.notification {
+    font-size: 16px;
+    color: white;
 }

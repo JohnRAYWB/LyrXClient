@@ -14,9 +14,9 @@ const Collection: React.FC<CollectionItems> = ({items, type}) => {
 
     return (
         <div className={styles.main}>
-            {items && items.map((item, index) =>
+            {items && items.map((item) =>
                 <CollectionItem
-                    key={index}
+                    key={item._id}
                     item={item}
                     type={type}
                 />

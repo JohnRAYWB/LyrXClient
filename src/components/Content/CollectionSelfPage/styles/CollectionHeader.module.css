@@ -8,24 +8,31 @@
 
 .headerContainer {
     display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
+    flex-flow: row wrap;
+    justify-content: center;
+    align-items: center;
 }
 
 .image {
-    margin: 20px auto;
     box-shadow: 0 0 10px #151515;
     border: 1px solid transparent;
 }
 
 .headerText {
-    width: 700px;
     display: flex;
-    flex-direction: column;
-    justify-content: center;
+    flex-flow: row wrap;
+    flex: 1;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 25px;
+}
+
+.collectionInfo {
+    display: flex;
+    flex-flow: wrap column;
     align-items: flex-end;
-    gap: 20px;
-    padding: 10px 0;
+    gap: 30px;
+    margin: auto 0;
 }
 
 .textTitle {
@@ -76,9 +83,7 @@
 
 .scoresItem {
     display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    box-shadow: 0 0 4px black;
+    flex-flow: row wrap;
     border-radius: 10px;
 }
 
@@ -99,4 +104,48 @@
 .trackList {
     padding: 20px;
     background-color: #0e0e0e;
+    border-radius: 0 0 10px 10px;
+}
+
+.actionContainer {
+    display: flex;
+    align-items: center;
+    gap: 30px;
+    padding: 10px 20px;
+    border-radius: 10px;
+    background-color: #0e0e0e;
+    color: #888888;
+}
+
+.favActionEmpty {
+    font-size: 32px;
+    cursor: pointer;
+    transition-duration: 200ms;
+}
+
+.favActionEmpty:hover {
+    color: #F64141;
+    transform: scale(1.2);
+    transition-duration: 200ms;
+}
+
+.favActionFill {
+    font-size: 32px;
+    color: #F64141;
+    transition-duration: 200ms;
+}
+
+.favActionFill:hover {
+    transform: scale(1.2);
+    transition-duration: 200ms;
+}
+
+.loading {
+    font-size: 32px;
+    color: #F64141;
+}
+
+.notification {
+    font-size: 16px;
+    color: white;
 }

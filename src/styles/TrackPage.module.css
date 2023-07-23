@@ -78,11 +78,10 @@
 }
 
 .scoresContainer {
-    flex-wrap: wrap;
-    gap: 20px;
     display: flex;
-    flex-direction: row;
+    flex-flow: row wrap;
     justify-content: space-between;
+    align-items: center;
     padding: 10px 20px;
 }
 
@@ -92,6 +91,7 @@
     justify-content: space-between;
     box-shadow: 0 0 4px black;
     border-radius: 10px;
+    margin: 10px 0;
 }
 
 .scoresItemLeft {
@@ -102,8 +102,9 @@
 }
 
 .scoresItemRight {
+    text-transform: uppercase;
     margin-left: 2px;
-    padding: 10px 10px;
+    padding: 10px 20px;
     background-color: #F64141;
     border-radius: 0 10px 10px 0;
 }
@@ -204,6 +205,45 @@
 .iconEdit:hover {
     color: #24fd78;
     transition-duration: 200ms
+}
+
+.actionButtons {
+    display: flex;
+    flex-flow: row wrap;
+    border-radius: 10px;
+    background-color: #262626;
+    padding: 15px 20px;
+    gap: 30px
+}
+
+.loading {
+    font-size: 36px;
+    color: #F64141;
+}
+
+.addButtonEmpty {
+    font-size: 36px;
+    color: #414141;
+    cursor: pointer;
+    transition-duration: 200ms;
+}
+
+.addButtonEmpty:hover {
+    transform: scale(1.1);
+    color: #F64141;
+    transition-duration: 200ms;
+}
+
+.addButtonFill {
+    font-size: 36px;
+    color: #F64141;
+    cursor: pointer;
+    transition-duration: 200ms;
+}
+
+.addButtonFill:hover {
+    transform: scale(1.1);
+    transition-duration: 200ms;
 }
 
 .notification {

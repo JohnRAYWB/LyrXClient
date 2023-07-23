@@ -18,7 +18,7 @@ export interface userDto {
     readonly playlists: playlistDto[]
     readonly playlistsCollection: playlistDto[]
     readonly albums: albumDto[]
-    readonly albumsCollections: albumDto[]
+    readonly albumsCollection: albumDto[]
     readonly followers: userDto[]
     readonly followings: userDto[]
     readonly __v: number
