@@ -1,20 +1,21 @@
 import {apiSlice} from "@/store/api/apiSlice";
+import {playlistDto} from "@/api/dto/playlist.dto";
 
 export const PlaylistApi = apiSlice.injectEndpoints({
     endpoints: (build) => ({
-        fetchAllPlaylistAndSearch: build.query({
+        fetchAllPlaylistAndSearch: build.query<playlistDto[], string>({
             query: (query) => ({
                 url: `playlists/search?name=${query}`
             }),
             providesTags: result => ['Playlist']
         }),
-        fetchMostLikedPlaylist: build.query({
+        fetchMostLikedPlaylist: build.query<playlistDto[], void>({
             query: () => ({
                 url: `playlists/top`
             }),
             providesTags: result => ['Playlist']
         }),
-        fetchPlaylistById: build.query({
+        fetchPlaylistById: build.query<playlistDto, string>({
             query: (pId) => ({
                 url: `playlists/${pId}/current`
             }),

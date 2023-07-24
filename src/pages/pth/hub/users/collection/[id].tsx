@@ -3,16 +3,27 @@ import {wrapper} from "@/store/store";
 import {parseCookies} from "nookies";
 import {NextPageWithLayout} from "@/pages/_app";
 import MainLayout from "@/components/screens/MainLayout/MainLayout";
+import {useFetchUserByIdQuery} from "@/store/api/UserApi";
 
-const Collection: NextPageWithLayout = () => {
+interface CollectionParam {
+    userId: string
+}
+
+const UserCollection: NextPageWithLayout<CollectionParam> = ({userId}) => {
+
+    const {data: user, isLoading} = useFetchUserByIdQuery(userId)
+    if(isLoading) {
+        return <></>
+    }
+
     return (
         <div>
-            collection
+
         </div>
     );
 };
 
-Collection.getLayout = (page: React.ReactNode) => <MainLayout name={'Your collection'}>{page}</MainLayout>
+UserCollection.getLayout = (page: React.ReactNode) => <MainLayout name={'User collection'}>{page}</MainLayout>
 
 export const getServerSideProps = wrapper.getServerSideProps((store) => async (ctx) => {
 
@@ -28,9 +39,14 @@ export const getServerSideProps = wrapper.getServerSideProps((store) => async (c
             }
         }
 
+        return {
+            props: {
+                userId: ctx.params.id
+            }
+        }
     } catch (e) {
         console.log(e)
     }
 })
 
-export default Collection;
+export default UserCollection;

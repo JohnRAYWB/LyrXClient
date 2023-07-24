@@ -9,7 +9,7 @@ export const TrackApi = apiSlice.injectEndpoints({
             }),
             providesTags: result => ['Track']
         }),
-        fetchMostLikedTrack: build.query<trackDto, trackDto>({
+        fetchMostLikedTrack: build.query<trackDto[], void>({
             query: () => ({
                 url: `tracks/top`,
             }),

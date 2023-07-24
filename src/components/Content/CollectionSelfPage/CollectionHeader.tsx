@@ -18,6 +18,8 @@ import {
 import {useAddAlbumToUserCollectionMutation, useRemoveAlbumFromUserCollectionMutation} from "@/store/api/AlbumApi";
 import {playlistDto} from "@/api/dto/playlist.dto";
 import {albumDto} from "@/api/dto/album.dto";
+import {handleAddPlaylist, handleRemovePlaylist} from "@/util/handlePlaylistControl";
+import {handleAddAlbum, handleRemoveAlbum} from "@/util/handleAlbumControl";
 
 interface Items {
     type: string
@@ -39,70 +41,6 @@ const CollectionHeader: React.FC<Items> = ({type, collection}) => {
     let descriptionLength = collection.description
     descriptionLength ? descriptionLength = useTextLength(collection.description, 240) : collection.description
 
-    const handleAddPlaylist = () => {
-        try {
-            addPlaylist(collection._id)
-
-            notification.success({
-                style: {backgroundColor: "#646464", width: 300},
-                message: <p className={styles.notification}>Done!</p>,
-                description: <p className={styles.notification}>Playlist added successfully</p>,
-                placement: "bottomLeft",
-                duration: 2
-            })
-        } catch (e) {
-            console.log(e)
-        }
-    }
-
-    const handleAddAlbum = () => {
-        try {
-            addAlbum(collection._id)
-
-            notification.success({
-                style: {backgroundColor: "#646464", width: 300},
-                message: <p className={styles.notification}>Done!</p>,
-                description: <p className={styles.notification}>Album added successfully</p>,
-                placement: "bottomLeft",
-                duration: 2
-            })
-        } catch (e) {
-            console.log(e)
-        }
-    }
-
-    const handleRemovePlaylist = () => {
-        try {
-            removePlaylist(collection._id)
-
-            notification.success({
-                style: {backgroundColor: "#646464", width: 300},
-                message: <p className={styles.notification}>Done!</p>,
-                description: <p className={styles.notification}>Playlist removed successfully</p>,
-                placement: "bottomLeft",
-                duration: 2
-            })
-        } catch (e) {
-            console.log(e)
-        }
-    }
-
-    const handleRemoveAlbum = () => {
-        try {
-            removeAlbum(collection._id)
-
-            notification.success({
-                style: {backgroundColor: "#646464", width: 300},
-                message: <p className={styles.notification}>Done!</p>,
-                description: <p className={styles.notification}>Playlist removed successfully</p>,
-                placement: "bottomLeft",
-                duration: 2
-            })
-        } catch (e) {
-            console.log(e)
-        }
-    }
-
     return (
         <div>
             <div className={styles.headerMain}>
@@ -122,7 +60,7 @@ const CollectionHeader: React.FC<Items> = ({type, collection}) => {
                             <Link className={styles.userLink}
                                   href={type === 'album' ?
                                       `/pth/hub/profile/${collection.artist._id}`
-                                          :
+                                      :
                                       `/pth/hub/profile/${collection.user._id}`
                                   }>{collection.name[0]}</Link>
                         </div>
@@ -160,8 +98,9 @@ const CollectionHeader: React.FC<Items> = ({type, collection}) => {
                                                                     <LoadingOutlined className={styles.loading}/>
                                                                     :
                                                                     <>
-                                                                        <HeartFilled onClick={handleRemovePlaylist}
-                                                                                     className={styles.favActionFill}/>
+                                                                        <HeartFilled
+                                                                            onClick={() => handleRemovePlaylist(removePlaylist, collection._id)}
+                                                                            className={styles.favActionFill}/>
                                                                         <p>IN YOUR COLLECTION</p>
                                                                     </>
                                                             }
@@ -173,8 +112,9 @@ const CollectionHeader: React.FC<Items> = ({type, collection}) => {
                                                                     <LoadingOutlined className={styles.loading}/>
                                                                     :
                                                                     <>
-                                                                        <HeartOutlined onClick={handleAddPlaylist}
-                                                                                       className={styles.favActionEmpty}/>
+                                                                        <HeartOutlined
+                                                                            onClick={() => handleAddPlaylist(addPlaylist, collection._id)}
+                                                                            className={styles.favActionEmpty}/>
                                                                         <p>ADD TO YOUR COLLECTION</p>
                                                                     </>
                                                             }
@@ -195,8 +135,9 @@ const CollectionHeader: React.FC<Items> = ({type, collection}) => {
                                                                     <LoadingOutlined className={styles.loading}/>
                                                                     :
                                                                     <>
-                                                                        <HeartFilled onClick={handleRemoveAlbum}
-                                                                                     className={styles.favActionFill}/>
+                                                                        <HeartFilled
+                                                                            onClick={() => handleRemoveAlbum(removeAlbum, collection._id)}
+                                                                            className={styles.favActionFill}/>
                                                                         <p>IN YOUR COLLECTION</p>
                                                                     </>
                                                             }
@@ -208,8 +149,9 @@ const CollectionHeader: React.FC<Items> = ({type, collection}) => {
                                                                     <LoadingOutlined className={styles.loading}/>
                                                                     :
                                                                     <>
-                                                                        <HeartOutlined onClick={handleAddAlbum}
-                                                                                       className={styles.favActionEmpty}/>
+                                                                        <HeartOutlined
+                                                                            onClick={() => handleAddAlbum(addAlbum, collection._id)}
+                                                                            className={styles.favActionEmpty}/>
                                                                         <p>ADD TO YOUR COLLECTION</p>
                                                                     </>
                                                             }

@@ -3,7 +3,7 @@ import Image from "next/image";
 import {ConfigProvider, Input, notification, Popover, Tabs, TabsProps} from "antd";
 import {
     CheckOutlined,
-    InfoCircleOutlined,
+    InfoCircleOutlined, LoadingOutlined,
     PlusOutlined,
     UserAddOutlined,
     UserOutlined
@@ -13,7 +13,12 @@ import {useRouter} from "next/navigation";
 
 import styles from "./styles/ProfilePage.module.css"
 import {userDto} from "@/api/dto/user.dto";
-import {useFetchProfileQuery, useSubscribeUserMutation, useUploadAboutMutation, useUploadAvatarMutation} from "@/store/api/UserApi";
+import {
+    useFetchProfileQuery,
+    useSubscribeUserMutation,
+    useUploadAboutMutation,
+    useUploadAvatarMutation
+} from "@/store/api/UserApi";
 import TrackList from "@/components/Content/TrackPage/TrackList";
 import {PlaylistCollectionRow, AlbumCollectionRow} from "@/components/Content/components/ProfileCollectionRow";
 import useTextLength from "@/util/useTextLength";
@@ -29,7 +34,7 @@ const Profile: React.FC<UserParam> = ({user, type}) => {
     const {data: loggedUser, isLoading} = useFetchProfileQuery()
     const [uploadAvatar] = useUploadAvatarMutation()
     const [uploadAbout] = useUploadAboutMutation()
-    const [subscribe] = useSubscribeUserMutation()
+    const [subscribe, {isLoading: subLoading}] = useSubscribeUserMutation()
 
     const [edit, setEdit] = useState(false)
     const [editAvatar, setEditAvatar] = useState()
@@ -207,13 +212,23 @@ const Profile: React.FC<UserParam> = ({user, type}) => {
                                 }
                             </>
                             :
-                            <UserAddOutlined
-                                onClick={subHandler}
-                                className={user.followers.findIndex(fellow => fellow._id === loggedUser._id) !== -1 ?
-                                    styles.subscribedButton
-                                    :
-                                    styles.editButton}
-                            />
+                            <>
+                                {
+                                    subLoading ?
+                                        <div className={styles.loadContainer}>
+                                            <p>Processing</p>
+                                            <LoadingOutlined className={styles.loading}/>
+                                        </div>
+                                        :
+                                        <UserAddOutlined
+                                            onClick={subHandler}
+                                            className={user.followers.findIndex(fellow => fellow._id === loggedUser._id) !== -1 ?
+                                                styles.subscribedButton
+                                                :
+                                                styles.editButton}
+                                        />
+                                }
+                            </>
                     }
                     <div className={styles.followContainer}>
                         <div className={styles.followElement}>
@@ -250,7 +265,11 @@ const Profile: React.FC<UserParam> = ({user, type}) => {
                     />
                 </ConfigProvider>
             </div>
-            <Link className={styles.collectionLink} href={'/pth/hub/profile/collection'}>See more</Link>
+            <Link className={styles.collectionLink} href={type === 'profile' ?
+                '/pth/hub/profile/collection'
+                :
+                `/pth/hub/users/collection/${user._id}`}
+            >See more</Link>
         </div>
     );
 };

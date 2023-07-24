@@ -5,6 +5,7 @@ interface UploadParam {
     setFile: Function,
     setStatus: Function,
     type: string
+    children
 }
 
 const FileUpload: React.FC<UploadParam> = ({setFile, setStatus, type, children}) => {

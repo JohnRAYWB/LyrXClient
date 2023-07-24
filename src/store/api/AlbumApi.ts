@@ -1,20 +1,21 @@
 import {apiSlice} from "@/store/api/apiSlice";
+import {albumDto} from "@/api/dto/album.dto";
 
 export const AlbumApi = apiSlice.injectEndpoints({
     endpoints: (build) => ({
-        fetchAllAlbumAndSearch: build.query({
+        fetchAllAlbumAndSearch: build.query<albumDto[], string>({
             query: (query) => ({
                 url: `albums/search?name=${query}`
             }),
             providesTags: result => ['Album']
         }),
-        fetchMostLikedAlbum: build.query({
+        fetchMostLikedAlbum: build.query<albumDto[], void>({
             query: () => ({
                 url: `albums/top`
             }),
             providesTags: result => ['Album']
         }),
-        fetchAlbumById: build.query({
+        fetchAlbumById: build.query<albumDto, string>({
             query: (aId) => ({
                 url: `albums/${aId}/current`
             }),

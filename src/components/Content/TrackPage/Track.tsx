@@ -8,7 +8,7 @@ import {
     PlayCircleOutlined
 } from "@ant-design/icons";
 import {useRouter} from "next/navigation";
-import {ConfigProvider, Divider, Dropdown, MenuProps, notification} from "antd";
+import {ConfigProvider, Divider, Dropdown, MenuProps} from "antd";
 import Link from "next/link";
 
 import styles from "./styles/Track.module.css"
@@ -19,6 +19,7 @@ import {
     useAddTrackToUserCollectionMutation,
     useRemoveTrackFromUserCollectionMutation
 } from "@/store/api/UserApi";
+import {handleAddTrack, handleRemoveTrack} from "@/util/handleTrackControl";
 
 interface Track {
     track: trackDto
@@ -52,7 +53,7 @@ const Track: React.FC<Track> = ({track, index}) => {
         {
             label: [
                 (
-                    user._id === track.artist ?
+                    user._id === track.artist._id ?
                         <Link href={`/pth/hub/profile`}>Go to artist</Link>
                         :
                         <Link href={`/pth/hub/users/${track.artist}`}>Go to artist</Link>
@@ -65,38 +66,6 @@ const Track: React.FC<Track> = ({track, index}) => {
             key: '1',
         }
     ];
-
-    const handleAddTrack = () => {
-        try {
-            addTrack(track._id)
-
-            notification.success({
-                style: {backgroundColor: "#646464", width: 300},
-                message: <p className={styles.notification}>Done!</p>,
-                description: <p className={styles.notification}>Track added successfully</p>,
-                placement: "bottomLeft",
-                duration: 2
-            })
-        } catch (e) {
-            console.log(e)
-        }
-    }
-
-    const handleRemoveTrack = () => {
-        try {
-            removeTrack(track._id)
-
-            notification.success({
-                style: {backgroundColor: "#646464", width: 300},
-                message: <p className={styles.notification}>Done!</p>,
-                description: <p className={styles.notification}>Track removed successfully</p>,
-                placement: "bottomLeft",
-                duration: 2
-            })
-        } catch (e) {
-            console.log(e)
-        }
-    }
 
     return (
         <div>
@@ -132,7 +101,7 @@ const Track: React.FC<Track> = ({track, index}) => {
                                         {removeLoading ?
                                             <LoadingOutlined className={styles.loading}/>
                                             :
-                                            <HeartFilled onClick={handleRemoveTrack} className={styles.favIconFill}/>
+                                            <HeartFilled onClick={() => handleRemoveTrack(removeTrack, track._id)} className={styles.favIconFill}/>
                                         }
                                     </>
                                     :
@@ -140,7 +109,7 @@ const Track: React.FC<Track> = ({track, index}) => {
                                         {addLoading ?
                                             <LoadingOutlined className={styles.loading}/>
                                             :
-                                            <HeartOutlined onClick={handleAddTrack} className={styles.favIcon}/>
+                                            <HeartOutlined onClick={() => handleAddTrack(addTrack, track._id)} className={styles.favIcon}/>
                                         }
                                     </>
                             }

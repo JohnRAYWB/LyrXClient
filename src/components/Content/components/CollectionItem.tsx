@@ -15,6 +15,8 @@ import {
 } from "@/store/api/PlaylistApi";
 import {useAddAlbumToUserCollectionMutation, useRemoveAlbumFromUserCollectionMutation} from "@/store/api/AlbumApi";
 import {notification} from "antd";
+import {handleAddPlaylist, handleRemovePlaylist} from "@/util/handlePlaylistControl";
+import {handleAddAlbum, handleRemoveAlbum} from "@/util/handleAlbumControl";
 
 interface CollectionItem {
     item: playlistDto | albumDto
@@ -39,70 +41,6 @@ const CollectionItem: React.FC<CollectionItem> = ({item, type}) => {
 
     const nameLength = useTextLength(item.name[1], 40)
     const descriptionLength = useTextLength(item.description, 40)
-
-    const handleAddPlaylist = () => {
-        try {
-            addPlaylist(item._id)
-
-            notification.success({
-                style: {backgroundColor: "#646464", width: 300},
-                message: <p className={styles.notification}>Done!</p>,
-                description: <p className={styles.notification}>Playlist added successfully</p>,
-                placement: "bottomLeft",
-                duration: 2
-            })
-        } catch (e) {
-            console.log(e)
-        }
-    }
-
-    const handleAddAlbum = () => {
-        try {
-            addAlbum(item._id)
-
-            notification.success({
-                style: {backgroundColor: "#646464", width: 300},
-                message: <p className={styles.notification}>Done!</p>,
-                description: <p className={styles.notification}>Album added successfully</p>,
-                placement: "bottomLeft",
-                duration: 2
-            })
-        } catch (e) {
-            console.log(e)
-        }
-    }
-
-    const handleRemovePlaylist = () => {
-        try {
-            removePlaylist(item._id)
-
-            notification.success({
-                style: {backgroundColor: "#646464", width: 300},
-                message: <p className={styles.notification}>Done!</p>,
-                description: <p className={styles.notification}>Playlist removed successfully</p>,
-                placement: "bottomLeft",
-                duration: 2
-            })
-        } catch (e) {
-            console.log(e)
-        }
-    }
-
-    const handleRemoveAlbum = () => {
-        try {
-            removeAlbum(item._id)
-
-            notification.success({
-                style: {backgroundColor: "#646464", width: 300},
-                message: <p className={styles.notification}>Done!</p>,
-                description: <p className={styles.notification}>Playlist removed successfully</p>,
-                placement: "bottomLeft",
-                duration: 2
-            })
-        } catch (e) {
-            console.log(e)
-        }
-    }
 
     return (
         <div className={styles.main}>
@@ -135,7 +73,7 @@ const CollectionItem: React.FC<CollectionItem> = ({item, type}) => {
                                                 playlistRemoveLoading ?
                                                     <LoadingOutlined className={styles.loading}/>
                                                     :
-                                                    <HeartFilled onClick={handleRemovePlaylist}
+                                                    <HeartFilled onClick={() => handleRemovePlaylist(removePlaylist, item._id)}
                                                                  className={styles.favActionFill}/>
                                             }
                                         </>
@@ -145,7 +83,7 @@ const CollectionItem: React.FC<CollectionItem> = ({item, type}) => {
                                                 playlistAddLoading ?
                                                     <LoadingOutlined className={styles.loading}/>
                                                     :
-                                                    <HeartOutlined onClick={handleAddPlaylist}
+                                                    <HeartOutlined onClick={() => handleAddPlaylist(addPlaylist, item._id)}
                                                                    className={styles.favActionEmpty}/>
                                             }
                                         </>
@@ -164,7 +102,7 @@ const CollectionItem: React.FC<CollectionItem> = ({item, type}) => {
                                                 albumRemoveLoading ?
                                                     <LoadingOutlined className={styles.loading}/>
                                                     :
-                                                    <HeartFilled onClick={handleRemoveAlbum}
+                                                    <HeartFilled onClick={() => handleRemoveAlbum(removeAlbum, item._id)}
                                                                  className={styles.favActionFill}/>
                                             }
                                         </>
@@ -174,7 +112,7 @@ const CollectionItem: React.FC<CollectionItem> = ({item, type}) => {
                                                 albumAddLoading ?
                                                     <LoadingOutlined className={styles.loading}/>
                                                     :
-                                                    <HeartOutlined onClick={handleAddAlbum}
+                                                    <HeartOutlined onClick={() => handleAddAlbum(addAlbum, item._id)}
                                                                    className={styles.favActionEmpty}/>
                                             }
                                         </>

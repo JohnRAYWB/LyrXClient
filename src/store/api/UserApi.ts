@@ -4,7 +4,7 @@ import {apiSlice} from "./apiSlice"
 
 export const UserApi = apiSlice.injectEndpoints({
     endpoints: (build) => ({
-        fetchProfile: build.query<userDto, userDto>({
+        fetchProfile: build.query<userDto, void>({
             query: () => ({
                 url: 'users/profile'
             }),
@@ -22,7 +22,7 @@ export const UserApi = apiSlice.injectEndpoints({
             }),
             providesTags: result => ['User']
         }),
-        fetchUserCollection: build.query({
+        fetchUserCollection: build.query<trackDto, void>({
             query: () => ({
                 url: 'users/collection'
             }),
@@ -48,7 +48,7 @@ export const UserApi = apiSlice.injectEndpoints({
             }),
             invalidatesTags: result => ['User']
         }),
-        addTrackToUserCollection: build.mutation<trackDto, string>({
+        addTrackToUserCollection: build.mutation({
             query: (tId) => ({
                 url: `tracks/collection/${tId}/add`,
                 method: 'POST',
@@ -56,7 +56,7 @@ export const UserApi = apiSlice.injectEndpoints({
             }),
             invalidatesTags: result => ['User', 'Track']
         }),
-        removeTrackFromUserCollection: build.mutation<trackDto, string>({
+        removeTrackFromUserCollection: build.mutation({
             query: (tId) => ({
                 url: `tracks/collection/${tId}/remove`,
                 method: 'POST',
@@ -64,7 +64,7 @@ export const UserApi = apiSlice.injectEndpoints({
             }),
             invalidatesTags: result => ['User', 'Track']
         }),
-        subscribeUser: build.mutation<userDto, string>({
+        subscribeUser: build.mutation({
             query: (uId) => ({
                 url: `users/subscribe/${uId}`,
                 method: 'POST',

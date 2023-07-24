@@ -27,6 +27,7 @@ import {
     useRemoveTrackFromUserCollectionMutation
 } from "@/store/api/UserApi";
 import Comment from "@/components/Content/TrackPage/Comment";
+import {handleAddTrack, handleRemoveTrack} from "@/util/handleTrackControl";
 
 interface PageParams {
     trackId: string
@@ -55,39 +56,6 @@ const TrackPage: NextPageWithLayout<PageParams> = ({trackId}) => {
 
     const textHandle = (e) => {
         setText(e.target.value)
-    }
-
-    const handleAddTrack = () => {
-        try {
-            addTrack(track._id)
-
-            notification.success({
-                style: {backgroundColor: "#646464", width: 300},
-                message: <p className={styles.notification}>Done!</p>,
-                description: <p className={styles.notification}>Track added successfully</p>,
-                placement: "bottomLeft",
-                duration: 2
-            })
-
-        } catch (e) {
-            console.log(e)
-        }
-    }
-
-    const handleRemoveTrack = () => {
-        try {
-            removeTrack(track._id)
-
-            notification.success({
-                style: {backgroundColor: "#646464", width: 300},
-                message: <p className={styles.notification}>Done!</p>,
-                description: <p className={styles.notification}>Track removed successfully</p>,
-                placement: "bottomLeft",
-                duration: 2
-            })
-        } catch (e) {
-            console.log(e)
-        }
     }
 
     return (
@@ -178,7 +146,7 @@ const TrackPage: NextPageWithLayout<PageParams> = ({trackId}) => {
                                         {removeLoading ?
                                             <LoadingOutlined className={styles.loading}/>
                                             :
-                                            <HeartFilled onClick={handleRemoveTrack} className={styles.addButtonFill}/>
+                                            <HeartFilled onClick={() => handleRemoveTrack(removeTrack, track._id)} className={styles.addButtonFill}/>
                                         }
                                     </>
                                     :
@@ -186,7 +154,7 @@ const TrackPage: NextPageWithLayout<PageParams> = ({trackId}) => {
                                     {addLoading ?
                                         <LoadingOutlined className={styles.loading}/>
                                         :
-                                        <HeartOutlined onClick={handleAddTrack} className={styles.addButtonEmpty}/>
+                                        <HeartOutlined onClick={() => handleAddTrack(addTrack, track._id)} className={styles.addButtonEmpty}/>
                                     }
                                     </>
                                 }

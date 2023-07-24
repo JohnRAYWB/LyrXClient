@@ -254,6 +254,22 @@
     margin: 20px;
 }
 
+.loadContainer {
+    display: flex;
+    align-items: center;
+    padding: 15px 20px;
+    gap: 20px;
+    background-color: #0e0e0e;
+    color: #888888;
+    border-radius: 10px;
+    font-size: 18px;
+}
+
+.loading {
+    font-size: 34px;
+    color: #69ee4a;
+}
+
 .notification {
     font-size: 16px;
     color: white;

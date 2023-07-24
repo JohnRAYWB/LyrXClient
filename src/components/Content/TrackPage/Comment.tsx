@@ -1,11 +1,12 @@
 import React, {useState} from 'react';
-import {commentDto} from "@/api/dto/track.dto";
-import styles from "@/styles/TrackPage.module.css";
 import {DeleteOutlined, EditOutlined} from "@ant-design/icons";
 import {ConfigProvider, Divider, Input, notification} from "antd";
 import Link from "next/link";
-import {userDto} from "@/api/dto/user.dto";
+
+import styles from "@/styles/TrackPage.module.css";
 import {useDeleteCommentMutation, useEditCommentMutation} from "@/store/api/TrackApi";
+import {commentDto} from "@/api/dto/track.dto";
+import {userDto} from "@/api/dto/user.dto";
 
 interface CommentParam {
     comment: commentDto
