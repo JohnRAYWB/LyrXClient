@@ -12,6 +12,10 @@ interface CollectionItems {
 
 const Collection: React.FC<CollectionItems> = ({items, type}) => {
 
+    if(items.length === 0) {
+        return <div className={styles.emptyList}>Here no added collection yet</div>
+    }
+
     return (
         <div className={styles.main}>
             {items && items.map((item) =>

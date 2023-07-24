@@ -15,10 +15,8 @@ import styles from "./styles/Track.module.css"
 import {trackDto} from "@/api/dto/track.dto";
 import useTextLength from "@/util/useTextLength";
 import {
-    useFetchProfileQuery,
-    useAddTrackToUserCollectionMutation,
-    useRemoveTrackFromUserCollectionMutation
-} from "@/store/api/UserApi";
+    useFetchProfileQuery} from "@/store/api/UserApi";
+import {useAddTrackToUserCollectionMutation, useRemoveTrackFromUserCollectionMutation} from "@/store/api/TrackApi"
 import {handleAddTrack, handleRemoveTrack} from "@/util/handleTrackControl";
 
 interface Track {

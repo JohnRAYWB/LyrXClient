@@ -1,0 +1,138 @@
+.headerContainer {
+    display: flex;
+    flex-flow: row wrap;
+    align-items: center;
+    gap: 30px;
+    background-color: #0e0e0e;
+    padding: 20px 40px;
+    border-radius: 10px;
+    color: #888888;
+    margin: 0 0 20px 0;
+}
+
+.artistContainer {
+    display: flex;
+    flex-flow: row wrap;
+    align-items: center;
+    background-color: #0e0e0e;
+    padding: 20px 60px;
+    border-radius: 10px;
+    color: #888888;
+    margin: 20px 0;
+}
+
+.artistEntitiesContainer {
+    display: flex;
+    flex-flow: wrap column;
+    align-items: center;
+    flex: 1 1 auto;
+    text-transform: uppercase;
+}
+
+.artistEntitiesElems {
+    padding: 10px;
+    display: flex;
+    flex-flow: wrap row;
+    gap: 40px;
+}
+
+.artistEntityContainer {
+    display: flex;
+    flex-flow: wrap row;
+    flex-basis: auto;
+    justify-content: space-around;
+    align-items: center;
+    gap: 30px;
+    padding: 10px 30px;
+    background-color: #313131;
+    border-radius: 10px;
+    font-size: 12px;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition-duration: 300ms;
+}
+
+.artistEntityContainer:hover {
+    transform: scale(1.03);
+    color: white;
+    transition-duration: 300ms;
+}
+
+.title {
+    word-break: break-word;
+    font-size: 20px;
+}
+
+.title:first-letter {
+    text-transform: uppercase;
+}
+
+.entitiesContainer {
+    display: flex;
+    flex: 3;
+    flex-flow: wrap row;
+    align-items: center;
+    gap: 30px;
+}
+
+.entitiesContainer > * {
+    flex: 1 1 auto;
+}
+
+.entityContainer {
+    display: flex;
+    flex-flow: wrap row;
+    flex-basis: auto;
+    justify-content: space-around;
+    align-items: center;
+    padding: 10px 0;
+    background-color: #313131;
+    border-radius: 10px;
+    font-size: 12px;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition-duration: 300ms;
+}
+
+.entityContainer:hover {
+    transform: scale(1.03);
+    color: white;
+    transition-duration: 300ms;
+}
+
+.entityScore {
+    display: flex;
+    flex-flow: wrap column;
+    justify-content: center;
+    align-items: center;
+    padding: 10px 20px;
+    gap: 10px;
+    background-color: #0e0e0e;
+    border-radius: 10px;
+    transition-duration: 200ms;
+}
+
+.entityScore:hover {
+    color: #F64141;
+    transition-duration: 200ms;
+}
+
+.avatar {
+    border: 2px solid #222326;
+    border-radius: 50%;
+}
+
+.emptyAvatar {
+    font-size: 50px;
+    padding: 23px;
+    color: #888888;
+    border: 2px solid #888888;
+    border-radius: 100%;
+}
+
+.children {
+    margin: 10px 0;
+    padding: 15px 0;
+    background-color: #0e0e0e;
+    border-radius: 20px;
+}

@@ -18,14 +18,12 @@ import {
 import styles from "@/styles/TrackPage.module.css"
 import useTextLength from "@/util/useTextLength";
 import {
+    useAddTrackToUserCollectionMutation,
+    useRemoveTrackFromUserCollectionMutation,
     useFetchTrackByIdQuery,
     useLeaveCommentMutation
 } from "@/store/api/TrackApi";
-import {
-    useAddTrackToUserCollectionMutation,
-    useFetchProfileQuery,
-    useRemoveTrackFromUserCollectionMutation
-} from "@/store/api/UserApi";
+import {useFetchProfileQuery} from "@/store/api/UserApi";
 import Comment from "@/components/Content/TrackPage/Comment";
 import {handleAddTrack, handleRemoveTrack} from "@/util/handleTrackControl";
 

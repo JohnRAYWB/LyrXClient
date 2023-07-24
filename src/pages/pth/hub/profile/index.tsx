@@ -15,7 +15,7 @@ const Profile: NextPageWithLayout = () => {
 
     if(isFetching) {
         return <div className={styles.fetchingWarn}>
-            <p>Uploading data... Wait a moment</p>
+            <p>Uploading data... Wait a sec</p>
             <LoadingOutlined/>
         </div>
     }

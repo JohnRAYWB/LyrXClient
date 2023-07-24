@@ -2,4 +2,13 @@
     display: flex;
     flex-flow: row wrap;
     flex: 0 0 20%;
+    padding: 0 9px;
+}
+
+.emptyList {
+    font-weight: bold;
+    font-size: 44px;
+    color: #888888;
+    text-align: center;
+    margin: 10px 0;
 }

@@ -8,7 +8,7 @@ export const UserApi = apiSlice.injectEndpoints({
             query: () => ({
                 url: 'users/profile'
             }),
-            providesTags: result => ['User']
+            providesTags: result => ['User', 'Track']
         }),
         fetchAllUserAndSearch: build.query<userDto[], string>({
             query: (query) => ({
@@ -19,12 +19,6 @@ export const UserApi = apiSlice.injectEndpoints({
         fetchUserById: build.query<userDto, string>({
             query: (uId) => ({
                 url: `users/profile/${uId}`
-            }),
-            providesTags: result => ['User']
-        }),
-        fetchUserCollection: build.query<trackDto, void>({
-            query: () => ({
-                url: 'users/collection'
             }),
             providesTags: result => ['User']
         }),
@@ -48,22 +42,6 @@ export const UserApi = apiSlice.injectEndpoints({
             }),
             invalidatesTags: result => ['User']
         }),
-        addTrackToUserCollection: build.mutation({
-            query: (tId) => ({
-                url: `tracks/collection/${tId}/add`,
-                method: 'POST',
-                responseHandler: (response) => response.text()
-            }),
-            invalidatesTags: result => ['User', 'Track']
-        }),
-        removeTrackFromUserCollection: build.mutation({
-            query: (tId) => ({
-                url: `tracks/collection/${tId}/remove`,
-                method: 'POST',
-                responseHandler: (response) => response.text()
-            }),
-            invalidatesTags: result => ['User', 'Track']
-        }),
         subscribeUser: build.mutation({
             query: (uId) => ({
                 url: `users/subscribe/${uId}`,
@@ -77,12 +55,9 @@ export const UserApi = apiSlice.injectEndpoints({
 
 export const {
     useFetchProfileQuery,
-    useFetchUserCollectionQuery,
     useFetchAllUserAndSearchQuery,
     useFetchUserByIdQuery,
     useUploadAboutMutation,
     useUploadAvatarMutation,
-    useAddTrackToUserCollectionMutation,
-    useRemoveTrackFromUserCollectionMutation,
     useSubscribeUserMutation
 } = UserApi

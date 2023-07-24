@@ -6,7 +6,7 @@ interface Link {
     num: number
 }
 
-const Pagination: React.FC<Link> = ({link, num}) => {
+const Pag: React.FC<Link> = ({link, num}) => {
 
     const [entities, setEntities] = useState([])
 
@@ -60,4 +60,4 @@ const Pagination: React.FC<Link> = ({link, num}) => {
     );
 };
 
-export default Pagination;
+export default Pag;

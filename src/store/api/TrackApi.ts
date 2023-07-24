@@ -21,6 +21,22 @@ export const TrackApi = apiSlice.injectEndpoints({
             }),
             providesTags: result => ['Track', 'User']
         }),
+        addTrackToUserCollection: build.mutation({
+            query: (tId) => ({
+                url: `tracks/collection/${tId}/add`,
+                method: 'POST',
+                responseHandler: (response) => response.text()
+            }),
+            invalidatesTags: result => ['User', 'Track']
+        }),
+        removeTrackFromUserCollection: build.mutation({
+            query: (tId) => ({
+                url: `tracks/collection/${tId}/remove`,
+                method: 'POST',
+                responseHandler: (response) => response.text()
+            }),
+            invalidatesTags: result => ['User', 'Track']
+        }),
         leaveComment: build.mutation({
             query: ({tId, ...text}) => ({
                 url: `tracks/comment/${tId}`,
@@ -54,6 +70,8 @@ export const {
     useFetchAllTrackAndSearchQuery,
     useFetchMostLikedTrackQuery,
     useFetchTrackByIdQuery,
+    useAddTrackToUserCollectionMutation,
+    useRemoveTrackFromUserCollectionMutation,
     useLeaveCommentMutation,
     useEditCommentMutation,
     useDeleteCommentMutation
