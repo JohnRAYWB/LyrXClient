@@ -9,6 +9,7 @@ export interface userDto {
     readonly about: string
     readonly avatar: string
     readonly birth: Date
+    readonly createdTime: Date
     readonly roles: roleDto[]
     readonly ban: boolean
     readonly banReason: String[]

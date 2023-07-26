@@ -49,6 +49,23 @@ export const UserApi = apiSlice.injectEndpoints({
                 responseHandler: (response) => response.text()
             }),
             invalidatesTags: result => ['User']
+        }),
+        unbanUser: build.mutation({
+            query: (uId) => ({
+                url: `users/unban/${uId}`,
+                method: 'POST',
+                responseHandler: (response) => response.text()
+            }),
+            invalidatesTags: result => ['User']
+        }),
+        banUser: build.mutation({
+            query: ({uId, ...reason}) => ({
+                url: `users/ban/${uId}`,
+                method: 'POST',
+                body: reason,
+                responseHandler: (response) => response.text()
+            }),
+            invalidatesTags: result => ['User']
         })
     })
 })
@@ -59,5 +76,7 @@ export const {
     useFetchUserByIdQuery,
     useUploadAboutMutation,
     useUploadAvatarMutation,
-    useSubscribeUserMutation
+    useSubscribeUserMutation,
+    useUnbanUserMutation,
+    useBanUserMutation,
 } = UserApi

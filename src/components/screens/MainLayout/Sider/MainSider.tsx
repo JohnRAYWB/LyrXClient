@@ -10,7 +10,7 @@ import PlaylistSider from "./components/PlaylistSider";
 import AdminToolSider from "./components/AdminToolSider";
 import MenuSider from "./components/MenuSider";
 import ArtistToolSider from "./components/ArtistToolSider";
-import Genre from "@/components/screens/MainLayout/Sider/components/Genre";
+import GenreSider from "@/components/screens/MainLayout/Sider/components/GenreSider";
 import {useAppSelector} from "@/hook/redux";
 import {selectUserData} from "@/store/slice/user";
 
@@ -81,7 +81,7 @@ const HubHeader: React.FC<SiderComponent> = ({searchField}) => {
                 <MenuSider items={profileItems}/>
             </div>
             <PlaylistSider playlists={playlistLength}/>
-            <Genre/>
+            <GenreSider/>
             <AdminToolSider roles={user.roles}/>
             <ArtistToolSider roles={user.roles}/>
         </main>

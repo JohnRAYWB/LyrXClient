@@ -1,9 +1,10 @@
 import React from 'react';
-import styles from "@/components/screens/MainLayout/Sider/styles/PlaylistSider.module.css";
 import {BoxPlotFilled} from "@ant-design/icons";
 import Link from "next/link";
 
-const Genre = () => {
+import styles from "@/components/screens/MainLayout/Sider/styles/PlaylistSider.module.css";
+
+const GenreSider = () => {
     return (
         <div className={styles.main}>
             <div className={styles.container}>
@@ -16,4 +17,4 @@ const Genre = () => {
     );
 };
 
-export default Genre;
+export default GenreSider;

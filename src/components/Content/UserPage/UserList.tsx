@@ -37,6 +37,22 @@ const UserList: React.FC<Users> = ({users, type}) => {
         );
     }
 
+    if(type === 'ban') {
+        const userList = users.filter(user => user._id !== loggedUser._id)
+
+        return (
+            <div className={styles.container}>
+                {userList && userList.map(user =>
+                    <User
+                        key={user._id}
+                        user={user}
+                        type={'ban'}
+                    />
+                )}
+            </div>
+        );
+    }
+
     return (
         <div className={styles.container}>
             {users && users.map(user =>
