@@ -171,9 +171,9 @@
 .detailedInfoContainer {
     display: flex;
     flex-flow: wrap row;
-    justify-content: space-around;
+    justify-content: center;
     align-items: flex-start;
-    gap: 20px;
+    gap: 2px;
     margin-top: 30px;
     padding: 10px;
     background-color: #1c1c1c;
@@ -187,6 +187,17 @@
 .detailedList {
     display: flex;
     flex-flow: wrap column;
+    flex: 45%;
+    padding: 10px;
+    background-color: #0e0e0e;
+}
+
+.detailedList:first-child {
+    border-radius: 10px 0 0 10px;
+}
+
+.detailedList:last-child {
+    border-radius: 0 10px 10px 0;
 }
 
 .detailedListTitle {
@@ -204,6 +215,26 @@
     border: 1px solid #313131;
     border-radius: 10px;
     color: #999999;
+}
+
+.detailedCounter {
+    display: flex;
+    flex-flow: wrap row;
+    justify-content: center;
+    gap: 2px;
+    margin: 10px 0;
+}
+
+.detailedCounterTitle {
+    padding: 10px;
+    background-color: #F64141;
+    border-radius: 10px 0 0 10px;
+}
+
+.detailedCounterScore {
+    padding: 10px;
+    background-color: #F64141;
+    border-radius: 0 10px 10px 0;
 }
 
 .emptyListTitle {
@@ -253,17 +284,74 @@
     transition-duration: 200ms;
 }
 
+.roleControlContainer {
+    display: flex;
+    flex-flow: wrap row;
+    flex: 1;
+    justify-content: space-around;
+    align-items: center;
+    margin-top: 20px;
+    padding: 20px;
+}
+
+.roleControlContainer > * {
+    flex: 0 0 30%
+}
+
+.roleEntityAdd {
+    text-align: center;
+    padding: 10px 20px;
+    text-transform: uppercase;
+    box-shadow: 0 0 5px #F64141;
+    border-radius: 10px;
+    color: #999999;
+    cursor: pointer;
+    transition-duration: 200ms;
+}
+
+.roleEntityRemove {
+    text-align: center;
+    padding: 10px 20px;
+    text-transform: uppercase;
+    background-color: #00ff5c;
+    box-shadow: 0 0 10px #00ff5c;
+    border-radius: 10px;
+    color: black;
+    cursor: pointer;
+    transition-duration: 200ms;
+}
+
+.roleEntityAdd:hover {
+    background-color: #F64141;
+    color: black;
+    box-shadow: 0 0 10px #F64141;
+    transition-duration: 200ms;
+}
+
+.roleEntityRemove:hover {
+    background-color: inherit;
+    color: #999999;
+    box-shadow: 0 0 5px #00ff5c;
+    transition-duration: 200ms;
+}
+
 .notification {
     font-size: 16px;
     color: white;
 }
 
-.loadingBan {
+.loadingContainer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.loadingRed {
     font-size: 28px;
     color: #F64141;
 }
 
-.loadingUnban {
+.loadingGreen {
     font-size: 28px;
-    color: #34f879;
+    color: #00ff5c;
 }

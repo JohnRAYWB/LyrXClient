@@ -50,6 +50,24 @@ export const UserApi = apiSlice.injectEndpoints({
             }),
             invalidatesTags: result => ['User']
         }),
+        addRole: build.mutation({
+            query: ({uId, ...roleName}) => ({
+                url: `users/role/${uId}/add`,
+                method: 'POST',
+                body: roleName,
+                responseHandler: (response) => response.text()
+            }),
+            invalidatesTags: result => ['User']
+        }),
+        removeRole: build.mutation({
+            query: ({uId, ...roleName}) => ({
+                url: `users/role/${uId}/remove`,
+                method: 'POST',
+                body: roleName,
+                responseHandler: (response) => response.text()
+            }),
+            invalidatesTags: result => ['User']
+        }),
         unbanUser: build.mutation({
             query: (uId) => ({
                 url: `users/unban/${uId}`,
@@ -77,6 +95,8 @@ export const {
     useUploadAboutMutation,
     useUploadAvatarMutation,
     useSubscribeUserMutation,
+    useAddRoleMutation,
+    useRemoveRoleMutation,
     useUnbanUserMutation,
     useBanUserMutation,
 } = UserApi

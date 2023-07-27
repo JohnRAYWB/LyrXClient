@@ -5,7 +5,7 @@ import {useFetchAllUserAndSearchQuery} from "@/store/api/UserApi";
 import Search from "@/components/screens/MainLayout/Sider/components/Search";
 import UserList from "@/components/Content/UserPage/UserList";
 
-const Ban: NextPageWithLayout = () => {
+const Role: NextPageWithLayout = () => {
 
     const [query, setQuery] = useState('')
     const {data: users, isLoading} = useFetchAllUserAndSearchQuery(query)
@@ -19,10 +19,10 @@ const Ban: NextPageWithLayout = () => {
     }
 
     return (
-        <MainLayout name={'Ban Control'} searchElement={<Search onChange={searchHandle}/>}>
-            <UserList users={users} type={'ban'}/>
+        <MainLayout name={'Role Control'} searchElement={<Search onChange={searchHandle}/>}>
+            <UserList users={users} type={'role'}/>
         </MainLayout>
     );
 };
 
-export default Ban;
+export default Role;

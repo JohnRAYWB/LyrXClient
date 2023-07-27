@@ -1,12 +1,20 @@
 import React, {useState} from 'react';
 import Image from "next/image";
-import {LoadingOutlined, TeamOutlined, UserOutlined} from "@ant-design/icons";
+import {TeamOutlined, UserOutlined} from "@ant-design/icons";
 import {useRouter} from "next/navigation";
 
 import styles from "../styles/User.module.css"
 import {userDto} from "@/api/dto/user.dto";
-import {useBanUserMutation, useFetchProfileQuery, useUnbanUserMutation} from "@/store/api/UserApi";
-import {ConfigProvider, Input, notification} from "antd";
+import {
+    useAddRoleMutation,
+    useBanUserMutation,
+    useFetchProfileQuery,
+    useRemoveRoleMutation,
+    useUnbanUserMutation
+} from "@/store/api/UserApi";
+import RoleHandler from "@/components/Content/UserPage/components/RoleHandler";
+import UsersDetail from "@/components/Content/UserPage/components/UsersDetail";
+import BanHandler from "@/components/Content/UserPage/components/BanHandler";
 
 interface UserParam {
     user: userDto
@@ -16,6 +24,14 @@ interface UserParam {
 const User: React.FC<UserParam> = ({user, type}) => {
 
     const {data: loggedUser, isLoading} = useFetchProfileQuery()
+
+    const [addAdmin, {isLoading: addAdminLoading}] = useAddRoleMutation()
+    const [addTester, {isLoading: addTesterLoading}] = useAddRoleMutation()
+    const [addArtist, {isLoading: addArtistLoading}] = useAddRoleMutation()
+    const [removeAdmin, {isLoading: removeAdminLoading}] = useRemoveRoleMutation()
+    const [removeTester, {isLoading: removeTesterLoading}] = useRemoveRoleMutation()
+    const [removeArtist, {isLoading: removeArtistLoading}] = useRemoveRoleMutation()
+
     const [unbanUser, {isLoading: unbanLoading}] = useUnbanUserMutation()
     const [banUser, {isLoading: banLoading}] = useBanUserMutation()
 
@@ -24,32 +40,6 @@ const User: React.FC<UserParam> = ({user, type}) => {
 
     if (isLoading) {
         return <></>
-    }
-
-    const handleReason = (e) => {
-        setBanReason(e.target.value)
-    }
-
-    const handleUnban = () => {
-        unbanUser(user._id)
-        notification.success({
-            style: {backgroundColor: "#646464", width: 300},
-            message: <p className={styles.notification}>Done!</p>,
-            description: <p className={styles.notification}>User unban successfully</p>,
-            placement: "bottomLeft",
-            duration: 2
-        })
-    }
-
-    const handleBan = () => {
-        banUser({uId: user._id, reason: banReason})
-        notification.success({
-            style: {backgroundColor: "#646464", width: 300},
-            message: <p className={styles.notification}>Done!</p>,
-            description: <p className={styles.notification}>User ban successfully</p>,
-            placement: "bottomLeft",
-            duration: 2
-        })
     }
 
     const router = useRouter()
@@ -89,7 +79,7 @@ const User: React.FC<UserParam> = ({user, type}) => {
                     }
                 </div>
                 {
-                    type !== 'ban' ?
+                    type !== 'ban' && type !== 'role' ?
                         <div className={styles.subContainer}>
                             <div className={styles.subLine}>
                                 <TeamOutlined className={styles.subIcon}/>
@@ -115,7 +105,7 @@ const User: React.FC<UserParam> = ({user, type}) => {
                         )}
                 </div>
                 {
-                    type === 'ban' ?
+                    type === 'ban' || type === 'role' ?
                         <div className={styles.detailButtonContainer}>
                             <p onClick={() => setOpenDetail(!openDetail)} className={styles.detailButton}>Detailed
                                 Info</p>
@@ -127,74 +117,52 @@ const User: React.FC<UserParam> = ({user, type}) => {
             {
                 openDetail ?
                     <div>
-                        <div className={styles.detailedInfoContainer}>
-                            <div className={styles.detailedList}>
-                                <p className={styles.detailedListTitle}>Comments</p>
-                                {
-                                    user.comments.length !== 0 ?
-                                        <div>
-                                            {user.comments.map(comment =>
-                                                <p key={comment._id} className={styles.detailedListEntity}>
-                                                    {comment.text}
-                                                </p>
-                                            )}
-                                        </div>
-                                        :
-                                        <p className={styles.emptyListTitle}>User don't have comments</p>
-                                }
-                            </div>
-                            <div className={styles.detailedList}>
-                                <p className={styles.detailedListTitle}>Reasons</p>
-                                {
-                                    user.banReason.length !== 0 ?
-                                        <div>
-                                            {user.banReason.map((reason, index) =>
-                                                <p key={index} className={styles.detailedListEntity}>{reason}</p>
-                                            )}
-                                        </div>
-                                        :
-                                        <p className={styles.emptyListTitle}>Reason list is empty</p>
-                                }
-                            </div>
+                        <UsersDetail user={user}/>
+                        <div>
+                            {type === 'ban' ?
+                                <BanHandler
+                                    user={user}
+                                    setBanReason={setBanReason}
+                                    banReason={banReason}
+                                    unbanFunction={unbanUser}
+                                    banFunction={banUser}
+                                    unbanLoading={unbanLoading}
+                                    banLoading={banLoading}
+                                />
+                                :
+                                null
+                            }
                         </div>
                         <div>
-                            {
-                                !user.ban ?
-                                    <>
-                                        {banLoading ?
-                                            <div className={styles.banContainer}>
-                                                <LoadingOutlined className={styles.loadingBan}/>
-                                            </div>
-                                            :
-                                            <div className={styles.banAction}>
-                                                <p className={styles.detailedListTitle}>Ban reason</p>
-                                                <ConfigProvider theme={{
-                                                    token: {
-                                                        colorBorder: '#232323FF',
-                                                        colorTextPlaceholder: '#404040',
-                                                        colorPrimary: '#ff2929',
-                                                    }
-                                                }}>
-                                                    <Input className={styles.commentInput} onChange={handleReason}/>
-                                                </ConfigProvider>
-                                                <p onClick={handleBan} className={styles.banButton}>Ban</p>
-                                            </div>
-                                        }
-                                    </>
-                                    :
-                                    <>
-                                        {
-                                            unbanLoading ?
-                                                <div className={styles.banContainer}>
-                                                    <LoadingOutlined className={styles.loadingUnban}/>
-                                                </div>
-                                                :
-                                                <div className={styles.banContainer}>
-                                                    <p onClick={handleUnban} className={styles.banButton}>Unban user</p>
-                                                </div>
-                                        }
-                                    </>
-
+                            {type === 'role' ?
+                                <div className={styles.roleControlContainer}>
+                                    <RoleHandler
+                                        user={user}
+                                        incomingRole={'admin'}
+                                        addFunction={addAdmin}
+                                        removeFunction={removeAdmin}
+                                        addLoading={addAdminLoading}
+                                        removeLoading={removeAdminLoading}
+                                    />
+                                    <RoleHandler
+                                        user={user}
+                                        incomingRole={'tester'}
+                                        addFunction={addTester}
+                                        removeFunction={removeTester}
+                                        addLoading={addTesterLoading}
+                                        removeLoading={removeTesterLoading}
+                                    />
+                                    <RoleHandler
+                                        user={user}
+                                        incomingRole={'artist'}
+                                        addFunction={addArtist}
+                                        removeFunction={removeArtist}
+                                        addLoading={addArtistLoading}
+                                        removeLoading={removeArtistLoading}
+                                    />
+                                </div>
+                                :
+                                null
                             }
                         </div>
                     </div>

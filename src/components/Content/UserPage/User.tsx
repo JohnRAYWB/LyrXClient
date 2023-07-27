@@ -15,11 +15,7 @@ interface UserParam {
 
 const User: React.FC<UserParam> = ({user, type}) => {
 
-    if(type === 'ban') {
-        return <UserComponent key={user._id} user={user} type={'ban'}/>
-    }
-
-    return <UserComponent user={user}/>
+    return <UserComponent key={user._id} user={user} type={type}/>
 };
 
 export default User;

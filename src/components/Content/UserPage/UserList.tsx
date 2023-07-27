@@ -22,7 +22,7 @@ const UserList: React.FC<Users> = ({users, type}) => {
         return <p className={styles.notFound}>User not found!</p>
     }
 
-    if(type === 'users') {
+    if(type === 'users' || type === 'ban' || type === 'role') {
         const userList = users.filter(user => user._id !== loggedUser._id)
 
         return (
@@ -31,22 +31,7 @@ const UserList: React.FC<Users> = ({users, type}) => {
                     <User
                         key={user._id}
                         user={user}
-                    />
-                )}
-            </div>
-        );
-    }
-
-    if(type === 'ban') {
-        const userList = users.filter(user => user._id !== loggedUser._id)
-
-        return (
-            <div className={styles.container}>
-                {userList && userList.map(user =>
-                    <User
-                        key={user._id}
-                        user={user}
-                        type={'ban'}
+                        type={type}
                     />
                 )}
             </div>
@@ -59,6 +44,7 @@ const UserList: React.FC<Users> = ({users, type}) => {
                 <User
                     key={user._id}
                     user={user}
+                    type={type}
                 />
             )}
         </div>

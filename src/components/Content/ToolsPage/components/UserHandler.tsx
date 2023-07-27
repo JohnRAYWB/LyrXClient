@@ -1,6 +1,6 @@
 import React from 'react';
 
-import styles from "../styles/ToolsPage.module.css"
+import styles from "../styles/UserHandler.module.css"
 import {useFetchAllUserAndSearchQuery} from "@/store/api/UserApi";
 import {useRouter} from "next/navigation";
 
@@ -33,7 +33,6 @@ const UserHandler: React.FC<Param> = ({setTotalCount}) => {
     const userCount = users.filter(user => user.roles.filter(role => role.role === 'user').length).length
 
     const banned = users.filter(user => user.ban).length
-    console.log(banned)
 
     return (
         <div className={styles.detailedStatContainer}>
@@ -91,7 +90,7 @@ const UserHandler: React.FC<Param> = ({setTotalCount}) => {
             <h1 className={styles.detailedStatTitle}>User Control Tools</h1>
             <div className={styles.adminToolContainer}>
                 <p onClick={() => router.push('/pth/hub/admin/ban')} className={styles.adminToolButton}>Ban | Unban User</p>
-                <p className={styles.adminToolButton}>Add | Remove Role</p>
+                <p onClick={() => router.push('/pth/hub/admin/role')} className={styles.adminToolButton}>Add | Remove Role</p>
             </div>
         </div>
     );
