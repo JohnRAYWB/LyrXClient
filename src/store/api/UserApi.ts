@@ -1,5 +1,4 @@
 import {userDto} from "@/api/dto/user.dto";
-import {trackDto} from "@/api/dto/track.dto";
 import {apiSlice} from "./apiSlice"
 
 export const UserApi = apiSlice.injectEndpoints({
@@ -13,6 +12,12 @@ export const UserApi = apiSlice.injectEndpoints({
         fetchAllUserAndSearch: build.query<userDto[], string>({
             query: (query) => ({
                 url: `users/search?username=${query}`
+            }),
+            providesTags: result => ['User']
+        }),
+        fetchAllArtistsAndSearch: build.query<userDto[], string>({
+            query: (query) => ({
+                url: `users/artists/search?username=${query}`
             }),
             providesTags: result => ['User']
         }),
@@ -91,6 +96,7 @@ export const UserApi = apiSlice.injectEndpoints({
 export const {
     useFetchProfileQuery,
     useFetchAllUserAndSearchQuery,
+    useFetchAllArtistsAndSearchQuery,
     useFetchUserByIdQuery,
     useUploadAboutMutation,
     useUploadAvatarMutation,

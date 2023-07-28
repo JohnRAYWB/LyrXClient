@@ -1,0 +1,267 @@
+.container {
+    background-color: #0e0e0e;
+    border-radius: 10px;
+    color: #999999;
+    transition-duration: 200ms;
+}
+
+.container:hover {
+    background-color: #1c1c1c;
+    transition-duration: 200ms;
+}
+
+.trackContainer {
+    display: flex;
+    flex-flow: wrap row;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+    margin: 10px 0;
+}
+
+.trackContainer > * {
+    margin: 10px;
+    flex: 0 0 20%;
+}
+
+.image {
+    flex: 0;
+}
+
+.trackName {
+    padding: 5px 30px;
+    font-size: 20px;
+}
+
+.trackArtist {
+    padding: 5px 30px;
+    font-size: 16px;
+    cursor: pointer;
+    transition-duration: 200ms;
+}
+
+.trackArtist:hover {
+    color: #F64141;
+    transition-duration: 200ms;
+}
+
+.scoreContainer {
+    display: flex;
+    flex-flow: wrap row;
+    justify-content: center;
+    gap: 2px;
+    text-align: center;
+}
+
+.scoreContainer:first-child {
+    border-radius: 10px 0 0 10px;
+}
+
+.scoreContainer:last-child {
+    border-radius: 0 10px 10px 0;
+}
+
+.scoreTitle {
+    padding: 10px;
+    background-color: #F64141;
+    border-radius: 10px 0 0 10px;
+    color: black;
+}
+
+.scoreCount {
+    padding: 10px;
+    background-color: #F64141;
+    border-radius: 0 10px 10px 0;
+    color: black;
+}
+
+.editButton {
+    display: flex;
+    flex: 0 0 75px;
+    justify-content: center;
+    padding: 10px;
+    margin-bottom: auto;
+    box-shadow: 0 0 5px #F64141;
+    border-radius: 10px;
+    cursor: pointer;
+    transition-duration: 200ms;
+}
+
+.editButton:hover {
+    background-color: #F64141;
+    box-shadow: 0 0 10px #F64141;
+    color: black;
+    transition-duration: 200ms;
+}
+
+.editContainer {
+    display: flex;
+    flex-flow: wrap column;
+    padding: 20px;
+}
+
+.editTitle {
+    padding: 20px;
+    margin: 20px 0;
+    background-color: #0e0e0e;
+    border-radius: 10px;
+    text-align: center;
+    text-transform: uppercase;
+}
+
+.editSelect {
+    display: flex;
+    flex-flow: wrap row;
+    justify-content: space-between;
+    padding: 20px;
+    background-color: #505050;
+    border-radius: 10px 10px 0 0;
+}
+
+.editSelect > * {
+    flex: 0 0 25%;
+}
+
+.input {
+    padding: 10px;
+    background-color: inherit;
+    border: 1px solid #1c1c1c;
+    border-radius: 10px;
+    font-size: 16px;
+    color: #1c1c1c;
+    transition-duration: 200ms;
+}
+
+.input::placeholder {
+    color: #1c1c1c;
+}
+
+.input:focus {
+    outline: none;
+    border: 1px solid #888888;
+    transition-duration: 200ms;
+}
+
+.changeButton {
+    display: flex;
+    flex: 0 0 auto;
+    align-items: center;
+    padding: 10px 20px;
+    box-shadow: 0 0 5px #00d75a;
+    border-radius: 10px;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition-duration: 200ms;
+}
+
+.changeButton:hover {
+    background-color: #00d75a;
+    box-shadow: 0 0 10px #00d75a;
+    color: black;
+    transition-duration: 200ms;
+}
+
+.usersContainer {
+    display: flex;
+    flex-flow: wrap column;
+    padding: 10px 40px;
+    background-color: #777777;
+    border-radius: 0 0 10px 10px;
+}
+
+.userContainer {
+    display: flex;
+    flex-flow: wrap row;
+    justify-content: space-around;
+    align-items: center;
+    padding: 10px;
+    margin: 10px 0;
+    border: 2px solid #0e0e0e;
+    border-radius: 10px;
+    color: black;
+    cursor: pointer;
+    transition-duration: 200ms;
+}
+
+.userContainer > * {
+    flex: 0 0 15%
+}
+
+.userContainer:hover {
+    transform: scale(1.03);
+    transition-duration: 200ms;
+}
+
+.selectedArtist {
+    display: flex;
+    flex-flow: wrap row;
+    justify-content: space-around;
+    align-items: center;
+    padding: 10px;
+    margin: 10px 0;
+    background-color: #00cb5a;
+    border-radius: 10px;
+    color: black;
+    transition-duration: 200ms;
+}
+
+.selectedArtist > * {
+    flex: 0 0 15%;
+}
+
+.selectedArtist:hover {
+    transform: scale(1.03);
+    transition-duration: 200ms;
+}
+
+.scoreEditContainer {
+    display: flex;
+    flex-flow: wrap row;
+    justify-content: center;
+    align-items: center;
+    gap: 2px;
+    border-radius: 10px;
+    text-transform: uppercase;
+    font-size: 12px;
+}
+
+.scoreTitleEdit {
+    padding: 10px;
+    background-color: #00d75a;
+    border-radius: 10px 0 0 10px;
+    box-shadow: 0 0 5px #00d75a;
+}
+
+.scoreCountEdit {
+    padding: 10px;
+    background-color: #00d75a;
+    border-radius: 0 10px 10px 0;
+    box-shadow: 0 0 5px #00d75a;
+}
+
+.avatar {
+    flex: 0
+}
+
+.emptyAvatar {
+    flex: 0;
+    padding: 10px;
+    font-size: 30px;
+    border: 2px solid #313131;
+    border-radius: 50%;
+}
+
+.loadingContainer {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.loadingGreen {
+    font-size: 28px;
+    color: #00ff5c;
+}
+
+.notification {
+    font-size: 16px;
+    color: white;
+}

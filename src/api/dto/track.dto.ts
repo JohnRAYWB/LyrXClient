@@ -22,5 +22,6 @@ export interface trackDto {
     readonly comments: commentDto[]
     readonly album: albumDto;
     readonly protectedDeletion: boolean
+    readonly createdTime: Date
     readonly __v: number
 }

@@ -16,10 +16,11 @@ const UserHandler: React.FC<Param> = ({setTotalCount}) => {
         return <></>
     }
 
-    const router = useRouter()
     setTotalCount(users.length)
 
-    const membersForDay = users.filter(user => {
+    const router = useRouter()
+
+    const membersForTheDay = users.filter(user => {
         const date = new Date(user.createdTime).toLocaleDateString().split('.')
         const now = new Date(Date.now()).toLocaleDateString().split('.')
         if (now[0] === date[0] && now[1] === date[1] && now[2] === date[2]) {
@@ -78,7 +79,7 @@ const UserHandler: React.FC<Param> = ({setTotalCount}) => {
                         </div>
                         <div className={styles.updatesMember}>
                             <p className={styles.memberTitle}>For the day</p>
-                            <p className={styles.memberScore}>{membersForDay}</p>
+                            <p className={styles.memberScore}>{membersForTheDay}</p>
                         </div>
                     </div>
                     <div className={styles.updatesBanned}>

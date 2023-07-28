@@ -15,11 +15,26 @@ export const TrackApi = apiSlice.injectEndpoints({
             }),
             providesTags: result => ['Track']
         }),
+        fetchMostListensTrack: build.query<trackDto[], void>({
+            query: () => ({
+                url: `tracks/listen`,
+            }),
+            providesTags: result => ['Track']
+        }),
         fetchTrackById: build.query<trackDto, string>({
             query: (tId) => ({
                 url: `tracks/${tId}/current`
             }),
             providesTags: result => ['Track', 'User']
+        }),
+        editTrackArtist: build.mutation({
+            query: ({tId, ...uId}) => ({
+                url: `tracks/${tId}/current/artist`,
+                method: 'PATCH',
+                body: uId,
+                responseHandler: (response) => response.text()
+            }),
+            invalidatesTags: result => ['Track', 'User']
         }),
         addTrackToUserCollection: build.mutation({
             query: (tId) => ({
@@ -62,14 +77,21 @@ export const TrackApi = apiSlice.injectEndpoints({
                 responseHandler: (response) => response.text()
             }),
             invalidatesTags: result => ['Track']
-        })
+        }),
+        deleteTrack: build.mutation({
+            query: ({tId, ...uId}) => ({
+                url: ``
+            })
+        }),
     })
 })
 
 export const {
     useFetchAllTrackAndSearchQuery,
     useFetchMostLikedTrackQuery,
+    useFetchMostListensTrackQuery,
     useFetchTrackByIdQuery,
+    useEditTrackArtistMutation,
     useAddTrackToUserCollectionMutation,
     useRemoveTrackFromUserCollectionMutation,
     useLeaveCommentMutation,

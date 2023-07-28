@@ -2,6 +2,9 @@ import React, {useState} from 'react';
 
 import styles from "../styles/ToolsPage.module.css";
 import UserHandler from "@/components/Content/ToolsPage/components/UserHandler";
+import TrackHandler from "@/components/Content/ToolsPage/components/TrackHandler";
+import PlaylistHandler from "@/components/Content/ToolsPage/components/PlaylistHandler";
+import AlbumHandler from "@/components/Content/ToolsPage/components/AlbumHandler";
 
 const AdminHeader: React.FC = () => {
 
@@ -10,40 +13,43 @@ const AdminHeader: React.FC = () => {
     const [totalPlaylists, setTotalPlaylists] = useState(0)
     const [totalAlbums, setTotalAlbums] = useState(0)
 
-    const [children, setChildren] = useState(<UserHandler setTotalCount={setTotalUsers}/>)
+    const [activeUser, setActiveUser] = useState(false)
+    const [activeTrack, setActiveTrack] = useState(false)
+    const [activePlaylist, setActivePlaylist] = useState(false)
+    const [activeAlbum, setActiveAlbum] = useState(false)
+
+    const [children, setChildren] = useState(<></>)
 
     const handleUserStats = () => {
+        setActiveUser(true)
+        setActiveTrack(false)
+        setActivePlaylist(false)
+        setActiveAlbum(false)
         return setChildren(<UserHandler setTotalCount={setTotalUsers}/>)
     }
 
     const handleTrackStats = () => {
-        const content = (
-            <div>
-                bla tr stats
-            </div>
-        )
-
-        return setChildren(content)
+        setActiveUser(false)
+        setActiveTrack(true)
+        setActivePlaylist(false)
+        setActiveAlbum(false)
+        return setChildren(<TrackHandler setTotalCount={setTotalTracks}/>)
     }
 
     const handlePlaylistStats = () => {
-        const content = (
-            <div>
-                bla pl stats
-            </div>
-        )
-
-        return setChildren(content)
+        setActiveUser(false)
+        setActiveTrack(false)
+        setActivePlaylist(true)
+        setActiveAlbum(false)
+        return setChildren(<PlaylistHandler setTotalCount={setTotalPlaylists}/>)
     }
 
     const handleAlbumStats = () => {
-        const content = (
-            <div>
-                bla al stats
-            </div>
-        )
-
-        return setChildren(content)
+        setActiveUser(false)
+        setActiveTrack(false)
+        setActivePlaylist(false)
+        setActiveAlbum(true)
+        return setChildren(<AlbumHandler setTotalCount={setTotalAlbums}/>)
     }
 
     return (
@@ -52,32 +58,61 @@ const AdminHeader: React.FC = () => {
                 <h1>STATISTIC</h1>
                 <div className={styles.statisticEntities}>
                     <div onClick={handleUserStats} className={styles.statisticEntity}>
-                        <h1 className={styles.statisticEntityTitle}>USERS</h1>
-                        <div className={styles.statisticScore}>
-                            <p>{totalUsers}</p>
-                            <p>TOTAL</p>
-                        </div>
+                        {
+                            activeUser ?
+                                <>
+                                    <h1 className={styles.statisticEntityTitle}>USERS</h1>
+                                    <div className={styles.statisticScore}>
+                                        <p>{totalUsers}</p>
+                                        <p>TOTAL</p>
+                                    </div>
+                                </>
+                                :
+                                <h1 className={styles.statisticEntityTitle}>USERS</h1>
+                        }
                     </div>
                     <div onClick={handleTrackStats} className={styles.statisticEntity}>
-                        <h1 className={styles.statisticEntityTitle}>TRACKS</h1>
-                        <div className={styles.statisticScore}>
-                            <p>0</p>
-                            <p>TOTAL</p>
-                        </div>
+                        {
+                            activeTrack ?
+                                <>
+                                    <h1 className={styles.statisticEntityTitle}>TRACKS</h1>
+                                    <div className={styles.statisticScore}>
+                                        <p>{totalTracks}</p>
+                                        <p>TOTAL</p>
+                                    </div>
+                                </>
+                                :
+                                <h1 className={styles.statisticEntityTitle}>TRACKS</h1>
+                        }
+
                     </div>
                     <div onClick={handlePlaylistStats} className={styles.statisticEntity}>
-                        <h1 className={styles.statisticEntityTitle}>PLAYLISTS</h1>
-                        <div className={styles.statisticScore}>
-                            <p>0</p>
-                            <p>TOTAL</p>
-                        </div>
+                        {
+                            activePlaylist ?
+                                <>
+                                    <h1 className={styles.statisticEntityTitle}>PLAYLISTS</h1>
+                                    <div className={styles.statisticScore}>
+                                        <p>{totalPlaylists}</p>
+                                        <p>TOTAL</p>
+                                    </div>
+                                </>
+                                :
+                                <h1 className={styles.statisticEntityTitle}>PLAYLISTS</h1>
+                        }
                     </div>
                     <div onClick={handleAlbumStats} className={styles.statisticEntity}>
-                        <h1 className={styles.statisticEntityTitle}>ALBUMS</h1>
-                        <div className={styles.statisticScore}>
-                            <p>0</p>
-                            <p>TOTAL</p>
-                        </div>
+                        {
+                            activeAlbum ?
+                                <>
+                                    <h1 className={styles.statisticEntityTitle}>ALBUMS</h1>
+                                    <div className={styles.statisticScore}>
+                                        <p>{totalAlbums}</p>
+                                        <p>TOTAL</p>
+                                    </div>
+                                </>
+                                :
+                                <h1 className={styles.statisticEntityTitle}>ALBUMS</h1>
+                        }
                     </div>
                 </div>
             </div>

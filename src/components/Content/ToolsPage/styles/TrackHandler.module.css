@@ -1,7 +1,7 @@
 .detailedStatContainer {
     display: flex;
     flex-flow: wrap column;
-    padding: 20px 25px;
+    padding: 10px 25px;
     background-color: #171717;
     border-radius: 10px;
 }
@@ -10,40 +10,17 @@
     color: white;
     text-transform: uppercase;
     text-align: start;
-    padding: 10px;
+    font-size: 18px;
+    margin: 10px 0;
 }
 
 .detailedStatEntitiesContainer {
     display: flex;
     flex-flow: wrap column;
-    padding: 20px 10px;
+    padding: 10px;
     background-color: #0e0e0e;
     border-radius: 10px;
-    margin-bottom: 20px;
-}
-
-.detailedStatEntities {
-    display: flex;
-    flex-flow: wrap row;
-    flex: 1;
-    color: #999999;
-    gap: 5px;
-    margin-bottom: 30px;
-}
-
-.detailedStatEntities > * {
-    flex: 1 1 20%;
-}
-
-.detailedStatEntity {
-    display: flex;
-    flex-flow: wrap column;
-    justify-content: center;
-    align-items: center;
-    gap: 10px;
-    padding: 5px 10px;
-    background-color: #1c1c1c;
-    border-radius: 0 0 10px 10px;
+    margin: 10px 0;
 }
 
 .detailedEntityTitle {
@@ -55,106 +32,110 @@
     color: #999999;
 }
 
-.detailedScore {
-    display: flex;
-    flex-flow: wrap row;
-    justify-content: center;
-    align-items: center;
-    gap: 2px;
-    color: black;
-    text-transform: uppercase;
-}
-
-.detailedScore > * {
-    padding: 10px 20px;
-    flex: auto;
-}
-
-.detailedScoreTitle {
-    border-radius: 10px 0 0 10px;
-    background-color: #F64141;
-}
-
-.detailedScoreCount {
-    border-radius: 0 10px 10px 0;
-    background-color: #F64141;
-}
-
-.detailedDesc {
-    padding: 10px;
-    background-color: #0e0e0e;
-    border-radius: 10px;
-}
-
-.updatesContainer {
+.detailedStatEntities {
     display: flex;
     flex-flow: wrap row;
     flex: 1;
-    gap: 20px;
-    justify-content: space-around;
-    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 30px;
 }
 
-.updatesContainer > * {
-    flex: 0 0 35%;
+.detailedStatEntities > * {
+    flex: 0 0 30%;
 }
 
-.updatesMembers {
+.detailedStatEntity {
     display: flex;
     flex-flow: wrap column;
-    padding: 0 50px;
-    gap: 20px;
-}
-
-.updatesMember {
-    display: flex;
-    flex-flow: wrap column;
-    gap: 5px;
+    justify-content: center;
+    gap: 3px;
     padding: 10px;
-    text-transform: uppercase;
-    text-align: center;
     background-color: #1c1c1c;
-    border-radius: 10px;
+    border-radius: 0 0 10px 10px;
+    font-size: 16px;
+    text-transform: uppercase;
 }
 
-.memberTitle {
+.entityTitle {
+    text-align: center;
     padding: 10px;
-    background-color: #313131;
-    color: #999999;
+    background-color: #F64141;
     border-radius: 10px 10px 0 0;
+    color: black;
 }
 
-.memberScore {
+.entityScore {
+    text-align: center;
     padding: 10px;
     background-color: #0e0e0e;
-    color: #999999;
+    border-radius: 0 0 10px 10px;
+    color: #888888;
+}
+
+.topTrackContainer {
+    display: flex;
+    flex-flow: wrap column;
+    padding: 10px;
+    background-color: #1c1c1c;
     border-radius: 0 0 10px 10px;
 }
 
-.updatesBanned {
+.trackListContainer {
+    display: flex;
+    flex-flow: wrap row;
+    justify-content: space-around;
+    margin: 20px 0;
+    padding: 10px;
+    background-color: #181818;
+    border-radius: 10px;
+}
+
+.trackListContainer > * {
+    flex: 0 0 15%;
+}
+
+.trackContainer {
+    display: flex;
+    flex-flow: wrap column;
+    align-items: center;
+    gap: 10px;
+    padding: 10px;
+    margin: 5px 0;
+    background-color: #0e0e0e;
+    border-radius: 10px;
+    color: #999999;
+    cursor: pointer;
+    transition-duration: 200ms;
+}
+
+.trackContainer:hover {
+    transform: scale(1.03);
+    background-color: #6e6e6e;
+    color: black;
+    transition-duration: 200ms;
+}
+
+.trackScoreContainer {
     display: flex;
     flex-flow: wrap row;
     justify-content: center;
-    align-items: center;
-    gap: 5px;
-    padding: 20px;
-    background-color: #1c1c1c;
-    border-radius: 10px;
-    font-size: 18px;
-    color: #999999;
+    gap: 1px;
 }
 
-.bannedTitle {
-    text-transform: uppercase;
-    padding: 20px;
-    background-color: #313131;
+.trackScoreTitle {
+    padding: 5px;
+    background-color: #F64141;
     border-radius: 10px 0 0 10px;
+    font-size: 12px;
+    color: black;
 }
 
-.bannedScore {
-    padding: 20px;
-    background-color: #0e0e0e;
+.trackScoreCount {
+    padding: 5px;
+    background-color: #F64141;
     border-radius: 0 10px 10px 0;
+    font-size: 12px;
+    color: black;
 }
 
 .adminToolContainer {
@@ -162,7 +143,7 @@
     flex-flow: wrap row;
     flex: 1;
     padding: 20px;
-    margin: 10px 0;
+    margin: 20px 0;
     justify-content: space-around;
     background-color: #0e0e0e;
     border-radius: 10px;
