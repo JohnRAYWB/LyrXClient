@@ -10,7 +10,7 @@ import GenreList from "@/components/Content/GenrePage/GenreList";
 
 const Genre: NextPageWithLayout = () => {
 
-    const {data: genres, isLoading} = useFetchAllGenreQuery(0)
+    const {data: genres, isLoading} = useFetchAllGenreQuery()
 
     if (isLoading) {
         return <></>

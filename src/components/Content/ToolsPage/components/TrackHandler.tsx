@@ -76,9 +76,9 @@ const TrackHandler: React.FC<Param> = ({setTotalCount}) => {
             </div>
             <h1 className={styles.detailedStatTitle}>Track Control Tools</h1>
             <div className={styles.adminToolContainer}>
-                <p className={styles.adminToolButton}>Add new genre</p>
+                <p onClick={() => router.push('/pth/hub/admin/track/genre')} className={styles.adminToolButton}>Add new genre</p>
                 <p onClick={() => router.push('/pth/hub/admin/track/artist')} className={styles.adminToolButton}>Edit track artist</p>
-                <p className={styles.adminToolButton}>Delete track</p>
+                <p onClick={() => router.push('/pth/hub/admin/track/delete')} className={styles.adminToolButton}>Delete track</p>
             </div>
         </div>
     );

@@ -79,9 +79,12 @@ export const TrackApi = apiSlice.injectEndpoints({
             invalidatesTags: result => ['Track']
         }),
         deleteTrack: build.mutation({
-            query: ({tId, ...uId}) => ({
-                url: ``
-            })
+            query: (tId) => ({
+                url: `tracks/${tId}`,
+                method: 'DELETE',
+                responseHandler: (response) => response.text()
+            }),
+            invalidatesTags: result => ['Track']
         }),
     })
 })
@@ -96,5 +99,6 @@ export const {
     useRemoveTrackFromUserCollectionMutation,
     useLeaveCommentMutation,
     useEditCommentMutation,
-    useDeleteCommentMutation
+    useDeleteCommentMutation,
+    useDeleteTrackMutation
 } = TrackApi

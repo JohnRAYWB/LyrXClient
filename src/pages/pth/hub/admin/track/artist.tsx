@@ -9,7 +9,7 @@ import EditTracksList from "@/components/Content/TrackPage/EditTracksList";
 const Artist: NextPageWithLayout = () => {
 
     const [query, setQuery] = useState('')
-    const {data: tracks, isLoading} = useFetchAllTrackAndSearchQuery(query)
+    const {data: tracks, isLoading, refetch} = useFetchAllTrackAndSearchQuery(query)
 
     if(isLoading) {
         return <></>
@@ -21,7 +21,7 @@ const Artist: NextPageWithLayout = () => {
 
     return (
         <MainLayout name={'Edit Artist'} searchElement={<Search onChange={searchHandle}/>}>
-            <EditTracksList tracks={tracks}/>
+            <EditTracksList tracks={tracks} type={'edit'} refetch={refetch}/>
         </MainLayout>
     );
 };

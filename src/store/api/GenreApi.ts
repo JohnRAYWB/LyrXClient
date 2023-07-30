@@ -4,8 +4,8 @@ import {genreDto} from "@/api/dto/genre.dto";
 export const GenreApi = apiSlice.injectEndpoints({
     endpoints: (build) => ({
         fetchAllGenre: build.query<genreDto[], number>({
-            query: (page) => ({
-                url: `genres?limit=20&page=${page}`,
+            query: () => ({
+                url: `genres`,
             }),
             providesTags: result => ['Genre']
         }),
@@ -14,8 +14,20 @@ export const GenreApi = apiSlice.injectEndpoints({
                 url: `genres/${gId}`
             }),
             providesTags: result => ['Genre']
+        }),
+        createGenre: build.mutation({
+            query: ({...body}) => ({
+                url: 'genres',
+                method: 'POST',
+                body: body,
+            }),
+            invalidatesTags: result => ['Genre']
         })
     })
 })
 
-export const {useFetchAllGenreQuery, useFetchGenreByIdQuery} = GenreApi
+export const {
+    useFetchAllGenreQuery,
+    useFetchGenreByIdQuery,
+    useCreateGenreMutation
+} = GenreApi

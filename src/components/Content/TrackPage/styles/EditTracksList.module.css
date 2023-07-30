@@ -1,0 +1,22 @@
+.refetchButton {
+    display: flex;
+    flex-flow: wrap row;
+    padding: 10px 20px;
+    margin: 0 0 20px auto;
+    box-shadow: 0 0 5px #F64141;
+    background-color: inherit;
+    border: none;
+    border-radius: 10px;
+    color: #999999;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition-duration: 200ms;
+}
+
+.refetchButton:hover {
+    transform: scale(1.05);
+    background-color: #F64141;
+    box-shadow: 0 0 10px #F64141;
+    color: black;
+    transition-duration: 200ms;
+}
