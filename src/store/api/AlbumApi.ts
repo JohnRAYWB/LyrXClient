@@ -37,6 +37,15 @@ export const AlbumApi = apiSlice.injectEndpoints({
             }),
             invalidatesTags: result => ['Album', 'User']
         }),
+        addTrackToAlbum: build.mutation({
+           query: ({aId, ...tId}) => ({
+               url: `albums/track/${aId}/add`,
+               method: 'PATCH',
+               body: tId,
+               responseHandler: (response) => response.text()
+           }),
+            invalidatesTags: result => ['Album', 'Track', 'User']
+        }),
         removeTrackFromAlbum: build.mutation({
            query: ({aId, ...tId}) => ({
                url: `albums/track/${aId}/remove`,
@@ -44,7 +53,7 @@ export const AlbumApi = apiSlice.injectEndpoints({
                body: tId,
                responseHandler: (response) => response.text()
            }),
-            invalidatesTags: result => ['Album', 'Track']
+            invalidatesTags: result => ['Album', 'Track', 'User']
         }),
         deleteAlbum: build.mutation({
             query: (aId) => ({
@@ -63,6 +72,7 @@ export const {
     useFetchAlbumByIdQuery,
     useAddAlbumToUserCollectionMutation,
     useRemoveAlbumFromUserCollectionMutation,
+    useAddTrackToAlbumMutation,
     useRemoveTrackFromAlbumMutation,
     useDeleteAlbumMutation
 } = AlbumApi

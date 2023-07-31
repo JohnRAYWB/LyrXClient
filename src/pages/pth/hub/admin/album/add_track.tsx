@@ -4,6 +4,7 @@ import {NextPageWithLayout} from "@/pages/_app";
 import MainLayout from "@/components/screens/MainLayout/MainLayout";
 import Search from "@/components/screens/MainLayout/Sider/components/Search";
 import {useFetchAllAlbumAndSearchQuery} from "@/store/api/AlbumApi";
+import EditEntitiesList from "@/components/Content/ToolsPage/components/EditEntities/EditEntitiesList";
 
 const AddTrack: NextPageWithLayout = () => {
 
@@ -20,9 +21,7 @@ const AddTrack: NextPageWithLayout = () => {
 
     return (
         <MainLayout name={'Add Track To Album'} searchElement={<Search onChange={searchHandle}/>}>
-            <div>
-
-            </div>
+            <EditEntitiesList entities={albums} entitiesType={'album'} type={'add'} refetch={refetch}/>
         </MainLayout>
     );
 };

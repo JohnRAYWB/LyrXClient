@@ -2,26 +2,36 @@ import React, {useState} from 'react';
 
 import styles from "../../styles/TracksList.module.css"
 import {trackDto} from "@/api/dto/track.dto";
-import {ExportOutlined, LoadingOutlined} from "@ant-design/icons";
-import {useRemoveTrackFromAlbumMutation} from "@/store/api/AlbumApi";
+import {ExportOutlined, ImportOutlined, LoadingOutlined} from "@ant-design/icons";
+import {useAddTrackToAlbumMutation, useRemoveTrackFromAlbumMutation} from "@/store/api/AlbumApi";
 import {notification} from "antd";
 
 interface Param {
-    track: trackDto
+    track: trackDto,
+    albumId?: string
+    type: string
 }
 
-const TrackRemove: React.FC<Param> = ({track}) => {
+const TrackDirection: React.FC<Param> = ({track, albumId,type}) => {
 
     const [confirm, setConfirm] = useState(false)
-    const [removeTrack, {isLoading}] = useRemoveTrackFromAlbumMutation()
+    const [addTrack, {isLoading: addLoading}] = useAddTrackToAlbumMutation()
+    const [removeTrack, {isLoading: removeLoading}] = useRemoveTrackFromAlbumMutation()
 
-    const handleRemoveTrack = () => {
-        removeTrack({aId: track.album, track: track._id})
+    const handleTrackDirection = () => {
+
+        if(type === 'add') {
+            addTrack({aId: albumId, track: track._id})
+        }
+
+        if(type === 'remove') {
+            removeTrack({aId: track.album, track: track._id})
+        }
 
         notification.success({
             style: {backgroundColor: "#646464", width: 300},
             message: <p className={styles.notification}>Done!</p>,
-            description: <p className={styles.notification}>Artist changed successfully</p>,
+            description: <p className={styles.notification}>Changes add successfully</p>,
             placement: "bottomLeft",
             duration: 2
         })
@@ -39,7 +49,7 @@ const TrackRemove: React.FC<Param> = ({track}) => {
                 <p className={styles.trackScoreTitle}>Listens</p>
                 <p className={styles.trackScoreCount}>{track.listens}</p>
             </div>
-            {isLoading ?
+            {addLoading || removeLoading ?
                 <div className={styles.loadingContainer}>
                     <LoadingOutlined className={styles.loadingRed}/>
                 </div>
@@ -48,11 +58,22 @@ const TrackRemove: React.FC<Param> = ({track}) => {
                     {confirm ?
                         <div className={styles.confirmContainer}>
                             <p className={styles.confirmTitle}>Confirm?</p>
-                            <p onClick={handleRemoveTrack} className={styles.confirmYes}>Yes</p>
+                            <p onClick={handleTrackDirection} className={styles.confirmYes}>Yes</p>
                             <p onClick={() => setConfirm(!confirm)} className={styles.confirmNo}>No</p>
                         </div>
                         :
-                        <ExportOutlined onClick={() => setConfirm(!confirm)} className={styles.icon}/>
+                        <>
+                            {type === 'remove' ?
+                                <ExportOutlined rotate={270} onClick={() => setConfirm(!confirm)} className={styles.icon}/>
+                                :
+                                null
+                            }
+                            {type === 'add' ?
+                                <ImportOutlined rotate={270} onClick={() => setConfirm(!confirm)} className={styles.icon}/>
+                                :
+                                null
+                            }
+                        </>
                     }
                 </div>
             }
@@ -60,4 +81,4 @@ const TrackRemove: React.FC<Param> = ({track}) => {
     );
 };
 
-export default TrackRemove;
+export default TrackDirection;

@@ -9,6 +9,7 @@ import DeleteTrack from "@/components/Content/ToolsPage/components/EditEntities/
 import DeletePlaylist from "@/components/Content/ToolsPage/components/EditEntities/Playlist/DeletePlaylist";
 import DeleteAlbum from "@/components/Content/ToolsPage/components/EditEntities/Album/DeleteAlbum";
 import RemoveTrack from "@/components/Content/ToolsPage/components/EditEntities/Album/RemoveTrack";
+import AddTrack from "@/components/Content/ToolsPage/components/EditEntities/Album/AddTrack";
 
 interface Param {
     entities: trackDto[] | playlistDto[] | albumDto[]
@@ -68,6 +69,17 @@ const EditEntitiesList: React.FC<Param> = ({entities, entitiesType, type, refetc
                 <button onClick={handleRefetch} className={styles.refetchButton}>Refetch</button>
                 {entities.map(entity =>
                     <DeleteAlbum album={entity}/>
+                )}
+            </div>
+        )
+    }
+
+    if(entitiesType === 'album' && type === 'add') {
+        return (
+            <div>
+                <button onClick={handleRefetch} className={styles.refetchButton}>Refetch</button>
+                {entities.map(entity =>
+                    <AddTrack album={entity}/>
                 )}
             </div>
         )

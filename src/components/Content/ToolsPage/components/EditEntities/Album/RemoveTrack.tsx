@@ -3,7 +3,7 @@ import React, {useState} from 'react';
 import styles from "../../../styles/EditEntity.module.css"
 import {albumDto} from "@/api/dto/album.dto";
 import EntityInfo from "@/components/Content/ToolsPage/components/EditEntities/EntityInfo";
-import TracksList from "@/components/Content/ToolsPage/components/EditEntities/TracksList";
+import AlbumsTrackDirection from "@/components/Content/ToolsPage/components/EditEntities/AlbumsTrackDirection";
 
 interface Param {
     album: albumDto
@@ -24,7 +24,7 @@ const RemoveTrack: React.FC<Param> = ({album}) => {
                     <>
                         {
                             album.tracks.length !== 0 ?
-                                <TracksList tracks={album.tracks}/>
+                                <AlbumsTrackDirection tracks={album.tracks} type={'remove'}/>
                                 :
                                 <p className={styles.emptyTitle}>Here no tracks yet</p>
                         }
