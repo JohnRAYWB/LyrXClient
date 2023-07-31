@@ -57,12 +57,25 @@ const CollectionHeader: React.FC<Items> = ({type, collection}) => {
                     <div className={styles.headerText}>
                         <div>
                             <h1 className={styles.textTitle}>{collection.name[1]}</h1>
-                            <Link className={styles.userLink}
-                                  href={type === 'album' ?
-                                      `/pth/hub/profile/${collection.artist._id}`
-                                      :
-                                      `/pth/hub/profile/${collection.user._id}`
-                                  }>{collection.name[0]}</Link>
+                            {type === 'album' ?
+                                <Link className={styles.userLink}
+                                      href={user._id !== collection.artist._id ?
+                                          `/pth/hub/users/${collection.artist._id}`
+                                          :
+                                          `/pth/hub/profile/${collection.artist._id}`
+                                      }>
+                                    {collection.name[0]}
+                                </Link>
+                                :
+                                <Link className={styles.userLink}
+                                      href={user._id !== collection.user._id ?
+                                          `/pth/hub/users/${collection.user._id}`
+                                          :
+                                          `/pth/hub/profile/${collection.user._id}`
+                                      }>
+                                    {collection.name[0]}
+                                </Link>
+                            }
                         </div>
                         <div className={styles.collectionInfo}>
                             <div className={styles.scoresItem}>

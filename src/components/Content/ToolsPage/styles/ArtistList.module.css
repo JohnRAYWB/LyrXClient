@@ -1,0 +1,89 @@
+.usersContainer {
+    display: flex;
+    flex-flow: wrap column;
+    padding: 10px 40px;
+    background-color: #777777;
+    border-radius: 0 0 10px 10px;
+}
+
+.userContainer {
+    display: flex;
+    flex-flow: wrap row;
+    justify-content: space-around;
+    align-items: center;
+    padding: 10px;
+    margin: 10px 0;
+    border: 2px solid #0e0e0e;
+    border-radius: 10px;
+    color: black;
+    cursor: pointer;
+    transition-duration: 200ms;
+}
+
+.userContainer > * {
+    flex: 0 0 15%
+}
+
+.userContainer:hover {
+    transform: scale(1.03);
+    transition-duration: 200ms;
+}
+
+.selectedArtist {
+    display: flex;
+    flex-flow: wrap row;
+    justify-content: space-around;
+    align-items: center;
+    padding: 10px;
+    margin: 10px 0;
+    background-color: #00cb5a;
+    border-radius: 10px;
+    color: black;
+    transition-duration: 200ms;
+}
+
+.selectedArtist > * {
+    flex: 0 0 15%;
+}
+
+.selectedArtist:hover {
+    transform: scale(1.03);
+    transition-duration: 200ms;
+}
+
+.avatar {
+    flex: 0
+}
+
+.emptyAvatar {
+    flex: 0;
+    padding: 10px;
+    font-size: 30px;
+    border: 2px solid #313131;
+    border-radius: 50%;
+}
+
+.scoreEditContainer {
+    display: flex;
+    flex-flow: wrap row;
+    justify-content: center;
+    align-items: center;
+    gap: 2px;
+    border-radius: 10px;
+    text-transform: uppercase;
+    font-size: 12px;
+}
+
+.scoreTitleEdit {
+    padding: 10px;
+    background-color: #00d75a;
+    border-radius: 10px 0 0 10px;
+    box-shadow: 0 0 5px #00d75a;
+}
+
+.scoreCountEdit {
+    padding: 10px;
+    background-color: #00d75a;
+    border-radius: 0 10px 10px 0;
+    box-shadow: 0 0 5px #00d75a;
+}

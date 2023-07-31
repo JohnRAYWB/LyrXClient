@@ -36,6 +36,14 @@ export const PlaylistApi = apiSlice.injectEndpoints({
                 responseHandler: response => response.text()
             }),
             invalidatesTags: result => ['Playlist', 'User']
+        }),
+        deletePlaylist: build.mutation({
+            query: (pId) => ({
+                url: `playlists/${pId}`,
+                method: 'DELETE',
+                responseHandler: response => response.text()
+            }),
+            invalidatesTags: result => ['Playlist']
         })
     })
 })
@@ -45,5 +53,6 @@ export const {
     useFetchMostLikedPlaylistQuery,
     useFetchPlaylistByIdQuery,
     useAddPlaylistToUserCollectionMutation,
-    useRemovePlaylistFromUserCollectionMutation
+    useRemovePlaylistFromUserCollectionMutation,
+    useDeletePlaylistMutation
 } = PlaylistApi

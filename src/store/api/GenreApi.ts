@@ -3,7 +3,7 @@ import {genreDto} from "@/api/dto/genre.dto";
 
 export const GenreApi = apiSlice.injectEndpoints({
     endpoints: (build) => ({
-        fetchAllGenre: build.query<genreDto[], number>({
+        fetchAllGenre: build.query<genreDto[], void>({
             query: () => ({
                 url: `genres`,
             }),

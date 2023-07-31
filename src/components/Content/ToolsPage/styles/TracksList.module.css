@@ -1,0 +1,137 @@
+.container {
+    display: flex;
+    flex-flow: wrap column;
+    gap: 5px;
+    padding: 10px 20px;
+}
+
+.trackContainer {
+    display: flex;
+    flex-flow: wrap row;
+    justify-content: space-between;
+    align-items: center;
+    padding: 5px 10px;
+    background-color: #0e0e0e;
+    border-radius: 10px;
+    transition-duration: 200ms;
+}
+
+.trackContainer > * {
+    flex: 0 0 20%
+}
+
+.trackContainer:hover {
+    background-color: #262626;
+    transform: scale(1.01);
+    transition-duration: 200ms;
+}
+
+.trackName {
+    text-align: center;
+}
+
+.trackArtist {
+    text-align: center;
+}
+
+.trackScoreContainer {
+    display: flex;
+    flex-flow: wrap row;
+    gap: 2px;
+    color: black;
+}
+
+.trackScoreTitle {
+    text-transform: uppercase;
+    padding: 5px;
+    background-color: #F64141;
+    border-radius: 10px 0 0 10px;
+}
+
+.trackScoreCount {
+    padding: 5px;
+    background-color: #F64141;
+    border-radius: 0 10px 10px 0;
+}
+
+.iconContainer {
+    display: flex;
+    justify-content: center;
+}
+
+.confirmContainer {
+    display: flex;
+    flex-flow: wrap row;
+    flex: 1;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px;
+    background-color: #0e0e0e;
+    border-radius: 10px;
+}
+
+.confirmYes {
+    padding: 7px;
+    box-shadow: 0 0 5px #00ff5c;
+    border-radius: 10px;
+    cursor: pointer;
+    transition-duration: 200ms;
+}
+
+.confirmYes:hover {
+    color: black;
+    background-color: #00ff5c;
+    box-shadow: 0 0 10px #00ff5c;
+    transition-duration: 200ms;
+}
+
+.confirmNo {
+    padding: 7px;
+    box-shadow: 0 0 5px #F64141;
+    border-radius: 10px;
+    cursor: pointer;
+    transition-duration: 200ms;
+}
+
+.confirmNo:hover {
+    color: black;
+    background-color: #F64141;
+    box-shadow: 0 0 10px #F64141;
+    transition-duration: 200ms;
+}
+
+.icon {
+    padding: 7px;
+    box-shadow: 0 0 5px #F64141;
+    border-radius: 10px;
+    font-size: 16px;
+    cursor: pointer;
+    transition-duration: 200ms;
+}
+
+.icon:hover {
+    background-color: #F64141;
+    box-shadow: 0 0 10px #F64141;
+    color: black;
+    transition-duration: 200ms;
+}
+
+.loadingContainer {
+    display: flex;
+    flex-flow: wrap row;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    background-color: #0e0e0e;
+    border-radius: 10px;
+}
+
+.loadingRed {
+    font-size: 20px;
+    color: #F64141;
+}
+
+.notification {
+    font-size: 16px;
+    color: white;
+}

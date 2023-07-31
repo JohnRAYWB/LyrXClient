@@ -8,6 +8,7 @@ export interface albumDto {
     readonly description: string
     readonly image: string
     readonly favorites: number
+    readonly createdTime: Date
     readonly genre: genreDto[]
     readonly artist: userDto
     readonly tracks: trackDto[]

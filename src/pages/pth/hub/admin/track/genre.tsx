@@ -1,11 +1,11 @@
 import React, {useState} from 'react';
 import {NextPageWithLayout} from "@/pages/_app";
-import MainLayout from "@/components/screens/MainLayout/MainLayout";
 
+import MainLayout from "@/components/screens/MainLayout/MainLayout";
 import styles from "@/styles/Genre.module.css"
 import {useCreateGenreMutation, useFetchAllGenreQuery} from "@/store/api/GenreApi";
 import {notification} from "antd";
-import {CheckOutlined, CloseOutlined, LoadingOutlined} from "@ant-design/icons";
+import {LoadingOutlined} from "@ant-design/icons";
 
 const Genre: NextPageWithLayout = () => {
 

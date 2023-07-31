@@ -1,17 +1,17 @@
 import React, {useState} from 'react';
 import {NextPageWithLayout} from "@/pages/_app";
 
-import {useFetchAllTrackAndSearchQuery} from "@/store/api/TrackApi";
 import MainLayout from "@/components/screens/MainLayout/MainLayout";
 import Search from "@/components/screens/MainLayout/Sider/components/Search";
-import EditTracksList from "@/components/Content/TrackPage/EditTracksList";
+import EditEntitiesList from "@/components/Content/ToolsPage/components/EditEntities/EditEntitiesList";
+import {useFetchAllTrackAndSearchQuery} from "@/store/api/TrackApi";
 
 const Artist: NextPageWithLayout = () => {
 
     const [query, setQuery] = useState('')
     const {data: tracks, isLoading, refetch} = useFetchAllTrackAndSearchQuery(query)
 
-    if(isLoading) {
+    if (isLoading) {
         return <></>
     }
 
@@ -21,7 +21,12 @@ const Artist: NextPageWithLayout = () => {
 
     return (
         <MainLayout name={'Edit Artist'} searchElement={<Search onChange={searchHandle}/>}>
-            <EditTracksList tracks={tracks} type={'edit'} refetch={refetch}/>
+            <EditEntitiesList
+                entities={tracks}
+                refetch={refetch}
+                entitiesType={'track'}
+                type={'edit'}
+            />
         </MainLayout>
     );
 };

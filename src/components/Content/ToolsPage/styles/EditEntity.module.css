@@ -10,16 +10,16 @@
     transition-duration: 200ms;
 }
 
-.trackContainer {
+.entityInfoContainer {
     display: flex;
     flex-flow: wrap row;
     justify-content: space-between;
     align-items: center;
-    padding: 10px;
+    padding: 20px;
     margin: 10px 0;
 }
 
-.trackContainer > * {
+.entityInfoContainer > * {
     margin: 10px;
     flex: 0 0 20%;
 }
@@ -28,21 +28,30 @@
     flex: 0;
 }
 
-.trackName {
+.entityName {
     padding: 5px 30px;
     font-size: 20px;
 }
 
-.trackArtist {
+.entityArtist {
     padding: 5px 30px;
     font-size: 16px;
     cursor: pointer;
     transition-duration: 200ms;
 }
 
-.trackArtist:hover {
+.entityArtist:hover {
     color: #F64141;
     transition-duration: 200ms;
+}
+
+.descriptionContainer {
+    display: flex;
+    flex-flow: wrap row;
+}
+
+.description {
+    text-align: start;
 }
 
 .scoreContainer {
@@ -86,25 +95,7 @@
     transition-duration: 200ms;
 }
 
-.deleteButton {
-    display: flex;
-    flex: 0;
-    padding: 10px 20px;
-    margin: 0 auto;
-    box-shadow: 0 0 5px #F64141;
-    border-radius: 10px;
-    cursor: pointer;
-    transition-duration: 200ms;
-}
-
 .editButton:hover {
-    background-color: #F64141;
-    box-shadow: 0 0 10px #F64141;
-    color: black;
-    transition-duration: 200ms;
-}
-
-.deleteButton:hover {
     background-color: #F64141;
     box-shadow: 0 0 10px #F64141;
     color: black;
@@ -178,96 +169,6 @@
     transition-duration: 200ms;
 }
 
-.usersContainer {
-    display: flex;
-    flex-flow: wrap column;
-    padding: 10px 40px;
-    background-color: #777777;
-    border-radius: 0 0 10px 10px;
-}
-
-.userContainer {
-    display: flex;
-    flex-flow: wrap row;
-    justify-content: space-around;
-    align-items: center;
-    padding: 10px;
-    margin: 10px 0;
-    border: 2px solid #0e0e0e;
-    border-radius: 10px;
-    color: black;
-    cursor: pointer;
-    transition-duration: 200ms;
-}
-
-.userContainer > * {
-    flex: 0 0 15%
-}
-
-.userContainer:hover {
-    transform: scale(1.03);
-    transition-duration: 200ms;
-}
-
-.selectedArtist {
-    display: flex;
-    flex-flow: wrap row;
-    justify-content: space-around;
-    align-items: center;
-    padding: 10px;
-    margin: 10px 0;
-    background-color: #00cb5a;
-    border-radius: 10px;
-    color: black;
-    transition-duration: 200ms;
-}
-
-.selectedArtist > * {
-    flex: 0 0 15%;
-}
-
-.selectedArtist:hover {
-    transform: scale(1.03);
-    transition-duration: 200ms;
-}
-
-.scoreEditContainer {
-    display: flex;
-    flex-flow: wrap row;
-    justify-content: center;
-    align-items: center;
-    gap: 2px;
-    border-radius: 10px;
-    text-transform: uppercase;
-    font-size: 12px;
-}
-
-.scoreTitleEdit {
-    padding: 10px;
-    background-color: #00d75a;
-    border-radius: 10px 0 0 10px;
-    box-shadow: 0 0 5px #00d75a;
-}
-
-.scoreCountEdit {
-    padding: 10px;
-    background-color: #00d75a;
-    border-radius: 0 10px 10px 0;
-    box-shadow: 0 0 5px #00d75a;
-}
-
-.avatar {
-    flex: 0
-}
-
-.emptyAvatar {
-    flex: 0;
-    padding: 10px;
-    font-size: 30px;
-    border: 2px solid #313131;
-    border-radius: 50%;
-}
-
 .loadingContainer {
     display: flex;
     flex-flow: wrap row;
@@ -276,6 +177,11 @@
     padding: 20px;
     background-color: #505050;
     border-radius: 10px 10px 0 0;
+}
+
+.loadingGreen {
+    font-size: 28px;
+    color: #00ff5c;
 }
 
 .loadingDeleteContainer {
@@ -288,68 +194,15 @@
     border-radius: 10px;
 }
 
-.loadingGreen {
-    font-size: 28px;
-    color: #00ff5c;
-}
-
 .loadingRed {
     font-size: 44px;
     color: #F64141;
 }
 
-.confirmContainer {
-    display: flex;
-    flex-flow: wrap column;
-    flex: 1;
-    padding: 10px;
-    background-color: #0e0e0e;
-    border-radius: 10px;
-}
-
-.confirmTitle {
+.emptyTitle {
+    padding-bottom: 20px;
+    font-size: 24px;
     text-align: center;
-    margin: 5px 0;
-}
-
-.confirmChoiceContainer {
-    display: flex;
-    flex-flow: wrap row;
-    justify-content: space-between;
-    padding: 10px;
-}
-
-.confirmChoiceContainer > * {
-    flex: 0 0 10%;
-}
-
-.confirmChoiceButton {
-    padding: 10px 20px;
-    border-radius: 10px;
-    cursor: pointer;
-    transition-duration: 200ms;
-}
-
-.confirmChoiceButton:first-child{
-    box-shadow: 0 0 5px #00d75a;
-}
-
-.confirmChoiceButton:first-child:hover{
-    background-color: #00d75a;
-    box-shadow: 0 0 10px #00d75a;
-    color: white;
-    transition-duration: 200ms;
-}
-
-.confirmChoiceButton:last-child{
-    box-shadow: 0 0 5px #F64141;
-}
-
-.confirmChoiceButton:last-child:hover{
-    background-color: #F64141;
-    box-shadow: 0 0 10px #F64141;
-    color: white;
-    transition-duration: 200ms;
 }
 
 .notification {

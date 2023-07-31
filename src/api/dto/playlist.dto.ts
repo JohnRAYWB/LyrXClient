@@ -8,6 +8,7 @@ export interface playlistDto {
     readonly description: string
     readonly image: string
     readonly favorites: number
+    readonly createdTime: Date
     readonly user: userDto
     readonly tracks: trackDto[]
     readonly genre: genreDto[]

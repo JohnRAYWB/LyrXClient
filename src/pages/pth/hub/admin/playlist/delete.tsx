@@ -3,13 +3,14 @@ import {NextPageWithLayout} from "@/pages/_app";
 
 import MainLayout from "@/components/screens/MainLayout/MainLayout";
 import Search from "@/components/screens/MainLayout/Sider/components/Search";
-import EditEntitiesList from "@/components/Content/ToolsPage/components/EditEntities/EditEntitiesList"
-import {useFetchAllTrackAndSearchQuery} from "@/store/api/TrackApi";
+import EditEntitiesList from "@/components/Content/ToolsPage/components/EditEntities/EditEntitiesList";
+import {useFetchAllPlaylistAndSearchQuery} from "@/store/api/PlaylistApi";
+
 
 const Delete: NextPageWithLayout = () => {
 
     const [query, setQuery] = useState('')
-    const {data: tracks, isLoading, refetch} = useFetchAllTrackAndSearchQuery(query)
+    const {data: playlists, isLoading, refetch} = useFetchAllPlaylistAndSearchQuery(query)
 
     if(isLoading) {
         return <></>
@@ -20,11 +21,11 @@ const Delete: NextPageWithLayout = () => {
     }
 
     return (
-        <MainLayout name={'Delete Track'} searchElement={<Search onChange={searchHandle}/>}>
+        <MainLayout name={'Delete Playlist'} searchElement={<Search onChange={searchHandle}/>}>
             <EditEntitiesList
-                entities={tracks}
+                entities={playlists}
                 refetch={refetch}
-                entitiesType={'track'}
+                entitiesType={'playlist'}
                 type={'delete'}
             />
         </MainLayout>

@@ -1,6 +1,10 @@
 import React from 'react';
-import {useFetchAllPlaylistAndSearchQuery} from "@/store/api/PlaylistApi";
 import {useRouter} from "next/navigation";
+
+import styles from "../styles/EntitiesHandler.module.css"
+import CollectionStat from "@/components/Content/ToolsPage/components/CollectionStat";
+import {useFetchAllPlaylistAndSearchQuery, useFetchMostLikedPlaylistQuery} from "@/store/api/PlaylistApi";
+
 
 interface Param {
     setTotalCount: Function
@@ -9,8 +13,9 @@ interface Param {
 const PlaylistHandler: React.FC<Param> = ({setTotalCount}) => {
 
     const {data: playlists, isLoading} = useFetchAllPlaylistAndSearchQuery('')
+    const {data: favPlaylists, isLoading: favLoading} = useFetchMostLikedPlaylistQuery()
 
-    if(isLoading) {
+    if(isLoading || favLoading) {
         return <></>
     }
 
@@ -19,8 +24,12 @@ const PlaylistHandler: React.FC<Param> = ({setTotalCount}) => {
     const router = useRouter()
 
     return (
-        <div>
-
+        <div className={styles.detailedStatContainer}>
+            <CollectionStat collection={playlists} favoritesCollection={favPlaylists} entitiesType={'playlist'} title={'Playlists'}/>
+            <h1 className={styles.detailedStatTitle}>Track Control Tools</h1>
+            <div className={styles.adminToolContainer}>
+                <p onClick={() => router.push('/pth/hub/admin/track/genre')} className={styles.adminToolButton}>Delete playlist</p>
+            </div>
         </div>
     );
 };

@@ -1,0 +1,73 @@
+.deleteButton {
+    display: flex;
+    flex: 0;
+    justify-content: center;
+    padding: 10px 20px;
+    margin: 0 auto;
+    box-shadow: 0 0 5px #F64141;
+    border-radius: 10px;
+    cursor: pointer;
+    transition-duration: 200ms;
+}
+
+.deleteButton:hover {
+    background-color: #F64141;
+    box-shadow: 0 0 10px #F64141;
+    color: black;
+    transition-duration: 200ms;
+}
+
+.confirmContainer {
+    display: flex;
+    flex-flow: wrap column;
+    flex: 1;
+    padding: 10px;
+    background-color: #0e0e0e;
+    border-radius: 10px;
+}
+
+.confirmTitle {
+    text-align: center;
+    margin: 5px 0;
+}
+
+.confirmChoiceContainer {
+    display: flex;
+    flex-flow: wrap row;
+    justify-content: space-between;
+    padding: 10px;
+}
+
+.confirmChoiceButton {
+    padding: 10px 20px;
+    border-radius: 10px;
+    cursor: pointer;
+    transition-duration: 200ms;
+}
+
+.confirmChoiceButton:first-child{
+    box-shadow: 0 0 5px #00d75a;
+}
+
+.confirmChoiceButton:first-child:hover{
+    background-color: #00d75a;
+    box-shadow: 0 0 10px #00d75a;
+    color: white;
+    transition-duration: 200ms;
+}
+
+.confirmChoiceButton:last-child{
+    box-shadow: 0 0 5px #F64141;
+}
+
+.confirmChoiceButton:last-child:hover{
+    background-color: #F64141;
+    box-shadow: 0 0 10px #F64141;
+    color: white;
+    transition-duration: 200ms;
+}
+
+.notification {
+    font-size: 16px;
+    color: white;
+}

@@ -3,13 +3,13 @@ import {NextPageWithLayout} from "@/pages/_app";
 
 import MainLayout from "@/components/screens/MainLayout/MainLayout";
 import Search from "@/components/screens/MainLayout/Sider/components/Search";
-import EditEntitiesList from "@/components/Content/ToolsPage/components/EditEntities/EditEntitiesList"
-import {useFetchAllTrackAndSearchQuery} from "@/store/api/TrackApi";
+import EditEntitiesList from "@/components/Content/ToolsPage/components/EditEntities/EditEntitiesList";
+import {useFetchAllAlbumAndSearchQuery} from "@/store/api/AlbumApi";
 
 const Delete: NextPageWithLayout = () => {
 
     const [query, setQuery] = useState('')
-    const {data: tracks, isLoading, refetch} = useFetchAllTrackAndSearchQuery(query)
+    const {data: albums, isLoading, refetch} = useFetchAllAlbumAndSearchQuery(query)
 
     if(isLoading) {
         return <></>
@@ -20,11 +20,11 @@ const Delete: NextPageWithLayout = () => {
     }
 
     return (
-        <MainLayout name={'Delete Track'} searchElement={<Search onChange={searchHandle}/>}>
+        <MainLayout name={'Delete Album'} searchElement={<Search onChange={searchHandle}/>}>
             <EditEntitiesList
-                entities={tracks}
+                entities={albums}
                 refetch={refetch}
-                entitiesType={'track'}
+                entitiesType={'album'}
                 type={'delete'}
             />
         </MainLayout>
