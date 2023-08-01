@@ -4,16 +4,26 @@ import {parseCookies} from "nookies";
 import {NextPageWithLayout} from "@/pages/_app";
 import MainLayout from "@/components/screens/MainLayout/MainLayout";
 
+import styles from "@/components/Content/CollectionPage/styles/Collection.module.css";
 import AlbumCollection from "@/components/Content/CollectionPage/AlbumCollection";
-import {useFetchAllAlbumAndSearchQuery} from "@/store/api/AlbumApi";
+import {useFetchAllAlbumAndSearchQuery, useFetchAllAlbumQuery} from "@/store/api/AlbumApi";
 import Search from "@/components/screens/MainLayout/Sider/components/Search";
+import Collection from "@/components/Content/components/Collection";
+import Pagination from "@/util/Pagination";
+import {LoadingOutlined} from "@ant-design/icons";
 
 const Album: NextPageWithLayout = () => {
 
+    const [page, setPage] = useState(0)
     const [query, setQuery] = useState('')
-    const {data: albums, isLoading} = useFetchAllAlbumAndSearchQuery(query)
+    const {
+        data: searchingAlbums,
+        isLoading: searchingLoading,
+        isFetching: fetchingSearch
+    } = useFetchAllAlbumAndSearchQuery(query)
+    const {data: albums, isLoading: albumLoading, isFetching: fetchingAll} = useFetchAllAlbumQuery(page)
 
-    if (isLoading) {
+    if (searchingLoading || albumLoading) {
         return <></>
     }
 
@@ -22,7 +32,24 @@ const Album: NextPageWithLayout = () => {
     }
     return (
         <MainLayout name={'Albums'} searchElement={<Search onChange={searchHandle}/>}>
-            <AlbumCollection albums={albums}/>
+            <AlbumCollection children={
+                query ?
+                    fetchingSearch ?
+                        <div className={styles.emptyListContainer}>
+                            <p className={styles.emptyList}>Searching playlists</p>
+                            <LoadingOutlined className={styles.emptyList}/>
+                        </div>
+                        :
+                        <Collection items={searchingAlbums} type={'album'}/>
+                    :
+                    <Pagination
+                        page={page}
+                        setPage={setPage}
+                        isFetching={fetchingAll}
+                        children={<Collection items={albums} type={'album'}/>}
+                    />
+            }
+            />
         </MainLayout>
     );
 };

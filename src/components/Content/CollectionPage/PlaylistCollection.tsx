@@ -3,15 +3,13 @@ import {Carousel} from "antd";
 
 import styles from "./styles/Collection.module.css"
 import {useFetchMostLikedPlaylistQuery} from "@/store/api/PlaylistApi";
-import Collection from "@/components/Content/components/Collection";
 import Row from "@/components/Content/components/Row";
-import {playlistDto} from "@/api/dto/playlist.dto";
 
 interface PlaylistParams {
-    playlists: playlistDto[]
+    children: React.ReactNode
 }
 
-const PlaylistCollection: React.FC<PlaylistParams> = ({playlists}) => {
+const PlaylistCollection: React.FC<PlaylistParams> = ({children}) => {
 
     const {data: likedPlaylist, isLoading} = useFetchMostLikedPlaylistQuery()
 
@@ -34,12 +32,7 @@ const PlaylistCollection: React.FC<PlaylistParams> = ({playlists}) => {
                 </div>
             </div>
             <p className={styles.listText}>Community playlists</p>
-            {
-                playlists.length === 0 ?
-                    <p className={styles.notFound}>Playlist not found</p>
-                    :
-                    <Collection items={playlists} type={'playlist'}/>
-            }
+            {children}
         </div>
     );
 };

@@ -1,20 +1,24 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {wrapper} from "@/store/store";
 import {parseCookies} from "nookies";
 import {NextPageWithLayout} from "@/pages/_app";
 import MainLayout from "@/components/screens/MainLayout/MainLayout";
 
-import {useFetchAllTrackAndSearchQuery} from "@/store/api/TrackApi";
+import {useFetchAllTrackAndSearchQuery, useFetchAllTracksQuery} from "@/store/api/TrackApi";
 import TrackList from "@/components/Content/TrackPage/TrackList";
 import styles from "@/styles/Track.module.css"
 import Search from "@/components/screens/MainLayout/Sider/components/Search";
+import Pagination from "@/util/Pagination";
 
 const Track: NextPageWithLayout = () => {
 
-    const [query, setQuery] = useState('')
-    const {data: tracks, isLoading} = useFetchAllTrackAndSearchQuery(query)
+    const [page, setPage] = useState(0)
+    const [query, setQuery] = useState(null)
 
-    if (isLoading) {
+    const {data: searchingTracks, isLoading: searchLoading, isFetching: fetchingSearch} = useFetchAllTrackAndSearchQuery(query)
+    const {data: tracks, isLoading: trackLoading, isFetching: fetchingAll} = useFetchAllTracksQuery(page)
+
+    if (searchLoading || trackLoading) {
         return <></>
     }
 
@@ -25,7 +29,12 @@ const Track: NextPageWithLayout = () => {
     return (
         <MainLayout name={'Tracks'} searchElement={<Search onChange={searchHandle}/>}>
             <div className={styles.main}>
-                <TrackList tracks={tracks}/>
+                {
+                    query ?
+                        <TrackList fetchingSearch={fetchingSearch} tracks={searchingTracks}/>
+                        :
+                        <Pagination page={page} setPage={setPage} isFetching={fetchingAll} children={<TrackList tracks={tracks}/>}/>
+                }
             </div>
         </MainLayout>
     );

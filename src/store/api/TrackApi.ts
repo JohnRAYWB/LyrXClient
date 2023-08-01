@@ -3,6 +3,21 @@ import {trackDto} from "@/api/dto/track.dto";
 
 export const TrackApi = apiSlice.injectEndpoints({
     endpoints: (build) => ({
+        fetchAllTracks: build.query<trackDto[], number>({
+            query: (page) => ({
+                url: `tracks?limit=10&page=${page * 10}`,
+            }),
+            serializeQueryArgs: ({endpointName}) => {
+                return endpointName
+            },
+            merge: (currentCache, newItems) => {
+                currentCache.push(...newItems)
+            },
+            forceRefetch({currentArg, previousArg}) {
+                return currentArg !== previousArg
+            },
+            providesTags: result => ['Track']
+        }),
         fetchAllTrackAndSearch: build.query<trackDto[], string>({
             query: (query) => ({
                 url: `tracks/search?name=${query}`,
@@ -90,6 +105,7 @@ export const TrackApi = apiSlice.injectEndpoints({
 })
 
 export const {
+    useFetchAllTracksQuery,
     useFetchAllTrackAndSearchQuery,
     useFetchMostLikedTrackQuery,
     useFetchMostListensTrackQuery,

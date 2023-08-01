@@ -3,6 +3,21 @@ import {albumDto} from "@/api/dto/album.dto";
 
 export const AlbumApi = apiSlice.injectEndpoints({
     endpoints: (build) => ({
+        fetchAllAlbum: build.query({
+           query: (page) => ({
+               url: `albums?limit=10&page=${page * 10}`
+           }),
+            serializeQueryArgs: ({endpointName}) => {
+                return endpointName
+            },
+            merge: (currentCache, newItems) => {
+                currentCache.push(...newItems)
+            },
+            forceRefetch({currentArg, previousArg}) {
+                return currentArg !== previousArg
+            },
+            providesTags: result => ['Album']
+        }),
         fetchAllAlbumAndSearch: build.query<albumDto[], string>({
             query: (query) => ({
                 url: `albums/search?name=${query}`
@@ -67,6 +82,7 @@ export const AlbumApi = apiSlice.injectEndpoints({
 })
 
 export const {
+    useFetchAllAlbumQuery,
     useFetchAllAlbumAndSearchQuery,
     useFetchMostLikedAlbumQuery,
     useFetchAlbumByIdQuery,

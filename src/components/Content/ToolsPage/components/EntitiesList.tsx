@@ -22,16 +22,12 @@ const EntitiesList: React.FC<Param> = ({entities, entityType, type}) => {
             {entities.slice(0, 5).map(entity =>
                 <div onClick={() => router.push(`/pth/hub/${entityType}/${entity._id}`)}
                      className={styles.trackContainer}>
-                    {entityType === 'track' ?
+                    {entity.protectedDeletion ?
                         <Image
                             width={100}
                             height={100}
                             priority={true}
-                            src={entity.protectedDeletion ?
-                                `http://localhost:4221/album/${entity.name[0]}/${entity.image}`
-                                :
-                                `http://localhost:4221/track/${entity.name[0]}/${entity.image}`
-                            }
+                            src={`http://localhost:4221/album/${entity.name[0]}/${entity.image}`}
                             alt={'track_logo'}
                         />
                         :

@@ -3,6 +3,21 @@ import {playlistDto} from "@/api/dto/playlist.dto";
 
 export const PlaylistApi = apiSlice.injectEndpoints({
     endpoints: (build) => ({
+        fetchAllPlaylist: build.query<playlistDto[], number>({
+            query: (page) => ({
+                url: `playlists?limit=10&page=${page * 10}`,
+            }),
+            serializeQueryArgs: ({endpointName}) => {
+                return endpointName
+            },
+            merge: (currentCache, newItems) => {
+                currentCache.push(...newItems)
+            },
+            forceRefetch({currentArg, previousArg}) {
+                return currentArg !== previousArg
+            },
+            providesTags: result => ['Playlist']
+        }),
         fetchAllPlaylistAndSearch: build.query<playlistDto[], string>({
             query: (query) => ({
                 url: `playlists/search?name=${query}`
@@ -49,6 +64,7 @@ export const PlaylistApi = apiSlice.injectEndpoints({
 })
 
 export const {
+    useFetchAllPlaylistQuery,
     useFetchAllPlaylistAndSearchQuery,
     useFetchMostLikedPlaylistQuery,
     useFetchPlaylistByIdQuery,

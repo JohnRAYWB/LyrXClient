@@ -8,10 +8,10 @@ import {albumDto} from "@/api/dto/album.dto";
 import {useFetchMostLikedAlbumQuery} from "@/store/api/AlbumApi";
 
 interface AlbumParams {
-    albums: albumDto[]
+    children: React.ReactNode
 }
 
-const AlbumCollection: React.FC<AlbumParams> = ({albums}) => {
+const AlbumCollection: React.FC<AlbumParams> = ({children}) => {
 
     const {data: likedAlbums, isLoading} = useFetchMostLikedAlbumQuery(null)
 
@@ -32,12 +32,7 @@ const AlbumCollection: React.FC<AlbumParams> = ({albums}) => {
                 </Carousel>
             </div>
             <p className={styles.listText}>Recently added</p>
-            {
-                albums.length === 0 ?
-                    <p className={styles.notFound}>Album not found</p>
-                    :
-                    <Collection items={albums} type={'album'}/>
-            }
+            {children}
         </div>
     );
 };
