@@ -17,7 +17,9 @@ const EntityInfo: React.FC<Param> = ({entity, type}) => {
 
     const router = useRouter()
 
-    const description = useTextLength(entity.description, 100)
+    let description
+
+    type !== 'track' ? description = useTextLength(entity.description, 100) : null
 
     return (
         <>
