@@ -1,0 +1,133 @@
+.container {
+    display: flex;
+    flex-flow: column;
+    padding: 20px;
+    background-color: #0e0e0e;
+    border-radius: 10px;
+    color: #888888;
+}
+
+.container > * {
+    margin: 10px 0;
+}
+
+.title {
+    font-size: 18px;
+    color: white;
+    text-transform: uppercase;
+}
+
+.artistStatContainer {
+    display: flex;
+    flex-flow: wrap row;
+    justify-content: space-around;
+    align-items: center;
+    margin: 10px 0;
+    padding: 10px;
+    background-color: #1c1c1c;
+    border-radius: 10px;
+    transition-duration: 200ms;
+}
+
+.artistStatContainer:hover {
+    transform: scale(1.01);
+    transition-duration: 200ms;
+}
+
+.artistStatContainer > * {
+    flex: 0 0 30%
+}
+
+.artistStatBox {
+    padding: 20px 5px;
+    background-color: #313131;
+    border-radius: 10px;
+    font-size: 16px;
+    text-transform: uppercase;
+    text-align: center;
+    transition-duration: 200ms;
+}
+
+.artistStatBox:hover {
+    color: #F64141;
+    transform: scale(1.01);
+    transition-duration: 200ms;
+}
+
+.elementsContainer {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.elementsRow {
+    display: flex;
+    flex-flow: wrap row;
+    justify-content: space-between;
+    background-color: #050505;
+    border-radius: 10px;
+}
+
+.elementsRow > * {
+    flex: 0 0 30%;
+}
+
+.elementContainer {
+    display: flex;
+    flex-flow: wrap column;
+    justify-content: center;
+    gap: 10px;
+    padding: 10px;
+}
+
+.elementContainerTitle {
+    text-transform: uppercase;
+    font-size: 16px;
+    font-weight: bold;
+    color: #b0b0b0;
+}
+
+.detailedStatContainer {
+    display: flex;
+    flex-flow: wrap row;
+    align-items: center;
+    padding: 30px;
+    gap: 20px;
+    background-color: #1c1c1c;
+    border-radius: 10px;
+    transition-duration: 200ms;
+}
+
+.detailedStatContainer:hover {
+    background-color: #313131;
+    transition-duration: 200ms;
+}
+
+.scoreContainer {
+    display: flex;
+    flex-flow: wrap row;
+    gap: 2px;
+    padding: 10px;
+    justify-content: center;
+    background-color: #1c1c1c;
+    border-radius: 10px;
+    color: black;
+}
+
+.scoreTitle {
+    padding: 10px;
+    background-color: #F64141;
+    border-radius: 10px 0 0 10px;
+    box-shadow: 0 0 5px #F64141;
+    text-transform: uppercase;
+    transition-duration: 200ms;
+}
+
+.scoreCount {
+    padding: 10px;
+    background-color: #F64141;
+    border-radius: 0 10px 10px 0;
+    box-shadow: 0 0 5px #F64141;
+    text-transform: uppercase;
+    transition-duration: 200ms;
+}

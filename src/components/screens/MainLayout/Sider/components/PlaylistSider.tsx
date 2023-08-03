@@ -2,7 +2,6 @@ import React from 'react';
 import styles from "../styles/PlaylistSider.module.css"
 import Link from "next/link";
 import {AppstoreOutlined, PlusOutlined} from "@ant-design/icons";
-import {playlistDto} from "@/api/dto/playlist.dto";
 
 interface playlistLength {
     playlists: number

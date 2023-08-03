@@ -1,0 +1,48 @@
+.container {
+    display: flex;
+    flex-flow: wrap row;
+    justify-content: space-around;
+    align-items: center;
+    gap: 5px;
+    padding: 10px;
+    background-color: #1c1c1c;
+    border-radius: 10px;
+    transition-duration: 200ms;
+}
+
+.container:hover {
+    background-color: #313131;
+    transition-duration: 200ms;
+}
+
+.entityInfoContainer {
+    display: flex;
+    flex-flow: wrap column;
+    gap: 5px;
+    padding: 10px;
+    background-color: #0e0e0e;
+    border-radius: 10px;
+}
+
+.entityName {
+    word-break: break-word;
+}
+
+.entityScoreContainer {
+    display: flex;
+    flex-flow: wrap row;
+    gap: 1px;
+    color: black;
+}
+
+.entityScoreTitle {
+    padding: 5px;
+    background-color: #F64141;
+    border-radius: 10px 0 0 10px;
+}
+
+.entityScoreCount {
+    padding: 5px;
+    background-color: #F64141;
+    border-radius: 0 10px 10px 0;
+}

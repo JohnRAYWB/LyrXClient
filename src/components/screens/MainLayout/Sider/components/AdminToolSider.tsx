@@ -1,8 +1,9 @@
 import React from 'react';
+import Link from "next/link";
+import {ToolOutlined} from "@ant-design/icons";
+
 import styles from "../styles/PlaylistSider.module.css"
 import {roleDto} from "@/api/dto/user.dto";
-import {ToolOutlined} from "@ant-design/icons";
-import Link from "next/link";
 
 interface RolesController {
     roles: roleDto[]
@@ -15,7 +16,7 @@ const AdminToolSider: React.FC<RolesController> = ({roles}) => {
             <div className={styles.main}>
                 <div className={styles.container}>
                     <div className={styles.elem}>
-                        <ToolOutlined className={styles.titleIcon}/>
+                        <ToolOutlined/>
                         <Link className={styles.elemLink} href={'/pth/hub/admin'}>Admin tool</Link>
                     </div>
                 </div>

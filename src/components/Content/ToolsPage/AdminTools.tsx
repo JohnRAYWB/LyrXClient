@@ -1,12 +1,12 @@
 import React, {useState} from 'react';
 
-import styles from "../styles/ToolsPage.module.css";
+import styles from "./styles/ToolsPage.module.css"
 import UserHandler from "@/components/Content/ToolsPage/components/UserHandler";
 import TrackHandler from "@/components/Content/ToolsPage/components/TrackHandler";
 import PlaylistHandler from "@/components/Content/ToolsPage/components/PlaylistHandler";
 import AlbumHandler from "@/components/Content/ToolsPage/components/AlbumHandler";
 
-const AdminHeader: React.FC = () => {
+const AdminTools = () => {
 
     const [totalUsers, setTotalUsers] = useState(0)
     const [totalTracks, setTotalTracks] = useState(0)
@@ -53,7 +53,7 @@ const AdminHeader: React.FC = () => {
     }
 
     return (
-        <div>
+        <div className={styles.container}>
             <div className={styles.statistic}>
                 <h1>STATISTIC</h1>
                 <div className={styles.statisticEntities}>
@@ -121,4 +121,4 @@ const AdminHeader: React.FC = () => {
     );
 };
 
-export default AdminHeader;
+export default AdminTools;

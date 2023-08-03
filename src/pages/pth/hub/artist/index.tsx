@@ -2,24 +2,27 @@ import React from 'react';
 import {NextPageWithLayout} from "@/pages/_app";
 
 import MainLayout from "@/components/screens/MainLayout/MainLayout";
-import AdminTools from "@/components/Content/ToolsPage/AdminTools";
 import {wrapper} from "@/store/store";
 import {parseCookies} from "nookies";
-import {useAppSelector} from "@/hook/redux";
-import {selectUserData} from "@/store/slice/user";
+import {useFetchProfileQuery} from "@/store/api/UserApi";
+import ArtistTools from "@/components/Content/ArtistTools/ArtistTools";
 
-const Admin: NextPageWithLayout = () => {
+const Artist: NextPageWithLayout = () => {
 
-    const user = useAppSelector(selectUserData)
+    const {data: user, isLoading} = useFetchProfileQuery()
 
-    if(user.roles.findIndex(role => role.role === 'admin') === -1) {
+    if(isLoading) {
+        return <></>
+    }
+
+    if(user.roles.findIndex(role => role.role === 'artist') === -1) {
         return <p style={{textAlign: "center", fontSize: 44, color: '#999999'}}>Access denied</p>
     }
 
-    return <AdminTools/>
+    return <ArtistTools artist={user}/>
 };
 
-Admin.getLayout = (page: React.ReactNode) => <MainLayout name={'Admin Tools'}>{page}</MainLayout>
+Artist.getLayout = (page: React.ReactNode) => <MainLayout name={'Artist Tools'}>{page}</MainLayout>
 
 export const getServerSideProps = wrapper.getServerSideProps((store) => async (ctx) => {
 
@@ -40,4 +43,4 @@ export const getServerSideProps = wrapper.getServerSideProps((store) => async (c
     }
 })
 
-export default Admin;
+export default Artist;

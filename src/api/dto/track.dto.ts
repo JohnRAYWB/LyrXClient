@@ -20,6 +20,7 @@ export interface trackDto {
     readonly audio: string;
     readonly image: string
     readonly comments: commentDto[]
+    readonly commentCount: number
     readonly album: albumDto;
     readonly protectedDeletion: boolean
     readonly createdTime: Date

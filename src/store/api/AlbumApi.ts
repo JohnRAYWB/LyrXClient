@@ -16,7 +16,6 @@ export const AlbumApi = apiSlice.injectEndpoints({
             forceRefetch({currentArg, previousArg}) {
                 return currentArg !== previousArg
             },
-            providesTags: result => ['Album']
         }),
         fetchAllAlbumAndSearch: build.query<albumDto[], string>({
             query: (query) => ({
@@ -27,6 +26,12 @@ export const AlbumApi = apiSlice.injectEndpoints({
         fetchMostLikedAlbum: build.query<albumDto[], void>({
             query: () => ({
                 url: `albums/top`
+            }),
+            providesTags: result => ['Album']
+        }),
+        fetchArtistsAlbums: build.query<albumDto[], void>({
+            query: () => ({
+                url: 'albums/artist'
             }),
             providesTags: result => ['Album']
         }),
@@ -85,6 +90,7 @@ export const {
     useFetchAllAlbumQuery,
     useFetchAllAlbumAndSearchQuery,
     useFetchMostLikedAlbumQuery,
+    useFetchArtistsAlbumsQuery,
     useFetchAlbumByIdQuery,
     useAddAlbumToUserCollectionMutation,
     useRemoveAlbumFromUserCollectionMutation,

@@ -16,7 +16,6 @@ export const PlaylistApi = apiSlice.injectEndpoints({
             forceRefetch({currentArg, previousArg}) {
                 return currentArg !== previousArg
             },
-            providesTags: result => ['Playlist']
         }),
         fetchAllPlaylistAndSearch: build.query<playlistDto[], string>({
             query: (query) => ({

@@ -12,13 +12,28 @@
     margin-bottom: 10px;
 }
 
-.title {
+.titleContainer {
     text-align: start;
     background-color: #232323;
     border-radius: 10px;
     font-size: 18px;
     padding: 20px;
     margin: 10px;
+    transition-duration: 400ms;
+}
+
+.titleButton {
+    margin-left: 10px;
+    background-color: inherit;
+    border: none;
+    font-size: 16px;
+    color: white;
+    cursor: pointer;
+    transition-duration: 400ms;
+}
+
+.titleButton:hover {
+    color: #F64141;
     transition-duration: 400ms;
 }
 
@@ -42,8 +57,7 @@
 }
 
 .containerRow:hover {
-    margin: 2px 5px;
-    border-radius: 10px;
+    padding: 10px 30px;
     background-color: #F64141;
     transition-duration: 400ms;
 }
@@ -61,7 +75,7 @@
     padding: 5px;
     border-radius: 5px;
     box-shadow: 0 0 3px #ffffff;
-    transition-duration: 500ms;
+    transition-duration: 200ms;
 }
 
 .rowAdd:hover {
@@ -70,5 +84,5 @@
     color: #0a0a0a;
     border-radius: 5px;
     padding: 5px;
-    transition-duration: 500ms;
+    transition-duration: 200ms;
 }

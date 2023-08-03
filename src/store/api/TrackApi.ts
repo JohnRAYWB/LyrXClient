@@ -16,7 +16,6 @@ export const TrackApi = apiSlice.injectEndpoints({
             forceRefetch({currentArg, previousArg}) {
                 return currentArg !== previousArg
             },
-            providesTags: result => ['Track']
         }),
         fetchAllTrackAndSearch: build.query<trackDto[], string>({
             query: (query) => ({
@@ -33,6 +32,12 @@ export const TrackApi = apiSlice.injectEndpoints({
         fetchMostListensTrack: build.query<trackDto[], void>({
             query: () => ({
                 url: `tracks/listen`,
+            }),
+            providesTags: result => ['Track']
+        }),
+        fetchArtistsTracks: build.query<trackDto[], string>({
+            query: (sort) => ({
+                url: `tracks/artist?sort=${sort}`
             }),
             providesTags: result => ['Track']
         }),
@@ -109,6 +114,7 @@ export const {
     useFetchAllTrackAndSearchQuery,
     useFetchMostLikedTrackQuery,
     useFetchMostListensTrackQuery,
+    useFetchArtistsTracksQuery,
     useFetchTrackByIdQuery,
     useEditTrackArtistMutation,
     useAddTrackToUserCollectionMutation,

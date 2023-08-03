@@ -7,7 +7,7 @@ export const UserApi = apiSlice.injectEndpoints({
             query: () => ({
                 url: 'users/profile'
             }),
-            providesTags: result => ['User', 'Track']
+            providesTags: result => ['User', 'Track', 'Playlist', 'Album']
         }),
         fetchAllUserAndSearch: build.query<userDto[], string>({
             query: (query) => ({
