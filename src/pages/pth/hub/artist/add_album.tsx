@@ -5,6 +5,7 @@ import MainLayout from "@/components/screens/MainLayout/MainLayout";
 import {wrapper} from "@/store/store";
 import {parseCookies} from "nookies";
 import {useFetchProfileQuery} from "@/store/api/UserApi";
+import AddAlbumTool from "@/components/Content/ArtistTools/AddAlbumTool";
 
 const AddAlbum: NextPageWithLayout = () => {
 
@@ -18,11 +19,7 @@ const AddAlbum: NextPageWithLayout = () => {
         return <p style={{textAlign: "center", fontSize: 44, color: '#999999'}}>Access denied</p>
     }
 
-    return (
-        <div>
-
-        </div>
-    );
+    return <AddAlbumTool/>
 };
 
 AddAlbum.getLayout = (page: React.ReactNode) => <MainLayout name={'Add Album'}>{page}</MainLayout>

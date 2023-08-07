@@ -51,9 +51,9 @@ const PreviewPlayer = ({url}) => {
                 :
                 <PlayCircleOutlined className={styles.playButton} onClick={handlePlay}/>
             }
-            <div id={'waveform-time'} className={styles.time}>{currentTime ? currentTime : '00:00'}</div>
+            <div id={'waveform-time'} className={styles.time}>{currentTime ? currentTime : '0:00'}</div>
             <div className={styles.player} id={'waveform'} ref={waveformRef}/>
-            <div id={'waveform-time'} className={styles.time}>{duration ? duration : '00:00'}</div>
+            <div id={'waveform-time'} className={styles.time}>{duration ? duration : '0:00'}</div>
         </div>
     )
 };

@@ -1,11 +1,11 @@
 import React, {useState} from 'react';
 import {ConfigProvider, Input, notification} from "antd";
 
-import styles from "./styles/AddTrackTool.module.css";
+import styles from "./styles/AddEntityTool.module.css";
 import UploadFile from "@/util/UploadFile";
 import {useAddTrackMutation} from "@/store/api/TrackApi";
 import {LoadingOutlined} from "@ant-design/icons";
-import {useFetchAllGenreQuery} from "@/store/api/GenreApi";
+import PickedGenresList from "@/components/Content/ArtistTools/components/PickedGenresList";
 
 const AddTrackTool = () => {
 
@@ -19,25 +19,7 @@ const AddTrackTool = () => {
     const [pickedGenres, setPickedGenres] = useState([])
     const [confirm, setConfirm] = useState(false)
 
-    const {data: genres, isLoading: loadingGenre} = useFetchAllGenreQuery()
     const [addTrack, {isLoading}] = useAddTrackMutation()
-
-    if(loadingGenre) {
-        return <></>
-    }
-
-    const handlePickGenre = (gId) => {
-
-        if(pickedGenres.findIndex(genre => genre === gId) === -1) {
-            setPickedGenres(prevGenres => [...prevGenres, gId])
-        }
-
-        if(pickedGenres.findIndex(genre => genre === gId) !== -1) {
-            setPickedGenres(prevGenres => prevGenres.filter(genre => genre !== gId))
-        }
-
-        return pickedGenres
-    }
 
     const handleUpload = () => {
 
@@ -120,19 +102,7 @@ const AddTrackTool = () => {
                             </div>
                         </div>
                         <h1 className={styles.title}>Add genre</h1>
-                        <div className={styles.genresContainer}>
-                            <div className={styles.genresList}>
-                                {genres.map(genre =>
-                                    <p
-                                        key={genre._id}
-                                        onClick={() => handlePickGenre(genre._id)}
-                                        className={pickedGenres.includes(genre._id) ? styles.addedGenre : styles.genre}
-                                    >
-                                        {genre.name}
-                                    </p>
-                                )}
-                            </div>
-                        </div>
+                        <PickedGenresList pickedGenres={pickedGenres} setPickedGenres={setPickedGenres}/>
                         <div className={styles.confirmMainContainer}>
                             {confirm ?
                                 <div className={styles.confirmContainer}>

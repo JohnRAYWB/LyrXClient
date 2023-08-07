@@ -1,7 +1,8 @@
 import React from 'react';
-import styles from "@/components/Content/ArtistTools/styles/AddTrackTool.module.css";
 import Image from "next/image";
 import {CheckCircleOutlined, CloseCircleOutlined, PlusOutlined} from "@ant-design/icons";
+
+import styles from "@/components/Content/ArtistTools/styles/AddEntityTool.module.css";
 import PreviewPlayer from "@/components/Player/PreviewPlayer";
 
 interface Param {
@@ -20,8 +21,8 @@ const UploadFile: React.FC<Param> = ({type, file, preview, setPreview, setFile})
         objectUrl = URL.createObjectURL(e.target.files[0])
         setFile(e.target.files[0])
         setPreview(objectUrl)
-        console.log(e.target.files);
     }
+
     const handleRemove = () => {
         URL.revokeObjectURL(objectUrl)
         setFile(null)
@@ -40,7 +41,7 @@ const UploadFile: React.FC<Param> = ({type, file, preview, setPreview, setFile})
                         <>
                             <label onChange={handleUpload} className={styles.fileButton}>
                                 <PlusOutlined/>
-                                <input multiple={true} hidden={true} type={'file'} accept={`${type}/*`}/>
+                                <input hidden={true} type={'file'} accept={`${type}/*`}/>
                             </label>
                         </>
                     }
@@ -55,13 +56,12 @@ const UploadFile: React.FC<Param> = ({type, file, preview, setPreview, setFile})
                     {file ? <CheckCircleOutlined className={styles.fileUploaded}/> : null}
                     <p className={styles.fileContainerTitle}>Audio upload: </p>
                     {preview ?
-                        // <audio className={styles.audioContainer} controls src={preview}/>
                         <PreviewPlayer url={preview}/>
                         :
                         <>
                             <label onChange={handleUpload} className={styles.fileButton}>
                                 <PlusOutlined/>
-                                <input multiple={true} hidden={true} type={'file'} accept={`${type}/*`}/>
+                                <input hidden={true} type={'file'} accept={`${type}/*`}/>
                             </label>
                         </>
                     }

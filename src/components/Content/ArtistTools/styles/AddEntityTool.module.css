@@ -37,7 +37,7 @@
     display: flex;
     flex-flow: wrap row;
     align-items: center;
-    gap: 20px;
+    gap: 10px;
 }
 
 .fileContainerTitle {
@@ -94,7 +94,7 @@
     display: flex;
     flex-flow: wrap row;
     gap: 10px;
-    padding: 20px;
+    padding: 10px;
     background-color: #0e0e0e;
     border-radius: 10px;
 }
@@ -109,51 +109,68 @@
     color: white;
 }
 
-.genresContainer {
+.formContainer {
     display: flex;
-    flex-flow: wrap column;
+    flex-flow: column;
     margin: 20px 0;
+    padding: 10px;
+    gap: 10px;
+    background-color: #313131;
+    border-radius: 10px;
+}
+
+.formEntity {
+    display: flex;
+    flex-flow: wrap row;
+    justify-content: space-between;
     padding: 20px;
     background-color: #1c1c1c;
     border-radius: 10px;
 }
 
-.genresList {
+.addNewFormEntityContainer {
     display: flex;
-    flex-flow: wrap row;
-    gap: 10px;
+    justify-content: center;
 }
 
-.genre {
-    padding: 10px;
+.addNewFormEntityButton {
+    margin-top: 10px;
+    padding: 5px 10px;
     box-shadow: 0 0 5px #00ff5c;
     border-radius: 10px;
     color: #999999;
+    font-size: 20px;
     cursor: pointer;
     transition-duration: 200ms;
 }
 
-.genre:hover {
+.addNewFormEntityButton:hover {
     background-color: #00ff5c;
     box-shadow: 0 0 10px #00ff5c;
     color: black;
     transition-duration: 200ms;
 }
 
-.addedGenre {
-    padding: 10px;
-    background-color: #00ff5c;
-    box-shadow: 0 0 10px #00ff5c;
-    border-radius: 10px;
-    color: black;
-    cursor: pointer;
-    transition-duration: 200ms;
+.removeFormEntityContainer {
+    display: flex;
+    flex: 0 0 5%;
+    justify-content: flex-end;
+    align-items: center;
 }
 
-.addedGenre:hover {
-    background-color: #F64141;
+.removeFormEntityButton {
+    padding: 5px;
     box-shadow: 0 0 5px #F64141;
     border-radius: 10px;
+    color: #999999;
+    font-size: 20px;
+    cursor: pointer;
+    transition-duration: 200ms;
+}
+
+.removeFormEntityButton:hover {
+    background-color: #F64141;
+    box-shadow: 0 0 10px #F64141;
     color: black;
     transition-duration: 200ms;
 }

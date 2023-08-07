@@ -1,0 +1,48 @@
+.genresContainer {
+    display: flex;
+    flex-flow: wrap column;
+    margin: 20px 0;
+    padding: 20px;
+    background-color: #1c1c1c;
+    border-radius: 10px;
+}
+
+.genresList {
+    display: flex;
+    flex-flow: wrap row;
+    gap: 10px;
+}
+
+.genre {
+    padding: 10px;
+    box-shadow: 0 0 5px #00ff5c;
+    border-radius: 10px;
+    color: #999999;
+    cursor: pointer;
+    transition-duration: 200ms;
+}
+
+.genre:hover {
+    background-color: #00ff5c;
+    box-shadow: 0 0 10px #00ff5c;
+    color: black;
+    transition-duration: 200ms;
+}
+
+.addedGenre {
+    padding: 10px;
+    background-color: #00ff5c;
+    box-shadow: 0 0 10px #00ff5c;
+    border-radius: 10px;
+    color: black;
+    cursor: pointer;
+    transition-duration: 200ms;
+}
+
+.addedGenre:hover {
+    background-color: #F64141;
+    box-shadow: 0 0 5px #F64141;
+    border-radius: 10px;
+    color: black;
+    transition-duration: 200ms;
+}

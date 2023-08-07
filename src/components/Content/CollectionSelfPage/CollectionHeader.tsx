@@ -57,7 +57,7 @@ const CollectionHeader: React.FC<Items> = ({type, collection}) => {
                     <div className={styles.headerText}>
                         <div>
                             <h1 className={styles.textTitle}>{collection.name[1]}</h1>
-                            {type === 'album' ?
+                            {type === 'album' && 'artist' in collection ?
                                 <Link className={styles.userLink}
                                       href={user._id !== collection.artist._id ?
                                           `/pth/hub/users/${collection.artist._id}`
@@ -67,6 +67,9 @@ const CollectionHeader: React.FC<Items> = ({type, collection}) => {
                                     {collection.name[0]}
                                 </Link>
                                 :
+                                null
+                            }
+                            {type === 'playlist' && 'user' in collection ?
                                 <Link className={styles.userLink}
                                       href={user._id !== collection.user._id ?
                                           `/pth/hub/users/${collection.user._id}`
@@ -75,6 +78,8 @@ const CollectionHeader: React.FC<Items> = ({type, collection}) => {
                                       }>
                                     {collection.name[0]}
                                 </Link>
+                                :
+                                null
                             }
                         </div>
                         <div className={styles.collectionInfo}>
