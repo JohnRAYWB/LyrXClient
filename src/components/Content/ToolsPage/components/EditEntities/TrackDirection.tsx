@@ -5,6 +5,8 @@ import {trackDto} from "@/api/dto/track.dto";
 import {ExportOutlined, ImportOutlined, LoadingOutlined} from "@ant-design/icons";
 import {useAddTrackToAlbumMutation, useRemoveTrackFromAlbumMutation} from "@/store/api/AlbumApi";
 import {notification} from "antd";
+import useTextLength from "@/util/useTextLength";
+import {useScoreLength} from "@/util/useScoreLength";
 
 interface Param {
     track: trackDto,
@@ -37,17 +39,21 @@ const TrackDirection: React.FC<Param> = ({track, albumId,type}) => {
         })
     }
 
+    const name = useTextLength(track.name[1], 15)
+    const listens = useScoreLength(track.listens)
+    const favorites = useScoreLength(track.favorites)
+
     return (
         <div className={styles.trackContainer}>
-            <p className={styles.trackName}>{track.name[1]}</p>
+            <p className={styles.trackName}>{name}</p>
             <p className={styles.trackArtist}>{track.name[0]}</p>
             <div className={styles.trackScoreContainer}>
                 <p className={styles.trackScoreTitle}>Favorites</p>
-                <p className={styles.trackScoreCount}>{track.favorites}</p>
+                <p className={styles.trackScoreCount}>{favorites}</p>
             </div>
             <div className={styles.trackScoreContainer}>
                 <p className={styles.trackScoreTitle}>Listens</p>
-                <p className={styles.trackScoreCount}>{track.listens}</p>
+                <p className={styles.trackScoreCount}>{listens}</p>
             </div>
             {addLoading || removeLoading ?
                 <div className={styles.loadingContainer}>

@@ -7,6 +7,7 @@ import {playlistDto} from "@/api/dto/playlist.dto";
 import {albumDto} from "@/api/dto/album.dto";
 import {useRouter} from "next/navigation";
 import useTextLength from "@/util/useTextLength";
+import {useScoreLength} from "@/util/useScoreLength";
 
 interface Param {
     entity: trackDto | playlistDto | albumDto
@@ -18,8 +19,17 @@ const EntityInfo: React.FC<Param> = ({entity, type}) => {
     const router = useRouter()
 
     let description
+    let favorites
+    let listens
 
     type !== 'track' ? description = useTextLength(entity.description, 100) : null
+
+    if('listens' in entity) {
+        listens = useScoreLength(entity.listens)
+    }
+    favorites = useScoreLength(entity.favorites)
+
+    const name = useTextLength(entity.name[1], 10)
 
     return (
         <>
@@ -43,7 +53,7 @@ const EntityInfo: React.FC<Param> = ({entity, type}) => {
                 />
             }
             <div>
-                <p className={styles.entityName}>{entity.name[1]}</p>
+                <p className={styles.entityName}>{name}</p>
                 <p
                     onClick={() => router.push(`/pth/hub/users/${"artist" in entity ? entity.artist : entity.user}`)}
                     className={styles.entityArtist}>{entity.name[0]}
@@ -53,11 +63,11 @@ const EntityInfo: React.FC<Param> = ({entity, type}) => {
                 <>
                     <div className={styles.scoreContainer}>
                         <p className={styles.scoreTitle}>Favorites</p>
-                        <p className={styles.scoreCount}>{entity.favorites}</p>
+                        <p className={styles.scoreCount}>{favorites}</p>
                     </div>
                     <div className={styles.scoreContainer}>
                         <p className={styles.scoreTitle}>Listens</p>
-                        <p className={styles.scoreCount}>{entity.listens}</p>
+                        <p className={styles.scoreCount}>{listens}</p>
                     </div>
                 </>
                 :
@@ -67,7 +77,7 @@ const EntityInfo: React.FC<Param> = ({entity, type}) => {
                     </div>
                     <div className={styles.scoreContainer}>
                         <p className={styles.scoreTitle}>Favorites</p>
-                        <p className={styles.scoreCount}>{entity.favorites}</p>
+                        <p className={styles.scoreCount}>{favorites}</p>
                     </div>
                 </>
             }

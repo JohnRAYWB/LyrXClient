@@ -1,0 +1,31 @@
+.container {
+    display: flex;
+    flex-flow: wrap row;
+    justify-content: space-around;
+    align-items: center;
+    gap: 10px;
+    background-color: #0e0e0e;
+    border-radius: 50px;
+    width: 300px;
+    padding: 20px;
+}
+
+.playButton {
+    font-size: 28px;
+    color: #999999;
+    transition-duration: 200ms;
+}
+
+.playButton:hover {
+    color: #F64141;
+    transition-duration: 200ms;
+}
+
+.player {
+    width: 100px;
+    cursor: pointer;
+}
+
+.time {
+    color: #999999;
+}

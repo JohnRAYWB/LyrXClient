@@ -6,6 +6,8 @@ import styles from "../styles/EntitiesHandler.module.css"
 import {trackDto} from "@/api/dto/track.dto";
 import {playlistDto} from "@/api/dto/playlist.dto";
 import {albumDto} from "@/api/dto/album.dto";
+import useTextLength from "@/util/useTextLength";
+import {useScoreLength} from "@/util/useScoreLength";
 
 interface Param {
     entities: trackDto[] | playlistDto[] | albumDto[]
@@ -39,13 +41,13 @@ const EntitiesList: React.FC<Param> = ({entities, entityType, type}) => {
                             alt={'collection_logo'}
                         />
                     }
-                    <p>{entity.name[1]}</p>
+                    <p>{useTextLength(entity.name[1], 15)}</p>
                     <div className={styles.trackScoreContainer}>
                         {
                             type === 'favorites' ?
                                 <>
                                     <p className={styles.trackScoreTitle}>Favorites</p>
-                                    <p className={styles.trackScoreCount}>{entity.favorites}</p>
+                                    <p className={styles.trackScoreCount}>{useScoreLength(entity.favorites)}</p>
                                 </>
                                 :
                                 null
@@ -54,7 +56,7 @@ const EntitiesList: React.FC<Param> = ({entities, entityType, type}) => {
                             type === 'listens' ?
                                 <>
                                     <p className={styles.trackScoreTitle}>Listens</p>
-                                    <p className={styles.trackScoreCount}>{entity.listens}</p>
+                                    <p className={styles.trackScoreCount}>{useScoreLength(entity.listens)}</p>
                                 </>
                                 :
                                 null

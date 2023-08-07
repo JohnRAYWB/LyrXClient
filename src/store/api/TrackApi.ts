@@ -47,6 +47,15 @@ export const TrackApi = apiSlice.injectEndpoints({
             }),
             providesTags: result => ['Track', 'User']
         }),
+        addTrack: build.mutation({
+            query: (body) => ({
+                url: 'tracks',
+                method: 'POST',
+                body: body,
+                formData: true
+            }),
+            invalidatesTags: result => ['Track']
+        }),
         editTrackArtist: build.mutation({
             query: ({tId, ...uId}) => ({
                 url: `tracks/${tId}/current/artist`,
@@ -116,6 +125,7 @@ export const {
     useFetchMostListensTrackQuery,
     useFetchArtistsTracksQuery,
     useFetchTrackByIdQuery,
+    useAddTrackMutation,
     useEditTrackArtistMutation,
     useAddTrackToUserCollectionMutation,
     useRemoveTrackFromUserCollectionMutation,

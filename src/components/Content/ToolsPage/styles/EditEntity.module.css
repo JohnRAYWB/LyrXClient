@@ -30,12 +30,12 @@
 
 .entityName {
     padding: 5px 30px;
-    font-size: 20px;
+    font-size: 16px;
 }
 
 .entityArtist {
     padding: 5px 30px;
-    font-size: 16px;
+    font-size: 14px;
     cursor: pointer;
     transition-duration: 200ms;
 }

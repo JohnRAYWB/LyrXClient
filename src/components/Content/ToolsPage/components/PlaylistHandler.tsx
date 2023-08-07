@@ -28,7 +28,7 @@ const PlaylistHandler: React.FC<Param> = ({setTotalCount}) => {
             <CollectionStat collection={playlists} favoritesCollection={favPlaylists} entitiesType={'playlist'} title={'Playlists'}/>
             <h1 className={styles.detailedStatTitle}>Track Control Tools</h1>
             <div className={styles.adminToolContainer}>
-                <p onClick={() => router.push('/pth/hub/admin/track/genre')} className={styles.adminToolButton}>Delete playlist</p>
+                <p onClick={() => router.push('/pth/hub/admin/playlist/delete')} className={styles.adminToolButton}>Delete playlist</p>
             </div>
         </div>
     );

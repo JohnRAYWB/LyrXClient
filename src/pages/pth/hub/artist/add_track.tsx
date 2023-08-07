@@ -5,24 +5,21 @@ import MainLayout from "@/components/screens/MainLayout/MainLayout";
 import {wrapper} from "@/store/store";
 import {parseCookies} from "nookies";
 import {useFetchProfileQuery} from "@/store/api/UserApi";
+import AddTrackTool from "@/components/Content/ArtistTools/AddTrackTool";
 
 const AddTrack: NextPageWithLayout = () => {
 
     const {data: user, isLoading} = useFetchProfileQuery()
 
-    if(isLoading) {
+    if (isLoading) {
         return <></>
     }
 
-    if(user.roles.findIndex(role => role.role === 'artist') === -1) {
+    if (user.roles.findIndex(role => role.role === 'artist') === -1) {
         return <p style={{textAlign: "center", fontSize: 44, color: '#999999'}}>Access denied</p>
     }
 
-    return (
-        <div>
-
-        </div>
-    );
+    return <AddTrackTool/>
 };
 
 AddTrack.getLayout = (page: React.ReactNode) => <MainLayout name={'Add Track'}>{page}</MainLayout>
@@ -32,7 +29,7 @@ export const getServerSideProps = wrapper.getServerSideProps((store) => async (c
     try {
         const {access_token} = parseCookies(ctx)
 
-        if(!access_token) {
+        if (!access_token) {
             return {
                 redirect: {
                     destination: "/",
