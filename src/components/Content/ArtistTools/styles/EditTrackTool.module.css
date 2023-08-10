@@ -1,0 +1,97 @@
+/*Edit Track Tool list*/
+
+.container {
+    display: flex;
+    flex-flow: column;
+    padding: 20px;
+    background-color: #0e0e0e;
+    border-radius: 10px;
+}
+
+.title {
+    margin-bottom: 20px;
+    padding: 20px 30px;
+    background-color: #313131;
+    border-radius: 5px;
+    text-transform: uppercase;
+    color: white;
+}
+
+.tracksContainer {
+    display: flex;
+    flex-flow: column;
+    gap: 2px;
+}
+
+.trackContainer {
+    display: flex;
+    flex-flow: wrap row;
+    justify-content: space-between;
+    align-items: center;
+    padding: 5px 30px;
+    gap: 10px;
+    background-color: #1e1e1e;
+    color: #888888;
+    opacity: 75%;
+    transition-duration: 200ms;
+}
+
+.trackContainer:hover {
+    background-color: #F64141;
+    opacity: 100%;
+    color: black;
+    transition-duration: 200ms;
+}
+
+.trackContainer > * {
+    flex: 0 0 15%
+}
+
+.trackIndex {
+    display: flex;
+    flex: 0 0 30px;
+    align-items: center;
+}
+
+.image {
+    display: flex;
+    flex: 0;
+    justify-content: center;
+    align-items: center;
+}
+
+.editButtonContainer {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+}
+
+.editButton {
+    padding: 5px;
+    box-shadow: 0 0 5px #F64141;
+    border-radius: 5px;
+    font-size: 24px;
+    cursor: pointer;
+    transition-duration: 200ms;
+}
+
+.editButton:hover {
+    background-color: white;
+    transform: scale(1.1);
+    transition-duration: 200ms;
+}
+
+.emptyListContainer {
+    display: flex;
+    flex-flow: wrap column;
+    justify-content: center;
+    align-items: center;
+}
+
+.emptyList {
+    font-weight: bold;
+    font-size: 44px;
+    color: #888888;
+    text-align: center;
+    margin: 10px 0;
+}

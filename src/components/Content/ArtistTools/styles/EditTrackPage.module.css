@@ -1,0 +1,181 @@
+.container {
+    display: flex;
+    flex-flow: wrap column;
+    padding: 10px;
+    gap: 20px;
+}
+
+.title {
+    margin: 10px 0;
+    text-transform: uppercase;
+    color: white;
+}
+
+.editButtonContainer {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+}
+
+.editButton {
+    padding: 10px 20px;
+    box-shadow: 0 0 5px #F64141;
+    border-radius: 10px;
+    color: #888888;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition-duration: 200ms;
+}
+
+.editButton:hover {
+    background-color: #F64141;
+    box-shadow: 0 0 10px #F64141;
+    color: black;
+    transition-duration: 200ms;
+}
+
+.trackContainer {
+    display: flex;
+    flex-flow: wrap column;
+    padding: 20px;
+    gap: 20px;
+    background-color: #0e0e0e;
+    border-radius: 10px;
+}
+
+.trackInfoContainer {
+    display: flex;
+    flex-flow: wrap row;
+    justify-content: space-around;
+    align-items: center;
+    gap: 10px;
+}
+
+.trackInfoContainer > * {
+    flex: 0 0 20%;
+}
+
+.image {
+    flex: 0;
+}
+
+.trackName {
+    flex: 0;
+    text-transform: uppercase;
+    text-align: center;
+    color: #999999;
+}
+
+.scoreContainer {
+    display: flex;
+    flex-flow: row;
+    justify-content: center;
+    align-items: center;
+    gap: 1px;
+    padding: 10px 0;
+    background-color: #313131;
+    border-radius: 10px;
+}
+
+.scoreTitle {
+    padding: 5px 10px;
+    background-color: #F64141;
+    border-radius: 10px 0 0 10px;
+}
+
+.scoreCounter {
+    padding: 5px 10px;
+    background-color: #F64141;
+    border-radius: 0 10px 10px 0;
+}
+
+.descriptionContainer {
+    display: flex;
+    flex-flow: column;
+    padding: 10px 20px;
+    gap: 20px;
+    background-color: rgba(246, 65, 65, .3);
+    border-radius: 10px;
+}
+
+.genreList {
+    display: flex;
+    flex-flow: row;
+    align-items: center;
+    gap: 10px;
+}
+
+.genre {
+    padding: 5px 10px;
+    background-color: #00ff5c;
+    box-shadow: 0 0 5px #00ff5c;
+    border-radius: 10px;
+    color: black;
+}
+
+.description {
+    color: white;
+}
+
+.playerContainer {
+    display: flex;
+    flex-flow: row;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+    padding: 10px;
+    background-color: rgba(246, 65, 65, .3);
+    border-radius: 10px;
+}
+
+.editContainer {
+    display: flex;
+    flex-flow: wrap column;
+    padding: 10px 20px;
+    gap: 20px;
+    background-color: rgba(246, 65, 65, .4);
+    border-radius: 10px;
+}
+
+.editGenre {
+    display: flex;
+    flex-flow: column;
+    padding: 10px 20px;
+    background-color: rgba(17,17,17, .5);
+    border-radius: 10px;
+}
+
+.editMediaContainer {
+    display: flex;
+    flex-flow: wrap row;
+    justify-content: space-between;
+    align-items: center;
+    gap: 20px;
+}
+
+.filesContainer {
+    display: flex;
+    flex-flow: wrap column;
+    gap: 10px;
+}
+
+.fileContainer {
+    display: flex;
+    flex-flow: column;
+    align-items: flex-start;
+    padding: 10px 20px;
+    background-color: rgba(17,17,17, .5);
+    border-radius: 10px;
+}
+
+.editDescriptionContainer {
+    padding: 10px 20px;
+    background-color: rgba(17,17,17, .5);
+    border-radius: 10px;
+}
+
+.loadingSpinner {
+    margin: 10px auto;
+    font-size: 32px;
+    color: #00ff5c;
+}

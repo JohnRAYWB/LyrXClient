@@ -6,17 +6,16 @@ import Search from "@/components/screens/MainLayout/Sider/components/Search";
 import EditEntitiesList from "@/components/Content/ToolsPage/components/EditEntities/EditEntitiesList";
 import {wrapper} from "@/store/store";
 import {parseCookies} from "nookies";
-import {useAppSelector} from "@/hook/redux";
-import {selectUserData} from "@/store/slice/user";
 import {useFetchAllTrackAndSearchQuery} from "@/store/api/TrackApi";
+import {useFetchProfileQuery} from "@/store/api/UserApi";
 
 const Artist: NextPageWithLayout = () => {
 
     const [query, setQuery] = useState('')
-    const user = useAppSelector(selectUserData)
+    const {data: user, isLoading: userLoading} = useFetchProfileQuery()
     const {data: tracks, isLoading, refetch} = useFetchAllTrackAndSearchQuery(query)
 
-    if (isLoading) {
+    if (isLoading || userLoading) {
         return <></>
     }
 

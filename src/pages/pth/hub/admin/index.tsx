@@ -5,12 +5,15 @@ import MainLayout from "@/components/screens/MainLayout/MainLayout";
 import AdminTools from "@/components/Content/ToolsPage/AdminTools";
 import {wrapper} from "@/store/store";
 import {parseCookies} from "nookies";
-import {useAppSelector} from "@/hook/redux";
-import {selectUserData} from "@/store/slice/user";
+import {useFetchProfileQuery} from "@/store/api/UserApi";
 
 const Admin: NextPageWithLayout = () => {
 
-    const user = useAppSelector(selectUserData)
+    const {data: user, isLoading: userLoading} = useFetchProfileQuery()
+
+    if(userLoading) {
+        return <></>
+    }
 
     if(user.roles.findIndex(role => role.role === 'admin') === -1) {
         return <p style={{textAlign: "center", fontSize: 44, color: '#999999'}}>Access denied</p>

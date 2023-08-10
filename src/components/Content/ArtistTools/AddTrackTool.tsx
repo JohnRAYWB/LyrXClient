@@ -1,21 +1,23 @@
 import React, {useState} from 'react';
-import {ConfigProvider, Input, notification} from "antd";
+import {notification} from "antd";
 
 import styles from "./styles/AddEntityTool.module.css";
 import UploadFile from "@/util/UploadFile";
 import {useAddTrackMutation} from "@/store/api/TrackApi";
-import {LoadingOutlined} from "@ant-design/icons";
 import PickedGenresList from "@/components/Content/ArtistTools/components/PickedGenresList";
+import InputFields from "@/components/Content/ArtistTools/components/InputFields";
+import LoadingLine from "@/components/Content/components/LoadingLine";
+import ConfirmHandler from "@/components/Content/components/ConfirmHandler";
 
 const AddTrackTool = () => {
 
-    const [image, setImage] = useState(null)
+    const [image, setImage] = useState<File>(null)
     const [previewImage, setPreviewImage] = useState()
-    const [audio, setAudio] = useState(null)
+    const [audio, setAudio] = useState<File>(null)
     const [previewAudio, setPreviewAudio] = useState()
 
-    const [name, setName] = useState(null)
-    const [description, setDescription] = useState(null)
+    const [name, setName] = useState<string>(null)
+    const [description, setDescription] = useState<string>(null)
     const [pickedGenres, setPickedGenres] = useState([])
     const [confirm, setConfirm] = useState(false)
 
@@ -32,6 +34,8 @@ const AddTrackTool = () => {
             formData.append('audio', audio)
             addTrack(formData)
 
+            setName(null)
+            setDescription(null)
             setImage(null)
             setAudio(null)
             setPreviewImage(null)
@@ -58,10 +62,7 @@ const AddTrackTool = () => {
         <>
             {
                 isLoading ?
-                    <div className={styles.loadingContainer}>
-                        <p className={styles.loadingTitle}>Processing</p>
-                        <LoadingOutlined className={styles.loadingSpinner}/>
-                    </div>
+                    <LoadingLine/>
                     :
                     <div className={styles.container}>
                         <h1 className={styles.title}>Upload track</h1>
@@ -81,40 +82,11 @@ const AddTrackTool = () => {
                                     preview={previewAudio}
                                     setPreview={setPreviewAudio}/>
                             </div>
-                            <div className={styles.inputsContainer}>
-                                <ConfigProvider theme={{
-                                    token: {
-                                        colorBorder: '#232323FF',
-                                        colorTextPlaceholder: '#404040',
-                                        colorPrimary: '#ff2929',
-                                    }
-                                }}>
-                                    <div className={styles.inputContainer}>
-                                        <p className={styles.inputTitle}>Track Name</p>
-                                        <Input onChange={e => setName(e.target.value)} className={styles.inputField}/>
-                                    </div>
-                                    <div className={styles.inputContainer}>
-                                        <p className={styles.inputTitle}>Track Description</p>
-                                        <Input.TextArea onChange={e => setDescription(e.target.value)}
-                                                        className={styles.inputField}/>
-                                    </div>
-                                </ConfigProvider>
-                            </div>
+                            <InputFields type={'create'} title={'track'} setName={setName} setDescription={setDescription}/>
                         </div>
                         <h1 className={styles.title}>Add genre</h1>
                         <PickedGenresList pickedGenres={pickedGenres} setPickedGenres={setPickedGenres}/>
-                        <div className={styles.confirmMainContainer}>
-                            {confirm ?
-                                <div className={styles.confirmContainer}>
-                                    <p className={styles.confirmTitle}>Confirm ?</p>
-                                    <p className={styles.confirmChoiceButtonYes} onClick={handleUpload}>Yes</p>
-                                    <p className={styles.confirmChoiceButtonNo}
-                                       onClick={() => setConfirm(!confirm)}>No</p>
-                                </div>
-                                :
-                                <p className={styles.confirmButton} onClick={() => setConfirm(!confirm)}>Complete</p>
-                            }
-                        </div>
+                        <ConfirmHandler confirm={confirm} setConfirm={setConfirm} handleUpload={handleUpload}/>
                     </div>
             }
         </>

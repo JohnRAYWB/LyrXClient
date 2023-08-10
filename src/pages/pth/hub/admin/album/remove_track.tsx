@@ -6,17 +6,16 @@ import MainLayout from "@/components/screens/MainLayout/MainLayout";
 import EditEntitiesList from "@/components/Content/ToolsPage/components/EditEntities/EditEntitiesList";
 import {wrapper} from "@/store/store";
 import {parseCookies} from "nookies";
-import {useAppSelector} from "@/hook/redux";
-import {selectUserData} from "@/store/slice/user";
 import {useFetchAllAlbumAndSearchQuery} from "@/store/api/AlbumApi";
+import {useFetchProfileQuery} from "@/store/api/UserApi";
 
 const RemoveTrack: NextPageWithLayout = () => {
 
     const [query, setQuery] = useState('')
-    const user = useAppSelector(selectUserData)
+    const {data: user, isLoading: userLoading} = useFetchProfileQuery()
     const {data: albums, isLoading, refetch} = useFetchAllAlbumAndSearchQuery(query)
 
-    if (isLoading) {
+    if (isLoading || userLoading) {
         return <></>
     }
 

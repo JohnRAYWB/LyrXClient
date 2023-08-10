@@ -136,32 +136,35 @@ const TrackPage: NextPageWithLayout<PageParams> = ({trackId}) => {
                         <p className={styles.scoresItemLeft}>Favorites</p>
                         <p className={styles.scoresItemRight}>{track.favorites}</p>
                     </div>
-                    <div>
+                    <div className={styles.actionButtons}>
                         {user.tracks.findIndex(t => t._id === track._id) === -1 ?
-                            <div className={styles.actionButtons}>
+                            <>
                                 {user.tracksCollection.findIndex(t => t._id === track._id) !== -1 ?
                                     <>
                                         {removeLoading ?
                                             <LoadingOutlined className={styles.loading}/>
                                             :
-                                            <HeartFilled onClick={() => handleRemoveTrack(removeTrack, track._id)} className={styles.addButtonFill}/>
+                                               <HeartFilled onClick={() => handleRemoveTrack(removeTrack, track._id)}
+                                                         className={styles.addButtonFill}/>
                                         }
                                     </>
                                     :
                                     <>
-                                    {addLoading ?
-                                        <LoadingOutlined className={styles.loading}/>
-                                        :
-                                        <HeartOutlined onClick={() => handleAddTrack(addTrack, track._id)} className={styles.addButtonEmpty}/>
-                                    }
+                                        {addLoading ?
+                                            <LoadingOutlined className={styles.loading}/>
+                                            :
+                                            <HeartOutlined onClick={() => handleAddTrack(addTrack, track._id)}
+                                                           className={styles.addButtonEmpty}/>
+                                        }
                                     </>
                                 }
-                                <CaretRightOutlined className={styles.addButtonEmpty}/>
-                                <PlusOutlined className={styles.addButtonEmpty}/>
-                            </div>
+
+                            </>
                             :
                             null
                         }
+                        <CaretRightOutlined className={styles.addButtonEmpty}/>
+                        <PlusOutlined className={styles.addButtonEmpty}/>
                     </div>
                     <div className={styles.scoresItem}>
                         <p className={styles.scoresItemLeft}>{track.listens}</p>
@@ -194,12 +197,13 @@ const TrackPage: NextPageWithLayout<PageParams> = ({trackId}) => {
                                 style={{color: '#606060', border: '1px solid #404040'}}
                                 ghost
                                 onClick={() => {
-                                    if(text.length !== 0) {
+                                    if (text.length !== 0) {
                                         leaveComment({tId: trackId, text: text})
                                         notification.success({
                                             style: {backgroundColor: "#646464", width: 300},
                                             message: <p className={styles.notification}>Done!</p>,
-                                            description: <p className={styles.notification}>Comment add successfully</p>,
+                                            description: <p className={styles.notification}>Comment add
+                                                successfully</p>,
                                             placement: "bottomLeft",
                                             duration: 2
                                         })

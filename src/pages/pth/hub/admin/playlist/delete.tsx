@@ -6,17 +6,16 @@ import Search from "@/components/screens/MainLayout/Sider/components/Search";
 import EditEntitiesList from "@/components/Content/ToolsPage/components/EditEntities/EditEntitiesList";
 import {wrapper} from "@/store/store";
 import {parseCookies} from "nookies";
-import {useAppSelector} from "@/hook/redux";
-import {selectUserData} from "@/store/slice/user";
 import {useFetchAllPlaylistAndSearchQuery} from "@/store/api/PlaylistApi";
+import {useFetchProfileQuery} from "@/store/api/UserApi";
 
 const Delete: NextPageWithLayout = () => {
 
     const [query, setQuery] = useState('')
-    const user = useAppSelector(selectUserData)
+    const {data: user, isLoading: userLoading} = useFetchProfileQuery()
     const {data: playlists, isLoading, refetch} = useFetchAllPlaylistAndSearchQuery(query)
 
-    if (isLoading) {
+    if (isLoading || userLoading) {
         return <></>
     }
 

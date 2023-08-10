@@ -60,7 +60,6 @@
 }
 
 .fileRemove:hover {
-    font-size: 22px;
     color: #F64141;
     transition-duration: 200ms;
 }
@@ -82,31 +81,6 @@
     color: #00ff5c;
     border: 2px solid #00ff5c;
     transition-duration: 200ms;
-}
-
-.inputsContainer {
-    display: flex;
-    flex-flow: wrap column;
-    gap: 10px;
-}
-
-.inputContainer {
-    display: flex;
-    flex-flow: wrap row;
-    gap: 10px;
-    padding: 10px;
-    background-color: #0e0e0e;
-    border-radius: 10px;
-}
-
-.inputTitle {
-    text-transform: uppercase;
-    color: #999999;
-}
-
-.inputField {
-    background-color: inherit;
-    color: white;
 }
 
 .formContainer {
@@ -173,95 +147,4 @@
     box-shadow: 0 0 10px #F64141;
     color: black;
     transition-duration: 200ms;
-}
-
-.confirmMainContainer {
-    display: flex;
-    justify-content: flex-end;
-    margin-top: 20px;
-    padding: 20px;
-    color: #999999;
-}
-
-.confirmButton {
-    padding: 10px 20px;
-    box-shadow: 0 0 5px #00ff5c;
-    border-radius: 10px;
-    text-transform: uppercase;
-    transition-duration: 200ms;
-}
-
-.confirmButton:hover {
-    background-color: #00ff5c;
-    box-shadow: 0 0 10px #00ff5c;
-    color: black;
-    transition-duration: 200ms;
-}
-
-.confirmContainer {
-    display: flex;
-    flex-flow: wrap row;
-    align-items: center;
-    gap: 20px;
-    padding: 10px 20px;
-    background-color: #1c1c1c;
-    border-radius: 10px;
-}
-
-.confirmTitle {
-    text-transform: uppercase;
-}
-
-.confirmChoiceButtonYes {
-    padding: 10px;
-    box-shadow: 0 0 5px #00ff5c;
-    border-radius: 10px;
-    transition-duration: 200ms;
-}
-
-.confirmChoiceButtonYes:hover {
-    padding: 10px;
-    background-color: #00ff5c;
-    box-shadow: 0 0 10px #00ff5c;
-    border-radius: 10px;
-    color: black;
-    transition-duration: 200ms;
-}
-
-.confirmChoiceButtonNo {
-    padding: 10px;
-    box-shadow: 0 0 5px #F64141;
-    border-radius: 10px;
-    transition-duration: 200ms;
-}
-
-.confirmChoiceButtonNo:hover {
-    padding: 10px;
-    background-color: #F64141;
-    box-shadow: 0 0 10px #F64141;
-    border-radius: 10px;
-    color: black;
-    transition-duration: 200ms;
-}
-
-.loadingContainer {
-    display: flex;
-    flex-flow: wrap row;
-    justify-content: center;
-    align-items: center;
-    gap: 20px;
-    padding: 20px 30px;
-    background-color: #1c1c1c;
-    border-radius: 10px;
-}
-
-.loadingTitle {
-    color: #999999;
-    font-size: 24px;
-    text-transform: uppercase;
-}
-
-.loadingSpinner {
-    color: #00ff5c;
-    font-size: 40px;
 }

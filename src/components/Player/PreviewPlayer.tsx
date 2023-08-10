@@ -16,7 +16,11 @@ const waveSurferOptions = ref => ({
     partialRender: true
 })
 
-const PreviewPlayer = ({url}) => {
+interface Param {
+    url: string
+}
+
+const PreviewPlayer: React.FC<Param> = ({url}) => {
 
     const waveformRef = useRef(null)
     const waveSurfer = useRef(null)

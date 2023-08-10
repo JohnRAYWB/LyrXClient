@@ -15,7 +15,7 @@ export const TrackApi = apiSlice.injectEndpoints({
             },
             forceRefetch({currentArg, previousArg}) {
                 return currentArg !== previousArg
-            },
+            }
         }),
         fetchAllTrackAndSearch: build.query<trackDto[], string>({
             query: (query) => ({
@@ -35,9 +35,29 @@ export const TrackApi = apiSlice.injectEndpoints({
             }),
             providesTags: result => ['Track']
         }),
-        fetchArtistsTracks: build.query<trackDto[], string>({
+        fetchArtistsTracks: build.query<trackDto[], number>({
+            query: (page) => ({
+                url: `tracks/artist?limit=10&page=${page * 10}`
+            }),
+            serializeQueryArgs: ({endpointName}) => {
+                return endpointName
+            },
+            merge: (currentCache, newItems) => {
+                currentCache.push(...newItems)
+            },
+            forceRefetch({currentArg, previousArg}) {
+                return currentArg !== previousArg
+            },
+        }),
+        fetchArtistsTracksAndSearch: build.query<trackDto[], string>({
+            query: (name) => ({
+                url: `tracks/artist/search?name=${name}`
+            }),
+            providesTags: result => ['Track']
+        }),
+        fetchArtistsSortedTracks: build.query<trackDto[], string>({
             query: (sort) => ({
-                url: `tracks/artist?sort=${sort}`
+                url: `tracks/artist/sorted?sort=${sort}`
             }),
             providesTags: result => ['Track']
         }),
@@ -53,6 +73,46 @@ export const TrackApi = apiSlice.injectEndpoints({
                 method: 'POST',
                 body: body,
                 formData: true
+            }),
+            invalidatesTags: result => ['Track']
+        }),
+        addGenreToTrack: build.mutation({
+            query: ({tId, ...genres}) => ({
+                url: `tracks/genre/${tId}/add`,
+                method: `POST`,
+                body: genres,
+                responseHandler: (response) => response.text()
+            }),
+            invalidatesTags: result => ['Track', 'Genre']
+        }),
+        editTrackDescription: build.mutation({
+            query: ({tId, ...body}) => ({
+                url: `tracks/${tId}/current/description`,
+                method: 'PATCH',
+                body: body,
+                responseHandler: (response) => response.text()
+            }),
+            invalidatesTags: result => ['Track']
+        }),
+        editTrackAudio: build.mutation({
+            query: ({tId, audio}) => ({
+                url: `tracks/${tId}/current/audio`,
+                method: 'PATCH',
+                file: audio,
+                body: audio,
+                formData: true,
+                responseHandler: (response) => response.text()
+            }),
+            invalidatesTags: result => ['Track']
+        }),
+        editTrackImage: build.mutation({
+            query: ({tId, image}) => ({
+                url: `tracks/${tId}/current/image`,
+                method: 'PATCH',
+                file: image,
+                body: image,
+                formData: true,
+                responseHandler: (response) => response.text()
             }),
             invalidatesTags: result => ['Track']
         }),
@@ -72,6 +132,15 @@ export const TrackApi = apiSlice.injectEndpoints({
                 responseHandler: (response) => response.text()
             }),
             invalidatesTags: result => ['User', 'Track']
+        }),
+        removeGenreFromTrack: build.mutation({
+            query: ({tId, ...genres}) => ({
+                url: `tracks/genre/${tId}/remove`,
+                method: `POST`,
+                body: genres,
+                responseHandler: (response) => response.text()
+            }),
+            invalidatesTags: result => ['Track', 'Genre']
         }),
         removeTrackFromUserCollection: build.mutation({
             query: (tId) => ({
@@ -124,10 +193,17 @@ export const {
     useFetchMostLikedTrackQuery,
     useFetchMostListensTrackQuery,
     useFetchArtistsTracksQuery,
+    useFetchArtistsTracksAndSearchQuery,
+    useFetchArtistsSortedTracksQuery,
     useFetchTrackByIdQuery,
     useAddTrackMutation,
+    useAddGenreToTrackMutation,
+    useEditTrackDescriptionMutation,
+    useEditTrackAudioMutation,
+    useEditTrackImageMutation,
     useEditTrackArtistMutation,
     useAddTrackToUserCollectionMutation,
+    useRemoveGenreFromTrackMutation,
     useRemoveTrackFromUserCollectionMutation,
     useLeaveCommentMutation,
     useEditCommentMutation,

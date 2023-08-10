@@ -6,14 +6,12 @@ import Search from "@/components/screens/MainLayout/Sider/components/Search";
 import UserList from "@/components/Content/UserPage/UserList";
 import {wrapper} from "@/store/store";
 import {parseCookies} from "nookies";
-import {useAppSelector} from "@/hook/redux";
-import {selectUserData} from "@/store/slice/user";
-import {useFetchAllUserAndSearchQuery} from "@/store/api/UserApi";
+import {useFetchAllUserAndSearchQuery, useFetchProfileQuery} from "@/store/api/UserApi";
 
 const Role: NextPageWithLayout = () => {
 
     const [query, setQuery] = useState('')
-    const user = useAppSelector(selectUserData)
+    const {data: user, isLoading: userLoading} = useFetchProfileQuery()
     const {data: users, isLoading} = useFetchAllUserAndSearchQuery(query)
 
     if (isLoading) {

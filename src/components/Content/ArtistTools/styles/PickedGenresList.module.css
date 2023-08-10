@@ -3,7 +3,7 @@
     flex-flow: wrap column;
     margin: 20px 0;
     padding: 20px;
-    background-color: #1c1c1c;
+    background-color: #0e0e0e;
     border-radius: 10px;
 }
 
@@ -45,4 +45,9 @@
     border-radius: 10px;
     color: black;
     transition-duration: 200ms;
+}
+
+.loadingSpinner {
+    color: #00ff5c;
+    font-size: 24px;
 }

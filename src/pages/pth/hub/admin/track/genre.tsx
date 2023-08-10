@@ -7,20 +7,19 @@ import styles from "@/styles/Genre.module.css"
 import MainLayout from "@/components/screens/MainLayout/MainLayout";
 import {wrapper} from "@/store/store";
 import {parseCookies} from "nookies";
-import {useAppSelector} from "@/hook/redux";
-import {selectUserData} from "@/store/slice/user";
 import {useCreateGenreMutation, useFetchAllGenreQuery} from "@/store/api/GenreApi";
+import {useFetchProfileQuery} from "@/store/api/UserApi";
 
 const Genre: NextPageWithLayout = () => {
 
     const [name, setName] = useState('')
-    const user = useAppSelector(selectUserData)
+    const {data: user, isLoading: userLoading} = useFetchProfileQuery()
     const [description, setDescription] = useState('')
 
     const {data: genres, isLoading} = useFetchAllGenreQuery()
     const [createGenre, {isLoading: addLoading, isSuccess}] = useCreateGenreMutation()
 
-    if (isLoading) {
+    if (isLoading || userLoading) {
         return <></>
     }
 

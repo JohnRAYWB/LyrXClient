@@ -11,19 +11,22 @@ import styles from "./styles/AddEntityTool.module.css";
 import {useAddAlbumMutation} from "@/store/api/AlbumApi";
 import PickedGenresList from "@/components/Content/ArtistTools/components/PickedGenresList";
 import UploadFile from "@/util/UploadFile";
-import {ConfigProvider, Input, notification} from "antd";
+import {notification} from "antd";
 import PreviewPlayer from "@/components/Player/PreviewPlayer";
+import InputFields from "@/components/Content/ArtistTools/components/InputFields";
+import LoadingLine from "@/components/Content/components/LoadingLine";
+import ConfirmHandler from "@/components/Content/components/ConfirmHandler";
 
 const uuid = () => `${new Date().getTime()}`
 
 const AddAlbumTool = () => {
 
-    const [image, setImage] = useState(null)
+    const [image, setImage] = useState<File>(null)
     const [previewImage, setPreviewImage] = useState(null)
-    const [name, setName] = useState(null)
-    const [description, setDescription] = useState(null)
+    const [name, setName] = useState<string>(null)
+    const [description, setDescription] = useState<string>(null)
 
-    const [tracksUploadList, setTracksUploadList] = useState([{
+    const [tracksUploadList, setTracksUploadList] = useState<>([{
         id: uuid(),
         track: null,
         trackName: '',
@@ -48,6 +51,8 @@ const AddAlbumTool = () => {
 
             addAlbum(formData)
 
+            setName(null)
+            setDescription(null)
             setImage(null)
             setPreviewImage(null)
             setTracksUploadList([{id: uuid(), track: null, trackName: '', previewUrl: null}])
@@ -92,7 +97,6 @@ const AddAlbumTool = () => {
 
         list[index].track = e.target.files[0]
         list[index].previewUrl = URL.createObjectURL(e.target.files[0])
-
         setTracksUploadList(list)
     }
 
@@ -104,15 +108,12 @@ const AddAlbumTool = () => {
 
         setTracksUploadList(list)
     }
-
+    console.log(tracksUploadList)
     return (
         <>
             {
                 isLoading ?
-                    <div className={styles.loadingContainer}>
-                        <p className={styles.loadingTitle}>Processing</p>
-                        <LoadingOutlined className={styles.loadingSpinner}/>
-                    </div>
+                    <LoadingLine/>
                     :
                     <div className={styles.container}>
                         <h1 className={styles.title}>Upload Album</h1>
@@ -125,25 +126,7 @@ const AddAlbumTool = () => {
                                     setPreview={setPreviewImage}
                                 />
                             </div>
-                            <div className={styles.inputsContainer}>
-                                <ConfigProvider theme={{
-                                    token: {
-                                        colorBorder: '#232323FF',
-                                        colorTextPlaceholder: '#404040',
-                                        colorPrimary: '#ff2929',
-                                    }
-                                }}>
-                                    <div className={styles.inputContainer}>
-                                        <p className={styles.inputTitle}>Album Name</p>
-                                        <Input onChange={e => setName(e.target.value)} className={styles.inputField}/>
-                                    </div>
-                                    <div className={styles.inputContainer}>
-                                        <p className={styles.inputTitle}>Album Description</p>
-                                        <Input.TextArea onChange={e => setDescription(e.target.value)}
-                                                        className={styles.inputField}/>
-                                    </div>
-                                </ConfigProvider>
-                            </div>
+                            <InputFields type={'create'} title={'album'} setName={setName} setDescription={setDescription}/>
                         </div>
                         <h1 className={styles.title}>Upload album's tracks</h1>
                         <form className={styles.formContainer} autoComplete={'off'}>
@@ -183,23 +166,7 @@ const AddAlbumTool = () => {
                                                 }
                                             </div>
                                         </div>
-                                        <div className={styles.inputsContainer}>
-                                            <ConfigProvider theme={{
-                                                token: {
-                                                    colorBorder: '#232323FF',
-                                                    colorTextPlaceholder: '#404040',
-                                                    colorPrimary: '#ff2929',
-                                                }
-                                            }}>
-                                                <div className={styles.inputContainer}>
-                                                    <p className={styles.inputTitle}>Track Name</p>
-                                                    <Input
-                                                        onChange={e => handleAddTrackName(e, index)}
-                                                        className={styles.inputField}
-                                                    />
-                                                </div>
-                                            </ConfigProvider>
-                                        </div>
+                                        <InputFields type={'add row'} title={'track'} handleRequest={handleAddTrackName} id={index}/>
                                         <div className={styles.removeFormEntityContainer}>
                                             {tracksUploadList.length > 1 &&
                                                 (<MinusOutlined
@@ -222,18 +189,7 @@ const AddAlbumTool = () => {
                         </form>
                         <h1 className={styles.title}>Add Genre</h1>
                         <PickedGenresList pickedGenres={pickedGenres} setPickedGenres={setPickedGenres}/>
-                        <div className={styles.confirmMainContainer}>
-                            {confirm ?
-                                <div className={styles.confirmContainer}>
-                                    <p className={styles.confirmTitle}>Confirm ?</p>
-                                    <p className={styles.confirmChoiceButtonYes} onClick={handleAddAlbum}>Yes</p>
-                                    <p className={styles.confirmChoiceButtonNo}
-                                       onClick={() => setConfirm(!confirm)}>No</p>
-                                </div>
-                                :
-                                <p className={styles.confirmButton} onClick={() => setConfirm(!confirm)}>Complete</p>
-                            }
-                        </div>
+                        <ConfirmHandler confirm={confirm} setConfirm={setConfirm} handleUpload={handleAddAlbum}/>
                     </div>
             }
         </>

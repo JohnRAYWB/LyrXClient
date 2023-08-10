@@ -3,7 +3,7 @@ import React from 'react';
 import styles from "./styles/ArtistTools.module.css"
 import ArtistOwnElementInfo from "@/components/Content/ArtistTools/components/ArtistOwnElementInfo";
 import {userDto} from "@/api/dto/user.dto";
-import {useFetchArtistsTracksQuery} from "@/store/api/TrackApi";
+import {useFetchArtistsSortedTracksQuery} from "@/store/api/TrackApi";
 import {useFetchArtistsAlbumsQuery} from "@/store/api/AlbumApi";
 import {useScoreLength} from "@/util/useScoreLength";
 
@@ -13,14 +13,13 @@ interface Param {
 
 const ArtistTools: React.FC<Param> = ({artist}) => {
 
-    const {data: allTracks, isLoading: allLoading} = useFetchArtistsTracksQuery(null)
-    const {data: listensTracks, isLoading: listensLoading} = useFetchArtistsTracksQuery('listens')
-    const {data: favoritesTracks, isLoading: favoritesLoading} = useFetchArtistsTracksQuery('favorites')
-    const {data: commentedTracks, isLoading: commentedLoading} = useFetchArtistsTracksQuery('comment')
+    const {data: listensTracks, isLoading: listensLoading} = useFetchArtistsSortedTracksQuery('listens')
+    const {data: favoritesTracks, isLoading: favoritesLoading} = useFetchArtistsSortedTracksQuery('favorites')
+    const {data: commentedTracks, isLoading: commentedLoading} = useFetchArtistsSortedTracksQuery('comment')
 
     const {data: albums, isLoading} = useFetchArtistsAlbumsQuery()
 
-    if (isLoading || allLoading || listensLoading || favoritesLoading || commentedLoading) {
+    if (isLoading || listensLoading || favoritesLoading || commentedLoading) {
         return <></>
     }
 
@@ -28,7 +27,7 @@ const ArtistTools: React.FC<Param> = ({artist}) => {
     let listens = 0
     let tracksFavorites = 0
 
-    allTracks.forEach(track => {
+    listensTracks.forEach(track => {
         commentCount += track.commentCount
         listens += track.listens
         tracksFavorites += track.favorites
@@ -59,7 +58,7 @@ const ArtistTools: React.FC<Param> = ({artist}) => {
                 <p className={styles.artistStatBox}>Albums | {albumsCount} | Total</p>
             </div>
             <h1 className={styles.title}>Tracks Statistic</h1>
-            {allTracks.length !== 0 ?
+            {listensTracks.length !== 0 ?
                 <div className={styles.elementsContainer}>
                     <div className={styles.elementsRow}>
                         <div className={styles.elementContainer}>
