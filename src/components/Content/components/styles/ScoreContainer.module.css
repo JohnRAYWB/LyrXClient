@@ -1,0 +1,21 @@
+.scoreContainer {
+    display: flex;
+    flex-flow: row;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 1px;
+    padding: 10px 0;
+    border-radius: 10px;
+}
+
+.scoreTitle {
+    padding: 5px 10px;
+    background-color: #F64141;
+    border-radius: 10px 0 0 10px;
+}
+
+.scoreCounter {
+    padding: 5px 10px;
+    background-color: #F64141;
+    border-radius: 0 10px 10px 0;
+}

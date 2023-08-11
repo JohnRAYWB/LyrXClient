@@ -144,7 +144,7 @@ const EditTrackPage: NextPageWithLayout<Param> = ({trackId}) => {
                     <div className={styles.editContainer}>
                         <div className={styles.editGenre}>
                             <p className={styles.title}>Genre control</p>
-                            <EditGenre track={track}/>
+                            <EditGenre type={'track'} entity={track}/>
                         </div>
                         <div className={styles.editMediaContainer}>
                             <div className={styles.filesContainer}>
@@ -231,8 +231,7 @@ const EditTrackPage: NextPageWithLayout<Param> = ({trackId}) => {
     );
 };
 
-EditTrackPage.getLayout = (page: React.ReactNode) => <MainLayout
-    name={'Edit Track Page'}>{page}</MainLayout>
+EditTrackPage.getLayout = (page: React.ReactNode) => <MainLayout name={'Edit Track Page'}>{page}</MainLayout>
 
 export const getServerSideProps = wrapper.getServerSideProps((store) => async (ctx) => {
 

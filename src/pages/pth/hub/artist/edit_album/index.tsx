@@ -1,6 +1,5 @@
 import React, {useState} from 'react';
 import {NextPageWithLayout} from "@/pages/_app";
-import {LoadingOutlined} from "@ant-design/icons";
 
 import MainLayout from "@/components/screens/MainLayout/MainLayout";
 import {wrapper} from "@/store/store";
@@ -10,22 +9,20 @@ import Search from "@/components/screens/MainLayout/Sider/components/Search";
 import Pagination from "@/util/Pagination";
 import EditArtistEntitiesTool from "@/components/Content/ArtistTools/EditArtistEntitiesTool";
 import {useFetchProfileQuery} from "@/store/api/UserApi";
-import {useFetchArtistsTracksAndSearchQuery, useFetchArtistsTracksQuery} from "@/store/api/TrackApi";
+import {useFetchArtistsAlbumsAndSearchQuery, useFetchArtistsAlbumsQuery} from "@/store/api/AlbumApi";
+import {LoadingOutlined} from "@ant-design/icons";
 
-const EditTrack: NextPageWithLayout = () => {
+
+const EditAlbum: NextPageWithLayout = () => {
 
     const [query, setQuery] = useState(null)
     const [page, setPage] = useState(0)
 
     const {data: user, isLoading: userLoading} = useFetchProfileQuery()
-    const {data: pagTracks, isLoading: pagLoading, isFetching: pagFetch} = useFetchArtistsTracksQuery(page)
-    const {
-        data: searchTracks,
-        isLoading: searchLoading,
-        isFetching: searchFetch
-    } = useFetchArtistsTracksAndSearchQuery(query)
+    const {data: pagAlbums, isLoading: pagLoading, isFetching: pagFetching} = useFetchArtistsAlbumsQuery(page)
+    const {data: searchAlbums, isLoading: searchLoading, isFetching: searchFetching} = useFetchArtistsAlbumsAndSearchQuery(query)
 
-    if (userLoading || pagLoading || searchLoading) {
+    if(userLoading || pagLoading || searchLoading) {
         return <></>
     }
 
@@ -36,27 +33,27 @@ const EditTrack: NextPageWithLayout = () => {
     const searchHandle = (e) => {
         setQuery(e.target.value)
     }
-
+    console.log(pagAlbums)
     return (
-        <MainLayout name={'Edit Tracks'} searchElement={<Search onChange={searchHandle}/>}>
+        <MainLayout name={'Edit Albums'} searchElement={<Search onChange={searchHandle}/>}>
             {query ?
-                searchFetch ?
+                searchFetching ?
                     <div className={styles.emptyListContainer}>
-                        <p className={styles.emptyList}>Searching track</p>
+                        <p className={styles.emptyList}>Searching album</p>
                         <LoadingOutlined className={styles.emptyList}/>
                     </div>
                     :
-                    <EditArtistEntitiesTool type={'track'} entities={searchTracks}/>
+                    <EditArtistEntitiesTool type={'album'} entities={searchAlbums}/>
                 :
                 <Pagination
                     page={page}
                     setPage={setPage}
-                    isFetching={pagFetch}
-                    children={<EditArtistEntitiesTool type={'track'} entities={pagTracks}/>}
+                    isFetching={pagFetching}
+                    children={<EditArtistEntitiesTool type={'album'} entities={pagAlbums}/>}
                 />
             }
         </MainLayout>
-    )
+    );
 };
 
 export const getServerSideProps = wrapper.getServerSideProps((store) => async (ctx) => {
@@ -78,4 +75,4 @@ export const getServerSideProps = wrapper.getServerSideProps((store) => async (c
     }
 })
 
-export default EditTrack;
+export default EditAlbum;

@@ -29,9 +29,29 @@ export const AlbumApi = apiSlice.injectEndpoints({
             }),
             providesTags: result => ['Album']
         }),
-        fetchArtistsAlbums: build.query<albumDto[], void>({
+        fetchArtistsAlbums: build.query<albumDto[], number>({
+            query: (page) => ({
+                url: `albums/artist?limit=10&page=${page * 10}`
+            }),
+            serializeQueryArgs: ({endpointName}) => {
+                return endpointName
+            },
+            merge: (currentCache, newItems) => {
+                currentCache.push(...newItems)
+            },
+            forceRefetch({currentArg, previousArg}) {
+                return currentArg !== previousArg
+            }
+        }),
+        fetchArtistsAlbumsAndSearch: build.query<albumDto[], string>({
+            query: (name) => ({
+                url: `albums/artist/search?name=${name}`
+            }),
+            providesTags: result => ['Album']
+        }),
+        fetchArtistsSortedAlbums: build.query<albumDto[], void>({
             query: () => ({
-                url: 'albums/artist'
+                url: 'albums/artist/sorted'
             }),
             providesTags: result => ['Album']
         }),
@@ -47,6 +67,35 @@ export const AlbumApi = apiSlice.injectEndpoints({
                 method: 'POST',
                 body: body,
                 formData: true
+            }),
+            invalidatesTags: result => ['Album']
+        }),
+        addGenreToAlbum: build.mutation({
+           query: ({aId, ...genre}) => ({
+               url: `albums/genre/${aId}/add`,
+               method: 'POST',
+               body: genre,
+               responseHandler: (response) => response.text()
+           }),
+           invalidatesTags: result => ['Album', 'Genre']
+        }),
+        editAlbumDescription: build.mutation({
+            query: ({aId, ...body}) => ({
+                url: `albums/edit/${aId}/description`,
+                method: 'PATCH',
+                body: body,
+                responseHandler: (response) => response.text()
+            }),
+            invalidatesTags: result => ['Album']
+        }),
+        editAlbumImage: build.mutation({
+            query: ({aId, image}) => ({
+                url: `albums/edit/${aId}/image`,
+                method: 'PATCH',
+                file: image,
+                body: image,
+                formData: true,
+                responseHandler: (response) => response.text()
             }),
             invalidatesTags: result => ['Album']
         }),
@@ -75,6 +124,15 @@ export const AlbumApi = apiSlice.injectEndpoints({
            }),
             invalidatesTags: result => ['Album', 'Track', 'User']
         }),
+        removeGenreFromAlbum: build.mutation({
+            query: ({aId, ...genre}) => ({
+                url: `albums/genre/${aId}/remove`,
+                method: 'POST',
+                body: genre,
+                responseHandler: (response) => response.text()
+            }),
+            invalidatesTags: result => ['Album', 'Genre']
+        }),
         removeTrackFromAlbum: build.mutation({
            query: ({aId, ...tId}) => ({
                url: `albums/track/${aId}/remove`,
@@ -100,9 +158,15 @@ export const {
     useFetchAllAlbumAndSearchQuery,
     useFetchMostLikedAlbumQuery,
     useFetchArtistsAlbumsQuery,
+    useFetchArtistsAlbumsAndSearchQuery,
+    useFetchArtistsSortedAlbumsQuery,
     useFetchAlbumByIdQuery,
     useAddAlbumMutation,
+    useAddGenreToAlbumMutation,
+    useEditAlbumDescriptionMutation,
+    useEditAlbumImageMutation,
     useAddAlbumToUserCollectionMutation,
+    useRemoveGenreFromAlbumMutation,
     useRemoveAlbumFromUserCollectionMutation,
     useAddTrackToAlbumMutation,
     useRemoveTrackFromAlbumMutation,

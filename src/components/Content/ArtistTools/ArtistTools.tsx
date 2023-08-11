@@ -4,7 +4,7 @@ import styles from "./styles/ArtistTools.module.css"
 import ArtistOwnElementInfo from "@/components/Content/ArtistTools/components/ArtistOwnElementInfo";
 import {userDto} from "@/api/dto/user.dto";
 import {useFetchArtistsSortedTracksQuery} from "@/store/api/TrackApi";
-import {useFetchArtistsAlbumsQuery} from "@/store/api/AlbumApi";
+import {useFetchArtistsSortedAlbumsQuery} from "@/store/api/AlbumApi";
 import {useScoreLength} from "@/util/useScoreLength";
 
 interface Param {
@@ -17,7 +17,7 @@ const ArtistTools: React.FC<Param> = ({artist}) => {
     const {data: favoritesTracks, isLoading: favoritesLoading} = useFetchArtistsSortedTracksQuery('favorites')
     const {data: commentedTracks, isLoading: commentedLoading} = useFetchArtistsSortedTracksQuery('comment')
 
-    const {data: albums, isLoading} = useFetchArtistsAlbumsQuery()
+    const {data: albums, isLoading} = useFetchArtistsSortedAlbumsQuery()
 
     if (isLoading || listensLoading || favoritesLoading || commentedLoading) {
         return <></>

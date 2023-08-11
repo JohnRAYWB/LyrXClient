@@ -1,8 +1,8 @@
 .confirmMainContainer {
     display: flex;
     justify-content: flex-end;
-    margin-top: 20px;
-    padding: 20px;
+    /*margin-top: 20px;*/
+    /*padding: 20px;*/
     color: #999999;
 }
 
@@ -25,8 +25,8 @@
     display: flex;
     flex-flow: wrap row;
     align-items: center;
-    gap: 20px;
-    padding: 10px 20px;
+    gap: 10px;
+    padding: 10px;
     background-color: #1c1c1c;
     border-radius: 10px;
 }
@@ -36,33 +36,33 @@
 }
 
 .confirmChoiceButtonYes {
-    padding: 10px;
+    padding: 5px;
     box-shadow: 0 0 5px #00ff5c;
-    border-radius: 10px;
+    border-radius: 5px;
+    cursor: pointer;
     transition-duration: 200ms;
 }
 
 .confirmChoiceButtonYes:hover {
-    padding: 10px;
     background-color: #00ff5c;
     box-shadow: 0 0 10px #00ff5c;
-    border-radius: 10px;
+    border-radius: 5px;
     color: black;
     transition-duration: 200ms;
 }
 
 .confirmChoiceButtonNo {
-    padding: 10px;
+    padding: 5px;
     box-shadow: 0 0 5px #F64141;
-    border-radius: 10px;
+    border-radius: 5px;
+    cursor: pointer;
     transition-duration: 200ms;
 }
 
 .confirmChoiceButtonNo:hover {
-    padding: 10px;
     background-color: #F64141;
     box-shadow: 0 0 10px #F64141;
-    border-radius: 10px;
+    border-radius: 5px;
     color: black;
     transition-duration: 200ms;
 }

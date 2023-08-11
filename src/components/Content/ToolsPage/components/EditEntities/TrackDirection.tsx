@@ -24,10 +24,12 @@ const TrackDirection: React.FC<Param> = ({track, albumId,type}) => {
 
         if(type === 'add') {
             addTrack({aId: albumId, track: track._id})
+            setConfirm(false)
         }
 
         if(type === 'remove') {
             removeTrack({aId: track.album, track: track._id})
+            setConfirm(false)
         }
 
         notification.success({

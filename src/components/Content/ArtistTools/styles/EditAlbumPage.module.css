@@ -1,0 +1,131 @@
+.container {
+    display: flex;
+    flex-flow: wrap row;
+    justify-content: space-between;
+    padding: 20px;
+    gap: 20px;
+    background-color: #0e0e0e;
+    border-radius: 10px;
+}
+
+.albumMain {
+    display: flex;
+    flex-flow: wrap column;
+    flex: 18%;
+    gap: 10px;
+}
+
+.albumContainer {
+    display: flex;
+    flex-flow: column;
+    flex: 0;
+    justify-content: flex-start;
+    align-items: flex-start;
+    gap: 10px;
+    padding: 10px 20px;
+    background-color: rgba(246, 65, 65, .5);
+    border-radius: 5px;
+}
+
+.image {
+    margin: 0 auto;
+}
+
+.albumName {
+    font-size: 16px;
+    text-transform: uppercase;
+    color: white;
+}
+
+.albumDescription {
+    word-break: break-word;
+    color: #cccccc;
+}
+
+.addedGenres {
+    display: flex;
+    flex-flow: wrap row;
+    gap: 10px;
+}
+
+.addedGenres > * {
+    padding: 5px 10px;
+    background-color: #00ff5c;
+    box-shadow: 0 0 5px #00ff5c;
+    border-radius: 10px;
+}
+
+.editAlbumContainer {
+    display: flex;
+    flex-flow: column;
+    padding: 10px;
+    gap: 10px;
+    background-color: rgba(246, 65, 65, .5);
+    border-radius: 5px;
+}
+
+.editComponentContainer {
+    display: flex;
+    flex-flow: column;
+    padding: 10px;
+    gap: 10px;
+    background-color: rgba(17, 17, 17, .5);
+    border-radius: 5px;
+}
+
+.editComponentTitle {
+    color: white;
+    text-transform: uppercase;
+}
+
+.tracksContainer {
+    display: flex;
+    flex-flow: column;
+    flex: 60%;
+    gap: 10px;
+}
+
+.tracksList {
+    display: flex;
+    flex-flow: column;
+    gap: 2px;
+    padding: 10px;
+    background-color: #3d3d3d;
+    border-radius: 5px;
+}
+
+.editButtonContainer {
+    flex: 0 0 5%;
+}
+
+.editButton {
+    text-transform: uppercase;
+    text-align: center;
+    padding: 5px 10px;
+    box-shadow: 0 0 5px #F64141;
+    border-radius: 5px;
+    color: #999999;
+    cursor: pointer;
+    transition-duration: 200ms;
+}
+
+.editButton:hover {
+    background-color: #F64141;
+    box-shadow: 0 0 10px #F64141;
+    color: black;
+    transition-duration: 200ms;
+}
+
+.loadingContainer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 10px;
+    background-color: rgba(17, 17, 17, .5);
+    border-radius: 5px;
+}
+
+.loadingSpinner {
+    font-size: 20px;
+    color: #00ff5c;
+}

@@ -1,7 +1,6 @@
 .genresContainer {
     display: flex;
     flex-flow: wrap column;
-    margin: 20px 0;
     padding: 20px;
     background-color: #0e0e0e;
     border-radius: 10px;
