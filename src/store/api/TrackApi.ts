@@ -61,6 +61,12 @@ export const TrackApi = apiSlice.injectEndpoints({
             }),
             providesTags: result => ['Track']
         }),
+        fetchArtistSinglesAndSearch: build.query<trackDto[], string>({
+            query: (name) => ({
+                url: `tracks/artist/single/search?name=${name}`
+            }),
+            providesTags: result => ['Track']
+        }),
         fetchTrackById: build.query<trackDto, string>({
             query: (tId) => ({
                 url: `tracks/${tId}/current`
@@ -195,6 +201,7 @@ export const {
     useFetchArtistsTracksQuery,
     useFetchArtistsTracksAndSearchQuery,
     useFetchArtistsSortedTracksQuery,
+    useFetchArtistSinglesAndSearchQuery,
     useFetchTrackByIdQuery,
     useAddTrackMutation,
     useAddGenreToTrackMutation,

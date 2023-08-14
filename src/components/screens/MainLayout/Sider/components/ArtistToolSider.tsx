@@ -57,9 +57,16 @@ const ArtistToolSider: React.FC<RolesController> = ({roles}) => {
                     <div className={styles.containerRow}>
                         <div className={styles.rowElement}>
                             <DeleteOutlined/>
-                            <p className={styles.rowIcon}>Delete track | album</p>
+                            <p className={styles.rowIcon}>Delete track</p>
                         </div>
-                        <Link href={'/pth/hub/artist/delete'}><RightOutlined className={styles.rowAdd}/></Link>
+                        <Link href={'/pth/hub/artist/edit_track/delete'}><RightOutlined className={styles.rowAdd}/></Link>
+                    </div>
+                    <div className={styles.containerRow}>
+                        <div className={styles.rowElement}>
+                            <DeleteOutlined/>
+                            <p className={styles.rowIcon}>Delete album</p>
+                        </div>
+                        <Link href={'/pth/hub/artist/edit_album/delete'}><RightOutlined className={styles.rowAdd}/></Link>
                     </div>
                 </div>
             </div>

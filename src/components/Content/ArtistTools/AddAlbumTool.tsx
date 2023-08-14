@@ -53,6 +53,7 @@ const AddAlbumTool = () => {
 
             setName(null)
             setDescription(null)
+            setConfirm(false)
             setImage(null)
             setPreviewImage(null)
             setTracksUploadList([{id: uuid(), track: null, trackName: '', previewUrl: null}])

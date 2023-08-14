@@ -43,13 +43,13 @@ const EditAlbum: NextPageWithLayout = () => {
                         <LoadingOutlined className={styles.emptyList}/>
                     </div>
                     :
-                    <EditArtistEntitiesTool type={'album'} entities={searchAlbums}/>
+                    <EditArtistEntitiesTool type={'album'} action={'edit'} entities={searchAlbums}/>
                 :
                 <Pagination
                     page={page}
                     setPage={setPage}
                     isFetching={pagFetching}
-                    children={<EditArtistEntitiesTool type={'album'} entities={pagAlbums}/>}
+                    children={<EditArtistEntitiesTool type={'album'} action={'edit'} entities={pagAlbums}/>}
                 />
             }
         </MainLayout>

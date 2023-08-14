@@ -46,13 +46,13 @@ const EditTrack: NextPageWithLayout = () => {
                         <LoadingOutlined className={styles.emptyList}/>
                     </div>
                     :
-                    <EditArtistEntitiesTool type={'track'} entities={searchTracks}/>
+                    <EditArtistEntitiesTool type={'track'} action={'edit'} entities={searchTracks}/>
                 :
                 <Pagination
                     page={page}
                     setPage={setPage}
                     isFetching={pagFetch}
-                    children={<EditArtistEntitiesTool type={'track'} entities={pagTracks}/>}
+                    children={<EditArtistEntitiesTool type={'track'} action={'edit'} entities={pagTracks}/>}
                 />
             }
         </MainLayout>

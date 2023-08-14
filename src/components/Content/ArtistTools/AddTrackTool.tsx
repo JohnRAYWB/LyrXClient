@@ -41,6 +41,7 @@ const AddTrackTool = () => {
             setPreviewImage(null)
             setPreviewAudio(null)
             setPickedGenres([])
+            setConfirm(false)
 
             notification.success({
                 style: {backgroundColor: "#646464", width: 300},

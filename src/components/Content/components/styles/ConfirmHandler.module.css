@@ -1,8 +1,6 @@
 .confirmMainContainer {
     display: flex;
     justify-content: flex-end;
-    /*margin-top: 20px;*/
-    /*padding: 20px;*/
     color: #999999;
 }
 

@@ -15,7 +15,7 @@ const ConfirmHandler: React.FC<Param> = ({confirm,setConfirm, handleUpload}) => 
             {confirm ?
                 <div className={styles.confirmContainer}>
                     <p className={styles.confirmTitle}>Confirm ?</p>
-                    <p className={styles.confirmChoiceButtonYes} onClick={handleUpload}>Yes</p>
+                    <p className={styles.confirmChoiceButtonYes} onClick={() => handleUpload()}>Yes</p>
                     <p className={styles.confirmChoiceButtonNo}
                        onClick={() => setConfirm(!confirm)}>No</p>
                 </div>

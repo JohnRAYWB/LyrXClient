@@ -12,9 +12,9 @@ const Role: NextPageWithLayout = () => {
 
     const [query, setQuery] = useState('')
     const {data: user, isLoading: userLoading} = useFetchProfileQuery()
-    const {data: users, isLoading} = useFetchAllUserAndSearchQuery(query)
+    const {data: users, isLoading: usersLoading} = useFetchAllUserAndSearchQuery(query)
 
-    if (isLoading) {
+    if (userLoading || usersLoading) {
         return <></>
     }
 

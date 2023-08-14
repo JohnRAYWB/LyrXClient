@@ -41,7 +41,7 @@ export const PlaylistApi = apiSlice.injectEndpoints({
                 method: 'POST',
                 responseHandler: response => response.text()
             }),
-            invalidatesTags: result => ['Playlist', 'User']
+            invalidatesTags: result => ['Playlist'],
         }),
         removePlaylistFromUserCollection: build.mutation({
             query: (pId) => ({
@@ -49,7 +49,7 @@ export const PlaylistApi = apiSlice.injectEndpoints({
                 method: 'POST',
                 responseHandler: response => response.text()
             }),
-            invalidatesTags: result => ['Playlist', 'User']
+            invalidatesTags: result => ['Playlist']
         }),
         deletePlaylist: build.mutation({
             query: (pId) => ({

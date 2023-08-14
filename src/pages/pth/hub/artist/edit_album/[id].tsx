@@ -159,7 +159,10 @@ const EditAlbumPage: NextPageWithLayout<Param> = ({albumId}) => {
             <div className={styles.tracksContainer}>
                 <TrackControl type={'remove'} edit={edit} album={albumId} tracks={album.tracks}/>
                 {edit ?
-                    <TrackControl type={'add'} edit={edit} album={albumId} tracks={singles}/>
+                    singles.length !== 0 ?
+                        <TrackControl type={'add'} edit={edit} album={albumId} tracks={singles}/>
+                        :
+                        null
                     :
                     null
                 }

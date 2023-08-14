@@ -58,6 +58,7 @@
 
 .editButtonContainer {
     display: flex;
+    flex: 5%;
     justify-content: flex-end;
     align-items: center;
 }
@@ -91,4 +92,9 @@
     color: #888888;
     text-align: center;
     margin: 10px 0;
+}
+
+.loadingSpinner {
+    color: #F64141;
+    font-size: 20px;
 }

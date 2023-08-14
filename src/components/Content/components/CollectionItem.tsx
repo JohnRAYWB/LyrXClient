@@ -14,7 +14,6 @@ import {
     useRemovePlaylistFromUserCollectionMutation
 } from "@/store/api/PlaylistApi";
 import {useAddAlbumToUserCollectionMutation, useRemoveAlbumFromUserCollectionMutation} from "@/store/api/AlbumApi";
-import {notification} from "antd";
 import {handleAddPlaylist, handleRemovePlaylist} from "@/util/handlePlaylistControl";
 import {handleAddAlbum, handleRemoveAlbum} from "@/util/handleAlbumControl";
 
@@ -37,8 +36,6 @@ const CollectionItem: React.FC<CollectionItem> = ({item, type}) => {
 
     const router = useRouter()
 
-    const score = useScoreLength(item.favorites)
-
     const nameLength = useTextLength(item.name[1], 40)
     const descriptionLength = useTextLength(item.description, 40)
 
@@ -60,7 +57,7 @@ const CollectionItem: React.FC<CollectionItem> = ({item, type}) => {
             <div className={styles.actionContainer}>
                 <div className={styles.favInfo}>
                     <p className={styles.favText}>Fav</p>
-                    <p className={styles.favScore}>{score}</p>
+                    <p className={styles.favScore}>{useScoreLength(item.favorites)}</p>
                 </div>
                 <>
                     {
