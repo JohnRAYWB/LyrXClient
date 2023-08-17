@@ -29,11 +29,26 @@ export const PlaylistApi = apiSlice.injectEndpoints({
             }),
             providesTags: result => ['Playlist']
         }),
+        fetchUsersPlaylists: build.query<playlistDto[], void>({
+           query: () => ({
+               url: `playlists/user`
+           }),
+            providesTags: result => ['Playlist']
+        }),
         fetchPlaylistById: build.query<playlistDto, string>({
             query: (pId) => ({
                 url: `playlists/${pId}/current`
             }),
             providesTags: result => ['Playlist']
+        }),
+        addPlaylist: build.mutation({
+           query: (body) => ({
+                url: 'playlists',
+               method: 'POST',
+               body: body,
+               formData: true
+           }),
+            invalidatesTags: result => ['Playlist', 'User']
         }),
         addPlaylistToUserCollection: build.mutation({
             query: (pId) => ({
@@ -66,7 +81,9 @@ export const {
     useFetchAllPlaylistQuery,
     useFetchAllPlaylistAndSearchQuery,
     useFetchMostLikedPlaylistQuery,
+    useFetchUsersPlaylistsQuery,
     useFetchPlaylistByIdQuery,
+    useAddPlaylistMutation,
     useAddPlaylistToUserCollectionMutation,
     useRemovePlaylistFromUserCollectionMutation,
     useDeletePlaylistMutation

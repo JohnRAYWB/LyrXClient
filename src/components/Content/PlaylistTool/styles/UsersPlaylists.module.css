@@ -1,0 +1,282 @@
+.container {
+    display: flex;
+    flex-flow: wrap column;
+    gap: 30px;
+    padding: 10px 20px;
+    background-color: #0e0e0e;
+    border-radius: 5px;
+}
+
+.title {
+    font-size: 20px;
+    text-transform: uppercase;
+    color: white;
+}
+
+.CurrentContainer {
+    display: flex;
+    flex-flow: wrap row;
+    gap: 10px;
+}
+
+.CurrentInfoContainer {
+    display: flex;
+    flex-flow: row;
+    flex: 0 0 35%;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+    background-color: rgba(246, 65, 65, .5);
+    border-radius: 5px;
+}
+
+.image {
+    box-shadow: 1px 1px 10px #0e0e0e;
+    border-radius: 5px;
+}
+
+.CurrentDescriptionContainer {
+    display: flex;
+    flex-flow: wrap column;
+    justify-content: center;
+    align-items: flex-end;
+    gap: 5px;
+}
+
+.CurrentName {
+    padding: 5px 20px;
+    background-color: #0e0e0e;
+    font-size: 20px;
+    color: white;
+    cursor: pointer;
+    position: relative;
+    z-index: 0;
+    border-radius: 25px;
+}
+
+.CurrentName:before {
+    content: '';
+    background: linear-gradient(45deg, #f64141, #71118d, #ff29a2, #ff0059, #ff0000);
+    position: absolute;
+    top: -2px;
+    left:-2px;
+    background-size: 400%;
+    z-index: -1;
+    filter: blur(5px);
+    width: calc(100% + 4px);
+    height: calc(100% + 4px);
+    animation: glowing 20s linear infinite;
+    opacity: 0;
+    transition: opacity .3s ease-in-out;
+    border-radius: 25px;
+}
+
+.CurrentName:active {
+    color: #000
+}
+
+.CurrentName:after {
+    z-index: -1;
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    left: 0;
+    top: 0;
+    border-radius: 25px;
+}
+
+@keyframes glowing {
+    0% { background-position: 0 0; }
+    50% { background-position: 400% 0; }
+    100% { background-position: 0 0; }
+}
+
+.CurrentName:active:after {
+    background: transparent;
+}
+
+.CurrentName:hover:before {
+    opacity: 1;
+}
+
+.genresContainer {
+    display: flex;
+    flex-flow: wrap row;
+    gap: 10px;
+}
+
+.genresContainer > * {
+    padding: 5px 10px;
+    background-color: #00ff5c;
+    box-shadow: 0 0 5px #00ff5c;
+    border-radius: 10px;
+}
+
+.trackListContainer {
+    flex: 1
+}
+
+.CurrentTracksContainer {
+    display: flex;
+    flex-flow: column;
+    height: 265px;
+    gap: 5px;
+    padding: 5px 10px;
+    background-color: rgba(70, 70, 70, 0.9);
+    border-radius: 5px;
+    overflow-y: scroll;
+}
+
+.CurrentTracksContainer::-webkit-scrollbar-track {
+    border-radius: 5px;
+    background-color: rgba(17, 17, 17, .5);
+}
+
+.CurrentTracksContainer::-webkit-scrollbar {
+    width: 10px;
+}
+
+.CurrentTracksContainer::-webkit-scrollbar-thumb {
+    border-radius: 10px;
+    background-color: rgba(246, 65, 65, .3);
+}
+
+.trackContainer {
+    display: flex;
+    flex-flow: row;
+    justify-content: space-between;
+    align-items: center;
+    gap: 10px;
+    padding: 5px 20px;
+    background-color: rgba(17, 17, 17, .5);
+    color: #999999;
+    transition-duration: 100ms;
+}
+
+.trackContainer > * {
+    flex: 0 0 15%;
+}
+
+.trackMediaContainer {
+    display: flex;
+    flex-flow: row;
+    flex: 0 0 20%;
+    justify-content: space-between;
+    align-items: center;
+    gap: 10px;
+}
+
+.trackMediaContainer > * {
+    flex: 0 0 20%
+}
+
+.trackImage {
+    box-shadow: 0 0 5px #0e0e0e;
+    border-radius: 5px;
+}
+
+.trackContainer:hover {
+    color: white;
+    background-color: rgba(246, 46, 46, .5);
+    transition-duration: 100ms;
+}
+
+.actionsContainer {
+    display: flex;
+    flex-flow: row;
+    flex: 0 0 10%;
+    justify-content: space-between;
+}
+
+.actionContainer {
+    display: flex;
+    justify-content: flex-end;
+    flex: 0;
+    font-size: 20px;
+}
+
+.heartAdd:hover {
+    color: #F64141;
+}
+
+.heartRemove {
+    color: #F64141;
+}
+
+.removeTrackButton {
+    flex: 0;
+    cursor: pointer;
+}
+
+.removeTrackButton:hover {
+    color: #F64141;
+}
+
+.loadingAdd {
+    color: #00ff5c;
+}
+
+.loadingRemove {
+    color: #F64141;
+}
+
+.collectionList {
+    display: flex;
+    flex-flow: column;
+    gap: 10px;
+}
+
+.playlistsContainer {
+    display: flex;
+    flex-flow: wrap row;
+    gap: 10px;
+    padding: 10px 20px;
+    background-color: rgba(9, 9, 9, 0.5);
+    border-radius: 5px;
+}
+
+.playlistContainer {
+    display: flex;
+    flex-flow: column;
+    padding: 10px;
+    gap: 10px;
+    align-items: center;
+    background-color: rgba(61, 61, 61, 0.5);
+    border-radius: 5px;
+    color: #606060;
+    cursor: pointer;
+    transition-duration: 100ms;
+}
+
+.activePlaylistContainer {
+    display: flex;
+    flex-flow: column;
+    padding: 10px;
+    gap: 10px;
+    align-items: center;
+    background-color: rgba(246, 65, 65, .5);
+    border-radius: 5px;
+    color: white;
+}
+
+.playlistContainer:hover {
+    background-color: rgba(246, 65, 65, .5);
+    color: white;
+    transition-duration: 100ms;
+}
+
+.playlistImage {
+    box-shadow: 0 0 5px #0e0e0e;
+    border-radius: 5px;
+    transition-duration: 200ms;
+}
+
+.playlistImage:hover {
+    transform: scale(1.03);
+    transition-duration: 200ms;
+}
+
+.playlistName {
+    text-transform: uppercase;
+}

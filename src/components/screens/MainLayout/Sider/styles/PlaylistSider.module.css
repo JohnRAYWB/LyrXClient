@@ -41,15 +41,15 @@
     padding: 5px;
     border-radius: 5px;
     box-shadow: 0 0 3px #813232;
-    transition-duration: 500ms;
+    transition-duration: 200ms;
 }
 
 .elemAdd:hover {
-    box-shadow: 0 0 10px #813232;
-    transition-duration: 500ms;
     background-color: #F64141;
+    box-shadow: 0 0 10px #F64141;
     border-radius: 5px;
-    padding: 5px;
+    color: black;
+    transition-duration: 200ms;
 }
 
 .firstPlaylist {

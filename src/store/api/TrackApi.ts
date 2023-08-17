@@ -91,6 +91,23 @@ export const TrackApi = apiSlice.injectEndpoints({
             }),
             invalidatesTags: result => ['Track', 'Genre']
         }),
+        addTrackToUserCollection: build.mutation({
+            query: (tId) => ({
+                url: `tracks/collection/${tId}/add`,
+                method: 'POST',
+                responseHandler: (response) => response.text()
+            }),
+            invalidatesTags: result => ['User', 'Track']
+        }),
+        addTrackToPlaylist: build.mutation({
+            query: ({tId, ...pId}) => ({
+                url: `tracks/playlist/${tId}/add`,
+                method: 'POST',
+                body: pId,
+                responseHandler: (response) => response.text()
+            }),
+            invalidatesTags: result => ['Track', 'Playlist']
+        }),
         editTrackDescription: build.mutation({
             query: ({tId, ...body}) => ({
                 url: `tracks/${tId}/current/description`,
@@ -131,14 +148,6 @@ export const TrackApi = apiSlice.injectEndpoints({
             }),
             invalidatesTags: result => ['Track', 'User']
         }),
-        addTrackToUserCollection: build.mutation({
-            query: (tId) => ({
-                url: `tracks/collection/${tId}/add`,
-                method: 'POST',
-                responseHandler: (response) => response.text()
-            }),
-            invalidatesTags: result => ['User', 'Track']
-        }),
         removeGenreFromTrack: build.mutation({
             query: ({tId, ...genres}) => ({
                 url: `tracks/genre/${tId}/remove`,
@@ -156,6 +165,15 @@ export const TrackApi = apiSlice.injectEndpoints({
             }),
             invalidatesTags: result => ['User', 'Track']
         }),
+        removeTrackFromPlaylist: build.mutation({
+            query: ({tId, ...pId}) => ({
+                url: `tracks/playlist/${tId}/remove`,
+                method: 'POST',
+                body: pId,
+                responseHandler: (response) => response.text()
+            }),
+            invalidatesTags: result => ['Track', 'Playlist']
+        }),
         leaveComment: build.mutation({
             query: ({tId, ...text}) => ({
                 url: `tracks/comment/${tId}`,
@@ -166,12 +184,12 @@ export const TrackApi = apiSlice.injectEndpoints({
             invalidatesTags: result => ['Track']
         }),
         editComment: build.mutation({
-           query: ({cId, ...text}) => ({
-               url: `tracks/comment/${cId}/edit`,
-               method: 'PATCH',
-               body: text,
-               responseHandler: (response) => response.text()
-           }),
+            query: ({cId, ...text}) => ({
+                url: `tracks/comment/${cId}/edit`,
+                method: 'PATCH',
+                body: text,
+                responseHandler: (response) => response.text()
+            }),
             invalidatesTags: result => ['Track', 'User']
         }),
         deleteComment: build.mutation({
@@ -205,13 +223,15 @@ export const {
     useFetchTrackByIdQuery,
     useAddTrackMutation,
     useAddGenreToTrackMutation,
+    useAddTrackToUserCollectionMutation,
+    useAddTrackToPlaylistMutation,
     useEditTrackDescriptionMutation,
     useEditTrackAudioMutation,
     useEditTrackImageMutation,
     useEditTrackArtistMutation,
-    useAddTrackToUserCollectionMutation,
     useRemoveGenreFromTrackMutation,
     useRemoveTrackFromUserCollectionMutation,
+    useRemoveTrackFromPlaylistMutation,
     useLeaveCommentMutation,
     useEditCommentMutation,
     useDeleteCommentMutation,

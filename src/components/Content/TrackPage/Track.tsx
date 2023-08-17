@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import Image from "next/image";
 import {
     EllipsisOutlined,
@@ -8,16 +8,23 @@ import {
     PlayCircleOutlined
 } from "@ant-design/icons";
 import {useRouter} from "next/navigation";
-import {ConfigProvider, Divider, Dropdown, MenuProps} from "antd";
+import {ConfigProvider, Divider, Dropdown, MenuProps, message, Modal} from "antd";
 import Link from "next/link";
 
 import styles from "./styles/Track.module.css"
 import {trackDto} from "@/api/dto/track.dto";
 import useTextLength from "@/util/useTextLength";
 import {
-    useFetchProfileQuery} from "@/store/api/UserApi";
-import {useAddTrackToUserCollectionMutation, useRemoveTrackFromUserCollectionMutation} from "@/store/api/TrackApi"
+    useFetchProfileQuery
+} from "@/store/api/UserApi";
+import {
+    useAddTrackToPlaylistMutation,
+    useAddTrackToUserCollectionMutation,
+    useRemoveTrackFromUserCollectionMutation
+} from "@/store/api/TrackApi"
 import {handleAddTrack, handleRemoveTrack} from "@/util/handleTrackControl";
+import {playlistImagePath} from "@/util/ImagePath";
+import ScoreContainer from "@/components/Content/components/ScoreContainer";
 
 interface Track {
     track: trackDto
@@ -26,9 +33,13 @@ interface Track {
 
 const Track: React.FC<Track> = ({track, index}) => {
 
+    const [modalOpen, setModalOpen] = useState(false)
+    const [selectedPlaylist, setSelectedPlaylist] = useState<string>(null)
+
     const {data: user, isLoading} = useFetchProfileQuery()
     const [addTrack, {isLoading: addLoading}] = useAddTrackToUserCollectionMutation()
     const [removeTrack, {isLoading: removeLoading}] = useRemoveTrackFromUserCollectionMutation()
+    const [addTrackToPlaylist, result] = useAddTrackToPlaylistMutation()
 
     if (isLoading) {
         return <></>
@@ -47,6 +58,23 @@ const Track: React.FC<Track> = ({track, index}) => {
         folder = 'album'
     }
 
+    const handleOpenModal = () => {
+        setModalOpen(true)
+    }
+
+    const handleSubmitModal = () => {
+
+        addTrackToPlaylist({tId: track._id, playlist: selectedPlaylist})
+
+        setModalOpen(false)
+        setSelectedPlaylist(null)
+    }
+
+    const handleCancelModal = () => {
+        setSelectedPlaylist(null)
+        setModalOpen(false)
+    }
+
     const items: MenuProps['items'] = [
         {
             label: [
@@ -60,11 +88,11 @@ const Track: React.FC<Track> = ({track, index}) => {
             key: '0',
         },
         {
-            label: 'Add to playlist',
+            label: <p onClick={handleOpenModal}>Add to Playlist</p>,
             key: '1',
         }
     ];
-
+    console.log(result)
     return (
         <div>
             <div className={styles.container}>
@@ -99,7 +127,8 @@ const Track: React.FC<Track> = ({track, index}) => {
                                         {removeLoading ?
                                             <LoadingOutlined className={styles.loading}/>
                                             :
-                                            <HeartFilled onClick={() => handleRemoveTrack(removeTrack, track._id)} className={styles.favIconFill}/>
+                                            <HeartFilled onClick={() => handleRemoveTrack(removeTrack, track._id)}
+                                                         className={styles.favIconFill}/>
                                         }
                                     </>
                                     :
@@ -107,7 +136,8 @@ const Track: React.FC<Track> = ({track, index}) => {
                                         {addLoading ?
                                             <LoadingOutlined className={styles.loading}/>
                                             :
-                                            <HeartOutlined onClick={() => handleAddTrack(addTrack, track._id)} className={styles.favIcon}/>
+                                            <HeartOutlined onClick={() => handleAddTrack(addTrack, track._id)}
+                                                           className={styles.favIcon}/>
                                         }
                                     </>
                             }
@@ -115,10 +145,10 @@ const Track: React.FC<Track> = ({track, index}) => {
                         :
                         null
                     }
-
                     <ConfigProvider theme={{
                         token: {
                             colorBgElevated: '#232323',
+                            colorPrimary: '#f64141',
                             colorText: '#606060',
                             controlItemBgHover: "#303030",
                             boxShadowSecondary: "none"
@@ -127,10 +157,42 @@ const Track: React.FC<Track> = ({track, index}) => {
                         <Dropdown placement="bottomRight" menu={{items}} trigger={['click']}>
                             <EllipsisOutlined className={styles.dots}/>
                         </Dropdown>
+                        <Modal
+                            title={'Select playlist'}
+                            open={modalOpen}
+                            onOk={handleSubmitModal}
+                            onCancel={handleCancelModal}
+                            width={695}
+                            centered={true}
+                        >
+                            <div className={styles.playlistsContainer}>
+                                {user.playlists.map(playlist =>
+                                    <div key={playlist._id} onClick={() => setSelectedPlaylist(playlist._id)}
+                                         className={
+                                             selectedPlaylist && selectedPlaylist === playlist._id ?
+                                                 styles.selectedPlaylist
+                                                 :
+                                                 styles.playlistContainer
+                                         }>
+                                        <Image
+                                            className={styles.playlistImage}
+                                            width={115}
+                                            height={115}
+                                            priority={true}
+                                            src={playlistImagePath(playlist)}
+                                            alt={'playlist_logo'}
+                                        />
+                                        <p className={styles.playlistName}>{useTextLength(playlist.name[1], 10)}</p>
+                                    </div>
+                                )}
+                            </div>
+                        </Modal>
                     </ConfigProvider>
                 </div>
             </div>
             <Divider style={{width: 50}} className={styles.divider}/>
+            {result.isSuccess && message.success(result.data)}
+            {result.isError && message.error(result.error.data)}
         </div>
     );
 };

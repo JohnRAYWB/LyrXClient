@@ -99,21 +99,33 @@ const ArtistTools: React.FC<Param> = ({artist}) => {
                 <p>You don't have tracks yet</p>
             }
             <h1 className={styles.title}>Albums Statistic</h1>
-            {albums.length !== 0 ?
-                <div className={styles.elementsContainer}>
-                    <p className={styles.elementContainerTitle}>Most Liked</p>
-                    <div className={styles.elementsRow}>
-                        <div className={styles.elementContainer}>
-                            <ArtistOwnElementInfo element={albums[0]} elementType={'album'}/>
-                        </div>
-                        <div className={styles.elementContainer}>
-                            <ArtistOwnElementInfo element={albums[1]} elementType={'album'}/>
-                        </div>
-                        <div className={styles.elementContainer}>
-                            <ArtistOwnElementInfo element={albums[2]} elementType={'album'}/>
+            {albums.length !== 0 && albums.length <= 3 ?
+                albums.length < 3 ?
+                    <div className={styles.elementsContainer}>
+                        <p className={styles.elementContainerTitle}>Most Liked</p>
+                        <div className={styles.elementsRow}>
+                            {albums.map(album =>
+                                <div className={styles.elementContainer}>
+                                    <ArtistOwnElementInfo element={album} elementType={'album'}/>
+                                </div>
+                            )}
                         </div>
                     </div>
-                </div>
+                    :
+                    <div className={styles.elementsContainer}>
+                        <p className={styles.elementContainerTitle}>Most Liked</p>
+                        <div className={styles.elementsRow}>
+                            <div className={styles.elementContainer}>
+                                <ArtistOwnElementInfo element={albums[0]} elementType={'album'}/>
+                            </div>
+                            <div className={styles.elementContainer}>
+                                <ArtistOwnElementInfo element={albums[1]} elementType={'album'}/>
+                            </div>
+                            <div className={styles.elementContainer}>
+                                <ArtistOwnElementInfo element={albums[2]} elementType={'album'}/>
+                            </div>
+                        </div>
+                    </div>
                 :
                 <p>You don't have albums yet</p>
             }

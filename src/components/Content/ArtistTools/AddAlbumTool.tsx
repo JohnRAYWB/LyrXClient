@@ -2,7 +2,6 @@ import React, {useState} from 'react';
 import {
     CheckCircleOutlined,
     CloseCircleOutlined,
-    LoadingOutlined,
     MinusOutlined,
     PlusOutlined
 } from "@ant-design/icons";
@@ -109,7 +108,7 @@ const AddAlbumTool = () => {
 
         setTracksUploadList(list)
     }
-    console.log(tracksUploadList)
+
     return (
         <>
             {

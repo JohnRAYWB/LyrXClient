@@ -33,7 +33,7 @@ const EditAlbum: NextPageWithLayout = () => {
     const searchHandle = (e) => {
         setQuery(e.target.value)
     }
-    console.log(pagAlbums)
+
     return (
         <MainLayout name={'Edit Albums'} searchElement={<Search onChange={searchHandle}/>}>
             {query ?
