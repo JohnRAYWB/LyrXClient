@@ -25,7 +25,7 @@ const AddAlbumTool = () => {
     const [name, setName] = useState<string>(null)
     const [description, setDescription] = useState<string>(null)
 
-    const [tracksUploadList, setTracksUploadList] = useState<>([{
+    const [tracksUploadList, setTracksUploadList] = useState([{
         id: uuid(),
         track: null,
         trackName: '',

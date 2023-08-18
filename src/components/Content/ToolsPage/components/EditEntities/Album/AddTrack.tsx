@@ -13,7 +13,7 @@ interface Param {
 const AddTrack: React.FC<Param> = ({album}) => {
 
     const [edit, setEdit] = useState(false)
-    const {data: user, isLoading} = useFetchUserByIdQuery(album.artist)
+    const {data: user, isLoading} = useFetchUserByIdQuery(`${album.artist}`)
 
     if (isLoading) {
         return <></>

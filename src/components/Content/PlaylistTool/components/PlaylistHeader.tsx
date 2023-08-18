@@ -8,6 +8,7 @@ import ScoreContainer from "@/components/Content/components/ScoreContainer";
 import PlaylistsTrackList from "@/components/Content/PlaylistTool/components/PlaylistsTrackList";
 import {userDto} from "@/api/dto/user.dto";
 import {useRouter} from "next/navigation";
+import {SettingOutlined} from "@ant-design/icons";
 
 interface Param {
     playlist: playlistDto
@@ -36,8 +37,13 @@ const PlaylistHeader: React.FC<Param> = ({playlist, user}) => {
                     </h1>
                     <ScoreContainer title={'Favorites'} count={playlist.favorites}/>
                     <div className={styles.genresContainer}>
-                        {playlist.genre.map(genre => <p key={genre._id}>{genre.name}</p>)}
+                        {playlist.genre.map(genre => <p className={styles.genreName} key={genre._id}>{genre.name}</p>)}
                     </div>
+                    <SettingOutlined
+                        onClick={() => router.push(`/pth/hub/playlist/edit/${playlist._id}`)}
+                        title={'Edit playlist'}
+                        className={styles.edit}
+                    />
                 </div>
             </div>
             <div className={styles.trackListContainer}>
@@ -46,7 +52,8 @@ const PlaylistHeader: React.FC<Param> = ({playlist, user}) => {
                     :
                     <div className={styles.CurrentTracksContainer}>
                         {playlist.tracks.map((track, index) =>
-                            <PlaylistsTrackList key={track._id} track={track} playlistId={playlist._id} user={user} index={index}/>
+                            <PlaylistsTrackList key={track._id} track={track} playlistId={playlist._id} user={user}
+                                                index={index}/>
                         )}
                     </div>
                 }

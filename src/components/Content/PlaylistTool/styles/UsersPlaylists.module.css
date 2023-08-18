@@ -26,6 +26,7 @@
     justify-content: space-between;
     align-items: center;
     padding: 10px;
+    gap: 10px;
     background-color: rgba(246, 65, 65, .5);
     border-radius: 5px;
 }
@@ -103,14 +104,46 @@
 .genresContainer {
     display: flex;
     flex-flow: wrap row;
+    justify-content: flex-end;
+    align-items: flex-start;
     gap: 10px;
+    padding: 10px;
+    height: 75px;
+    overflow-y: scroll;
 }
 
-.genresContainer > * {
+.genresContainer::-webkit-scrollbar-track {
+    background-color: #0e0e0e;
+}
+
+.genresContainer::-webkit-scrollbar {
+    width: 5px;
+}
+
+.genresContainer::-webkit-scrollbar-thumb {
+    background-color: rgba(246, 65, 65, .5);
+}
+
+.genreName {
+    display: flex;
+    align-items: center;
     padding: 5px 10px;
     background-color: #00ff5c;
     box-shadow: 0 0 5px #00ff5c;
     border-radius: 10px;
+}
+
+.edit {
+    padding: 5px;
+    font-size: 20px;
+    color: #888888;
+    cursor: pointer;
+    transition-duration: 200ms;
+}
+
+.edit:hover {
+    color: #F64141;
+    transition-duration: 200ms;
 }
 
 .trackListContainer {

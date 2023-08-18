@@ -7,13 +7,15 @@ import {useAddGenreToTrackMutation, useRemoveGenreFromTrackMutation} from "@/sto
 import {LoadingOutlined} from "@ant-design/icons";
 import {albumDto} from "@/api/dto/album.dto";
 import {useAddGenreToAlbumMutation, useRemoveGenreFromAlbumMutation} from "@/store/api/AlbumApi";
+import {playlistDto} from "@/api/dto/playlist.dto";
+import {useAddGenreToPlaylistMutation, useRemoveGenreFromPlaylistMutation} from "@/store/api/PlaylistApi";
 
 interface Param {
     type: string
-    entity: trackDto | albumDto
+    entity: trackDto | albumDto | playlistDto
 }
 
-const EditGenre: React.FC<Param> = ({type ,entity}) => {
+const EditGenre: React.FC<Param> = ({type, entity}) => {
 
     const {data: genres, isLoading: genresLoading} = useFetchAllGenreQuery()
 
@@ -23,6 +25,9 @@ const EditGenre: React.FC<Param> = ({type ,entity}) => {
     const [addGenreToAlbum, {isLoading: addGenreToAlbumLoading}] = useAddGenreToAlbumMutation()
     const [removeGenreFromAlbum, {isLoading: removeGenreFromTAlbumLoading}] = useRemoveGenreFromAlbumMutation()
 
+    const [addGenreToPlaylist, {isLoading: addGenreToPlaylistLoading}] = useAddGenreToPlaylistMutation()
+    const [removeGenreFromPlaylist, {isLoading: removeGenreFromPlaylistLoading}] = useRemoveGenreFromPlaylistMutation()
+
     if (genresLoading) {
         return <></>
     }
@@ -30,14 +35,37 @@ const EditGenre: React.FC<Param> = ({type ,entity}) => {
     const {genre: entityGenres} = entity
 
     const handleGenreControl = (gId) => {
-        if(type === 'track') {
-            if (entityGenres.findIndex(tGenre => tGenre._id === gId) === -1) addGenreToTrack({tId: entity._id, genre: gId})
-            if (entityGenres.findIndex(tGenre => tGenre._id === gId) !== -1) removeGenreFromTrack({tId: entity._id, genre: gId})
+        if (type === 'track') {
+            if (entityGenres.findIndex(tGenre => tGenre._id === gId) === -1) addGenreToTrack({
+                tId: entity._id,
+                genre: gId
+            })
+            if (entityGenres.findIndex(tGenre => tGenre._id === gId) !== -1) removeGenreFromTrack({
+                tId: entity._id,
+                genre: gId
+            })
         }
 
-        if(type === 'album') {
-            if (entityGenres.findIndex(aGenre => aGenre._id === gId) === -1) addGenreToAlbum({aId: entity._id, genre: gId})
-            if (entityGenres.findIndex(aGenre => aGenre._id === gId) !== -1) removeGenreFromAlbum({aId: entity._id, genre: gId})
+        if (type === 'album') {
+            if (entityGenres.findIndex(aGenre => aGenre._id === gId) === -1) addGenreToAlbum({
+                aId: entity._id,
+                genre: gId
+            })
+            if (entityGenres.findIndex(aGenre => aGenre._id === gId) !== -1) removeGenreFromAlbum({
+                aId: entity._id,
+                genre: gId
+            })
+        }
+
+        if (type === 'playlist') {
+            if (entityGenres.findIndex(pGenre => pGenre._id === gId) === -1) addGenreToPlaylist({
+                pId: entity._id,
+                genre: gId
+            })
+            if (entityGenres.findIndex(pGenre => pGenre._id === gId) !== -1) removeGenreFromPlaylist({
+                pId: entity._id,
+                genre: gId
+            })
         }
     }
 
@@ -54,7 +82,7 @@ const EditGenre: React.FC<Param> = ({type ,entity}) => {
                     </p>
                 )}
                 {
-                    addGenreToTrackLoading || removeGenreFromTrackLoading || addGenreToAlbumLoading || removeGenreFromTAlbumLoading ?
+                    addGenreToTrackLoading || removeGenreFromTrackLoading || addGenreToAlbumLoading || removeGenreFromTAlbumLoading || addGenreToPlaylistLoading || removeGenreFromPlaylistLoading ?
                         <LoadingOutlined className={styles.loadingSpinner}/>
                         :
                         null

@@ -122,7 +122,7 @@
 }
 
 .playlistsContainer {
-    height: 170px;
+    height: 165px;
     display: flex;
     flex-flow: wrap row;
     gap: 10px;

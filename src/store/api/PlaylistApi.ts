@@ -50,6 +50,15 @@ export const PlaylistApi = apiSlice.injectEndpoints({
            }),
             invalidatesTags: result => ['Playlist', 'User']
         }),
+        addGenreToPlaylist: build.mutation({
+           query: ({pId, ...genre}) => ({
+               url: `playlists/genre/${pId}/add`,
+               method: 'POST',
+               body: genre,
+               responseHandler: (response) => response.text()
+           }),
+            invalidatesTags: result => ['Playlist', 'Genre']
+        }),
         addPlaylistToUserCollection: build.mutation({
             query: (pId) => ({
                 url: `playlists/collection/${pId}/add`,
@@ -57,6 +66,35 @@ export const PlaylistApi = apiSlice.injectEndpoints({
                 responseHandler: response => response.text()
             }),
             invalidatesTags: result => ['Playlist'],
+        }),
+        editPlaylistDescription: build.mutation({
+            query: ({pId, ...body}) => ({
+                url: `playlists/edit/${pId}/description`,
+                method: 'PATCH',
+                body: body,
+                responseHandler: (response) => response.text()
+            }),
+            invalidatesTags: result => ['Playlist']
+        }),
+        editPlaylistImage: build.mutation({
+            query: ({pId, image}) => ({
+                url: `playlists/edit/${pId}/image`,
+                method: 'PATCH',
+                file: image,
+                body: image,
+                formData: true,
+                responseHandler: (response) => response.text()
+            }),
+            invalidatesTags: result => ['Playlist']
+        }),
+        removeGenreFromPlaylist: build.mutation({
+            query: ({pId, ...genre}) => ({
+                url: `playlists/genre/${pId}/remove`,
+                method: 'POST',
+                body: genre,
+                responseHandler: (response) => response.text()
+            }),
+            invalidatesTags: result => ['Playlist', 'Genre']
         }),
         removePlaylistFromUserCollection: build.mutation({
             query: (pId) => ({
@@ -84,7 +122,11 @@ export const {
     useFetchUsersPlaylistsQuery,
     useFetchPlaylistByIdQuery,
     useAddPlaylistMutation,
+    useAddGenreToPlaylistMutation,
     useAddPlaylistToUserCollectionMutation,
+    useEditPlaylistDescriptionMutation,
+    useEditPlaylistImageMutation,
+    useRemoveGenreFromPlaylistMutation,
     useRemovePlaylistFromUserCollectionMutation,
     useDeletePlaylistMutation
 } = PlaylistApi

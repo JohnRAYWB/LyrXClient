@@ -47,7 +47,7 @@ const EditArtistEntityTool: React.FC<Param> = ({type, action, index, entity}) =>
                         priority={true}
                         quality={50}
                         src={
-                            entity.protectedDeletion ?
+                            'protectedDeletion' in entity && entity.protectedDeletion ?
                                 albumsTrackImagePath(entity)
                                 :
                                 trackImagePath(entity)
@@ -71,7 +71,7 @@ const EditArtistEntityTool: React.FC<Param> = ({type, action, index, entity}) =>
             </div>
             {type !== 'album' ?
                 <div>
-                    {entity.album ?
+                    {'album' in entity && entity.album ?
                         <p>{useTextLength(entity.album.name[1], 10)}</p>
                         :
                         null

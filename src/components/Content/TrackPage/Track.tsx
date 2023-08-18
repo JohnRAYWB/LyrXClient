@@ -25,6 +25,7 @@ import {
 import {handleAddTrack, handleRemoveTrack} from "@/util/handleTrackControl";
 import {playlistImagePath} from "@/util/ImagePath";
 import ScoreContainer from "@/components/Content/components/ScoreContainer";
+import {playlistDto} from "@/api/dto/playlist.dto";
 
 interface Track {
     track: trackDto
@@ -34,12 +35,12 @@ interface Track {
 const Track: React.FC<Track> = ({track, index}) => {
 
     const [modalOpen, setModalOpen] = useState(false)
-    const [selectedPlaylist, setSelectedPlaylist] = useState<string>(null)
+    const [selectedPlaylist, setSelectedPlaylist] = useState<playlistDto>(null)
 
     const {data: user, isLoading} = useFetchProfileQuery()
     const [addTrack, {isLoading: addLoading}] = useAddTrackToUserCollectionMutation()
     const [removeTrack, {isLoading: removeLoading}] = useRemoveTrackFromUserCollectionMutation()
-    const [addTrackToPlaylist, result] = useAddTrackToPlaylistMutation()
+    const [addTrackToPlaylist, {isLoading: toPlaylistLoading}] = useAddTrackToPlaylistMutation()
 
     if (isLoading) {
         return <></>
@@ -64,10 +65,17 @@ const Track: React.FC<Track> = ({track, index}) => {
 
     const handleSubmitModal = () => {
 
-        addTrackToPlaylist({tId: track._id, playlist: selectedPlaylist})
+        if(selectedPlaylist.tracks.findIndex(selectedTrack => selectedTrack === track._id) === -1) {
+            addTrackToPlaylist({tId: track._id, playlist: selectedPlaylist._id})
 
-        setModalOpen(false)
-        setSelectedPlaylist(null)
+            setModalOpen(false)
+            setSelectedPlaylist(null)
+
+            message.success('Track added successfully')
+        } else {
+            message.error('Something goes wrong. Maybe you have this track in playlist already')
+        }
+
     }
 
     const handleCancelModal = () => {
@@ -92,7 +100,7 @@ const Track: React.FC<Track> = ({track, index}) => {
             key: '1',
         }
     ];
-    console.log(result)
+
     return (
         <div>
             <div className={styles.container}>
@@ -167,9 +175,9 @@ const Track: React.FC<Track> = ({track, index}) => {
                         >
                             <div className={styles.playlistsContainer}>
                                 {user.playlists.map(playlist =>
-                                    <div key={playlist._id} onClick={() => setSelectedPlaylist(playlist._id)}
+                                    <div key={playlist._id} onClick={() => setSelectedPlaylist(playlist)}
                                          className={
-                                             selectedPlaylist && selectedPlaylist === playlist._id ?
+                                             selectedPlaylist && selectedPlaylist._id === playlist._id ?
                                                  styles.selectedPlaylist
                                                  :
                                                  styles.playlistContainer
@@ -191,8 +199,6 @@ const Track: React.FC<Track> = ({track, index}) => {
                 </div>
             </div>
             <Divider style={{width: 50}} className={styles.divider}/>
-            {result.isSuccess && message.success(result.data)}
-            {result.isError && message.error(result.error.data)}
         </div>
     );
 };

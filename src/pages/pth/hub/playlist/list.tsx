@@ -92,7 +92,7 @@ const UsersPlaylists: NextPageWithLayout = () => {
     );
 };
 
-UsersPlaylists.getLayout = (page: React.ReactNode) => <MainLayout name={'Your Playlists'}>{page}</MainLayout>
+UsersPlaylists.getLayout = (page: React.ReactNode) => <MainLayout name={'Playlists Collection'}>{page}</MainLayout>
 
 export const getServerSideProps = wrapper.getServerSideProps((store) => async (ctx) => {
 
