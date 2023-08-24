@@ -3,12 +3,13 @@ import {createWrapper, HYDRATE} from "next-redux-wrapper";
 import {userReducer} from "./slice/user"
 import {authReducer} from "@/store/slice/auth";
 import {apiSlice} from "@/store/api/apiSlice";
+import {playerReducer} from "@/store/slice/player";
 
 export const rootReducer = combineReducers({
     [apiSlice.reducerPath]: apiSlice.reducer,
-
     user: userReducer,
-    auth: authReducer
+    auth: authReducer,
+    player: playerReducer
 })
 
 export const reducer = (state, action) => {

@@ -39,11 +39,15 @@ const PlaylistHeader: React.FC<Param> = ({playlist, user}) => {
                     <div className={styles.genresContainer}>
                         {playlist.genre.map(genre => <p className={styles.genreName} key={genre._id}>{genre.name}</p>)}
                     </div>
-                    <SettingOutlined
-                        onClick={() => router.push(`/pth/hub/playlist/edit/${playlist._id}`)}
-                        title={'Edit playlist'}
-                        className={styles.edit}
-                    />
+                    {user.playlists.findIndex(uPlaylist => uPlaylist._id === playlist._id) !== -1 ?
+                        <SettingOutlined
+                            onClick={() => router.push(`/pth/hub/playlist/edit/${playlist._id}`)}
+                            title={'Edit playlist'}
+                            className={styles.edit}
+                        />
+                        :
+                        null
+                    }
                 </div>
             </div>
             <div className={styles.trackListContainer}>

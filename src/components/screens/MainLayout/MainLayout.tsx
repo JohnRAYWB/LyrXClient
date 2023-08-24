@@ -5,6 +5,7 @@ import Head from "next/head";
 import styles from "./MainLayout.module.css"
 import MainSider from "./Sider/MainSider";
 import Navigation from "./Navigation/Navigation";
+import FooterPlayer from "@/components/Player/FooterPlayer";
 
 const {Header, Content, Footer, Sider} = Layout;
 
@@ -32,6 +33,7 @@ const App: React.FC<NavName> = ({children, searchElement, name}) => {
                     </Content>
                     <Footer className={styles.footer}>© LyrX | All rights reserved</Footer>
                 </Layout>
+                <FooterPlayer track={null}/>
             </Layout>
         </>
     )

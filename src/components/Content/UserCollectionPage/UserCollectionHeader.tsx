@@ -72,7 +72,7 @@ const UserCollectionHeader: React.FC<UserCollectionParam> = ({user, type}) => {
                 <p className={styles.title}>My collection</p>
                 <CollectionCountsHead
                     track={user.tracksCollection}
-                    playlist={user.playlistsCollection}
+                    playlist={[].concat(user.playlistsCollection, user.playlists)}
                     album={user.albumsCollection}
                     setChildren={setChildren}
                 />

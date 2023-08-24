@@ -5,6 +5,8 @@ import styles from "./styles/TrackList.module.css"
 import {trackDto} from "@/api/dto/track.dto";
 import Track from "@/components/Content/TrackPage/Track";
 import {LoadingOutlined} from "@ant-design/icons";
+import {useAppDispatch, useAppSelector} from "@/hook/redux";
+import {selectTrackData} from "@/store/slice/player";
 
 interface TrackListData {
     tracks: trackDto[]
@@ -24,6 +26,8 @@ const TrackList: React.FC<TrackListData> = ({tracks, fetchingSearch}) => {
         return <div className={styles.emptyList}>Here no added tracks yet</div>
     }
 
+    const player = useAppSelector(selectTrackData)
+    console.log(player)
     return (
         <div>
             <div className={styles.main}>
@@ -38,9 +42,11 @@ const TrackList: React.FC<TrackListData> = ({tracks, fetchingSearch}) => {
             <Divider style={{width: 50}} className={styles.divider}/>
             {tracks && tracks.map((track, index) =>
                 <Track
-                    index={index + 1}
+                    index={index}
                     key={track._id}
                     track={track}
+                    activeTrack={player.activeTrack}
+                    isPlaying={player.isPlaying}
                 />
             )}
         </div>

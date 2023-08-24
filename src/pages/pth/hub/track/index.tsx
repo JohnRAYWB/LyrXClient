@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React, {useState} from 'react';
 import {wrapper} from "@/store/store";
 import {parseCookies} from "nookies";
 import {NextPageWithLayout} from "@/pages/_app";

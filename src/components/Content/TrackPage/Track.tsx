@@ -24,18 +24,24 @@ import {
 } from "@/store/api/TrackApi"
 import {handleAddTrack, handleRemoveTrack} from "@/util/handleTrackControl";
 import {playlistImagePath} from "@/util/ImagePath";
-import ScoreContainer from "@/components/Content/components/ScoreContainer";
 import {playlistDto} from "@/api/dto/playlist.dto";
+import {useAppDispatch} from "@/hook/redux";
+import {setPlayerTrack, setPlayPause} from "@/store/slice/player";
+import PlayPause from "@/components/Content/TrackPage/components/PlayPause";
 
 interface Track {
     track: trackDto
+    activeTrack: trackDto
     index: number
+    isPlaying: boolean
 }
 
-const Track: React.FC<Track> = ({track, index}) => {
+const Track: React.FC<Track> = ({track, activeTrack, index, isPlaying}) => {
 
     const [modalOpen, setModalOpen] = useState(false)
     const [selectedPlaylist, setSelectedPlaylist] = useState<playlistDto>(null)
+
+    const dispatch = useAppDispatch()
 
     const {data: user, isLoading} = useFetchProfileQuery()
     const [addTrack, {isLoading: addLoading}] = useAddTrackToUserCollectionMutation()
@@ -65,7 +71,7 @@ const Track: React.FC<Track> = ({track, index}) => {
 
     const handleSubmitModal = () => {
 
-        if(selectedPlaylist.tracks.findIndex(selectedTrack => selectedTrack === track._id) === -1) {
+        if (selectedPlaylist.tracks.findIndex(selectedTrack => selectedTrack === track._id) === -1) {
             addTrackToPlaylist({tId: track._id, playlist: selectedPlaylist._id})
 
             setModalOpen(false)
@@ -101,17 +107,26 @@ const Track: React.FC<Track> = ({track, index}) => {
         }
     ];
 
+    const handlePlay = () => {
+        dispatch(setPlayerTrack({tracksList: [], activeTrack: track, isPlaying: true}))
+        dispatch(setPlayPause(true))
+    }
+    const handlePause = () => {
+        dispatch(setPlayPause(false))
+    }
+
     return (
         <div>
             <div className={styles.container}>
                 <div className={styles.mediaContainer}>
-                    <p>{index}</p>
-                    {
-                        true ?
-                            <PlayCircleOutlined className={styles.playButton}/>
-                            :
-                            <PauseOutlined className={styles.playButton}/>
-                    }
+                    <p>{index + 1}</p>
+                    <PlayPause
+                        track={track}
+                        activeTrack={activeTrack}
+                        isPlaying={isPlaying}
+                        handlePlay={handlePlay}
+                        handlePause={handlePause}
+                    />
                     <Image
                         className={styles.image}
                         priority={true}
