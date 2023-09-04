@@ -1,100 +1,80 @@
-.container {
-    display: flex;
-    flex-flow: row;
-    justify-content: center;
-    align-items: center;
-    padding: 0 50px;
-    gap: 20px;
-    position: fixed;
-    height: 60px;
-    width: 100%;
-    bottom: 0;
-    background-color: rgba(30, 30, 30, 0.8);
-    color: #999999;
-    transition-duration: 200ms;
-}
-
-.container:hover {
-    background-color: #1e1e1e;
-    color: white;
-}
-
-.image {
-    flex: 0;
-    box-shadow: 0 0 5px #606060;
-    border-radius: 5px;
-}
-
-.icons {
-    font-size: 20px;
-    cursor: pointer;
-}
-
-.playerContainer {
+.mainContainer {
     display: flex;
     flex-flow: row;
     justify-content: space-between;
     align-items: center;
-    flex: 0 0 60%;
-}
-
-.player {
-    width: 60%;
-    cursor: pointer;
-}
-
-.time {
-
-}
-
-.volumeControl {
-    -webkit-appearance: none;
-    appearance: none;
-    width: 100%;
-    outline: none;
-    overflow: hidden;
-    border-radius: 15px;
-    cursor: pointer;
-    background: #111111;
-}
-
-.volumeControl::-webkit-slider-runnable-track {
-    border-radius: 15px;
-}
-
-.volumeControl::-moz-range-track {
-    border-radius: 15px;
-}
-
-.volumeControl::-webkit-slider-thumb {
-    -webkit-appearance: none;
-    appearance: none;
-    height: 15px;
-    width: 15px;
-    background-color: #F64141;
-    border-radius: 50%;
-    box-shadow: -407px 0 0 400px #a82a2a;
-}
-
-.volumeControl::-moz-range-thumb {
-    height: 15px;
-    width: 15px;
-    background-color: #F64141;
-    border-radius: 50%;
-    box-shadow: -407px 0 0 400px #a82a2a;
-}
-
-.closeButton {
+    padding: 0 50px;
+    gap: 20px;
     position: fixed;
-    right: 0;
-    margin-right: 20px;
-    padding: 5px;
-    font-size: 10px;
-    color: #505050;
-    transition-duration: 100ms;
+    height: 100px;
+    width: 100%;
+    bottom: 0;
+    background-color: rgba(246, 65, 65, 0.8);
+    color: #1c1c1c;
+    transition-duration: 300ms;
 }
 
-.closeButton:hover {
-    color: #F64141;
-    transition-duration: 100ms;
+.mainContainer:hover {
+    background-color: #F64141;
+    color: white;
+    transition-duration: 300ms;
+}
+
+.popupBackgroundImage {
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    height: 100%;
+    width: 100%;
+    transition-duration: 300ms;
+}
+
+.popupBackgroundImage:hover {
+    transition-duration: 300ms;
+}
+
+.popupMainContainer {
+    display: flex;
+    flex-flow: column;
+    padding-top: 30px;
+    gap: 20px;
+    position: fixed;
+    bottom: 0;
+    height: 100%;
+    width: 100%;
+    background-color: #1c1c1c;
+    transition-duration: 300ms;
+}
+
+.playerFooterContainer {
+    display: flex;
+    flex-flow: column;
+    gap: 20px;
+}
+
+.popupInfoContainer {
+    display: flex;
+    flex-flow: row;
+    position: fixed;
+    top: 10%;
+    left: 35%;
+    justify-content: space-between;
+    align-items: flex-start;
+}
+
+.playerPopupContainer {
+    display: flex;
+    flex-flow: column-reverse;
+    align-items: center;
+    padding: 20px 30px;
+    gap: 20px;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    background-color: rgba(246, 65, 65, .7);
 }

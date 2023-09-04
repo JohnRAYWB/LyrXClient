@@ -6,9 +6,10 @@ interface Param {
     confirm: boolean
     setConfirm: Function
     handleUpload: Function
+    type?: string
 }
 
-const ConfirmHandler: React.FC<Param> = ({confirm,setConfirm, handleUpload}) => {
+const ConfirmHandler: React.FC<Param> = ({confirm,setConfirm, handleUpload, type}) => {
 
     return (
         <div className={styles.confirmMainContainer}>
@@ -20,7 +21,7 @@ const ConfirmHandler: React.FC<Param> = ({confirm,setConfirm, handleUpload}) => 
                        onClick={() => setConfirm(!confirm)}>No</p>
                 </div>
                 :
-                <p className={styles.confirmButton} onClick={() => setConfirm(!confirm)}>Complete</p>
+                <p className={styles.confirmButton} onClick={() => setConfirm(!confirm)}>{type !== 'delete' ? 'Complete' : 'Delete'}</p>
             }
         </div>
     );

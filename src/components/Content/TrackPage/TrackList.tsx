@@ -6,7 +6,7 @@ import {trackDto} from "@/api/dto/track.dto";
 import Track from "@/components/Content/TrackPage/Track";
 import {LoadingOutlined} from "@ant-design/icons";
 import {useAppDispatch, useAppSelector} from "@/hook/redux";
-import {selectTrackData} from "@/store/slice/player";
+import {resetTracksList, selectTrackData} from "@/store/slice/player";
 
 interface TrackListData {
     tracks: trackDto[]
@@ -27,7 +27,12 @@ const TrackList: React.FC<TrackListData> = ({tracks, fetchingSearch}) => {
     }
 
     const player = useAppSelector(selectTrackData)
-    console.log(player)
+    const dispatch = useAppDispatch()
+
+    if(player.isPlaying && player.tracksList.length < tracks.length) {
+        dispatch(resetTracksList(tracks))
+    }
+
     return (
         <div>
             <div className={styles.main}>
@@ -42,10 +47,11 @@ const TrackList: React.FC<TrackListData> = ({tracks, fetchingSearch}) => {
             <Divider style={{width: 50}} className={styles.divider}/>
             {tracks && tracks.map((track, index) =>
                 <Track
-                    index={index}
                     key={track._id}
                     track={track}
-                    activeTrack={player.activeTrack}
+                    tracksList={tracks}
+                    currentIndex={index}
+                    currentTrack={player.currentTrack}
                     isPlaying={player.isPlaying}
                 />
             )}

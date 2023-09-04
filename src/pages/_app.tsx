@@ -20,7 +20,9 @@ const App = ({Component, pageProps}: AppPropsWithLayout) => {
 
     const getLayout = Component.getLayout ?? ((page) => page)
 
-    return getLayout(<Component {...pageProps}/>)
+    return getLayout(
+        <Component {...pageProps}/>
+    )
 }
 
 App.getInitialProps = wrapper.getInitialAppProps((store) => async ({ctx, Component}) => {

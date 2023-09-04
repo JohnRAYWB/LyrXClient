@@ -1,6 +1,13 @@
 import React from 'react';
 import styles from "@/components/Content/PlaylistTool/styles/UsersPlaylists.module.css";
-import {CaretRightOutlined, CloseOutlined, HeartFilled, HeartOutlined, LoadingOutlined} from "@ant-design/icons";
+import {
+    CaretRightOutlined,
+    CloseOutlined,
+    HeartFilled,
+    HeartOutlined,
+    LoadingOutlined,
+    PauseOutlined
+} from "@ant-design/icons";
 import Image from "next/image";
 import {albumsTrackImagePath, trackImagePath} from "@/util/ImagePath";
 import useTextLength from "@/util/useTextLength";
@@ -11,25 +18,44 @@ import {
     useRemoveTrackFromPlaylistMutation,
     useRemoveTrackFromUserCollectionMutation
 } from "@/store/api/TrackApi";
+import {setCurrentTrack, setPlayPause} from "@/store/slice/player";
+import {useAppDispatch} from "@/hook/redux";
 
 interface Param {
     track: trackDto
+    currentTrack: trackDto
+    tracksList: trackDto[]
     playlistId: string
     user: userDto
     index: number
+    isPlaying: boolean
 }
 
-const PlaylistsTrackList: React.FC<Param> = ({track, playlistId, user, index}) => {
+const PlaylistsTrackList: React.FC<Param> = ({track, currentTrack, tracksList, playlistId, user, index, isPlaying}) => {
 
     const [addTrack, {isLoading: addLoading}] = useAddTrackToUserCollectionMutation()
     const [removeTrack, {isLoading: removeLoading}] = useRemoveTrackFromUserCollectionMutation()
     const [removeFromPlaylist, {isLoading: removeFromPlaylistLoading}] = useRemoveTrackFromPlaylistMutation()
 
+    const dispatch = useAppDispatch()
+
+    const handlePlay = () => {
+        dispatch(setCurrentTrack({tracksList: tracksList, currentIndex: index, currentTrack: track, isPlaying: true, isActive: true}))
+        dispatch(setPlayPause(true))
+    }
+    const handlePause = () => {
+        dispatch(setPlayPause(false))
+    }
+
     return (
         <div className={styles.trackContainer}>
             <div className={styles.trackMediaContainer}>
                 <p>{index + 1}</p>
-                <CaretRightOutlined/>
+                {isPlaying && currentTrack._id === track._id ?
+                    <PauseOutlined onClick={handlePause}/>
+                    :
+                    <CaretRightOutlined onClick={handlePlay}/>
+                }
                 <Image
                     className={styles.trackImage}
                     width={50}

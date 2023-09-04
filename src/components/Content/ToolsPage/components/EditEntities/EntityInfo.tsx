@@ -36,8 +36,8 @@ const EntityInfo: React.FC<Param> = ({entity, type}) => {
             {type === 'track' ?
                 <Image
                     className={styles.image}
-                    width={125}
-                    height={125}
+                    width={50}
+                    height={50}
                     priority={true}
                     src={`http://localhost:4221/track/${entity.name[0]}/${entity.image}`}
                     alt={'track_logo'}

@@ -1,0 +1,69 @@
+.popoversContainer {
+    display: flex;
+    flex-flow: row;
+    gap: 20px;
+    font-size: 20px;
+}
+
+.volumeControl {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 100%;
+    outline: none;
+    overflow: hidden;
+    border-radius: 15px;
+    cursor: pointer;
+    background: #111111;
+}
+
+.volumeControl::-webkit-slider-runnable-track {
+    border-radius: 15px;
+}
+
+.volumeControl::-moz-range-track {
+    border-radius: 15px;
+}
+
+.volumeControl::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    height: 15px;
+    width: 15px;
+    background-color: #F64141;
+    border-radius: 50%;
+    box-shadow: -407px 0 0 400px #a82a2a;
+}
+
+.volumeControl::-moz-range-thumb {
+    height: 15px;
+    width: 15px;
+    background-color: #F64141;
+    border-radius: 50%;
+    box-shadow: -407px 0 0 400px #a82a2a;
+}
+
+.closeButton {
+    font-size: 14px;
+    color: #9f0000;
+    transition-duration: 100ms;
+}
+
+.closeButton:hover {
+    color: #1c1c1c;
+    transition-duration: 100ms;
+}
+
+.popupPopoverContainer {
+    display: flex;
+    flex-flow: row;
+    gap: 20px;
+    font-size: 20px;
+    position: fixed;
+    bottom: 45px;
+    right: 50px;
+    color: #d0d0d0;
+}
+
+.actionButton:hover {
+    color: #a91f1f;
+}

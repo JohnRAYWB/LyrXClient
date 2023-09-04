@@ -1,0 +1,33 @@
+.seekBarFooterContainer {
+    display: flex;
+    flex-flow: row;
+    justify-content: space-between;
+    align-items: center;
+    gap: 10px;
+}
+
+.seekBarFooter {
+    cursor: pointer;
+    width: 800px;
+}
+
+.seekBarPopupContainer {
+    display: flex;
+    flex-flow: row;
+    align-items: center;
+    gap: 20px;
+    font-size: 18px;
+}
+
+.seekButtons {
+    font-size: 24px;
+    color: #d0d0d0;
+    transition-duration: 200ms;
+}
+
+.seekButtons:hover {
+    filter: drop-shadow(0 0 2px #343434);
+    color: #F64141;
+    transform: scale(1.2);
+    transition-duration: 200ms;
+}

@@ -1,4 +1,4 @@
-import React, {ReactElement, ReactNode} from 'react';
+import React, {ReactNode} from 'react';
 import {Layout} from 'antd';
 import Head from "next/head";
 
@@ -6,6 +6,8 @@ import styles from "./MainLayout.module.css"
 import MainSider from "./Sider/MainSider";
 import Navigation from "./Navigation/Navigation";
 import FooterPlayer from "@/components/Player/FooterPlayer";
+import {useAppSelector} from "@/hook/redux";
+import {selectTrackData} from "@/store/slice/player";
 
 const {Header, Content, Footer, Sider} = Layout;
 
@@ -16,6 +18,8 @@ interface NavName {
 }
 
 const App: React.FC<NavName> = ({children, searchElement, name}) => {
+
+    const player = useAppSelector(selectTrackData)
 
     return (
         <>
@@ -33,8 +37,12 @@ const App: React.FC<NavName> = ({children, searchElement, name}) => {
                     </Content>
                     <Footer className={styles.footer}>© LyrX | All rights reserved</Footer>
                 </Layout>
-                <FooterPlayer track={null}/>
             </Layout>
+            {player.currentTrack ?
+                <FooterPlayer/>
+                :
+                null
+            }
         </>
     )
 };

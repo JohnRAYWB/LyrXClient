@@ -32,13 +32,21 @@ const EditTrack: React.FC<Param> = ({track}) => {
     }
 
     const handleEditArtist = () => {
-        if (selectedArtist._id) {
+        if (selectedArtist && selectedArtist._id) {
             editArtist({tId: track._id, artist: selectedArtist._id})
 
             notification.success({
                 style: {backgroundColor: "#646464", width: 300},
                 message: <p className={styles.notification}>Done!</p>,
                 description: <p className={styles.notification}>Artist changed successfully</p>,
+                placement: "bottomLeft",
+                duration: 2
+            })
+        } else {
+            notification.error({
+                style: {backgroundColor: "#646464", width: 300},
+                message: <p className={styles.notification}>Error!</p>,
+                description: <p className={styles.notification}>You don't pick an artist</p>,
                 placement: "bottomLeft",
                 duration: 2
             })

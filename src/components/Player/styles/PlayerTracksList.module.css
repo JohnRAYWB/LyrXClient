@@ -1,0 +1,120 @@
+.playerTracksListFooterContainer {
+    display: flex;
+    flex-flow: column;
+    gap: 2px;
+    width: 350px;
+    height: 341px;
+    overflow-y: scroll;
+}
+
+.playerTracksListFooterContainer::-webkit-scrollbar-track {
+    border-radius: 5px;
+    background-color: rgba(17, 17, 17, .5);
+}
+
+.playerTracksListFooterContainer::-webkit-scrollbar {
+    width: 10px;
+}
+
+.playerTracksListFooterContainer::-webkit-scrollbar-thumb {
+    border-radius: 10px;
+    background-color: rgba(246, 65, 65, .3);
+}
+
+.playerTrackFooterContainer {
+    display: flex;
+    flex-flow: row;
+    align-items: center;
+    gap: 20px;
+    padding: 2px 10px;
+    margin-right: 5px;
+    font-size: 18px;
+    background-color: rgba(60, 60, 60, .5);
+    border-radius: 5px;
+    transition-duration: 100ms;
+}
+
+.image {
+    box-shadow: 0 0 5px #1c1c1c;
+    border-radius: 5px;
+}
+
+.playerTrackFooterContainer:hover {
+    color: black;
+    background-color: rgba(246, 65, 65, .8);
+    transition-duration: 100ms;
+}
+
+.activePlayerTrackFooterContainer {
+    display: flex;
+    flex-flow: row;
+    align-items: center;
+    gap: 20px;
+    padding: 2px 10px;
+    margin-right: 5px;
+    font-size: 18px;
+    background-color: rgba(246, 65, 65, .8);
+    border-radius: 5px;
+    color: white;
+}
+
+.playerTracksListPopupContainer {
+    display: flex;
+    flex-flow: column;
+    gap: 3px;
+    padding: 10px;
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 117px;
+    width: 400px;
+    overflow-y: scroll;
+    background-color: rgba(17, 17, 17, .75);
+}
+
+.playerTracksListPopupContainer::-webkit-scrollbar-track {
+    background-color: rgba(17, 17, 17, .8);
+}
+
+.playerTracksListPopupContainer::-webkit-scrollbar {
+    width: 10px;
+}
+
+.playerTracksListPopupContainer::-webkit-scrollbar-thumb {
+    background-color: rgba(246, 65, 65, .5);
+}
+
+.playerTrackPopupContainer{
+    display: flex;
+    flex-flow: row;
+    align-items: center;
+    gap: 20px;
+    padding: 15px 20px;
+    margin-right: 5px;
+    font-size: 18px;
+    background-color: rgba(60, 60, 60, .2);
+    color: #999999;
+    transition-duration: 100ms;
+}
+
+.playerTrackPopupContainer:hover {
+    color: #fff;
+    background-color: rgba(246, 65, 65, .6);
+    transition-duration: 100ms;
+}
+
+.activePlayerTrackPopupContainer {
+    display: flex;
+    flex-flow: row;
+    align-items: center;
+    gap: 20px;
+    padding: 15px 20px;
+    margin-right: 5px;
+    font-size: 18px;
+    background-color: rgba(246, 65, 65, .8);
+    color: white;
+}
+
+.playPauseButton:hover {
+    color: #1c1c1c;
+}

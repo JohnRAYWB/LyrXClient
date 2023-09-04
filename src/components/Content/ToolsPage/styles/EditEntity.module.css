@@ -1,12 +1,11 @@
 .container {
-    background-color: #0e0e0e;
-    border-radius: 10px;
+    background-color: rgba(14, 14, 14, .7);
     color: #999999;
     transition-duration: 200ms;
 }
 
 .container:hover {
-    background-color: #1c1c1c;
+    background-color: rgba(21, 21, 21, 0.5);
     transition-duration: 200ms;
 }
 
@@ -15,8 +14,7 @@
     flex-flow: wrap row;
     justify-content: space-between;
     align-items: center;
-    padding: 20px;
-    margin: 10px 0;
+    padding: 5px;
 }
 
 .entityInfoContainer > * {
@@ -25,6 +23,8 @@
 }
 
 .image {
+    border-radius: 5px;
+    box-shadow: 0 0 10px #0e0e0e;
     flex: 0;
 }
 
@@ -87,10 +87,9 @@
 .editButton {
     display: flex;
     flex: 0;
-    padding: 10px 20px;
-    margin-bottom: auto;
+    padding: 5px 10px;
     box-shadow: 0 0 5px #F64141;
-    border-radius: 10px;
+    border-radius: 5px;
     cursor: pointer;
     transition-duration: 200ms;
 }
@@ -105,14 +104,14 @@
 .editContainer {
     display: flex;
     flex-flow: wrap column;
-    padding: 20px;
+    padding: 10px;
 }
 
 .editTitle {
-    padding: 20px;
+    padding: 10px;
     margin: 20px 0;
     background-color: #0e0e0e;
-    border-radius: 10px;
+    border-radius: 5px;
     text-align: center;
     text-transform: uppercase;
 }
@@ -123,7 +122,7 @@
     justify-content: space-between;
     padding: 20px;
     background-color: #505050;
-    border-radius: 10px 10px 0 0;
+    border-radius: 5px 5px 0 0;
 }
 
 .editSelect > * {
@@ -131,10 +130,10 @@
 }
 
 .input {
-    padding: 10px;
+    padding: 5px 10px;
     background-color: inherit;
     border: 1px solid #1c1c1c;
-    border-radius: 10px;
+    border-radius: 5px;
     font-size: 16px;
     color: #1c1c1c;
     transition-duration: 200ms;
@@ -154,9 +153,9 @@
     display: flex;
     flex: 0 0 auto;
     align-items: center;
-    padding: 10px 20px;
+    padding: 5px 10px;
     box-shadow: 0 0 5px #00d75a;
-    border-radius: 10px;
+    border-radius: 5px;
     text-transform: uppercase;
     cursor: pointer;
     transition-duration: 200ms;

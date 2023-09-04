@@ -26,7 +26,7 @@ const EditEntitiesList: React.FC<Param> = ({entities, entitiesType, type, refetc
 
     if (entitiesType === 'track' && type === 'edit') {
         return (
-            <div>
+            <div className={styles.container}>
                 <button onClick={handleRefetch} className={styles.refetchButton}>Refetch</button>
                 {entities.map(entity =>
                     !entity.protectedDeletion ?
@@ -40,7 +40,7 @@ const EditEntitiesList: React.FC<Param> = ({entities, entitiesType, type, refetc
 
     if (entitiesType === 'track' && type === 'delete') {
         return (
-            <div>
+            <div className={styles.container}>
                 <button onClick={handleRefetch} className={styles.refetchButton}>Refetch</button>
                 {entities.map(entity =>
                     !entity.protectedDeletion ?

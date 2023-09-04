@@ -9,6 +9,8 @@ import PlaylistsTrackList from "@/components/Content/PlaylistTool/components/Pla
 import {userDto} from "@/api/dto/user.dto";
 import {useRouter} from "next/navigation";
 import {SettingOutlined} from "@ant-design/icons";
+import {useAppSelector} from "@/hook/redux";
+import {selectTrackData} from "@/store/slice/player";
 
 interface Param {
     playlist: playlistDto
@@ -19,6 +21,8 @@ const PlaylistHeader: React.FC<Param> = ({playlist, user}) => {
 
     const router = useRouter()
 
+    const player = useAppSelector(selectTrackData)
+    console.log(playlist)
     return (
         <div className={styles.CurrentContainer}>
             <div className={styles.CurrentInfoContainer}>
@@ -56,8 +60,16 @@ const PlaylistHeader: React.FC<Param> = ({playlist, user}) => {
                     :
                     <div className={styles.CurrentTracksContainer}>
                         {playlist.tracks.map((track, index) =>
-                            <PlaylistsTrackList key={track._id} track={track} playlistId={playlist._id} user={user}
-                                                index={index}/>
+                            <PlaylistsTrackList
+                                key={track._id}
+                                track={track}
+                                currentTrack={player.currentTrack}
+                                tracksList={playlist.tracks}
+                                playlistId={playlist._id}
+                                user={user}
+                                index={index}
+                                isPlaying={player.isPlaying}
+                            />
                         )}
                     </div>
                 }

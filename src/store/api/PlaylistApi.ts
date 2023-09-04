@@ -30,9 +30,15 @@ export const PlaylistApi = apiSlice.injectEndpoints({
             providesTags: result => ['Playlist']
         }),
         fetchUsersPlaylists: build.query<playlistDto[], void>({
-           query: () => ({
-               url: `playlists/user`
-           }),
+            query: () => ({
+                url: `playlists/user`
+            }),
+            providesTags: result => ['Playlist']
+        }),
+        fetchUsersPlaylistsCollection: build.query<playlistDto[], void>({
+            query: () => ({
+                url: `playlists/user/playlist_collection`
+            }),
             providesTags: result => ['Playlist']
         }),
         fetchPlaylistById: build.query<playlistDto, string>({
@@ -42,21 +48,21 @@ export const PlaylistApi = apiSlice.injectEndpoints({
             providesTags: result => ['Playlist']
         }),
         addPlaylist: build.mutation({
-           query: (body) => ({
+            query: (body) => ({
                 url: 'playlists',
-               method: 'POST',
-               body: body,
-               formData: true
-           }),
+                method: 'POST',
+                body: body,
+                formData: true
+            }),
             invalidatesTags: result => ['Playlist', 'User']
         }),
         addGenreToPlaylist: build.mutation({
-           query: ({pId, ...genre}) => ({
-               url: `playlists/genre/${pId}/add`,
-               method: 'POST',
-               body: genre,
-               responseHandler: (response) => response.text()
-           }),
+            query: ({pId, ...genre}) => ({
+                url: `playlists/genre/${pId}/add`,
+                method: 'POST',
+                body: genre,
+                responseHandler: (response) => response.text()
+            }),
             invalidatesTags: result => ['Playlist', 'Genre']
         }),
         addPlaylistToUserCollection: build.mutation({
@@ -120,6 +126,7 @@ export const {
     useFetchAllPlaylistAndSearchQuery,
     useFetchMostLikedPlaylistQuery,
     useFetchUsersPlaylistsQuery,
+    useFetchUsersPlaylistsCollectionQuery,
     useFetchPlaylistByIdQuery,
     useAddPlaylistMutation,
     useAddGenreToPlaylistMutation,

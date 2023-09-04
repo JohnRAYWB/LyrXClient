@@ -5,6 +5,7 @@ import styles from "../../styles/DeleteEntity.module.css";
 import {trackDto} from "@/api/dto/track.dto";
 import {playlistDto} from "@/api/dto/playlist.dto";
 import {albumDto} from "@/api/dto/album.dto";
+import ConfirmHandler from "@/components/Content/components/ConfirmHandler";
 
 interface Param {
     entity: trackDto | playlistDto | albumDto
@@ -28,7 +29,8 @@ const DeleteEntity: React.FC<Param> = ({entity, deleteAction}) => {
     }
 
     return (
-        <>
+        <ConfirmHandler confirm={confirm} setConfirm={setConfirm} handleUpload={handleDelete} type={'delete'}/>
+        /*<>
             {confirm ?
                 <div className={styles.confirmContainer}>
                     <p className={styles.confirmTitle}>Are you sure?</p>
@@ -40,7 +42,7 @@ const DeleteEntity: React.FC<Param> = ({entity, deleteAction}) => {
                 :
                 <p onClick={() => setConfirm(true)} className={styles.deleteButton}>Delete</p>
             }
-        </>
+        </>*/
     );
 };
 

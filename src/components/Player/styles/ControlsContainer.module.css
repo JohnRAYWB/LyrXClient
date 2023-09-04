@@ -1,0 +1,74 @@
+.controlsFooterContainer {
+    display: flex;
+    flex-flow: row;
+    justify-content: center;
+    align-items: center;
+    gap: 50px;
+}
+
+.playingControlsFooterContainer {
+    display: flex;
+    flex-flow: row;
+    gap: 15px;
+    font-size: 24px;
+}
+
+.footerCornerButtonOff {
+    color: #1c1c1c;
+}
+
+.footerCornerButtonOn {
+    color: white;
+}
+
+.controlsPopupContainer {
+    display: flex;
+    flex-flow: row;
+    justify-content: center;
+    align-items: center;
+    gap: 75px;
+    font-size: 20px;
+}
+
+.playingControlsPopupContainer {
+    display: flex;
+    flex-flow: row;
+    gap: 20px;
+    font-size: 32px;
+}
+
+.controlsButton {
+    color: #d0d0d0;
+    transition-duration: 200ms;
+}
+
+.controlsButton:hover {
+    filter: drop-shadow(0 0 2px #343434);
+    transform: scale(1.2);
+    color: #F64141;
+    transition-duration: 200ms;
+}
+
+.popupCornerButtonOn {
+    color: #d0d0d0;
+    transition-duration: 200ms;
+}
+
+.popupCornerButtonOn:hover {
+    filter: drop-shadow(0 0 2px #343434);
+    transform: scale(1.2);
+    color: #F64141;
+    transition-duration: 200ms;
+}
+
+.popupCornerButtonOff {
+    color: #1c1c1c;
+    transition-duration: 200ms;
+}
+
+.popupCornerButtonOff:hover {
+    filter: drop-shadow(0 0 2px #343434);
+    transform: scale(1.2);
+    color: #F64141;
+    transition-duration: 200ms;
+}

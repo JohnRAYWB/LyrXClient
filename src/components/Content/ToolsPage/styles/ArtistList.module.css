@@ -2,19 +2,19 @@
     display: flex;
     flex-flow: wrap column;
     padding: 10px 40px;
+    gap: 10px;
     background-color: #777777;
-    border-radius: 0 0 10px 10px;
+    border-radius: 0 0 5px 5px;
 }
 
 .userContainer {
     display: flex;
-    flex-flow: wrap row;
+    flex-flow: row;
     justify-content: space-around;
     align-items: center;
-    padding: 10px;
-    margin: 10px 0;
+    padding: 5px;
     border: 2px solid #0e0e0e;
-    border-radius: 10px;
+    border-radius: 5px;
     color: black;
     cursor: pointer;
     transition-duration: 200ms;
@@ -25,7 +25,7 @@
 }
 
 .userContainer:hover {
-    transform: scale(1.03);
+    transform: scale(1.01);
     transition-duration: 200ms;
 }
 
@@ -34,10 +34,9 @@
     flex-flow: wrap row;
     justify-content: space-around;
     align-items: center;
-    padding: 10px;
-    margin: 10px 0;
+    padding: 5px;
     background-color: #00cb5a;
-    border-radius: 10px;
+    border-radius: 5px;
     color: black;
     transition-duration: 200ms;
 }
@@ -47,11 +46,13 @@
 }
 
 .selectedArtist:hover {
-    transform: scale(1.03);
+    transform: scale(1.01);
     transition-duration: 200ms;
 }
 
 .avatar {
+    border-radius: 5px;
+    box-shadow: 0 0 5px #0e0e0e;
     flex: 0
 }
 

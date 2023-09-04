@@ -5,7 +5,7 @@ import MainLayout from "@/components/screens/MainLayout/MainLayout";
 import {wrapper} from "@/store/store";
 import {parseCookies} from "nookies";
 import styles from "@/components/Content/PlaylistTool/styles/UsersPlaylists.module.css"
-import {useFetchUsersPlaylistsQuery} from "@/store/api/PlaylistApi";
+import {useFetchUsersPlaylistsCollectionQuery, useFetchUsersPlaylistsQuery} from "@/store/api/PlaylistApi";
 import {useFetchProfileQuery} from "@/store/api/UserApi";
 import {playlistDto} from "@/api/dto/playlist.dto";
 import PlaylistHeader from "@/components/Content/PlaylistTool/components/PlaylistHeader";
@@ -19,8 +19,9 @@ const UsersPlaylists: NextPageWithLayout = () => {
 
     const {data: playlists, isLoading: playlistsLoading} = useFetchUsersPlaylistsQuery()
     const {data: user, isLoading: userLoading} = useFetchProfileQuery()
+    const {data: playlistsCollection, isLoading: collectionLoading} = useFetchUsersPlaylistsCollectionQuery()
 
-    if (playlistsLoading || userLoading) {
+    if (playlistsLoading || userLoading || collectionLoading) {
         return <></>
     }
 
@@ -61,11 +62,11 @@ const UsersPlaylists: NextPageWithLayout = () => {
                 :
                 <h1 className={styles.title}>You don't have own playlists yet</h1>
             }
-            {user.playlistsCollection ?
+            {playlistsCollection ?
                 <div className={styles.collectionList}>
                     <h1 className={styles.title}>Your favorites</h1>
                     <div className={styles.playlistsContainer}>
-                        {user.playlistsCollection.map(playlist =>
+                        {playlistsCollection.map(playlist =>
                             <div key={playlist._id} onClick={() => setMainPlaylist(playlist)}>
                                 <div className={mainPlaylist && mainPlaylist._id === playlist._id ?
                                     styles.activePlaylistContainer

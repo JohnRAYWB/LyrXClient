@@ -3,15 +3,19 @@ import {createSlice, PayloadAction} from "@reduxjs/toolkit";
 import {HYDRATE} from "next-redux-wrapper";
 import {RootState} from "@/store/store";
 
-interface Player {
-    tracksList: []
-    activeTrack: trackDto
+export interface Player {
+    tracksList: trackDto[]
+    currentIndex: number
+    currentTrack: trackDto
+    isActive: boolean
     isPlaying: boolean
 }
 
 const initialState: Player = {
     tracksList: [],
-    activeTrack: null,
+    currentIndex: 0,
+    currentTrack: null,
+    isActive: false,
     isPlaying: false
 }
 
@@ -19,13 +23,28 @@ const playerSlice = createSlice({
     name: 'player',
     initialState,
     reducers: {
-        setPlayerTrack: (state, action: PayloadAction<Player>) => {
+        setCurrentTrack: (state, action: PayloadAction<Player>) => {
             state.tracksList = action.payload.tracksList
-            state.activeTrack = action.payload.activeTrack
+            state.currentIndex = action.payload.currentIndex
+            state.currentTrack = action.payload.currentTrack
+            state.isActive = action.payload.isActive
             state.isPlaying = action.payload.isPlaying
+        },
+        setNextTrack: (state, action) => {
+            state.currentTrack = state.tracksList[action.payload]
+            state.currentIndex = action.payload
+            state.isActive = true
+        },
+        setPrevTrack: (state, action) => {
+            state.currentTrack = state.tracksList[action.payload]
+            state.currentIndex = action.payload
+            state.isActive = true
         },
         setPlayPause: (state, action) => {
             state.isPlaying = action.payload
+        },
+        resetTracksList: (state, action) => {
+            state.tracksList = action.payload
         }
     },
     extraReducers: builder => {
@@ -39,7 +58,7 @@ const playerSlice = createSlice({
     }
 })
 
-export const {setPlayerTrack, setPlayPause} = playerSlice.actions
+export const {setCurrentTrack, setPrevTrack, setNextTrack, setPlayPause, resetTracksList} = playerSlice.actions
 
 export const selectTrackData = (state: RootState) => state.player
 

@@ -4,8 +4,6 @@ import {
     EllipsisOutlined,
     HeartFilled,
     HeartOutlined, LoadingOutlined,
-    PauseOutlined,
-    PlayCircleOutlined
 } from "@ant-design/icons";
 import {useRouter} from "next/navigation";
 import {ConfigProvider, Divider, Dropdown, MenuProps, message, Modal} from "antd";
@@ -26,17 +24,18 @@ import {handleAddTrack, handleRemoveTrack} from "@/util/handleTrackControl";
 import {playlistImagePath} from "@/util/ImagePath";
 import {playlistDto} from "@/api/dto/playlist.dto";
 import {useAppDispatch} from "@/hook/redux";
-import {setPlayerTrack, setPlayPause} from "@/store/slice/player";
+import {setCurrentTrack, setPlayPause} from "@/store/slice/player";
 import PlayPause from "@/components/Content/TrackPage/components/PlayPause";
 
 interface Track {
     track: trackDto
-    activeTrack: trackDto
-    index: number
+    tracksList: trackDto[]
+    currentIndex: number
+    currentTrack: trackDto
     isPlaying: boolean
 }
 
-const Track: React.FC<Track> = ({track, activeTrack, index, isPlaying}) => {
+const Track: React.FC<Track> = ({track, tracksList, currentTrack, currentIndex, isPlaying}) => {
 
     const [modalOpen, setModalOpen] = useState(false)
     const [selectedPlaylist, setSelectedPlaylist] = useState<playlistDto>(null)
@@ -70,8 +69,7 @@ const Track: React.FC<Track> = ({track, activeTrack, index, isPlaying}) => {
     }
 
     const handleSubmitModal = () => {
-
-        if (selectedPlaylist.tracks.findIndex(selectedTrack => selectedTrack === track._id) === -1) {
+        if (selectedPlaylist.tracks.findIndex(selectedTrack => selectedTrack.toString() === track._id) === -1) {
             addTrackToPlaylist({tId: track._id, playlist: selectedPlaylist._id})
 
             setModalOpen(false)
@@ -108,7 +106,7 @@ const Track: React.FC<Track> = ({track, activeTrack, index, isPlaying}) => {
     ];
 
     const handlePlay = () => {
-        dispatch(setPlayerTrack({tracksList: [], activeTrack: track, isPlaying: true}))
+        dispatch(setCurrentTrack({tracksList: tracksList, currentIndex: currentIndex, currentTrack: track, isPlaying: true, isActive: true}))
         dispatch(setPlayPause(true))
     }
     const handlePause = () => {
@@ -119,10 +117,10 @@ const Track: React.FC<Track> = ({track, activeTrack, index, isPlaying}) => {
         <div>
             <div className={styles.container}>
                 <div className={styles.mediaContainer}>
-                    <p>{index + 1}</p>
+                    <p>{currentIndex + 1}</p>
                     <PlayPause
                         track={track}
-                        activeTrack={activeTrack}
+                        currentTrack={currentTrack}
                         isPlaying={isPlaying}
                         handlePlay={handlePlay}
                         handlePause={handlePause}
