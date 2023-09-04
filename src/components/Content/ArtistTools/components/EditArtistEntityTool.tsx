@@ -108,13 +108,13 @@ const EditArtistEntityTool: React.FC<Param> = ({type, action, index, entity}) =>
                                 <LoadingOutlined className={styles.loadingSpinner}/>
                                 :
                                 <ConfirmHandler confirm={confirm} setConfirm={setConfirm}
-                                                handleUpload={() => handleDeleteTrack(entity._id)}/>
+                                                handleUpload={() => handleDeleteTrack(entity._id)} type={'delete'}/>
                             :
                             albumDeleteLoading ?
                                 <LoadingOutlined className={styles.loadingSpinner}/>
                                 :
                                 <ConfirmHandler confirm={confirm} setConfirm={setConfirm}
-                                                handleUpload={() => handleDeleteAlbum(entity._id)}/>
+                                                handleUpload={() => handleDeleteAlbum(entity._id)} type={'delete'}/>
                         }
                     </>
                     :

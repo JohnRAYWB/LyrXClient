@@ -5,6 +5,8 @@ import {trackDto} from "@/api/dto/track.dto";
 import {trackAudioPath} from "@/util/AudioPath";
 import PreviewPlayer from "@/components/Player/PreviewPlayer";
 import TrackControlElement from "@/components/Content/ArtistTools/components/TrackControlElement";
+import {useAppSelector} from "@/hook/redux";
+import {selectTrackData} from "@/store/slice/player";
 
 interface Param {
     type: string
@@ -15,11 +17,7 @@ interface Param {
 
 const TrackControl: React.FC<Param> = ({type, edit, album, tracks}) => {
 
-    const [trackUrl, setTrackUrl] = useState<string>(null)
-
-    const handlePlay = (track) => {
-        setTrackUrl(() => trackAudioPath(track))
-    }
+    const player = useAppSelector(selectTrackData)
 
     return (
         <div>
@@ -29,19 +27,15 @@ const TrackControl: React.FC<Param> = ({type, edit, album, tracks}) => {
                         key={track._id}
                         type={type}
                         edit={edit}
-                        index={index + 1}
+                        index={index}
                         album={album}
                         track={track}
-                        handlePlay={handlePlay}/>
+                        currentTrack={player.currentTrack}
+                        tracksList={tracks}
+                        isPlaying={player.isPlaying}
+                    />
                 )}
             </div>
-            {trackUrl ?
-                <div className={styles.playerContainer}>
-                    <PreviewPlayer url={trackUrl}/>
-                </div>
-                :
-                null
-            }
         </div>
     );
 };

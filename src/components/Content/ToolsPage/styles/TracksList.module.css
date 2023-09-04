@@ -1,18 +1,17 @@
 .container {
     display: flex;
     flex-flow: wrap column;
-    gap: 5px;
+    gap: 10px;
     padding: 10px 20px;
 }
 
 .trackContainer {
     display: flex;
-    flex-flow: wrap row;
+    flex-flow: row;
     justify-content: space-between;
     align-items: center;
     padding: 5px 10px;
-    background-color: #0e0e0e;
-    border-radius: 10px;
+    background-color: rgba(15, 15, 15, .8);
     transition-duration: 200ms;
 }
 

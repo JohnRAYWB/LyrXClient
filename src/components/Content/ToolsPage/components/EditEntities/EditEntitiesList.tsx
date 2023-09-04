@@ -54,7 +54,7 @@ const EditEntitiesList: React.FC<Param> = ({entities, entitiesType, type, refetc
 
     if (entitiesType === 'playlist' && type === 'delete') {
         return (
-            <div>
+            <div className={styles.container}>
                 <button onClick={handleRefetch} className={styles.refetchButton}>Refetch</button>
                 {entities.map(entity =>
                     <DeletePlaylist playlist={entity}/>
@@ -65,7 +65,7 @@ const EditEntitiesList: React.FC<Param> = ({entities, entitiesType, type, refetc
 
     if (entitiesType === 'album' && type === 'delete') {
         return (
-            <div>
+            <div className={styles.container}>
                 <button onClick={handleRefetch} className={styles.refetchButton}>Refetch</button>
                 {entities.map(entity =>
                     <DeleteAlbum album={entity}/>
@@ -76,7 +76,7 @@ const EditEntitiesList: React.FC<Param> = ({entities, entitiesType, type, refetc
 
     if(entitiesType === 'album' && type === 'add') {
         return (
-            <div>
+            <div className={styles.container}>
                 <button onClick={handleRefetch} className={styles.refetchButton}>Refetch</button>
                 {entities.map(entity =>
                     <AddTrack album={entity}/>
@@ -87,7 +87,7 @@ const EditEntitiesList: React.FC<Param> = ({entities, entitiesType, type, refetc
 
     if(entitiesType === 'album' && type === 'remove') {
         return (
-            <div>
+            <div className={styles.container}>
                 <button onClick={handleRefetch} className={styles.refetchButton}>Refetch</button>
                 {entities.map(entity =>
                     <RemoveTrack album={entity}/>

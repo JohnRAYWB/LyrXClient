@@ -22,7 +22,7 @@ const EntityInfo: React.FC<Param> = ({entity, type}) => {
     let favorites
     let listens
 
-    type !== 'track' ? description = useTextLength(entity.description, 100) : null
+    type !== 'track' ? description = useTextLength(entity.description, 25) : null
 
     if('listens' in entity) {
         listens = useScoreLength(entity.listens)
@@ -45,8 +45,8 @@ const EntityInfo: React.FC<Param> = ({entity, type}) => {
                 :
                 <Image
                     className={styles.image}
-                    width={125}
-                    height={125}
+                    width={50}
+                    height={50}
                     priority={true}
                     src={`http://localhost:4221/${type}/${entity.name[0]}/${entity.image}`}
                     alt={'collection_logo'}

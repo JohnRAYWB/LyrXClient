@@ -1,4 +1,4 @@
-import React, {useCallback, useEffect, useRef} from 'react';
+import React from 'react';
 import {PauseCircleOutlined, PlayCircleOutlined} from "@ant-design/icons";
 
 import styles from "@/components/Content/TrackPage/styles/Track.module.css";

@@ -1,11 +1,13 @@
 import React from 'react';
 
 import styles from "../styles/TrackControl.module.css"
-import {LoadingOutlined, PlayCircleOutlined} from "@ant-design/icons";
+import {LoadingOutlined, PauseCircleOutlined, PlayCircleOutlined} from "@ant-design/icons";
 import useTextLength from "@/util/useTextLength";
 import ScoreContainer from "@/components/Content/components/ScoreContainer";
 import {trackDto} from "@/api/dto/track.dto";
 import {useAddTrackToAlbumMutation, useRemoveTrackFromAlbumMutation} from "@/store/api/AlbumApi";
+import {useAppDispatch} from "@/hook/redux";
+import {setCurrentTrack, setPlayPause} from "@/store/slice/player";
 
 interface Param {
     type: string
@@ -13,13 +15,17 @@ interface Param {
     edit: boolean
     album: string
     track: trackDto
-    handlePlay: Function
+    currentTrack: trackDto
+    tracksList: trackDto[]
+    isPlaying: boolean
 }
 
-const TrackControlElement: React.FC<Param> = ({type, index, edit, album, track, handlePlay}) => {
+const TrackControlElement: React.FC<Param> = ({type, index, edit, album, track, currentTrack, tracksList, isPlaying}) => {
 
     const [addTrack, {isLoading: addLoading}] = useAddTrackToAlbumMutation()
     const [removeTrack, {isLoading: removeLoading}] = useRemoveTrackFromAlbumMutation()
+
+    const dispatch = useAppDispatch()
 
     const handleAddTrack = () => {
         addTrack({aId: album, track: track._id})
@@ -29,10 +35,22 @@ const TrackControlElement: React.FC<Param> = ({type, index, edit, album, track, 
         removeTrack({aId: album, track: track._id})
     }
 
+    const handlePlay = () => {
+        dispatch(setCurrentTrack({tracksList: tracksList, currentIndex: index, currentTrack: track, isPlaying: true, isActive: true}))
+        dispatch(setPlayPause(true))
+    }
+    const handlePause = () => {
+        dispatch(setPlayPause(false))
+    }
+
     return (
         <div className={styles.trackContainer}>
-            <p className={styles.index}>{index}</p>
-            <PlayCircleOutlined onClick={() => handlePlay(track)} className={styles.playButton}/>
+            <p className={styles.index}>{index + 1}</p>
+            {isPlaying && track._id === currentTrack._id ?
+                <PauseCircleOutlined className={styles.playButton} onClick={handlePause}/>
+                :
+                <PlayCircleOutlined className={styles.playButton} onClick={handlePlay}/>
+            }
             <p className={styles.trackName}>{useTextLength(track.name[1], 15)}</p>
             <div className={styles.scoreContainer}>
                 <ScoreContainer title={'Listens'} count={track.listens}/>

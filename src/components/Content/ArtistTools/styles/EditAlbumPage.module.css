@@ -28,6 +28,8 @@
 }
 
 .image {
+    border-radius: 5px;
+    box-shadow: 2px 2px 5px #0e0e0e;
     margin: 0 auto;
 }
 
