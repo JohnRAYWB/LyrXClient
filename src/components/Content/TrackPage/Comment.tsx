@@ -25,7 +25,7 @@ const Comment: React.FC<CommentParam> = ({comment, user}) => {
     }
 
     return (
-        <div className={styles.commentItem} key={comment._id}>
+        <div className={styles.commentItem}>
             <div className={styles.editButtons}>
                 {comment.user._id === user._id ?
                     <>

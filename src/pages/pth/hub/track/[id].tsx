@@ -5,13 +5,13 @@ import {NextPageWithLayout} from "@/pages/_app";
 import MainLayout from "@/components/screens/MainLayout/MainLayout";
 import Image from "next/image";
 import Link from "next/link";
-import {Button, ConfigProvider, Divider, Input, notification, Popover} from "antd";
+import {Button, ConfigProvider, Divider, Input, message, Modal, notification, Popover} from "antd";
 import {
     CaretRightOutlined,
     HeartFilled,
     HeartOutlined,
     InfoCircleOutlined,
-    LoadingOutlined,
+    LoadingOutlined, PauseOutlined,
     PlusOutlined
 } from "@ant-design/icons";
 
@@ -21,11 +21,15 @@ import {
     useAddTrackToUserCollectionMutation,
     useRemoveTrackFromUserCollectionMutation,
     useFetchTrackByIdQuery,
-    useLeaveCommentMutation
+    useLeaveCommentMutation, useAddTrackToPlaylistMutation
 } from "@/store/api/TrackApi";
 import {useFetchProfileQuery} from "@/store/api/UserApi";
 import Comment from "@/components/Content/TrackPage/Comment";
 import {handleAddTrack, handleRemoveTrack} from "@/util/handleTrackControl";
+import {useAppDispatch, useAppSelector} from "@/hook/redux";
+import {selectTrackData, setCurrentTrack, setPlayPause} from "@/store/slice/player";
+import {playlistDto} from "@/api/dto/playlist.dto";
+import {albumsTrackImagePath, playlistImagePath, trackImagePath} from "@/util/ImagePath";
 
 interface PageParams {
     trackId: string
@@ -38,22 +42,55 @@ const TrackPage: NextPageWithLayout<PageParams> = ({trackId}) => {
     const [leaveComment, {isLoading}] = useLeaveCommentMutation()
     const [addTrack, {isLoading: addLoading}] = useAddTrackToUserCollectionMutation()
     const [removeTrack, {isLoading: removeLoading}] = useRemoveTrackFromUserCollectionMutation()
+    const [addToPlaylist, {isLoading: addToPlaylistLoading}] = useAddTrackToPlaylistMutation()
+
+    const [openModal, setOpenModal] = useState(false)
+    const [selectedPlaylist, setSelectedPlaylist] = useState<playlistDto>(null)
 
     const [text, setText] = useState('')
+
+    const dispatch = useAppDispatch()
+    const player = useAppSelector(selectTrackData)
 
     if (trackLoading || userLoading) {
         return <></>
     }
 
-    let folder = 'track'
-    track.protectedDeletion ? folder = 'album' : folder
-
-    let descriptionLength = ''
-
-    track.description ? descriptionLength = useTextLength(track.description, 240) : ''
-
     const textHandle = (e) => {
         setText(e.target.value)
+    }
+
+    const handleSubmitModal = () => {
+        if (selectedPlaylist.tracks.findIndex(selectedTrack => selectedTrack._id === track._id) === -1) {
+            addToPlaylist({tId: trackId, playlist: selectedPlaylist._id})
+
+            setOpenModal(false)
+            setSelectedPlaylist(null)
+
+            message.success('Track added successfully')
+        } else {
+            message.error('Something goes wrong. Maybe you have this track in playlist already')
+        }
+
+    }
+
+    const handleCloseModal = () => {
+        setOpenModal(false)
+        setSelectedPlaylist(null)
+    }
+
+    const handlePlay = () => {
+        dispatch(setCurrentTrack({
+            tracksList: [track],
+            currentIndex: 0,
+            currentTrack: track,
+            isPlaying: true,
+            isActive: true
+        }))
+        dispatch(setPlayPause(true))
+    }
+    const handlePause = () => {
+        dispatch(setPlayPause(false))
     }
 
     return (
@@ -108,25 +145,19 @@ const TrackPage: NextPageWithLayout<PageParams> = ({trackId}) => {
                         priority={true}
                         width={260}
                         height={260}
-                        src={`http://localhost:4221/${folder}/${track.name[0]}/${track.image}`}
+                        src={track.protectedDeletion ? albumsTrackImagePath(track) : trackImagePath(track)}
                         alt={'track_logo'}
                     />
                 </div>
                 <div className={styles.description}>
                     {
-                        track.description && track.description.length > 240 ?
+                        track.description ?
                             <>
                                 <Popover overlayStyle={{width: 600}} content={track.description}>
                                     <InfoCircleOutlined/>
                                 </Popover>
-                                <p>DESCRIPTION: {descriptionLength}</p>
+                                <p>DESCRIPTION: {useTextLength(track.description, 200)}</p>
                             </>
-                            :
-                            null
-                    }
-                    {
-                        track.description && track.description.length < 240 ?
-                            <p>DESCRIPTION: {track.description}</p>
                             :
                             null
                     }
@@ -144,7 +175,7 @@ const TrackPage: NextPageWithLayout<PageParams> = ({trackId}) => {
                                         {removeLoading ?
                                             <LoadingOutlined className={styles.loading}/>
                                             :
-                                               <HeartFilled onClick={() => handleRemoveTrack(removeTrack, track._id)}
+                                            <HeartFilled onClick={() => handleRemoveTrack(removeTrack, track._id)}
                                                          className={styles.addButtonFill}/>
                                         }
                                     </>
@@ -163,8 +194,57 @@ const TrackPage: NextPageWithLayout<PageParams> = ({trackId}) => {
                             :
                             null
                         }
-                        <CaretRightOutlined className={styles.addButtonEmpty}/>
-                        <PlusOutlined className={styles.addButtonEmpty}/>
+                        {player.isPlaying ?
+                            <PauseOutlined className={styles.addButtonEmpty} onClick={handlePause}/>
+                            :
+                            <CaretRightOutlined className={styles.addButtonEmpty} onClick={handlePlay}/>
+                        }
+                        {addToPlaylistLoading ?
+                            <LoadingOutlined className={styles.loading}/>
+                            :
+                            <PlusOutlined className={styles.addButtonEmpty} onClick={() => setOpenModal(true)}/>
+                        }
+                        <ConfigProvider theme={{
+                            token: {
+                                colorBgElevated: '#232323',
+                                colorPrimary: '#f64141',
+                                colorText: '#606060',
+                                controlItemBgHover: "#303030",
+                                boxShadowSecondary: "none"
+                            }
+                        }}>
+                            <Modal
+                                title={'Select Playlist'}
+                                open={openModal}
+                                onOk={handleSubmitModal}
+                                onCancel={handleCloseModal}
+                                width={695}
+                                centered={true}
+                            >
+                                <div className={styles.playlistsContainer}>
+                                    {user.playlists.map(playlist =>
+                                        <div
+                                            key={playlist._id}
+                                            onClick={() => setSelectedPlaylist(playlist)}
+                                            className={selectedPlaylist && selectedPlaylist._id === playlist._id ?
+                                                styles.selectedPlaylist
+                                                :
+                                                styles.playlistContainer
+                                            }
+                                        >
+                                            <Image
+                                                className={styles.playlistImage}
+                                                width={115}
+                                                height={115}
+                                                src={playlistImagePath(playlist)}
+                                                alt={'playlist_logo'}
+                                            />
+                                            <p className={styles.playlistName}>{useTextLength(playlist.name[1], 10)}</p>
+                                        </div>
+                                    )}
+                                </div>
+                            </Modal>
+                        </ConfigProvider>
                     </div>
                     <div className={styles.scoresItem}>
                         <p className={styles.scoresItemLeft}>{track.listens}</p>
@@ -228,7 +308,7 @@ const TrackPage: NextPageWithLayout<PageParams> = ({trackId}) => {
                     <div className={styles.commentList}>
                         {
                             track.comments.map(comment =>
-                                <Comment comment={comment} user={user}/>
+                                <Comment key={comment._id} comment={comment} user={user}/>
                             )
                         }
                     </div>

@@ -21,7 +21,7 @@ import {
     useRemoveTrackFromUserCollectionMutation
 } from "@/store/api/TrackApi"
 import {handleAddTrack, handleRemoveTrack} from "@/util/handleTrackControl";
-import {playlistImagePath} from "@/util/ImagePath";
+import {albumsTrackImagePath, playlistImagePath, trackImagePath} from "@/util/ImagePath";
 import {playlistDto} from "@/api/dto/playlist.dto";
 import {useAppDispatch} from "@/hook/redux";
 import {setCurrentTrack, setPlayPause} from "@/store/slice/player";
@@ -53,23 +53,12 @@ const Track: React.FC<Track> = ({track, tracksList, currentTrack, currentIndex, 
 
     const router = useRouter()
 
-    const artistLength = useTextLength(track.name[0], 20)
-    const trackLength = useTextLength(track.name[1], 20)
-    let albumLength = ''
-
-    track.album ? albumLength = useTextLength(track.album.name[1] || '', 20) : ''
-
-    let folder = 'track'
-    if (track.protectedDeletion) {
-        folder = 'album'
-    }
-
     const handleOpenModal = () => {
         setModalOpen(true)
     }
 
     const handleSubmitModal = () => {
-        if (selectedPlaylist.tracks.findIndex(selectedTrack => selectedTrack.toString() === track._id) === -1) {
+        if (selectedPlaylist.tracks.findIndex(selectedTrack => selectedTrack._id === track._id) === -1) {
             addTrackToPlaylist({tId: track._id, playlist: selectedPlaylist._id})
 
             setModalOpen(false)
@@ -106,7 +95,13 @@ const Track: React.FC<Track> = ({track, tracksList, currentTrack, currentIndex, 
     ];
 
     const handlePlay = () => {
-        dispatch(setCurrentTrack({tracksList: tracksList, currentIndex: currentIndex, currentTrack: track, isPlaying: true, isActive: true}))
+        dispatch(setCurrentTrack({
+            tracksList: tracksList,
+            currentIndex: currentIndex,
+            currentTrack: track,
+            isPlaying: true,
+            isActive: true
+        }))
         dispatch(setPlayPause(true))
     }
     const handlePause = () => {
@@ -130,14 +125,14 @@ const Track: React.FC<Track> = ({track, tracksList, currentTrack, currentIndex, 
                         priority={true}
                         width={45}
                         height={45}
-                        src={`http://localhost:4221/${folder}/${track.name[0]}/${track.image}`}
+                        src={track.protectedDeletion ? albumsTrackImagePath(track) : trackImagePath(track)}
                         alt={'track_log0'}
                     />
                 </div>
                 <div className={styles.trackContainer} onClick={() => router.push(`/pth/hub/track/${track._id}`)}>
-                    <p className={styles.name}>{trackLength}</p>
-                    <p className={styles.artist}>{artistLength}</p>
-                    <p className={styles.album}>{albumLength}</p>
+                    <p className={styles.name}>{useTextLength(track.name[1], 20)}</p>
+                    <p className={styles.artist}>{useTextLength(track.name[0], 20)}</p>
+                    <p className={styles.album}>{track.album ? useTextLength(track.album.name[1], 20) : ''}</p>
                 </div>
                 <div className={styles.actionContainer}>
                     {user.tracks.findIndex(t => t._id === track._id) === -1 ?
@@ -175,9 +170,13 @@ const Track: React.FC<Track> = ({track, tracksList, currentTrack, currentIndex, 
                             boxShadowSecondary: "none"
                         }
                     }}>
-                        <Dropdown placement="bottomRight" menu={{items}} trigger={['click']}>
-                            <EllipsisOutlined className={styles.dots}/>
-                        </Dropdown>
+                        {toPlaylistLoading ?
+                            <LoadingOutlined className={styles.loading}/>
+                            :
+                            <Dropdown placement="bottomRight" menu={{items}} trigger={['click']}>
+                                <EllipsisOutlined className={styles.dots}/>
+                            </Dropdown>
+                        }
                         <Modal
                             title={'Select playlist'}
                             open={modalOpen}

@@ -82,6 +82,14 @@ export const TrackApi = apiSlice.injectEndpoints({
             }),
             invalidatesTags: result => ['Track']
         }),
+        incrementListens: build.mutation({
+            query: (tId) => ({
+                url: `tracks/listens/${tId}`,
+                method: 'POST',
+                responseHandler: (response) => response.text()
+            }),
+            invalidatesTags: result => ['Track']
+        }),
         addGenreToTrack: build.mutation({
             query: ({tId, ...genres}) => ({
                 url: `tracks/genre/${tId}/add`,
@@ -222,6 +230,7 @@ export const {
     useFetchArtistSinglesAndSearchQuery,
     useFetchTrackByIdQuery,
     useAddTrackMutation,
+    useIncrementListensMutation,
     useAddGenreToTrackMutation,
     useAddTrackToUserCollectionMutation,
     useAddTrackToPlaylistMutation,

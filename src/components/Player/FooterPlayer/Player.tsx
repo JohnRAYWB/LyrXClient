@@ -1,10 +1,12 @@
-import React, {useEffect, useRef} from 'react';
+import React, {useEffect, useRef, useState} from 'react';
 
 import styles from "@/components/Player/styles/Player.module.css";
 import {trackDto} from "@/api/dto/track.dto";
 import {trackAudioPath} from "@/util/AudioPath";
 import WaveSurfer from "wavesurfer.js";
 import {FastBackwardOutlined, FastForwardOutlined, StepBackwardOutlined, StepForwardOutlined} from "@ant-design/icons";
+import {useIncrementListensMutation} from "@/store/api/TrackApi";
+import {toFixed} from "@rc-component/mini-decimal";
 
 interface Param {
     popup: boolean
@@ -34,6 +36,9 @@ const Player: React.FC<Param> = ({
 
     const ref = useRef(null)
     const wavesurfer = useRef(null)
+
+    const [listened, setListened] = useState(false)
+    const [incrementListens] = useIncrementListensMutation()
 
     const formatTime = time => `${Math.floor(time / 60)}:${(`0${Math.floor(time % 60)}`).slice(-2)}`
 
@@ -73,11 +78,25 @@ const Player: React.FC<Param> = ({
 
     useEffect(() => {
         if (!repeat) {
-            wavesurfer.current.on('finish', () => onEnded())
+            wavesurfer.current.on('finish', () => {
+                setListened(true)
+                return onEnded()
+            })
         } else {
-            wavesurfer.current.on('finish', () => wavesurfer.current.seekTo(0.0001))
+            wavesurfer.current.on('finish', () => {
+                setListened(true)
+                return wavesurfer.current.seekTo(0.0001)
+            })
         }
+
     }, [currentTrack, repeat])
+
+    useEffect(() => {
+        if(listened) {
+            incrementListens(currentTrack._id)
+            setListened(false)
+        }
+    }, [listened])
 
     useEffect(() => {
         wavesurfer.current.setVolume(volume)
