@@ -52,7 +52,7 @@ const playerSlice = createSlice({
             .addCase(HYDRATE, (state, action) => {
                 return {
                     ...state,
-                    ...action.payload
+                    ...action.payload.player
                 }
             })
     }
