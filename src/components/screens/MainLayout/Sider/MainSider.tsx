@@ -56,6 +56,7 @@ const HubHeader: React.FC<SiderComponent> = ({searchField}) => {
                         <button className={styles.dropDownLogout} onClick={() => {
                             if (window.confirm("Are you sure to logout?")) {
                                 destroyCookie(null, 'access_token', {path: '/'})
+                                localStorage.clear()
                                 router.push('/')
                             }
                         }}>Logout</button>

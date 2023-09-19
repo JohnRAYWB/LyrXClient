@@ -1,15 +1,12 @@
 import React from 'react';
 import Link from "next/link";
 import Image from "next/image";
-import {notification, Popover} from "antd";
+import {Popover} from "antd";
 import {HeartFilled, HeartOutlined, InfoCircleOutlined, LoadingOutlined} from "@ant-design/icons";
 
 import styles from './styles/CollectionHeader.module.css'
 import TrackList from "@/components/Content/TrackPage/TrackList";
 import useTextLength from "@/util/useTextLength";
-import {userDto} from "@/api/dto/user.dto";
-import {genreDto} from "@/api/dto/genre.dto";
-import {trackDto} from "@/api/dto/track.dto";
 import {useFetchProfileQuery} from "@/store/api/UserApi";
 import {
     useAddPlaylistToUserCollectionMutation,
@@ -20,6 +17,7 @@ import {playlistDto} from "@/api/dto/playlist.dto";
 import {albumDto} from "@/api/dto/album.dto";
 import {handleAddPlaylist, handleRemovePlaylist} from "@/util/handlePlaylistControl";
 import {handleAddAlbum, handleRemoveAlbum} from "@/util/handleAlbumControl";
+import {albumImagePath, playlistImagePath} from "@/util/ImagePath";
 
 interface Items {
     type: string
@@ -49,14 +47,14 @@ const CollectionHeader: React.FC<Items> = ({type, collection}) => {
                         className={styles.image}
                         priority={true}
                         quality={100}
-                        width={250}
-                        height={250}
-                        src={`http://localhost:4221/${type}/${collection.name[0]}/${collection.image}`}
+                        width={225}
+                        height={225}
+                        src={type === 'album' && 'artist' in collection ? albumImagePath(collection) : 'user' in collection && playlistImagePath(collection)}
                         alt={'collection_logo'}
                     />
                     <div className={styles.headerText}>
                         <div>
-                            <h1 className={styles.textTitle}>{collection.name[1]}</h1>
+                            <h1 className={styles.textTitle}>{useTextLength(collection.name[1], 15)}</h1>
                             {type === 'album' && 'artist' in collection ?
                                 <Link className={styles.userLink}
                                       href={user._id !== collection.artist._id ?
@@ -64,7 +62,7 @@ const CollectionHeader: React.FC<Items> = ({type, collection}) => {
                                           :
                                           `/pth/hub/profile/${collection.artist._id}`
                                       }>
-                                    {collection.name[0]}
+                                    {useTextLength(collection.name[0], 15)}
                                 </Link>
                                 :
                                 null
@@ -76,7 +74,7 @@ const CollectionHeader: React.FC<Items> = ({type, collection}) => {
                                           :
                                           `/pth/hub/profile/${collection.user._id}`
                                       }>
-                                    {collection.name[0]}
+                                    {useTextLength(collection.name[0], 15)}
                                 </Link>
                                 :
                                 null
@@ -89,17 +87,21 @@ const CollectionHeader: React.FC<Items> = ({type, collection}) => {
                             </div>
                             {
                                 collection.genre.length !== 0 ?
-                                    <p className={styles.genre}>
-                                        {collection.genre.map((genre) =>
-                                            <Link
-                                                href={`/pth/hub/genre/${genre._id}`}
-                                                key={genre._id}
-                                                className={styles.link}>
-                                                {genre.name}
-                                            </Link>
-                                        )}
-                                        : GENRES
-                                    </p>
+                                    <div className={styles.genresContainer}>
+                                        <div className={styles.genresLinkContainer}>
+                                            {collection.genre.map((genre) =>
+                                                <Link
+                                                    href={`/pth/hub/genre/${genre._id}`}
+                                                    key={genre._id}
+                                                    className={styles.genreLink}>
+                                                    {genre.name}
+                                                </Link>
+                                            )}
+                                        </div>
+                                        <p className={styles.genreTitle}>:</p>
+                                        <p className={styles.genreTitle}>GENRES</p>
+                                    </div>
+
                                     :
                                     null
                             }

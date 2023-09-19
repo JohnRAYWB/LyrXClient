@@ -22,7 +22,7 @@ const CollectionStat: React.FC<Param> = ({collection, favoritesCollection, liste
     // @ts-ignore
     const uploadsForTheDay = collection.filter(entity => {
 
-        if(entitiesType === 'track') {
+        if (entitiesType === 'track') {
             listens += entity.listens
         } else {
             favorites += entity.favorites
@@ -51,7 +51,7 @@ const CollectionStat: React.FC<Param> = ({collection, favoritesCollection, liste
                                 <p className={styles.entityTitle}>Listens for all time</p>
                                 <p className={styles.entityScore}>{listens}</p>
                             </div>
-                        :
+                            :
                             <div className={styles.detailedStatEntity}>
                                 <p className={styles.entityTitle}>Total add to favorites</p>
                                 <p className={styles.entityScore}>{favorites}</p>
@@ -68,17 +68,32 @@ const CollectionStat: React.FC<Param> = ({collection, favoritesCollection, liste
                             <>
                                 <div>
                                     <h1 className={styles.detailedStatTitle}>Most favorites tracks</h1>
-                                    <EntitiesList entities={favoritesCollection} entityType={'track'} type={'favorites'}/>
+                                    {favoritesCollection.length !== 0 ?
+                                        <EntitiesList entities={favoritesCollection} entityType={'track'}
+                                                      type={'favorites'}/>
+                                        :
+                                        <p className={styles.detailedStatTitle}>List is empty</p>
+                                    }
                                 </div>
                                 <div>
                                     <h1 className={styles.detailedStatTitle}>Most listens tracks</h1>
-                                    <EntitiesList entities={listensCollection} entityType={'track'} type={'listens'}/>
+                                    {listensCollection.length !== 0 ?
+                                        <EntitiesList entities={listensCollection} entityType={'track'}
+                                                      type={'listens'}/>
+                                        :
+                                        <p className={styles.detailedStatTitle}>List is empty</p>
+                                    }
                                 </div>
                             </>
-                        :
+                            :
                             <div>
-                                <h1 className={styles.detailedStatTitle}>Most favorites tracks</h1>
-                                <EntitiesList entities={favoritesCollection} entityType={entitiesType} type={'favorites'}/>
+                                <h1 className={styles.detailedStatTitle}>Most favorites {title}</h1>
+                                {favoritesCollection.length !== 0 ?
+                                    <EntitiesList entities={favoritesCollection} entityType={entitiesType}
+                                                  type={'favorites'}/>
+                                    :
+                                    <p className={styles.detailedStatTitle}>List is empty</p>
+                                }
                             </div>
                         }
                     </div>

@@ -25,15 +25,13 @@ export const reducer = (state, action) => {
     }
 }
 
-export function makeStore() {
-    return configureStore({
-        reducer: reducer,
-        middleware: getDefaultMiddleware => getDefaultMiddleware()
-            .concat(apiSlice.middleware,)
-    })
-}
+export const store = configureStore({
+    reducer: reducer,
+    middleware: getDefaultMiddleware => getDefaultMiddleware()
+        .concat(apiSlice.middleware,)
+})
 
-export const store = makeStore()
+export const makeStore = () => store
 
 export type RootStore = ReturnType<typeof makeStore>
 export type RootState = ReturnType<RootStore['getState']>

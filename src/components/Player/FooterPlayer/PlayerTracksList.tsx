@@ -55,7 +55,7 @@ const PlayerTracksList: React.FC<Param> = ({tracksList, currentTrack, isPlaying,
                         :
                         <CaretRightOutlined className={styles.playPauseButton} onClick={() => handlePlay(track, index)}/>
                     }
-                    <p>{useTextLength(track.name[0], 10)} - {useTextLength(track.name[1], 10)}</p>
+                    <p>{useTextLength(track.name[0], 10)} - {useTextLength(track.name[1], 40)}</p>
                 </div>
             )}
         </div>

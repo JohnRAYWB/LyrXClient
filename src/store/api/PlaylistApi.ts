@@ -116,7 +116,7 @@ export const PlaylistApi = apiSlice.injectEndpoints({
                 method: 'DELETE',
                 responseHandler: response => response.text()
             }),
-            invalidatesTags: result => ['Playlist']
+            invalidatesTags: result => ['Playlist', 'User']
         })
     })
 })

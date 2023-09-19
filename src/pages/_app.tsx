@@ -29,7 +29,6 @@ App.getInitialProps = wrapper.getInitialAppProps((store) => async ({ctx, Compone
 
     try {
         const {access_token} = parseCookies(ctx)
-
         const userData = await Api.auth.getProfile(access_token)
 
         store.dispatch(setUserData(userData))

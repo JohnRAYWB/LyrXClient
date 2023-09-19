@@ -25,7 +25,7 @@ const AlbumHandler: React.FC<Param> = ({setTotalCount}) => {
     return (
         <div className={styles.detailedStatContainer}>
             <CollectionStat collection={albums} favoritesCollection={favAlbums} entitiesType={'album'} title={'Albums'}/>
-            <h1 className={styles.detailedStatTitle}>Track Control Tools</h1>
+            <h1 className={styles.detailedStatTitle}>Album Control Tools</h1>
             <div className={styles.adminToolContainer}>
                 <p onClick={() => router.push('/pth/hub/admin/album/add_track')} className={styles.adminToolButton}>Add track to album</p>
                 <p onClick={() => router.push('/pth/hub/admin/album/delete')} className={styles.adminToolButton}>Delete album</p>

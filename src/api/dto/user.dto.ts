@@ -8,7 +8,6 @@ export interface userDto {
     readonly username: string
     readonly about: string
     readonly avatar: string
-    readonly birth: Date
     readonly createdTime: Date
     readonly roles: roleDto[]
     readonly ban: boolean

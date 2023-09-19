@@ -2,15 +2,17 @@
     display: flex;
     flex-direction: column;
     padding: 20px 30px;
+    gap: 10px;
     background-image: linear-gradient(to bottom, #232323, #0e0e0e);
     border-radius: 10px 10px 0 0;
 }
 
 .headerContainer {
     display: flex;
-    flex-flow: row wrap;
-    justify-content: center;
+    flex-flow: row;
+    justify-content: space-between;
     align-items: center;
+    gap: 20px;
 }
 
 .headerContainer > * {
@@ -20,7 +22,13 @@
 .image {
     flex: 0;
     box-shadow: 0 0 10px #151515;
-    border: 1px solid transparent;
+    border-radius: 5px;
+    transition-duration: 200ms;
+}
+
+.image:hover {
+    transition-duration: 200ms;
+    transform: scale(1.03);
 }
 
 .headerText {
@@ -28,11 +36,10 @@
     flex-flow: row wrap;
     justify-content: space-between;
     align-items: center;
-    padding: 0 25px;
 }
 
 .headerText > * {
-    flex: 0 0 50%
+    flex: 0 0 45%
 }
 
 .collectionInfo {
@@ -59,19 +66,44 @@
     transition-duration: 400ms;
 }
 
-.genre {
+.genresContainer {
+    display: flex;
+    flex-flow: wrap row;
+    align-items: center;
+    gap: 10px;
+    padding: 10px;
+    background-color: rgba(17, 17, 17, .8);
+    border-radius: 5px;
+}
+
+.genreTitle {
     color: #a8a8a8;
     font-size: 16px;
 }
-
-.link {
-    margin-left: 5px;
-    transition-duration: 400ms;
+.genresLinkContainer {
+    display: flex;
+    flex-flow: wrap column;
+    justify-content: center;
+    align-items: center;
+    gap: 5px;
 }
 
-.link:hover {
-    transition-duration: 400ms;
-    color: #F64141;
+.genresLinkContainer > * {
+    flex: 5%;
+}
+
+.genreLink {
+    text-align: center;
+    padding: 5px 10px;
+    background-color: #00ff5c;
+    border-radius: 10px;
+    transition-duration: 200ms;
+}
+
+.genreLink:hover {
+    transition-duration: 200ms;
+    color: white;
+    background-color: #F64141;
 }
 
 .description {

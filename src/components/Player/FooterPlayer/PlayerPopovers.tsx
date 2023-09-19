@@ -81,7 +81,11 @@ const PlayerPopovers: React.FC<Param> = ({
                     </Popover>
                 }
             </ConfigProvider>
-            <CloseOutlined className={styles.closeButton} onClick={handleClosePlayer}/>
+            {!popup ?
+                <CloseOutlined className={styles.closeButton} onClick={handleClosePlayer}/>
+                :
+                null
+            }
         </div>
     );
 };

@@ -186,25 +186,29 @@ const Track: React.FC<Track> = ({track, tracksList, currentTrack, currentIndex, 
                             centered={true}
                         >
                             <div className={styles.playlistsContainer}>
-                                {user.playlists.map(playlist =>
-                                    <div key={playlist._id} onClick={() => setSelectedPlaylist(playlist)}
-                                         className={
-                                             selectedPlaylist && selectedPlaylist._id === playlist._id ?
-                                                 styles.selectedPlaylist
-                                                 :
-                                                 styles.playlistContainer
-                                         }>
-                                        <Image
-                                            className={styles.playlistImage}
-                                            width={115}
-                                            height={115}
-                                            priority={true}
-                                            src={playlistImagePath(playlist)}
-                                            alt={'playlist_logo'}
-                                        />
-                                        <p className={styles.playlistName}>{useTextLength(playlist.name[1], 10)}</p>
-                                    </div>
-                                )}
+                                {user.playlists.length !== 0 ?
+                                    user.playlists.map(playlist =>
+                                        <div key={playlist._id} onClick={() => setSelectedPlaylist(playlist)}
+                                             className={
+                                                 selectedPlaylist && selectedPlaylist._id === playlist._id ?
+                                                     styles.selectedPlaylist
+                                                     :
+                                                     styles.playlistContainer
+                                             }>
+                                            <Image
+                                                className={styles.playlistImage}
+                                                width={115}
+                                                height={115}
+                                                priority={true}
+                                                src={playlistImagePath(playlist)}
+                                                alt={'playlist_logo'}
+                                            />
+                                            <p className={styles.playlistName}>{useTextLength(playlist.name[1], 10)}</p>
+                                        </div>
+                                    )
+                                    :
+                                    <p className={styles.emptyPlaylistTitle}>You don't have own playlists yet</p>
+                                }
                             </div>
                         </Modal>
                     </ConfigProvider>

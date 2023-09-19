@@ -28,12 +28,17 @@ const Delete: NextPageWithLayout = () => {
             {user.roles.findIndex(role => role.role === 'admin') === -1 ?
                 <p style={{textAlign: "center", fontSize: 44, color: '#999999'}}>Access denied</p>
                 :
-                <EditEntitiesList
-                    entities={playlists}
-                    refetch={refetch}
-                    entitiesType={'playlist'}
-                    type={'delete'}
-                />
+                playlists.length !== 0 ?
+                    <EditEntitiesList
+                        entities={playlists}
+                        refetch={refetch}
+                        entitiesType={'playlist'}
+                        type={'delete'}
+                    />
+                    :
+                    <p style={{textAlign: "center", fontSize: 36, textTransform: 'uppercase', color: '#888888'}}>
+                        Playlists not found
+                    </p>
             }
         </MainLayout>
     );

@@ -264,15 +264,15 @@
     display: flex;
     flex-flow: wrap row;
     gap: 10px;
-    padding: 10px 20px;
-    background-color: rgba(9, 9, 9, 0.5);
+    padding: 10px 25px;
+    background-color: rgba(9, 9, 9, .7);
     border-radius: 5px;
 }
 
 .playlistContainer {
     display: flex;
     flex-flow: column;
-    padding: 10px;
+    padding: 5px;
     gap: 10px;
     align-items: center;
     background-color: rgba(61, 61, 61, 0.5);
@@ -285,7 +285,7 @@
 .activePlaylistContainer {
     display: flex;
     flex-flow: column;
-    padding: 10px;
+    padding: 6px;
     gap: 10px;
     align-items: center;
     background-color: rgba(246, 65, 65, .5);

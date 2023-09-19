@@ -10,7 +10,7 @@ const TrackRow = () => {
 
     const {data: tracks, isLoading} = useFetchMostLikedTrackQuery()
 
-    if(isLoading) {
+    if (isLoading) {
         return <></>
     }
 
@@ -18,18 +18,25 @@ const TrackRow = () => {
     const secondRow = tracks.slice(5, 10)
 
     return (
-        <div className={styles.main}>
-            <div className={styles.container}>
-                <h1 className={styles.title}>Tracks</h1>
-                <Link className={styles.link} href={'/pth/hub/track'}>See all</Link>
+        tracks.length !== 0 ?
+            <div className={styles.main}>
+                <div className={styles.container}>
+                    <h1 className={styles.title}>Tracks</h1>
+                    <Link className={styles.link} href={'/pth/hub/track'}>See all</Link>
+                </div>
+                <div className={styles.rowContainer}>
+                    {tracks.length > 5 ?
+                        <Carousel>
+                            <Row items={firstRow} type={'track'}/>
+                            <Row items={secondRow} type={'track'}/>
+                        </Carousel>
+                        :
+                        <Row items={tracks} type={'track'}/>
+                    }
+                </div>
             </div>
-            <div className={styles.rowContainer}>
-                <Carousel>
-                    <Row items={firstRow} type={'track'}/>
-                    <Row items={secondRow} type={'track'}/>
-                </Carousel>
-            </div>
-        </div>
+            :
+            null
     );
 };
 

@@ -29,13 +29,19 @@ const UsersPlaylists: NextPageWithLayout = () => {
 
     return (
         <div className={styles.container}>
-            {mainPlaylist && mainPlaylist._id !== lastAdded._id ?
-                <h1 className={styles.title}>Current playlist</h1>
+            {lastAdded || mainPlaylist ?
+                <>
+                    {mainPlaylist && mainPlaylist._id !== lastAdded?._id ?
+                        <h1 className={styles.title}>Current playlist</h1>
+                        :
+                        <h1 className={styles.title}>Last added playlist</h1>
+                    }
+                    <PlaylistHeader playlist={mainPlaylist ? mainPlaylist : lastAdded} user={user}/>
+                </>
                 :
-                <h1 className={styles.title}>Last added playlist</h1>
+                null
             }
-            <PlaylistHeader playlist={mainPlaylist ? mainPlaylist : lastAdded} user={user}/>
-            {playlists ?
+            {playlists.length !== 0 ?
                 <div className={styles.collectionList}>
                     <h1 className={styles.title}>Other your playlist</h1>
                     <div className={styles.playlistsContainer}>
@@ -60,9 +66,11 @@ const UsersPlaylists: NextPageWithLayout = () => {
                     </div>
                 </div>
                 :
-                <h1 className={styles.title}>You don't have own playlists yet</h1>
+                <div className={styles.playlistsContainer}>
+                    <h1 className={styles.title}>You don't have own playlists yet</h1>
+                </div>
             }
-            {playlistsCollection ?
+            {playlistsCollection.length !== 0 ?
                 <div className={styles.collectionList}>
                     <h1 className={styles.title}>Your favorites</h1>
                     <div className={styles.playlistsContainer}>
@@ -87,7 +95,9 @@ const UsersPlaylists: NextPageWithLayout = () => {
                     </div>
                 </div>
                 :
-                <h1 className={styles.title}>You don't have favorites playlists yet</h1>
+                <div className={styles.playlistsContainer}>
+                    <h1 className={styles.title}>You don't have favorites playlists yet</h1>
+                </div>
             }
         </div>
     );

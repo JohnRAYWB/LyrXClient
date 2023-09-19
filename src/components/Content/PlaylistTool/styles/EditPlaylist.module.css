@@ -125,6 +125,8 @@
 .loadingContainer {
     display: flex;
     justify-content: center;
+    padding: 10px;
+    background-color: rgba(17, 17, 17, .8);
 }
 
 .loadingSpinner {

@@ -16,7 +16,7 @@ interface element {
 const Element: React.FC<element> = ({item, type}) => {
 
     const router = useRouter()
-    const nameLength = useTextLength(item.name[1], 40)
+    const nameLength = useTextLength(item.name[1], 15)
     const descriptionLength = useTextLength(item.description || '', 40)
     let folder = type
     if(type === 'track' && 'protectedDeletion' in item && item.protectedDeletion) {

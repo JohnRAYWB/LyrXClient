@@ -6,8 +6,8 @@ import styles from "./MainLayout.module.css"
 import MainSider from "./Sider/MainSider";
 import Navigation from "./Navigation/Navigation";
 import FooterPlayer from "@/components/Player/FooterPlayer";
-import {useAppSelector} from "@/hook/redux";
-import {selectTrackData} from "@/store/slice/player";
+import {useAppDispatch, useAppSelector} from "@/hook/redux";
+import {selectTrackData, setCurrentTrack} from "@/store/slice/player";
 
 const {Header, Content, Footer, Sider} = Layout;
 
@@ -19,7 +19,12 @@ interface NavName {
 
 const App: React.FC<NavName> = ({children, searchElement, name}) => {
 
+    const dispatch = useAppDispatch()
     const player = useAppSelector(selectTrackData)
+
+    if (typeof window !== "undefined" && localStorage.getItem('player') && JSON.parse(localStorage.getItem('player')).currentTrack !== null && player.currentTrack === null) {
+        dispatch(setCurrentTrack(JSON.parse(localStorage.getItem('player'))))
+    }
 
     return (
         <>
@@ -38,7 +43,7 @@ const App: React.FC<NavName> = ({children, searchElement, name}) => {
                     <Footer className={styles.footer}>© LyrX | All rights reserved</Footer>
                 </Layout>
             </Layout>
-            {player.currentTrack ?
+            {player.currentTrack !== null ?
                 <FooterPlayer/>
                 :
                 null

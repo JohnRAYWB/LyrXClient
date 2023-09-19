@@ -15,7 +15,7 @@ const Delete: NextPageWithLayout = () => {
     const {data: user, isLoading: userLoading} = useFetchProfileQuery()
     const {data: albums, isLoading, refetch} = useFetchAllAlbumAndSearchQuery(query)
 
-    if(isLoading || userLoading) {
+    if (isLoading || userLoading) {
         return <></>
     }
 
@@ -28,12 +28,17 @@ const Delete: NextPageWithLayout = () => {
             {user.roles.findIndex(role => role.role === 'admin') === -1 ?
                 <p style={{textAlign: "center", fontSize: 44, color: '#999999'}}>Access denied</p>
                 :
-                <EditEntitiesList
-                    entities={albums}
-                    refetch={refetch}
-                    entitiesType={'album'}
-                    type={'delete'}
-                />
+                albums.length !== 0 ?
+                    < EditEntitiesList
+                        entities={albums}
+                        refetch={refetch}
+                        entitiesType={'album'}
+                        type={'delete'}
+                    />
+                    :
+                    <p style={{textAlign: "center", fontSize: 36, textTransform: 'uppercase', color: '#888888'}}>
+                        Albums not found
+                    </p>
             }
         </MainLayout>
     );
@@ -44,7 +49,7 @@ export const getServerSideProps = wrapper.getServerSideProps((store) => async (c
     try {
         const {access_token} = parseCookies(ctx)
 
-        if(!access_token) {
+        if (!access_token) {
             return {
                 redirect: {
                     destination: "/",

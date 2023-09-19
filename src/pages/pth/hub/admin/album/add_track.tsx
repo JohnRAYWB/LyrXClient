@@ -28,12 +28,17 @@ const AddTrack: NextPageWithLayout = () => {
             {user.roles.findIndex(role => role.role === 'admin') === -1 ?
                 <p style={{textAlign: "center", fontSize: 44, color: '#999999'}}>Access denied</p>
                 :
-                <EditEntitiesList
-                    entities={albums}
-                    entitiesType={'album'}
-                    type={'add'}
-                    refetch={refetch}
-                />
+                albums.length !== 0 ?
+                    <EditEntitiesList
+                        entities={albums}
+                        entitiesType={'album'}
+                        type={'add'}
+                        refetch={refetch}
+                    />
+                    :
+                    <p style={{textAlign: "center", fontSize: 36, textTransform: 'uppercase', color: '#888888'}}>
+                        Albums not found
+                    </p>
             }
         </MainLayout>
     );

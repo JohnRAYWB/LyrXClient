@@ -2,7 +2,14 @@ import React, {useEffect, useState} from 'react';
 
 import styles from "../styles/FooterPlayer.module.css"
 import {useAppDispatch, useAppSelector} from "@/hook/redux";
-import {selectTrackData, setCurrentTrack, setNextTrack, setPlayPause, setPrevTrack} from "@/store/slice/player";
+import {
+    selectTrackData,
+    setChangeTrack,
+    setCurrentTrack,
+    setNextTrack,
+    setPlayPause,
+    setPrevTrack
+} from "@/store/slice/player";
 import PlayerTrackInfo from "@/components/Player/FooterPlayer/PlayerTrackInfo";
 import Player from "@/components/Player/FooterPlayer/Player";
 import PlayerControls from "@/components/Player/FooterPlayer/PlayerControls";
@@ -12,7 +19,9 @@ import {albumsTrackImagePath, trackImagePath} from "@/util/ImagePath";
 
 const FooterPlayer = () => {
 
-    const {tracksList, currentIndex, currentTrack, isActive, isPlaying} = useAppSelector(selectTrackData)
+    const player = useAppSelector(selectTrackData)
+    const {tracksList, currentIndex, currentTrack, isActive, isPlaying} = player
+
     const [duration, setDuration] = useState(0)
     const [currentTime, setCurrentTime] = useState(0)
     const [repeat, setRepeat] = useState(false)
@@ -38,19 +47,19 @@ const FooterPlayer = () => {
 
     const handleNextTrack = () => {
         if (!shuffle) {
-            dispatch(setNextTrack((currentIndex + 1) % tracksList.length))
+            dispatch(setChangeTrack((currentIndex + 1) % tracksList.length))
         } else {
-            dispatch(setNextTrack(Math.floor(Math.random() * tracksList.length)))
+            dispatch(setChangeTrack(Math.floor(Math.random() * tracksList.length)))
         }
     }
 
     const handlePrevTrack = () => {
         if (currentIndex === 0) {
-            dispatch(setPrevTrack(tracksList.length - 1))
+            dispatch(setChangeTrack(tracksList.length - 1))
         } else if (shuffle) {
-            dispatch(setPrevTrack(Math.floor(Math.random() * tracksList.length)))
+            dispatch(setChangeTrack(Math.floor(Math.random() * tracksList.length)))
         } else {
-            dispatch(setPrevTrack((currentIndex - 1) % tracksList.length))
+            dispatch(setChangeTrack((currentIndex - 1) % tracksList.length))
         }
     }
 

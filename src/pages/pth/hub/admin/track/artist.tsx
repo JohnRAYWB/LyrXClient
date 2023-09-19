@@ -28,12 +28,17 @@ const Artist: NextPageWithLayout = () => {
             {user.roles.findIndex(role => role.role === 'admin') === -1 ?
                 <p style={{textAlign: "center", fontSize: 44, color: '#999999'}}>Access denied</p>
                 :
-                <EditEntitiesList
-                    entities={tracks}
-                    refetch={refetch}
-                    entitiesType={'track'}
-                    type={'edit'}
-                />
+                tracks.length !== 0 ?
+                    <EditEntitiesList
+                        entities={tracks}
+                        refetch={refetch}
+                        entitiesType={'track'}
+                        type={'edit'}
+                    />
+                    :
+                    <p style={{textAlign: "center", fontSize: 36, textTransform: 'uppercase', color: '#888888'}}>
+                        Tracks not found
+                    </p>
             }
         </MainLayout>
     );
@@ -44,7 +49,7 @@ export const getServerSideProps = wrapper.getServerSideProps((store) => async (c
     try {
         const {access_token} = parseCookies(ctx)
 
-        if(!access_token) {
+        if (!access_token) {
             return {
                 redirect: {
                     destination: "/",

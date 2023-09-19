@@ -22,7 +22,7 @@ const PlaylistHeader: React.FC<Param> = ({playlist, user}) => {
     const router = useRouter()
 
     const player = useAppSelector(selectTrackData)
-    console.log(playlist)
+
     return (
         <div className={styles.CurrentContainer}>
             <div className={styles.CurrentInfoContainer}>

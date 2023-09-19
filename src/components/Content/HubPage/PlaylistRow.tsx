@@ -9,7 +9,7 @@ const PlaylistRow = () => {
 
     const {data: playlists, isLoading} = useFetchMostLikedPlaylistQuery()
 
-    if(isLoading) {
+    if (isLoading) {
         return <></>
     }
 
@@ -18,18 +18,26 @@ const PlaylistRow = () => {
 
 
     return (
-        <div className={styles.main}>
-            <div className={styles.container}>
-                <h1 className={styles.title}>Playlist</h1>
-                <Link className={styles.link} href={'/pth/hub/playlist'}>See all</Link>
+        playlists.length !== 0 ?
+
+            <div className={styles.main}>
+                <div className={styles.container}>
+                    <h1 className={styles.title}>Playlist</h1>
+                    <Link className={styles.link} href={'/pth/hub/playlist'}>See all</Link>
+                </div>
+                <div className={styles.rowContainer}>
+                    {playlists.length > 5 ?
+                        <Carousel>
+                            <Row items={firstRow} type={'playlist'}/>
+                            <Row items={secondRow} type={'playlist'}/>
+                        </Carousel>
+                        :
+                        <Row items={playlists} type={'playlist'}/>
+                    }
+                </div>
             </div>
-            <div className={styles.rowContainer}>
-                <Carousel>
-                    <Row items={firstRow} type={'playlist'}/>
-                    <Row items={secondRow} type={'playlist'}/>
-                </Carousel>
-            </div>
-        </div>
+            :
+            null
     );
 };
 
