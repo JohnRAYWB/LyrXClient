@@ -27,11 +27,6 @@ const TrackList: React.FC<TrackListData> = ({tracks, fetchingSearch}) => {
     }
 
     const player = useAppSelector(selectTrackData)
-    const dispatch = useAppDispatch()
-
-    if(player.isPlaying && player.tracksList.length < tracks.length) {
-        dispatch(resetTracksList(tracks))
-    }
 
     return (
         <div>

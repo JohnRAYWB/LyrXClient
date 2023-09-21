@@ -9,6 +9,8 @@ import TrackList from "@/components/Content/TrackPage/TrackList";
 import styles from "@/styles/Track.module.css"
 import Search from "@/components/screens/MainLayout/Sider/components/Search";
 import Pagination from "@/util/Pagination";
+import {useAppDispatch} from "@/hook/redux";
+import {resetTracksList} from "@/store/slice/player";
 
 const Track: NextPageWithLayout = () => {
 
@@ -24,6 +26,12 @@ const Track: NextPageWithLayout = () => {
 
     const searchHandle = (e) => {
         setQuery(e.target.value)
+    }
+
+    const dispatch = useAppDispatch()
+
+    if(fetchingAll) {
+        dispatch(resetTracksList(tracks))
     }
 
     return (

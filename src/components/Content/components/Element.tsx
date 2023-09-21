@@ -28,7 +28,6 @@ const Element: React.FC<element> = ({item, type}) => {
             <Image
                 className={styles.image}
                 priority={true}
-                quality={50}
                 width={165}
                 height={165}
                 src={`http://localhost:4221/${folder}/${item.name[0]}/${item.image}`}

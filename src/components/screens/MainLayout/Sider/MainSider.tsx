@@ -13,6 +13,7 @@ import ArtistToolSider from "./components/ArtistToolSider";
 import GenreSider from "@/components/screens/MainLayout/Sider/components/GenreSider";
 import {useAppSelector} from "@/hook/redux";
 import {selectUserData} from "@/store/slice/user";
+import Image from "next/image";
 
 interface SiderComponent {
     searchField: ReactNode
@@ -28,13 +29,12 @@ const HubHeader: React.FC<SiderComponent> = ({searchField}) => {
     }
 
     const playlistLength = user.playlists.length
-
     const profileItems: MenuProps['items'] = [
         {
             label: 'Profile',
             key: 'SubMenu',
             style: {fontSize: 16, width: 280},
-            icon: <UserOutlined style={{fontSize: 16, marginRight: 10}}/>,
+            icon: user.avatar ? <Image className={styles.avatar} width={40} height={40} src={`http://localhost:4221/profile/${user.username}/${user.avatar}`} alt={'avatar'}/> : <UserOutlined style={{fontSize: 16, marginRight: 10}}/>,
             children: [
                 {
                     style: {fontSize: 14},

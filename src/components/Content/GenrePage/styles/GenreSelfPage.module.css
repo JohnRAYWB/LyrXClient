@@ -1,0 +1,95 @@
+.container {
+    display: flex;
+    flex-flow: column;
+    gap: 20px;
+}
+
+.collectionsContainer {
+    display: flex;
+    flex-flow: column;
+    background-color: #0e0e0e;
+    border-radius: 10px;
+}
+
+.collectionsTitleContainer {
+    display: flex;
+    flex-flow: row;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px;
+    background-color: #464646;
+    border-radius: 10px 10px 0 0;
+}
+
+.collectionsContainerTitle {
+    font-size: 20px;
+    color: white;
+}
+
+.moreButton {
+    font-size: 12px;
+    font-weight: bold;
+    color: #1c1c1c;
+    cursor: pointer;
+    transition-duration: 200ms;
+}
+
+.moreButton:hover {
+    color: #F64141;
+    transition-duration: 200ms;
+}
+
+.collectionsCarousel {
+    border-radius: 0 0 10px 10px;
+    transition-duration: 300ms;
+}
+
+.collectionsCarousel:hover {
+    background-color: rgba(246, 65, 65, .4);
+    transition-duration: 300ms;
+}
+
+.collectionsDropDown {
+    display: flex;
+    flex-flow: wrap row;
+    justify-content: flex-start;
+    gap: 17px;
+    padding: 10px;
+    height: 530px;
+    overflow-y: scroll;
+    transition-duration: 300ms;
+}
+
+.collectionsDropDown::-webkit-scrollbar-track {
+    background-color: #0e0e0e;
+}
+
+.collectionsDropDown::-webkit-scrollbar {
+    width: 5px;
+}
+
+.collectionsDropDown::-webkit-scrollbar-thumb {
+    background-color: rgba(246, 65, 65, .4);
+}
+
+.collectionsDropDown:hover {
+    background-color: rgba(246, 65, 65, .4);
+    transition-duration: 300ms;
+}
+
+.tracksMainContainer {
+    display: flex;
+    flex-flow: column;
+}
+
+.tracksContainer {
+    padding: 10px;
+    border-radius: 0 0 10px 10px;
+    transition-duration: 300ms;
+}
+
+.tracksContainer:hover {
+    color: black;
+    background-color: rgba(54, 54, 54, 0.5);
+    transition-duration: 300ms;
+}

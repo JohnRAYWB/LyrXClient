@@ -72,3 +72,9 @@
     color: white;
     font-size: 14px;
 }
+
+.avatar {
+    padding: 2px;
+    background-color: rgba(246, 65, 65, .8);
+    border-radius: 50%;
+}

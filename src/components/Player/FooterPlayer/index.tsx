@@ -6,9 +6,7 @@ import {
     selectTrackData,
     setChangeTrack,
     setCurrentTrack,
-    setNextTrack,
     setPlayPause,
-    setPrevTrack
 } from "@/store/slice/player";
 import PlayerTrackInfo from "@/components/Player/FooterPlayer/PlayerTrackInfo";
 import Player from "@/components/Player/FooterPlayer/Player";

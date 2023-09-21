@@ -26,18 +26,20 @@ const PlaylistHeader: React.FC<Param> = ({playlist, user}) => {
     return (
         <div className={styles.CurrentContainer}>
             <div className={styles.CurrentInfoContainer}>
-                <Image
-                    className={styles.image}
-                    width={150}
-                    height={150}
-                    priority={true}
-                    src={playlistImagePath(playlist)}
-                    alt={'playlist_logo'}
-                />
+                <div className={styles.imageContainer}>
+                    <Image
+                        className={styles.image}
+                        width={145}
+                        height={145}
+                        priority={true}
+                        src={playlistImagePath(playlist)}
+                        alt={'playlist_logo'}
+                    />
+                </div>
                 <div className={styles.CurrentDescriptionContainer}>
                     <h1 onClick={() => router.push(`/pth/hub/playlist/${playlist._id}`)}
                         className={styles.CurrentName}>
-                        {useTextLength(playlist.name[1], 10)}
+                        {useTextLength(playlist.name[1], 9)}
                     </h1>
                     <ScoreContainer title={'Favorites'} count={playlist.favorites}/>
                     <div className={styles.genresContainer}>

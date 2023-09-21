@@ -1,14 +1,16 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {wrapper} from "@/store/store";
 import {parseCookies} from "nookies";
 import {NextPageWithLayout} from "@/pages/_app";
 import MainLayout from "@/components/screens/MainLayout/MainLayout";
-import {ConfigProvider, Tabs, TabsProps} from "antd";
+import {Carousel, ConfigProvider, Tabs, TabsProps} from "antd";
 
-import styles from "@/styles/Genre.module.css"
+import styles from "@/components/Content/GenrePage/styles/GenreSelfPage.module.css"
 import TrackList from "@/components/Content/TrackPage/TrackList";
 import Collection from "@/components/Content/components/Collection";
 import {useFetchGenreByIdQuery} from "@/store/api/GenreApi";
+import Row from "@/components/Content/components/Row";
+import Element from "@/components/Content/components/Element";
 
 interface PageParams {
     genreId: string
@@ -16,9 +18,12 @@ interface PageParams {
 
 const GenrePage: NextPageWithLayout<PageParams> = ({genreId}) => {
 
+    const [dropdownPlaylist, setDropdownPlaylist] = useState(false)
+    const [dropdownAlbum, setDropdownAlbum] = useState(false)
+
     const {data: genre, isLoading} = useFetchGenreByIdQuery(genreId)
 
-    if(isLoading) {
+    if (isLoading) {
         return <></>
     }
 
@@ -40,10 +45,95 @@ const GenrePage: NextPageWithLayout<PageParams> = ({genreId}) => {
         },
     ]
 
+    const {tracks, playlists, albums} = genre
+
     return (
-        <div>
-            <div className={styles.collectionContainer}>
-                <ConfigProvider theme={{
+        <div className={styles.container}>
+            {playlists !== 0 ?
+                <div className={styles.collectionsContainer}>
+                    <div className={styles.collectionsTitleContainer}>
+                        <h1 className={styles.collectionsContainerTitle}>{genre.name}'s Playlists</h1>
+                        {playlists.length > 5 ?
+                            <p className={styles.moreButton}
+                               onClick={() => setDropdownPlaylist(!dropdownPlaylist)}
+                            >
+                                See more
+                            </p>
+                            :
+                            null
+                        }
+                    </div>
+                    {!dropdownPlaylist ?
+                        <div className={styles.collectionsCarousel}>
+                            {playlists.length > 5 ?
+                                <Carousel>
+                                    <Row items={playlists.slice(0, 5)} type={'playlist'}/>
+                                    <Row items={playlists.slice(5, 10)} type={'playlist'}/>
+                                </Carousel>
+                                :
+                                <Row items={playlists} type={'playlist'}/>
+                            }
+                        </div>
+                        :
+                        <div className={styles.collectionsDropDown}>
+                            {playlists.map(playlist =>
+                                <Element item={playlist} type={'playlist'}/>
+                            )}
+                        </div>
+                    }
+                </div>
+                :
+                null
+            }
+            {albums !== 0 ?
+                <div className={styles.collectionsContainer}>
+                    <div className={styles.collectionsTitleContainer}>
+                        <h1 className={styles.collectionsContainerTitle}>{genre.name}'s Albums</h1>
+                        {albums.length > 5 ?
+                            <p className={styles.moreButton}
+                               onClick={() => setDropdownAlbum(!dropdownAlbum)}
+                            >
+                                See more
+                            </p>
+                            :
+                            null
+                        }
+                    </div>
+                    {!dropdownAlbum ?
+                        <div className={styles.collectionsCarousel}>
+                            {albums.length > 5 ?
+                                <Carousel>
+                                    <Row items={albums.slice(0, 5)} type={'album'}/>
+                                    <Row items={albums.slice(5, 10)} type={'album'}/>
+                                </Carousel>
+                                :
+                                <Row items={albums} type={'album'}/>
+                            }
+                        </div>
+                        :
+                        <div className={styles.collectionsDropDown}>
+                            {albums.map(album =>
+                                <Element item={album} type={'album'}/>
+                            )}
+                        </div>
+                    }
+                </div>
+                :
+                null
+            }
+            {tracks !== 0 ?
+                <div className={styles.tracksMainContainer}>
+                    <div className={styles.collectionsTitleContainer}>
+                        <h1 className={styles.collectionsContainerTitle}>{genre.name}'s Tracks</h1>
+                    </div>
+                    <div className={styles.tracksContainer}>
+                        <TrackList tracks={tracks}/>
+                    </div>
+                </div>
+                :
+                null
+            }
+            {/*<ConfigProvider theme={{
                     token: {
                         colorPrimary: "#F64141",
                         colorBorderSecondary: "#343434",
@@ -55,8 +145,7 @@ const GenrePage: NextPageWithLayout<PageParams> = ({genreId}) => {
                         items={items}
                         tabBarStyle={{color: '#888888'}}
                     />
-                </ConfigProvider>
-            </div>
+                </ConfigProvider>*/}
         </div>
     );
 };
@@ -68,7 +157,7 @@ export const getServerSideProps = wrapper.getServerSideProps((store) => async (c
     try {
         const {access_token} = parseCookies(ctx)
 
-        if(!access_token) {
+        if (!access_token) {
             return {
                 redirect: {
                     destination: "/",

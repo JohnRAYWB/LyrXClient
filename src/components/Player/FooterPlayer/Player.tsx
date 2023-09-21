@@ -40,7 +40,7 @@ const Player: React.FC<Param> = ({
     const [incrementListens] = useIncrementListensMutation()
 
     const formatTime = time => `${Math.floor(time / 60)}:${(`0${Math.floor(time % 60)}`).slice(-2)}`
-    console.log(listened)
+
     useEffect(() => {
         wavesurfer.current = WaveSurfer.create({
             container: ref.current,

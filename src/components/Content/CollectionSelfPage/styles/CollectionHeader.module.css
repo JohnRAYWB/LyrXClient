@@ -19,16 +19,25 @@
     flex: 1;
 }
 
-.image {
+.imageContainer {
+    display: flex;
+    align-items: center;
+    justify-content: center;
     flex: 0;
+    padding: 10px;
+    background-color: rgba(246, 65, 65, .7);
+    border-radius: 5px;
+}
+
+.image {
     box-shadow: 0 0 10px #151515;
     border-radius: 5px;
-    transition-duration: 200ms;
+    transition-duration: 300ms;
 }
 
 .image:hover {
-    transition-duration: 200ms;
-    transform: scale(1.03);
+    transition-duration: 300ms;
+    transform: scale(1.1);
 }
 
 .headerText {

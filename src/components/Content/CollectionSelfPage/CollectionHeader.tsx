@@ -43,15 +43,17 @@ const CollectionHeader: React.FC<Items> = ({type, collection}) => {
         <div>
             <div className={styles.headerMain}>
                 <div className={styles.headerContainer}>
-                    <Image
-                        className={styles.image}
-                        priority={true}
-                        quality={100}
-                        width={225}
-                        height={225}
-                        src={type === 'album' && 'artist' in collection ? albumImagePath(collection) : 'user' in collection && playlistImagePath(collection)}
-                        alt={'collection_logo'}
-                    />
+                    <div className={styles.imageContainer}>
+                        <Image
+                            className={styles.image}
+                            priority={true}
+                            quality={100}
+                            width={215}
+                            height={215}
+                            src={type === 'album' && 'artist' in collection ? albumImagePath(collection) : 'user' in collection && playlistImagePath(collection)}
+                            alt={'collection_logo'}
+                        />
+                    </div>
                     <div className={styles.headerText}>
                         <div>
                             <h1 className={styles.textTitle}>{useTextLength(collection.name[1], 15)}</h1>

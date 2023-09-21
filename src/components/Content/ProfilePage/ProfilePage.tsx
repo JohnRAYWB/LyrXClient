@@ -129,13 +129,15 @@ const Profile: React.FC<UserParam> = ({user, type}) => {
                 {!edit ?
                     <>
                         {user.avatar ?
-                            <Image
-                                priority={true}
-                                className={styles.avatar}
-                                width={200}
-                                height={200}
-                                src={`http:localhost:4221/profile/${user.username}/${user.avatar}`}
-                                alt={'avatar'}/>
+                            <div className={styles.avatarContainer}>
+                                <Image
+                                    priority={true}
+                                    className={styles.avatar}
+                                    width={195}
+                                    height={195}
+                                    src={`http:localhost:4221/profile/${user.username}/${user.avatar}`}
+                                    alt={'avatar'}/>
+                            </div>
                             :
                             <UserOutlined className={styles.emptyAvatar}/>
                         }
