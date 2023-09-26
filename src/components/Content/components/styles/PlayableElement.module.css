@@ -1,0 +1,64 @@
+.mainContainer {
+    display: flex;
+    flex-flow: row;
+    align-items: center;
+    gap: 10px;
+    padding: 10px;
+    background-color: rgba(17,17,17, 1);
+    border-radius: 5px;
+    color: #d0d0d0;
+    transition-duration: 300ms;
+}
+
+.mainContainer:hover {
+    background-color: #1c1c1c;
+    color: white;
+    transform: scale(1.01);
+    transition-duration: 300ms;
+}
+
+.imageContainer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 75px;
+    height: 75px;
+    background-size: cover;
+    background-repeat: no-repeat;
+    box-shadow: 0 0 10px #0e0e0e;
+    border-radius: 5px;
+}
+
+.button {
+    font-size: 40px;
+    color: white;
+    cursor: pointer;
+    transition-duration: 200ms;
+}
+
+.button:hover {
+    transform: scale(1.2);
+    color: #F64141;
+    transition-duration: 200ms;
+}
+
+.nameContainer {
+    display: flex;
+    flex-flow: column;
+    gap: 5px;
+    cursor: pointer;
+}
+
+.nameContainer:hover {
+    color: #F64141;
+}
+
+.trackName {
+    font-size: 14px;
+    transition-duration: 200ms;
+}
+
+.artistName {
+    font-size: 12px;
+    transition-duration: 200ms;
+}
