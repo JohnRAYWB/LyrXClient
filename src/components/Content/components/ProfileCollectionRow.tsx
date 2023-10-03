@@ -5,6 +5,7 @@ import styles from "./styles/ProfileCollectionRow.module.css";
 import Row from "@/components/Content/components/Row";
 import {playlistDto} from "@/api/dto/playlist.dto";
 import {albumDto} from "@/api/dto/album.dto";
+import Element from "@/components/Content/components/Element";
 
 interface PlaylistItems {
     playlists: playlistDto[]
@@ -23,16 +24,9 @@ export const PlaylistCollectionRow: React.FC<PlaylistItems> = ({playlists}) => {
 
     return (
         <div className={styles.list}>
-            {playlists.length > 5 ?
-                <>
-                    <Carousel>
-                        <Row items={playlists.slice(0, 5)} type={'playlist'}/>
-                        <Row items={playlists.slice(5, 10)} type={'playlist'}/>
-                    </Carousel>
-                </>
-                :
-                <Row items={playlists.slice(0, 5)} type={'playlist'}/>
-            }
+            {playlists.slice(0, 10).map(playlist =>
+                <Element item={playlist} type={'playlist'}/>
+            )}
         </div>
     );
 };
@@ -45,16 +39,9 @@ export const AlbumCollectionRow: React.FC<AlbumItems> = ({albums}) => {
 
     return (
         <div className={styles.list}>
-            {albums.length > 5 ?
-                <>
-                    <Carousel>
-                        <Row items={albums.slice(0, 5)} type={'album'}/>
-                        <Row items={albums.slice(5, 10)} type={'album'}/>
-                    </Carousel>
-                </>
-                :
-                <Row items={albums.slice(0, 5)} type={'album'}/>
-            }
+            {albums.slice(0, 10).map(album =>
+                <Element item={album} type={'album'}/>
+            )}
         </div>
     );
 };

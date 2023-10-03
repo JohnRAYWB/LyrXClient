@@ -24,7 +24,6 @@ const ArtistsList: React.FC<Param> = ({artists, selectedArtist, setSelectedArtis
                             width={50}
                             height={50}
                             priority={true}
-                            quality={50}
                             src={`http://localhost:4221/profile/${artist.username}/${artist.avatar}`}
                             alt={'artist_avatar'}
                         />

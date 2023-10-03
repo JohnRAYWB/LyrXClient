@@ -1,27 +1,30 @@
-.main {
-    width: 100%;
-    margin: 10px 0;
-    box-shadow: 0 0 10px black;
+.mainContainer {
+    display: flex;
+    flex-flow: column;
+    background-color: #0e0e0e;
+    box-shadow: 0 0 10px #0e0e0e;
     border-radius: 10px;
 }
 
-.container {
+.titleContainer {
     display: flex;
-    flex-direction: row;
+    flex-flow: row;
     justify-content: space-between;
     align-items: center;
-    background-color: #171717;
+    background-color: rgba(246, 65, 65, .5);
     border-radius: 10px 10px 0 0;
-    padding: 20px 30px;
+    padding: 10px 20px;
 }
 
 .title {
+    text-transform: uppercase;
     color: #ffffff;
     font-size: 20px;
 }
 
 .link {
-    color: #a6a6a6;
+    font-size: 12px;
+    color: #c44545;
     transition-duration: 400ms;
 }
 
@@ -31,7 +34,6 @@
 }
 
 .rowContainer {
-    background-color: #0e0e0e;
     padding: 10px;
     border-radius: 0 0 10px 10px;
 }

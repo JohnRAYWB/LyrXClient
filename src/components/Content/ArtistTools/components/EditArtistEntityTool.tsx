@@ -45,7 +45,6 @@ const EditArtistEntityTool: React.FC<Param> = ({type, action, index, entity}) =>
                         width={50}
                         height={50}
                         priority={true}
-                        quality={50}
                         src={
                             'protectedDeletion' in entity && entity.protectedDeletion ?
                                 albumsTrackImagePath(entity)

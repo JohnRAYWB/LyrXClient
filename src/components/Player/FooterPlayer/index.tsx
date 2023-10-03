@@ -15,7 +15,12 @@ import PlayerPopovers from "@/components/Player/FooterPlayer/PlayerPopovers";
 import PlayerTracksList from "@/components/Player/FooterPlayer/PlayerTracksList";
 import {albumsTrackImagePath, trackImagePath} from "@/util/ImagePath";
 
-const FooterPlayer = () => {
+interface Param {
+    popup: boolean
+    setPopup: Function
+}
+
+const FooterPlayer: React.FC<Param> = ({popup, setPopup}) => {
 
     const player = useAppSelector(selectTrackData)
     const {tracksList, currentIndex, currentTrack, isActive, isPlaying} = player
@@ -25,7 +30,7 @@ const FooterPlayer = () => {
     const [repeat, setRepeat] = useState(false)
     const [shuffle, setShuffle] = useState(false)
     const [volume, setVolume] = useState(0.5)
-    const [popup, setPopup] = useState(false)
+    // const [popup, setPopup] = useState(false)
 
     const dispatch = useAppDispatch()
 

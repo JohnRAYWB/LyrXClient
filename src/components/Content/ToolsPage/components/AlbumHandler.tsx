@@ -29,7 +29,7 @@ const AlbumHandler: React.FC<Param> = ({setTotalCount}) => {
             <div className={styles.adminToolContainer}>
                 <p onClick={() => router.push('/pth/hub/admin/album/add_track')} className={styles.adminToolButton}>Add track to album</p>
                 <p onClick={() => router.push('/pth/hub/admin/album/delete')} className={styles.adminToolButton}>Delete album</p>
-                <p onClick={() => router.push('/pth/hub/admin/album/remove_track')} className={styles.adminToolButton}>Remove track to album</p>
+                <p onClick={() => router.push('/pth/hub/admin/album/remove_track')} className={styles.adminToolButton}>Remove track from album</p>
             </div>
         </div>
     );

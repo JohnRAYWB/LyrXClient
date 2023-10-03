@@ -17,7 +17,7 @@
     justify-content: space-between;
     align-items: center;
     padding: 10px 20px;
-    background-color: #464646;
+    background-color: rgba(246,65,65,.5);
     border-radius: 10px 10px 0 0;
 }
 
@@ -40,13 +40,13 @@
 }
 
 .collectionsCarousel {
+    padding: 10px;
     border-radius: 0 0 10px 10px;
-    transition-duration: 300ms;
+    transition-duration: 400ms;
 }
 
 .collectionsCarousel:hover {
-    background-color: rgba(246, 65, 65, .4);
-    transition-duration: 300ms;
+    transition-duration: 400ms;
 }
 
 .collectionsDropDown {
@@ -57,7 +57,7 @@
     padding: 10px;
     height: 530px;
     overflow-y: scroll;
-    transition-duration: 300ms;
+    transition-duration: 400ms;
 }
 
 .collectionsDropDown::-webkit-scrollbar-track {
@@ -73,8 +73,7 @@
 }
 
 .collectionsDropDown:hover {
-    background-color: rgba(246, 65, 65, .4);
-    transition-duration: 300ms;
+    transition-duration: 400ms;
 }
 
 .tracksMainContainer {

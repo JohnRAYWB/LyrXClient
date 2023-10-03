@@ -109,18 +109,17 @@
     border-radius: 0 10px 10px 0;
 }
 
-.commentContainer {
-    background-color: #0e0e0e;
-    padding: 20px;
-}
-
 .commentContainerEntities {
+    display: flex;
+    flex-flow: column;
+    gap: 20px;
     padding: 10px 50px;
+    background-color: #0e0e0e;
 }
 
 .commentTitle {
     color: white;
-    font-size: 28px;
+    font-size: 24px;
     text-transform: uppercase;
     text-align: right;
 }
@@ -144,67 +143,10 @@
 }
 
 .commentList {
-    margin: 10px 0;
+    display: flex;
+    flex-flow: column;
+    gap: 5px;
     color: white;
-}
-
-.commentItem {
-    margin: 20px auto;
-    padding: 0 30px 20px 30px;
-    border-radius: 10px;
-    border: 1px solid #232323;
-}
-
-.comment {
-    text-align: start;
-    word-wrap: break-word;
-    color: #cbcbcb;
-}
-
-.editButtons {
-    text-align: end;
-    margin: 10px auto 0 auto;
-    color: #39393d;
-}
-
-.editButtons > * {
-    margin: 0 5px;
-}
-
-.edit {
-    font-size: 14px;
-    margin-top: 20px;
-    padding: 7px 15px;
-    background-color: inherit;
-    color: #39393d;
-    border: 1px solid #39393d;
-    border-radius: 10px;
-    transition-duration: 200ms;
-    cursor: pointer;
-}
-
-.edit:hover {
-    color: #24fd78;
-    border: 1px solid #24fd78;
-    transition-duration: 200ms;
-}
-
-.iconDelete {
-    transition-duration: 200ms;
-}
-
-.iconEdit {
-    transition-duration: 200ms;
-}
-
-.iconDelete:hover {
-    color: #F64141;
-    transition-duration: 200ms
-}
-
-.iconEdit:hover {
-    color: #24fd78;
-    transition-duration: 200ms
 }
 
 .actionButtons {

@@ -66,7 +66,7 @@ const GenrePage: NextPageWithLayout<PageParams> = ({genreId}) => {
                     {!dropdownPlaylist ?
                         <div className={styles.collectionsCarousel}>
                             {playlists.length > 5 ?
-                                <Carousel>
+                                <Carousel style={{paddingBottom: 30}}>
                                     <Row items={playlists.slice(0, 5)} type={'playlist'}/>
                                     <Row items={playlists.slice(5, 10)} type={'playlist'}/>
                                 </Carousel>
@@ -102,7 +102,7 @@ const GenrePage: NextPageWithLayout<PageParams> = ({genreId}) => {
                     {!dropdownAlbum ?
                         <div className={styles.collectionsCarousel}>
                             {albums.length > 5 ?
-                                <Carousel>
+                                <Carousel style={{paddingBottom: 30}}>
                                     <Row items={albums.slice(0, 5)} type={'album'}/>
                                     <Row items={albums.slice(5, 10)} type={'album'}/>
                                 </Carousel>

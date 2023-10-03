@@ -7,6 +7,7 @@ import Image from "next/image";
 import {UserOutlined} from "@ant-design/icons";
 import TrackList from "@/components/Content/TrackPage/TrackList";
 import ArtistHeader from "@/components/Content/UserCollectionPage/components/ArtistHeader";
+import {profileImagePath} from "@/util/ImagePath";
 
 interface UserCollectionParam {
     user: userDto
@@ -19,14 +20,14 @@ const UserCollectionHeader: React.FC<UserCollectionParam> = ({user, type}) => {
 
     if (type === 'user') {
         return (
-            <div>
+            <div className={styles.container}>
                 <div className={styles.headerContainer}>
                     {user.avatar ?
                         <Image
                             width={100}
                             height={100}
                             priority={true}
-                            src={`http:/localhost:4221/profile/${user.username}/${user.avatar}`}
+                            src={profileImagePath(user)}
                             alt={'user_avatar'}
                             className={styles.avatar}
                         />
@@ -54,7 +55,7 @@ const UserCollectionHeader: React.FC<UserCollectionParam> = ({user, type}) => {
     }
 
     return (
-        <div>
+        <div className={styles.container}>
             <div className={styles.headerContainer}>
                 {
                     user.avatar ?
@@ -62,7 +63,7 @@ const UserCollectionHeader: React.FC<UserCollectionParam> = ({user, type}) => {
                             width={100}
                             height={100}
                             priority={true}
-                            src={`http:/localhost:4221/profile/${user.username}/${user.avatar}`}
+                            src={profileImagePath(user)}
                             alt={'user_avatar'}
                             className={styles.avatar}
                         />

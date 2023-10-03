@@ -23,6 +23,8 @@ import TrackList from "@/components/Content/TrackPage/TrackList";
 import {PlaylistCollectionRow, AlbumCollectionRow} from "@/components/Content/components/ProfileCollectionRow";
 import useTextLength from "@/util/useTextLength";
 import FileUpload from "@/util/FileUpload";
+import {profileImagePath} from "@/util/ImagePath";
+import {useScoreLength} from "@/util/useScoreLength";
 
 interface UserParam {
     user: userDto
@@ -48,15 +50,6 @@ const Profile: React.FC<UserParam> = ({user, type}) => {
     const router = useRouter()
 
     const roles = user.roles.map(role => role.role).join(' | ')
-
-    let about = ''
-    let emptyAbout = ''
-
-    if (user.about === undefined) {
-        emptyAbout = `You can add about yourself`
-    }
-
-    user.about !== undefined && user.about.length > 150 ? about = useTextLength(user.about, 150) : about = user.about
 
     const items: TabsProps['items'] = [
         {
@@ -108,7 +101,6 @@ const Profile: React.FC<UserParam> = ({user, type}) => {
     }
 
     const handleEditDone = () => {
-        if (editAvatar || editAbout) {
             const formData = new FormData()
             formData.append('avatar', editAvatar)
             uploadAvatar(formData)
@@ -120,7 +112,6 @@ const Profile: React.FC<UserParam> = ({user, type}) => {
                 placement: "bottomLeft",
                 duration: 2
             })
-        }
     }
 
     return (
@@ -135,35 +126,37 @@ const Profile: React.FC<UserParam> = ({user, type}) => {
                                     className={styles.avatar}
                                     width={195}
                                     height={195}
-                                    src={`http:localhost:4221/profile/${user.username}/${user.avatar}`}
+                                    src={profileImagePath(user)}
                                     alt={'avatar'}/>
                             </div>
                             :
-                            <UserOutlined className={styles.emptyAvatar}/>
+                            <div className={styles.avatarContainer}>
+                                <UserOutlined className={styles.emptyAvatar}/>
+                            </div>
                         }
                         <div className={styles.infoContainer}>
                             <p className={styles.roles}>{roles}</p>
                             <h1 className={styles.infoUsername}>{user.username}</h1>
                             <h1 className={styles.infoEmail}>{user.email}</h1>
                             <div className={styles.description}>
-                                {user.about === undefined ?
-                                    <>
-                                        <InfoCircleOutlined/>
-                                        <p className={styles.infoDescription}>{emptyAbout}</p>
-                                    </>
-                                    :
-                                    about.length > 150 ?
+                                {user.about ?
+                                    user.about.length > 100 ?
                                         <>
                                             <Popover overlayStyle={{width: 600}} content={user.about}>
                                                 <InfoCircleOutlined/>
                                             </Popover>
-                                            <p className={styles.infoDescription}>{about}</p>
+                                            <p className={styles.infoDescription}>{useTextLength(user.about, 100)}</p>
                                         </>
                                         :
                                         <>
                                             <InfoCircleOutlined/>
-                                            <p className={styles.infoDescription}>{about}</p>
+                                            <p className={styles.infoDescription}>{user.about}</p>
                                         </>
+                                        :
+                                    <>
+                                        <InfoCircleOutlined/>
+                                        <p className={styles.infoDescription}>You can add about yourself</p>
+                                    </>
                                 }
                             </div>
                         </div>
@@ -234,20 +227,20 @@ const Profile: React.FC<UserParam> = ({user, type}) => {
                     }
                     <div className={styles.followContainer}>
                         <div className={styles.followElement}>
-                            <h1 className={styles.followText}>Followers:</h1>
-                            <button
+                            <p className={styles.followText}>Followers</p>
+                            <p
                                 onClick={() => router.push(`/pth/hub/users/followers/${user._id}`)}
                                 className={styles.followButton}>
-                                {user.followers.length}
-                            </button>
+                                {useScoreLength(user.followers.length)}
+                            </p>
                         </div>
                         <div className={styles.followElement}>
-                            <h1 className={styles.followText}>Followings:</h1>
-                            <button
+                            <p className={styles.followText}>Followings</p>
+                            <p
                                 onClick={() => router.push(`/pth/hub/users/followings/${user._id}`)}
                                 className={styles.followButton}>
-                                {user.followings.length}
-                            </button>
+                                {useScoreLength(user.followings.length)}
+                            </p>
                         </div>
                     </div>
                 </div>

@@ -20,14 +20,14 @@ const PlaylistRow = () => {
     return (
         playlists.length !== 0 ?
 
-            <div className={styles.main}>
-                <div className={styles.container}>
+            <div className={styles.mainContainer}>
+                <div className={styles.titleContainer}>
                     <h1 className={styles.title}>Playlist</h1>
                     <Link className={styles.link} href={'/pth/hub/playlist'}>See all</Link>
                 </div>
                 <div className={styles.rowContainer}>
                     {playlists.length > 5 ?
-                        <Carousel>
+                        <Carousel style={{paddingBottom: 30}}>
                             <Row items={firstRow} type={'playlist'}/>
                             <Row items={secondRow} type={'playlist'}/>
                         </Carousel>

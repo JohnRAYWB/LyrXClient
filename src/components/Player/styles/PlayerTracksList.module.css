@@ -2,7 +2,7 @@
     display: flex;
     flex-flow: column;
     gap: 2px;
-    width: 350px;
+    width: 400px;
     height: 341px;
     overflow-y: scroll;
 }
@@ -67,7 +67,7 @@
     top: 0;
     right: 0;
     bottom: 117px;
-    width: 400px;
+    width: 480px;
     overflow-y: scroll;
     background-color: rgba(17, 17, 17, .75);
 }

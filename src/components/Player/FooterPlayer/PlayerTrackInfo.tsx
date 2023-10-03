@@ -25,13 +25,21 @@ const PlayerTrackInfo: React.FC<Param> = ({track, index, popup}) => {
                 width={popup ? 400 : 60}
                 height={popup ? 400 : 60}
                 priority={true}
-                quality={100}
                 src={track.protectedDeletion ? albumsTrackImagePath(track) : trackImagePath(track)}
                 alt={'track_logo'}
             />
             <div className={popup ? styles.trackNamesPopupContainer : styles.trackNamesFooterContainer}>
-                <p className={popup ? styles.trackPopupName : styles.trackFooterName}>{useTextLength(track.name[1], 11)}</p>
-                <p className={popup ? styles.trackPopupArtist : styles.trackFooterArtist}>{useTextLength(track.name[0], 11)}</p>
+                {popup ?
+                    <>
+                        <p className={styles.trackPopupName}>{useTextLength(track.name[1], 35)}</p>
+                        <p className={styles.trackPopupArtist}>{useTextLength(track.name[0], 35)}</p>
+                    </>
+                :
+                    <>
+                        <p className={styles.trackFooterName}>{useTextLength(track.name[1], 11)}</p>
+                        <p className={styles.trackFooterArtist}>{useTextLength(track.name[0], 11)}</p>
+                    </>
+                }
             </div>
         </div>
     );

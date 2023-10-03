@@ -22,17 +22,19 @@ const PlaylistCollection: React.FC<PlaylistParams> = ({children}) => {
 
     return (
         <div className={styles.main}>
-            <div className={styles.fav}>
-                <p className={styles.favText}>Most popular playlists</p>
-                <div className={styles.favItems}>
-                    <Carousel>
+            <div className={styles.favoritesContainer}>
+                <h1 className={styles.favoritesTitle}>Most popular playlists</h1>
+                <div className={styles.favoritesItems}>
+                    <Carousel style={{paddingBottom: 30}}>
                         <Row items={firstRow} type={'playlist'}/>
                         <Row items={secondRow} type={'playlist'}/>
                     </Carousel>
                 </div>
             </div>
-            <p className={styles.listText}>Community playlists</p>
-            {children}
+            <div className={styles.mainListContainer}>
+                <h1 className={styles.listTitle}>Community playlists</h1>
+                <div className={styles.listContainer}>{children}</div>
+            </div>
         </div>
     );
 };

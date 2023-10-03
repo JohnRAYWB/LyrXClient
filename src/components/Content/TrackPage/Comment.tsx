@@ -1,12 +1,14 @@
 import React, {useState} from 'react';
-import {DeleteOutlined, EditOutlined} from "@ant-design/icons";
-import {ConfigProvider, Divider, Input, notification} from "antd";
+import {DeleteOutlined, EditOutlined, UserOutlined} from "@ant-design/icons";
+import {ConfigProvider, Input, notification} from "antd";
 import Link from "next/link";
 
-import styles from "@/styles/TrackPage.module.css";
+import styles from "./styles/Comment.module.css";
 import {useDeleteCommentMutation, useEditCommentMutation} from "@/store/api/TrackApi";
 import {commentDto} from "@/api/dto/track.dto";
 import {userDto} from "@/api/dto/user.dto";
+import Image from "next/image";
+import {profileImagePath} from "@/util/ImagePath";
 
 interface CommentParam {
     comment: commentDto
@@ -25,48 +27,62 @@ const Comment: React.FC<CommentParam> = ({comment, user}) => {
     }
 
     return (
-        <div className={styles.commentItem}>
-            <div className={styles.editButtons}>
-                {comment.user._id === user._id ?
-                    <>
-                        <EditOutlined className={styles.iconEdit} onClick={() => setEdit(true)}/>
-                        <DeleteOutlined className={styles.iconDelete} onClick={() => {
-                            deleteComment(comment._id)
-                            notification.success({
-                                style: {backgroundColor: "#646464", width: 300},
-                                message: <p className={styles.notification}>Done!</p>,
-                                description: <p className={styles.notification}>Comment deleted</p>,
-                                placement: "bottomLeft",
-                                duration: 2
-                            })
-                        }}/>
-                    </>
-                    :
-                    null
-                }
-                {
-                    comment.__v !== 0 ?
+        <div className={styles.container}>
+            <div className={styles.headerContainer}>
+                <div className={styles.userContainer}>
+                    {user.avatar ?
+                        <Image
+                            className={styles.avatar}
+                            width={40}
+                            height={40}
+                            priority={true}
+                            src={profileImagePath(user)}
+                            alt={'profile_logo'}
+                        />
+                        :
+                        <UserOutlined className={styles.emptyAvatar}/>
+                    }
+                    <Link
+                        href={
+                            comment.user._id === user._id ?
+                                `/pth/hub/profile`
+                                :
+                                `/pth/hub/users/${comment.user._id}`
+                        }
+                        className={styles.username}
+                    >
+                        {comment.user.username}
+                    </Link>
+                </div>
+                <div className={styles.editContainer}>
+                    {comment.user._id === user._id ?
                         <>
-                            <EditOutlined style={{fontSize: 10}}/>
-                            edited
+                            <EditOutlined className={styles.iconEdit} onClick={() => setEdit(true)}/>
+                            <DeleteOutlined className={styles.iconDelete} onClick={() => {
+                                deleteComment(comment._id)
+                                notification.success({
+                                    style: {backgroundColor: "#646464", width: 300},
+                                    message: <p className={styles.notification}>Done!</p>,
+                                    description: <p className={styles.notification}>Comment deleted</p>,
+                                    placement: "bottomLeft",
+                                    duration: 2
+                                })
+                            }}/>
                         </>
                         :
                         null
-                }
-            </div>
-            <Divider style={{color: "white", border: "#343434", margin: "5px 0 10px 0"}} orientation={"left"}>
-                <Link
-                    href={
-                        comment.user._id === user._id ?
-                            `/pth/hub/profile`
-                            :
-                            `/pth/hub/users/${comment.user._id}`
                     }
-                    className={styles.link}
-                >
-                    {comment.user.username}
-                </Link>
-            </Divider>
+                    {
+                        comment.__v !== 0 ?
+                            <div className={styles.editedContainer}>
+                                <EditOutlined style={{fontSize: 10}}/>
+                                <p>edited</p>
+                            </div>
+                            :
+                            null
+                    }
+                </div>
+            </div>
             {
                 !edit ?
                     <p className={styles.comment}>{comment.text}</p>
@@ -79,9 +95,9 @@ const Comment: React.FC<CommentParam> = ({comment, user}) => {
                                 colorPrimary: '#ff2929',
                             }
                         }}>
-                        <Input className={styles.commentInput} onChange={handleEdit} defaultValue={comment.text}/>
+                            <Input className={styles.commentInput} onChange={handleEdit} defaultValue={comment.text}/>
                         </ConfigProvider>
-                        <button className={styles.edit} onClick={() => {
+                        <button className={styles.editButton} onClick={() => {
                             if(editText.length !== 0) {
                                 editComment({cId: comment._id, text: editText})
                                 notification.success({

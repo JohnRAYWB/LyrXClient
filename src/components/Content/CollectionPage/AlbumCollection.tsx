@@ -24,15 +24,19 @@ const AlbumCollection: React.FC<AlbumParams> = ({children}) => {
 
     return (
         <div className={styles.main}>
-            <p className={styles.favText}>Most popular albums</p>
-            <div className={styles.favItems}>
-                <Carousel>
-                    <Row items={firstRow} type={'album'}/>
-                    <Row items={secondRow} type={'album'}/>
-                </Carousel>
+            <div className={styles.favoritesContainer}>
+                <h1 className={styles.favoritesTitle}>Most popular albums</h1>
+                <div className={styles.favoritesItems}>
+                    <Carousel style={{paddingBottom: 30}}>
+                        <Row items={firstRow} type={'album'}/>
+                        <Row items={secondRow} type={'album'}/>
+                    </Carousel>
+                </div>
             </div>
-            <p className={styles.listText}>Recently added</p>
-            {children}
+            <div className={styles.mainListContainer}>
+                <h1 className={styles.listTitle}>Recently added</h1>
+                <div className={styles.listContainer}>{children}</div>
+            </div>
         </div>
     );
 };

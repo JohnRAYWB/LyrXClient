@@ -252,66 +252,62 @@ const TrackPage: NextPageWithLayout<PageParams> = ({trackId}) => {
                     </div>
                 </div>
             </div>
-            <div className={styles.commentContainer}>
+            <div className={styles.commentContainerEntities}>
+                <div className={styles.commentInputContainer}>
+                    <h1 className={styles.commentInputTitle}>Add comment</h1>
+                    <ConfigProvider theme={{
+                        token: {
+                            colorBorder: '#232323FF',
+                            colorTextPlaceholder: '#404040',
+                            colorPrimary: '#ff2929',
+                        }
+                    }}>
+                        <Input.TextArea
+                            onChange={textHandle}
+                            autoSize={true}
+                            className={styles.commentInput}
+                            placeholder={'Leave your comment'}
+                            value={isLoading ? '' : text}
+                        />
+                        <Button
+                            style={{color: '#606060', border: '1px solid #404040'}}
+                            ghost
+                            onClick={() => {
+                                if (text.length !== 0) {
+                                    leaveComment({tId: trackId, text: text})
+                                    notification.success({
+                                        style: {backgroundColor: "#646464", width: 300},
+                                        message: <p className={styles.notification}>Done!</p>,
+                                        description: <p className={styles.notification}>Comment add
+                                            successfully</p>,
+                                        placement: "bottomLeft",
+                                        duration: 2
+                                    })
+                                    setText('')
+                                } else {
+                                    notification.error({
+                                        style: {backgroundColor: "#646464", width: 300},
+                                        message: <p className={styles.notification}>Error!</p>,
+                                        description: <p className={styles.notification}>Please input text</p>,
+                                        placement: "bottomLeft",
+                                        duration: 2
+                                    })
+                                }
+                            }}
+                        >
+                            Leave comment
+                        </Button>
+                    </ConfigProvider>
+                </div>
                 <Divider style={{border: '#525252'}} orientation={"right"}>
                     <h1 className={styles.commentTitle}>Comments</h1>
                 </Divider>
-                <div className={styles.commentContainerEntities}>
-                    <div className={styles.commentInputContainer}>
-                        <h1 className={styles.commentInputTitle}>Add comment</h1>
-                        <ConfigProvider theme={{
-                            token: {
-                                colorBorder: '#232323FF',
-                                colorTextPlaceholder: '#404040',
-                                colorPrimary: '#ff2929',
-                            }
-                        }}>
-                            <Input.TextArea
-                                onChange={textHandle}
-                                autoSize={true}
-                                className={styles.commentInput}
-                                placeholder={'Leave your comment'}
-                                value={isLoading ? '' : text}
-                            />
-                            <Button
-                                style={{color: '#606060', border: '1px solid #404040'}}
-                                ghost
-                                onClick={() => {
-                                    if (text.length !== 0) {
-                                        leaveComment({tId: trackId, text: text})
-                                        notification.success({
-                                            style: {backgroundColor: "#646464", width: 300},
-                                            message: <p className={styles.notification}>Done!</p>,
-                                            description: <p className={styles.notification}>Comment add
-                                                successfully</p>,
-                                            placement: "bottomLeft",
-                                            duration: 2
-                                        })
-                                        setText('')
-                                    } else {
-                                        notification.error({
-                                            style: {backgroundColor: "#646464", width: 300},
-                                            message: <p className={styles.notification}>Error!</p>,
-                                            description: <p className={styles.notification}>Please input text</p>,
-                                            placement: "bottomLeft",
-                                            duration: 2
-                                        })
-                                    }
-                                }}
-                            >
-                                Leave comment
-                            </Button>
-                        </ConfigProvider>
-                    </div>
-                    <Divider style={{color: '#606060', border: '#232323FF', margin: '40px 0px'}}
-                             orientation={"right"}>Reactions</Divider>
-                    <div className={styles.commentList}>
-                        {
-                            track.comments.map(comment =>
-                                <Comment key={comment._id} comment={comment} user={user}/>
-                            )
-                        }
-                    </div>
+                <div className={styles.commentList}>
+                    {
+                        track.comments.map(comment =>
+                            <Comment key={comment._id} comment={comment} user={user}/>
+                        )
+                    }
                 </div>
             </div>
         </div>

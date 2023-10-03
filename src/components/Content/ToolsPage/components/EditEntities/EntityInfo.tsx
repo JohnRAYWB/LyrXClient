@@ -8,6 +8,8 @@ import {albumDto} from "@/api/dto/album.dto";
 import {useRouter} from "next/navigation";
 import useTextLength from "@/util/useTextLength";
 import {useScoreLength} from "@/util/useScoreLength";
+import {useAppSelector} from "@/hook/redux";
+import {selectUserData} from "@/store/slice/user";
 
 interface Param {
     entity: trackDto | playlistDto | albumDto
@@ -17,20 +19,8 @@ interface Param {
 const EntityInfo: React.FC<Param> = ({entity, type}) => {
 
     const router = useRouter()
-
-    let description
-    let favorites
-    let listens
-
-    type !== 'track' ? description = useTextLength(entity.description, 25) : null
-
-    if('listens' in entity) {
-        listens = useScoreLength(entity.listens)
-    }
-    favorites = useScoreLength(entity.favorites)
-
-    const name = useTextLength(entity.name[1], 10)
-
+    const user = useAppSelector(selectUserData)
+    console.log(user)
     return (
         <>
             {type === 'track' ?
@@ -53,9 +43,20 @@ const EntityInfo: React.FC<Param> = ({entity, type}) => {
                 />
             }
             <div>
-                <p className={styles.entityName}>{name}</p>
+                <p className={styles.entityName}>{useTextLength(entity.name[1], 10)}</p>
                 <p
-                    onClick={() => router.push(`/pth/hub/users/${"artist" in entity ? entity.artist : entity.user}`)}
+                    onClick={() =>
+                        "artist" in entity ?
+                            entity.artist === user._id ?
+                                router.push('/pth/hub/profile')
+                                :
+                                router.push(`/pth/hub/users/${entity.artist}`)
+                            :
+                            entity.user === user._id ?
+                                router.push('/pth/hub/profile')
+                                :
+                                router.push(`/pth/hub/users/${entity.user}`)
+                    }
                     className={styles.entityArtist}>{entity.name[0]}
                 </p>
             </div>
@@ -63,21 +64,21 @@ const EntityInfo: React.FC<Param> = ({entity, type}) => {
                 <>
                     <div className={styles.scoreContainer}>
                         <p className={styles.scoreTitle}>Favorites</p>
-                        <p className={styles.scoreCount}>{favorites}</p>
+                        <p className={styles.scoreCount}>{useScoreLength(entity.favorites)}</p>
                     </div>
                     <div className={styles.scoreContainer}>
                         <p className={styles.scoreTitle}>Listens</p>
-                        <p className={styles.scoreCount}>{listens}</p>
+                        <p className={styles.scoreCount}>{useScoreLength(entity.listens)}</p>
                     </div>
                 </>
                 :
                 <>
                     <div className={styles.descriptionContainer}>
-                        <p className={styles.description}>{description}</p>
+                        <p className={styles.description}>{useTextLength(entity.description, 25)}</p>
                     </div>
                     <div className={styles.scoreContainer}>
                         <p className={styles.scoreTitle}>Favorites</p>
-                        <p className={styles.scoreCount}>{favorites}</p>
+                        <p className={styles.scoreCount}>{useScoreLength(entity.favorites)}</p>
                     </div>
                 </>
             }

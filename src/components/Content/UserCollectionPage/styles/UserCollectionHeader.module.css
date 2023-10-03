@@ -1,3 +1,9 @@
+.container {
+    display: flex;
+    flex-flow: wrap column;
+    gap: 30px;
+}
+
 .headerContainer {
     display: flex;
     flex-flow: row wrap;
@@ -7,7 +13,6 @@
     padding: 20px 40px;
     border-radius: 10px;
     color: #888888;
-    margin-bottom: 20px;
 }
 
 .artistContainer {
@@ -18,7 +23,6 @@
     padding: 20px 60px;
     border-radius: 10px;
     color: #888888;
-    margin: 20px 0;
 }
 
 .artistEntitiesContainer {
@@ -131,8 +135,7 @@
 }
 
 .children {
-    margin: 10px 0;
-    padding: 15px 0;
+    padding: 20px 10px;
     background-color: #0e0e0e;
-    border-radius: 20px;
+    border-radius: 10px;
 }

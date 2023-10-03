@@ -2,34 +2,53 @@
     display: flex;
     flex-direction: column;
     justify-content: center;
+    gap: 30px;
 }
 
-.fav {
+.favoritesContainer {
     display: flex;
     flex-direction: column;
+    background-color: #0e0e0e;
+    border-radius: 10px;
 }
 
-.favItems {
-    padding: 10px 15px;
+.favoritesTitle {
+    display: flex;
+    padding: 10px 20px;
+    background-color: rgba(246, 65, 65, .7);
+    border-radius: 10px 10px 0 0;
+    color: white;
+    font-size: 24px;
+    text-transform: uppercase;
+}
+
+.favoritesItems {
+    padding: 10px;
     background-color: #0e0e0e;
     border-radius: 0 0 10px 10px;
 }
 
-.favText {
-    padding: 30px 30px 20px 20px;
-    text-align: right;
-    background-color: #1c1c1c;
-    color: white;
-    font-size: 24px;
-    border-radius: 10px 10px 0 0;
+.mainListContainer {
+    display: flex;
+    flex-flow: column;
 }
 
-.listText {
-    margin: 25px 0 15px 0;
+.listTitle {
+    display: flex;
+    justify-content: flex-end;
+    padding: 10px 20px;
+    background-color: #505050;
+    border-radius: 10px 10px 0 0;
     color: white;
     font-size: 24px;
-    font-weight: bold;
     text-transform: uppercase;
+}
+
+.listContainer {
+    display: flex;
+    padding: 20px 10px;
+    background-color: #0e0e0e;
+    border-radius: 0 0 10px 10px;
 }
 
 .emptyListContainer {

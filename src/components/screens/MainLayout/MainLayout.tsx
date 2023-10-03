@@ -1,4 +1,4 @@
-import React, {ReactNode} from 'react';
+import React, {ReactNode, useState} from 'react';
 import {Layout} from 'antd';
 import Head from "next/head";
 
@@ -19,6 +19,8 @@ interface NavName {
 
 const App: React.FC<NavName> = ({children, searchElement, name}) => {
 
+    const [popup, setPopup] = useState(false)
+
     const dispatch = useAppDispatch()
     const player = useAppSelector(selectTrackData)
 
@@ -37,14 +39,14 @@ const App: React.FC<NavName> = ({children, searchElement, name}) => {
                 </Sider>
                 <Layout className="site-layout" style={{backgroundColor: 'inherit'}}>
                     <Header style={{background: 'inherit', height: 100}}><Navigation name={name}/></Header>
-                    <Content className={styles.main}>
+                    <Content className={styles.main} hidden={popup}>
                         {children}
                     </Content>
                     <Footer className={styles.footer}>© LyrX | All rights reserved</Footer>
                 </Layout>
             </Layout>
             {player.currentTrack !== null ?
-                <FooterPlayer/>
+                <FooterPlayer popup={popup} setPopup={setPopup}/>
                 :
                 null
             }

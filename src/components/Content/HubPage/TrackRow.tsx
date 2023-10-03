@@ -19,14 +19,14 @@ const TrackRow = () => {
 
     return (
         tracks.length !== 0 ?
-            <div className={styles.main}>
-                <div className={styles.container}>
+            <div className={styles.mainContainer}>
+                <div className={styles.titleContainer}>
                     <h1 className={styles.title}>Tracks</h1>
                     <Link className={styles.link} href={'/pth/hub/track'}>See all</Link>
                 </div>
                 <div className={styles.rowContainer}>
                     {tracks.length > 5 ?
-                        <Carousel>
+                        <Carousel style={{paddingBottom: 30}}>
                             <Row items={firstRow} type={'track'}/>
                             <Row items={secondRow} type={'track'}/>
                         </Carousel>

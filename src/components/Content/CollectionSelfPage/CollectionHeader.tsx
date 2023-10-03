@@ -47,7 +47,6 @@ const CollectionHeader: React.FC<Items> = ({type, collection}) => {
                         <Image
                             className={styles.image}
                             priority={true}
-                            quality={100}
                             width={215}
                             height={215}
                             src={type === 'album' && 'artist' in collection ? albumImagePath(collection) : 'user' in collection && playlistImagePath(collection)}
