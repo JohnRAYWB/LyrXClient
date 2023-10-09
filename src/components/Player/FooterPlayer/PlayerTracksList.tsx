@@ -10,28 +10,32 @@ import Image from "next/image";
 import {albumsTrackImagePath, trackImagePath} from "@/util/ImagePath";
 
 interface Param {
+    collectionId: string
     tracksList: trackDto[]
     currentTrack: trackDto
     isPlaying: boolean
     popup: boolean
 }
 
-const PlayerTracksList: React.FC<Param> = ({tracksList, currentTrack, isPlaying, popup}) => {
+const PlayerTracksList: React.FC<Param> = ({collectionId, tracksList, currentTrack, isPlaying, popup}) => {
 
     const dispatch = useAppDispatch()
 
     const handlePlay = (track, currentIndex) => {
         dispatch(setCurrentTrack({
+            collectionId: collectionId,
             tracksList: tracksList,
             currentIndex: currentIndex,
             currentTrack: track,
             isPlaying: true,
-            isActive: true
         }))
-        dispatch(setPlayPause(true))
     }
-    const handlePause = () => {
-        dispatch(setPlayPause(false))
+    const handlePlayPause = () => {
+        if (isPlaying) {
+            dispatch(setPlayPause(false))
+        } else {
+            dispatch(setPlayPause(true))
+        }
     }
 
     return (
@@ -50,10 +54,16 @@ const PlayerTracksList: React.FC<Param> = ({tracksList, currentTrack, isPlaying,
                         src={track.protectedDeletion ? albumsTrackImagePath(track) : trackImagePath(track)}
                         alt={'track_logo'}
                     />
-                    {isPlaying && track === currentTrack ?
-                        <PauseOutlined className={styles.playPauseButton} onClick={handlePause}/>
+                    {track._id === currentTrack?._id ?
+                        isPlaying ?
+                            <PauseOutlined className={styles.playPauseButton} onClick={handlePlayPause}/>
+                            :
+                            <CaretRightOutlined className={styles.playPauseButton} onClick={handlePlayPause}/>
                         :
-                        <CaretRightOutlined className={styles.playPauseButton} onClick={() => handlePlay(track, index)}/>
+                        <CaretRightOutlined
+                            className={styles.playPauseButton}
+                            onClick={() => handlePlay(track, index)}
+                        />
                     }
                     {
                         popup ?

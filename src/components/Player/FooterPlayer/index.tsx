@@ -23,14 +23,13 @@ interface Param {
 const FooterPlayer: React.FC<Param> = ({popup, setPopup}) => {
 
     const player = useAppSelector(selectTrackData)
-    const {tracksList, currentIndex, currentTrack, isActive, isPlaying} = player
+    const {collectionId, tracksList, currentIndex, currentTrack, isPlaying} = player
 
     const [duration, setDuration] = useState(0)
     const [currentTime, setCurrentTime] = useState(0)
     const [repeat, setRepeat] = useState(false)
     const [shuffle, setShuffle] = useState(false)
     const [volume, setVolume] = useState(0.5)
-    // const [popup, setPopup] = useState(false)
 
     const dispatch = useAppDispatch()
 
@@ -39,8 +38,6 @@ const FooterPlayer: React.FC<Param> = ({popup, setPopup}) => {
     }, [currentIndex]);
 
     const handlePlayPause = () => {
-        if (!isActive) return
-
         if (isPlaying) {
             dispatch(setPlayPause(false))
         } else {
@@ -68,10 +65,10 @@ const FooterPlayer: React.FC<Param> = ({popup, setPopup}) => {
 
     const handleClosePlayer = () => {
         dispatch(setCurrentTrack({
+            collectionId: null,
             tracksList: [],
             currentIndex: 0,
             currentTrack: null,
-            isActive: false,
             isPlaying: false
         }))
     }
@@ -89,8 +86,9 @@ const FooterPlayer: React.FC<Param> = ({popup, setPopup}) => {
                  className={popup ? styles.popupBackgroundImage : null}/>
             {popup ?
                 <div className={styles.popupInfoContainer}>
-                    <PlayerTrackInfo track={currentTrack} index={currentIndex} popup={popup}/>
+                    <PlayerTrackInfo track={currentTrack} isPlaying={isPlaying} index={currentIndex} popup={popup}/>
                     <PlayerTracksList
+                        collectionId={collectionId}
                         tracksList={tracksList}
                         currentTrack={currentTrack}
                         isPlaying={isPlaying}
@@ -98,7 +96,7 @@ const FooterPlayer: React.FC<Param> = ({popup, setPopup}) => {
                     />
                 </div>
                 :
-                <PlayerTrackInfo track={currentTrack} index={currentIndex} popup={popup}/>
+                <PlayerTrackInfo track={currentTrack} isPlaying={isPlaying} index={currentIndex} popup={popup}/>
             }
 
             <div className={popup ? styles.playerPopupContainer : styles.playerFooterContainer}>
@@ -127,6 +125,7 @@ const FooterPlayer: React.FC<Param> = ({popup, setPopup}) => {
                 />
             </div>
             <PlayerPopovers
+                collectionId={collectionId}
                 currentTrack={currentTrack}
                 tracksList={tracksList}
                 isPlaying={isPlaying}

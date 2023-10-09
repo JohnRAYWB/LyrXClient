@@ -30,13 +30,13 @@ const Comment: React.FC<CommentParam> = ({comment, user}) => {
         <div className={styles.container}>
             <div className={styles.headerContainer}>
                 <div className={styles.userContainer}>
-                    {user.avatar ?
+                    {comment.user.avatar ?
                         <Image
                             className={styles.avatar}
                             width={40}
                             height={40}
                             priority={true}
-                            src={profileImagePath(user)}
+                            src={profileImagePath(comment.user)}
                             alt={'profile_logo'}
                         />
                         :

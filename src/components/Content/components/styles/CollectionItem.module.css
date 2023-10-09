@@ -75,7 +75,7 @@
 
 .textContainer {
     display: flex;
-    flex-direction: column;
+    flex-flow: column;
     align-items: center;
     gap: 5px;
     cursor: pointer;

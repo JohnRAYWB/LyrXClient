@@ -36,7 +36,7 @@ const TrackControlElement: React.FC<Param> = ({type, index, edit, album, track, 
     }
 
     const handlePlay = () => {
-        dispatch(setCurrentTrack({tracksList: tracksList, currentIndex: index, currentTrack: track, isPlaying: true, isActive: true}))
+        dispatch(setCurrentTrack({tracksList: tracksList, currentIndex: index, currentTrack: track, isPlaying: true}))
         dispatch(setPlayPause(true))
     }
     const handlePause = () => {

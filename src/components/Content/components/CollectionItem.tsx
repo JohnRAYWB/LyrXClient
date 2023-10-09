@@ -7,7 +7,14 @@ import {useRouter} from "next/navigation";
 import {playlistDto} from "@/api/dto/playlist.dto";
 import {albumDto} from "@/api/dto/album.dto";
 import {useFetchProfileQuery} from "@/store/api/UserApi";
-import {CaretRightOutlined, HeartFilled, HeartOutlined, LoadingOutlined, MenuUnfoldOutlined} from "@ant-design/icons";
+import {
+    CaretRightOutlined,
+    HeartFilled,
+    HeartOutlined,
+    LoadingOutlined,
+    MenuUnfoldOutlined,
+    PauseOutlined
+} from "@ant-design/icons";
 import {useScoreLength} from "@/util/useScoreLength";
 import {
     useAddPlaylistToUserCollectionMutation,
@@ -16,8 +23,8 @@ import {
 import {useAddAlbumToUserCollectionMutation, useRemoveAlbumFromUserCollectionMutation} from "@/store/api/AlbumApi";
 import {handleAddPlaylist, handleRemovePlaylist} from "@/util/handlePlaylistControl";
 import {handleAddAlbum, handleRemoveAlbum} from "@/util/handleAlbumControl";
-import {useAppDispatch} from "@/hook/redux";
-import {setCurrentTrack} from "@/store/slice/player";
+import {useAppDispatch, useAppSelector} from "@/hook/redux";
+import {selectTrackData, setCurrentTrack, setPlayPause} from "@/store/slice/player";
 
 interface CollectionItem {
     item: playlistDto | albumDto
@@ -27,6 +34,7 @@ interface CollectionItem {
 const CollectionItem: React.FC<CollectionItem> = ({item, type}) => {
 
     const [showInfo, setShowInfo] = useState(false)
+    const player = useAppSelector(selectTrackData)
 
     const {data: user, isLoading} = useFetchProfileQuery()
     const [addPlaylist, {isLoading: playlistAddLoading}] = useAddPlaylistToUserCollectionMutation()
@@ -38,17 +46,26 @@ const CollectionItem: React.FC<CollectionItem> = ({item, type}) => {
         return
     }
 
-    const router = useRouter()
     const dispatch = useAppDispatch()
 
-    const handlePlayCollection = () => {
+    const router = useRouter()
+
+    const handleInitialPlayCollection = () => {
         dispatch(setCurrentTrack({
+            collectionId: item._id,
             tracksList: item.tracks,
             currentTrack: item.tracks[0],
             currentIndex: 0,
             isPlaying: true,
-            isActive: true
         }))
+    }
+
+    const handlePlayPause = () => {
+        if (player.isPlaying) {
+            dispatch(setPlayPause(false))
+        } else {
+            dispatch(setPlayPause(true))
+        }
     }
 
     return (
@@ -69,10 +86,17 @@ const CollectionItem: React.FC<CollectionItem> = ({item, type}) => {
                 {showInfo &&
                     <div className={styles.overlay}>
                         <div className={styles.showInfoContainer}>
-                            <CaretRightOutlined
-                                className={styles.playButton}
-                                onClick={() => item.tracks.length !== 0 ? handlePlayCollection() : null}
-                            />
+                            {item._id === player?.collectionId ?
+                                player.isPlaying ?
+                                    <PauseOutlined className={styles.playButton} onClick={handlePlayPause}/>
+                                    :
+                                    <CaretRightOutlined className={styles.playButton} onClick={handlePlayPause}/>
+                                :
+                                <CaretRightOutlined
+                                    className={styles.playButton}
+                                    onClick={() => item.tracks.length !== 0 ? handleInitialPlayCollection() : null}
+                                />
+                            }
                             <div className={styles.tracksCount}>
                                 <MenuUnfoldOutlined/>
                                 <p>{item.tracks.length}</p>
@@ -82,7 +106,7 @@ const CollectionItem: React.FC<CollectionItem> = ({item, type}) => {
                 }
             </div>
             <div className={styles.textContainer} onClick={() => router.push(`/pth/hub/${type}/${item._id}`)}>
-                <h1 className={styles.name}>{`${useTextLength(item.name[0], 10)} - ${useTextLength(item.name[1], 10)}`}</h1>
+                <h1 className={styles.name}>{useTextLength(item.name[1], 24)}</h1>
                 <p className={styles.description}>{useTextLength(item.description, 20)}</p>
             </div>
             <div className={styles.actionContainer}>

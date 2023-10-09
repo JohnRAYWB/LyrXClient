@@ -4,18 +4,18 @@ import {HYDRATE} from "next-redux-wrapper";
 import {RootState} from "@/store/store";
 
 export interface Player {
+    collectionId?: string
     tracksList: trackDto[]
     currentIndex: number
     currentTrack: trackDto
-    isActive: boolean
     isPlaying: boolean
 }
 
 const initialState: Player = {
+    collectionId: null,
     tracksList: [],
     currentIndex: 0,
     currentTrack: null,
-    isActive: false,
     isPlaying: false
 }
 
@@ -24,29 +24,28 @@ const playerSlice = createSlice({
     initialState,
     reducers: {
         setCurrentTrack: (state, action: PayloadAction<Player>) => {
+            state.collectionId = action.payload.collectionId
             state.tracksList = action.payload.tracksList
             state.currentIndex = action.payload.currentIndex
             state.currentTrack = action.payload.currentTrack
-            state.isActive = action.payload.isActive
             state.isPlaying = action.payload.isPlaying
 
             localStorage.setItem('player', JSON.stringify({
+                collectionId: state.collectionId,
                 tracksList: state.tracksList,
                 currentIndex: state.currentIndex,
                 currentTrack: state.currentTrack,
-                isActive: state.isActive,
                 isPlaying: state.isPlaying
             }))
         },
         setChangeTrack: (state, action) => {
             state.currentTrack = state.tracksList[action.payload]
             state.currentIndex = action.payload
-            state.isActive = true
             localStorage.setItem('player', JSON.stringify({
+                collectionId: state.collectionId,
                 tracksList: state.tracksList,
                 currentIndex: state.currentIndex,
                 currentTrack: state.currentTrack,
-                isActive: state.isActive,
                 isPlaying: state.isPlaying
             }))
         },

@@ -100,12 +100,15 @@ const Track: React.FC<Track> = ({track, tracksList, currentTrack, currentIndex, 
             currentIndex: currentIndex,
             currentTrack: track,
             isPlaying: true,
-            isActive: true
         }))
         dispatch(setPlayPause(true))
     }
     const handlePause = () => {
-        dispatch(setPlayPause(false))
+        if(isPlaying) {
+            dispatch(setPlayPause(false))
+        } else {
+            dispatch(setPlayPause(true))
+        }
     }
 
     return (
@@ -121,7 +124,7 @@ const Track: React.FC<Track> = ({track, tracksList, currentTrack, currentIndex, 
                         handlePause={handlePause}
                     />
                     <Image
-                        className={styles.image}
+                        className={currentTrack && track._id === currentTrack._id ? styles.currentTrackImage : styles.image}
                         priority={true}
                         width={45}
                         height={45}

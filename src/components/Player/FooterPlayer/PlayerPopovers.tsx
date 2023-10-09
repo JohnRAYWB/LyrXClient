@@ -14,6 +14,7 @@ import PlayerTracksList from "@/components/Player/FooterPlayer/PlayerTracksList"
 import {trackDto} from "@/api/dto/track.dto";
 
 interface Param {
+    collectionId: string
     currentTrack: trackDto
     tracksList: trackDto[]
     isPlaying: boolean
@@ -25,6 +26,7 @@ interface Param {
 }
 
 const PlayerPopovers: React.FC<Param> = ({
+                                             collectionId,
                                              currentTrack,
                                              tracksList,
                                              isPlaying,
@@ -60,7 +62,8 @@ const PlayerPopovers: React.FC<Param> = ({
                         value={volume}
                         onChange={e => setVolume(e.target.value)}
                     />}>
-                    {volume <= 0 && <FilterOutlined className={styles.actionButton} rotate={90} onClick={() => setVolume(1)}/>}
+                    {volume <= 0 &&
+                        <FilterOutlined className={styles.actionButton} rotate={90} onClick={() => setVolume(1)}/>}
                     {volume > 0 && <SoundOutlined className={styles.actionButton} onClick={() => setVolume(0)}/>}
                 </Popover>
                 {popup ?
@@ -69,6 +72,7 @@ const PlayerPopovers: React.FC<Param> = ({
                     <Popover content={
                         tracksList ?
                             <PlayerTracksList
+                                collectionId={collectionId}
                                 tracksList={tracksList}
                                 currentTrack={currentTrack}
                                 isPlaying={isPlaying}

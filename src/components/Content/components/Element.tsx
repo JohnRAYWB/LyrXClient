@@ -7,9 +7,9 @@ import useTextLength from "@/util/useTextLength";
 import {trackDto} from "@/api/dto/track.dto";
 import {playlistDto} from "@/api/dto/playlist.dto";
 import {albumDto} from "@/api/dto/album.dto";
-import {useAppDispatch} from "@/hook/redux";
-import {setCurrentTrack} from "@/store/slice/player";
-import {CaretRightOutlined, MenuUnfoldOutlined} from "@ant-design/icons";
+import {useAppDispatch, useAppSelector} from "@/hook/redux";
+import {selectTrackData, setCurrentTrack, setPlayPause} from "@/store/slice/player";
+import {CaretRightOutlined, MenuUnfoldOutlined, PauseOutlined} from "@ant-design/icons";
 
 interface element {
     item: trackDto | playlistDto | albumDto
@@ -19,7 +19,10 @@ interface element {
 const Element: React.FC<element> = ({item, type}) => {
 
     const [showInfo, setShowInfo] = useState(false)
+
     const dispatch = useAppDispatch()
+    const player = useAppSelector(selectTrackData)
+
     const router = useRouter()
 
     let folder = type
@@ -33,21 +36,28 @@ const Element: React.FC<element> = ({item, type}) => {
             currentTrack: item,
             currentIndex: 0,
             isPlaying: true,
-            isActive: true
         }))
     }
 
     const handlePlayCollection = () => {
         if ('tracks' in item && item.tracks.length !== 0) {
             dispatch(setCurrentTrack({
+                collectionId: item._id,
                 tracksList: item.tracks,
                 currentTrack: item.tracks[0],
                 currentIndex: 0,
                 isPlaying: true,
-                isActive: true
             }))
         } else {
             return null
+        }
+    }
+
+    const handlePlayPause = () => {
+        if (player.isPlaying) {
+            dispatch(setPlayPause(false))
+        } else {
+            dispatch(setPlayPause(true))
         }
     }
 
@@ -69,10 +79,29 @@ const Element: React.FC<element> = ({item, type}) => {
                 {showInfo &&
                     <div className={styles.overlay}>
                         <div className={styles.showInfoContainer}>
-                            <CaretRightOutlined
-                                className={styles.playButton}
-                                onClick={() => type === 'track' ? handlePlayTrack() : handlePlayCollection()}
-                            />
+                            {type === 'track' ?
+                                item._id === player?.currentTrack?._id && player.isPlaying ?
+                                    <PauseOutlined
+                                        className={styles.playButton}
+                                        onClick={handlePlayPause}
+                                    />
+                                    :
+                                    <CaretRightOutlined
+                                        className={styles.playButton}
+                                        onClick={() => item._id !== player?.currentTrack?._id ? handlePlayTrack() : handlePlayPause()}
+                                    />
+                                :
+                                item._id === player?.collectionId && player.isPlaying ?
+                                    <PauseOutlined
+                                        className={styles.playButton}
+                                        onClick={handlePlayPause}
+                                    />
+                                    :
+                                    <CaretRightOutlined
+                                        className={styles.playButton}
+                                        onClick={() => item._id !== player?.collectionId ? handlePlayCollection() : handlePlayPause()}
+                                    />
+                            }
                             {type !== 'track' && 'tracks' in item &&
                                 <div className={styles.tracksCount}>
                                     <MenuUnfoldOutlined/>

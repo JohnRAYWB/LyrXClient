@@ -8,6 +8,7 @@ import {selectTrackData, setCurrentTrack, setPlayPause} from "@/store/slice/play
 import {CaretRightOutlined, PauseOutlined} from "@ant-design/icons";
 import useTextLength from "@/util/useTextLength";
 import {useRouter} from "next/navigation";
+import Image from "next/image";
 
 interface Param {
     track: trackDto
@@ -30,7 +31,6 @@ const PlayableElement: React.FC<Param> = ({track, tracksList, currentIndex}) => 
             currentIndex: currentIndex,
             currentTrack: track,
             isPlaying: true,
-            isActive: true
         }))
         dispatch(setPlayPause(true))
     }
@@ -46,32 +46,39 @@ const PlayableElement: React.FC<Param> = ({track, tracksList, currentIndex}) => 
     return (
         <div className={styles.mainContainer}>
             <div
-                onMouseEnter={() => setShowPlay(true)}
+                onMouseOver={() => setShowPlay(true)}
                 onMouseLeave={() => setShowPlay(false)}
-                style={{backgroundImage: `url(${track.protectedDeletion ? albumsTrackImagePath(track) : trackImagePath(track)})`}}
                 className={styles.imageContainer}
             >
-                {showPlay ?
-                    player.currentTrack === track ?
-                        player.isPlaying ?
-                            <PauseOutlined
-                                onClick={handlePlayPause}
-                                className={styles.button}
-                            />
+                <Image
+                    className={styles.image}
+                    width={75}
+                    height={75}
+                    priority={true}
+                    src={track.protectedDeletion ? albumsTrackImagePath(track) : trackImagePath(track)}
+                    alt={'track_logo'}
+                />
+                {showPlay &&
+                    <div className={styles.overlay}>
+                        {track._id === player?.currentTrack?._id ?
+                            player.isPlaying ?
+                                <PauseOutlined
+                                    onClick={handlePlayPause}
+                                    className={styles.button}
+                                />
+                                :
+                                <CaretRightOutlined
+                                    onClick={() => {
+                                        handlePlayPause()
+                                    }}
+                                    className={styles.button}
+                                />
                             :
                             <CaretRightOutlined
-                                onClick={() => {
-                                    handlePlayPause()
-                                }}
+                                onClick={handleInitialPlay}
                                 className={styles.button}
-                            />
-                        :
-                        <CaretRightOutlined
-                            onClick={handleInitialPlay}
-                            className={styles.button}
-                        />
-                    :
-                    null
+                            />}
+                    </div>
                 }
             </div>
             <div className={styles.nameContainer} onClick={() => router.push(`/pth/hub/track/${track._id}`)}>

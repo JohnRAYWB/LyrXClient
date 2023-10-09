@@ -1,67 +1,77 @@
 .main {
-    border-radius: 10px;
+    border-radius: 5px;
     box-shadow: 5px 5px 15px black;
 }
 
 .infoContainer {
     display: flex;
-    flex-direction: column;
+    flex-flow: column;
     padding: 20px;
+    gap: 20px;
     background-image: linear-gradient(to bottom, #232323, #0e0e0e);
-    border-radius: 10px 10px 0 0;
+    border-radius: 5px 5px 0 0;
 }
 
 .infoMain {
     display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
+    flex-flow: wrap row;
+    justify-content: space-between;
+    align-items: center;
+    gap: 20px;
+}
+
+.imageContainer {
+    display: flex;
+    align-items: center;
+    padding: 10px;
+    background-color: rgba(246, 65, 65, .5);
+    border-radius: 5px;
 }
 
 .image {
-    margin: 20px auto;
     box-shadow: 0 0 10px #151515;
-    border: 1px solid black;
+    border-radius: 5px;
+    transition-duration: 200ms;
+}
+
+.image:hover {
+    transform: scale(1.1);
+    box-shadow: none;
+    transition-duration: 200ms;
 }
 
 .infoText {
-    width: 700px;
     display: flex;
-    flex-direction: column;
+    flex-flow: wrap column;
     justify-content: center;
     align-items: flex-start;
-    padding: 0 20px;
-    gap: 10px;
+    gap: 20px;
     color: white;
     font-size: 16px;
     font-weight: bold;
 }
 
 .infoTextFooter {
-    margin-top: 50px;
-}
-
-.infoTextFooter > * {
-    margin: 10px 0;
+    display: flex;
+    flex-flow: wrap column;
+    gap: 10px;
 }
 
 .trackOwnerText {
-    font-size: 52px;
+    font-size: 44px;
     text-transform: uppercase;
 }
 
 .trackNameText {
-    margin-left: 5px;
     font-size: 36px;
 }
 
 .trackInfo {
+    display: flex;
+    flex-flow: row;
+    gap: 5px;
     color: #a8a8a8;
     font-size: 16px;
-}
-
-.link {
-    margin-left: 5px;
-    transition-duration: 400ms;
 }
 
 .link:hover {
@@ -71,18 +81,18 @@
 
 .description {
     display: flex;
-    padding: 20px;
     font-size: 16px;
     color: #505050;
-    gap: 20px;
+    gap: 10px;
 }
 
 .scoresContainer {
     display: flex;
     flex-flow: row wrap;
-    justify-content: space-between;
+    justify-content: space-around;
     align-items: center;
-    padding: 10px 20px;
+    padding: 10px 0;
+    gap: 10px;
 }
 
 .scoresItem {
@@ -113,7 +123,7 @@
     display: flex;
     flex-flow: column;
     gap: 20px;
-    padding: 10px 50px;
+    padding: 10px 20px;
     background-color: #0e0e0e;
 }
 
@@ -121,17 +131,19 @@
     color: white;
     font-size: 24px;
     text-transform: uppercase;
-    text-align: right;
 }
 
 .commentInputContainer {
+    display: flex;
+    flex-flow: column;
+    gap: 20px;
     color: white;
     text-align: right;
+    padding: 0 20px;
 }
 
 .commentInputTitle {
     font-size: 20px;
-    margin-bottom: 20px;
     text-align: left;
 }
 
@@ -139,7 +151,10 @@
     background-color: inherit;
     padding: 20px 30px;
     color: white;
-    margin-bottom: 20px;
+}
+
+.commentButton {
+    align-self: flex-end;
 }
 
 .commentList {
@@ -147,6 +162,27 @@
     flex-flow: column;
     gap: 5px;
     color: white;
+}
+
+.emptyCommentHeader {
+    display: flex;
+    flex-flow: row;
+    align-items: center;
+    gap: 10px;
+    color: #888888;
+    font-size: 16px;
+}
+
+.emptyAvatar {
+    padding: 10px;
+    border-radius: 50%;
+    border: solid 3px #888888;
+}
+
+.emptyCommentTitle {
+    padding: 5px;
+    font-size: 14px;
+    color: #505050;
 }
 
 .actionButtons {

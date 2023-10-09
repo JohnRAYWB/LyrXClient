@@ -8,11 +8,12 @@ import useTextLength from "@/util/useTextLength";
 
 interface Param {
     track: trackDto
+    isPlaying: boolean
     index: number
     popup: boolean
 }
 
-const PlayerTrackInfo: React.FC<Param> = ({track, index, popup}) => {
+const PlayerTrackInfo: React.FC<Param> = ({track, isPlaying, index, popup}) => {
     return (
         <div className={popup ? styles.trackInfoPopupContainer : styles.trackInfoFooterContainer}>
             {popup ?
@@ -21,7 +22,7 @@ const PlayerTrackInfo: React.FC<Param> = ({track, index, popup}) => {
                 <p>{index + 1}</p>
             }
             <Image
-                className={styles.image}
+                className={popup ? styles.imagePopup : isPlaying ? styles.imagePlay : styles.imagePause}
                 width={popup ? 400 : 60}
                 height={popup ? 400 : 60}
                 priority={true}
@@ -36,8 +37,8 @@ const PlayerTrackInfo: React.FC<Param> = ({track, index, popup}) => {
                     </>
                 :
                     <>
-                        <p className={styles.trackFooterName}>{useTextLength(track.name[1], 11)}</p>
-                        <p className={styles.trackFooterArtist}>{useTextLength(track.name[0], 11)}</p>
+                        <p className={styles.trackFooterName}>{useTextLength(track.name[1], 20)}</p>
+                        <p className={styles.trackFooterArtist}>{useTextLength(track.name[0], 20)}</p>
                     </>
                 }
             </div>

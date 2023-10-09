@@ -1,15 +1,35 @@
 .trackInfoFooterContainer {
     display: flex;
     flex-flow: row;
-    justify-content: space-between;
+    justify-content: flex-start;
     align-items: center;
     gap: 20px;
-    flex: 0 0 15%;
+    flex: 0 0 20%;
 }
 
-.image {
+.imagePause {
+    box-shadow: 0 0 10px #1c1c1c;
+    border-radius: 50%;
+}
+
+.imagePlay {
+    box-shadow: 0 0 10px #1c1c1c;
+    border-radius: 50%;
+    animation: rotation 8s infinite linear;
+}
+
+.imagePopup {
     box-shadow: 0 0 10px #1c1c1c;
     border-radius: 5px;
+}
+
+@keyframes rotation {
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(359deg);
+    }
 }
 
 .trackNamesFooterContainer {

@@ -49,7 +49,7 @@ const GenrePage: NextPageWithLayout<PageParams> = ({genreId}) => {
 
     return (
         <div className={styles.container}>
-            {playlists !== 0 ?
+            {playlists.length !== 0 ?
                 <div className={styles.collectionsContainer}>
                     <div className={styles.collectionsTitleContainer}>
                         <h1 className={styles.collectionsContainerTitle}>{genre.name}'s Playlists</h1>
@@ -85,7 +85,7 @@ const GenrePage: NextPageWithLayout<PageParams> = ({genreId}) => {
                 :
                 null
             }
-            {albums !== 0 ?
+            {albums.length !== 0 ?
                 <div className={styles.collectionsContainer}>
                     <div className={styles.collectionsTitleContainer}>
                         <h1 className={styles.collectionsContainerTitle}>{genre.name}'s Albums</h1>
@@ -121,7 +121,7 @@ const GenrePage: NextPageWithLayout<PageParams> = ({genreId}) => {
                 :
                 null
             }
-            {tracks !== 0 ?
+            {tracks.length !== 0 ?
                 <div className={styles.tracksMainContainer}>
                     <div className={styles.collectionsTitleContainer}>
                         <h1 className={styles.collectionsContainerTitle}>{genre.name}'s Tracks</h1>

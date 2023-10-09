@@ -12,7 +12,7 @@ import {
     HeartOutlined,
     InfoCircleOutlined,
     LoadingOutlined, PauseOutlined,
-    PlusOutlined
+    PlusOutlined, UserOutlined
 } from "@ant-design/icons";
 
 import styles from "@/styles/TrackPage.module.css"
@@ -85,7 +85,6 @@ const TrackPage: NextPageWithLayout<PageParams> = ({trackId}) => {
             currentIndex: 0,
             currentTrack: track,
             isPlaying: true,
-            isActive: true
         }))
         dispatch(setPlayPause(true))
     }
@@ -101,31 +100,33 @@ const TrackPage: NextPageWithLayout<PageParams> = ({trackId}) => {
                         <h1 className={styles.trackOwnerText}>
                             {
                                 track.artist._id === user._id ?
-                                    <Link className={styles.link} href={`/pth/hub/profile`}>{track.name[0]}</Link>
+                                    <Link className={styles.link}
+                                          href={`/pth/hub/profile`}>{useTextLength(track.name[0], 20)}</Link>
                                     :
                                     <Link className={styles.link}
-                                          href={`/pth/hub/users/${track.artist._id}`}>{track.name[0]}</Link>
+                                          href={`/pth/hub/users/${track.artist._id}`}>{useTextLength(track.name[0], 20)}</Link>
                             }
                         </h1>
-                        <h1 className={styles.trackNameText}>{track.name[1]}</h1>
+                        <h1 className={styles.trackNameText}>{useTextLength(track.name[1], 35)}</h1>
                         <div className={styles.infoTextFooter}>
                             {track.album ?
                                 <>
-                                    <p className={styles.trackInfo}>
-                                        ALBUM:
+                                    <div className={styles.trackInfo}>
+                                        <p>ALBUM:</p>
                                         <Link
                                             className={styles.link}
                                             href={`/pth/hub/album/${track.album._id}`}>
                                             {track.album.name[1]}
-                                        </Link></p>
+                                        </Link>
+                                    </div>
 
                                 </>
                                 :
                                 null}
                             {
                                 track.genre.length !== 0 ?
-                                    <p className={styles.trackInfo}>
-                                        GENRES:
+                                    <div className={styles.trackInfo}>
+                                        <p>GENRES:</p>
                                         {track.genre.map((genre) =>
                                             <Link
                                                 href={`/pth/hub/genre/${genre._id}`}
@@ -134,34 +135,40 @@ const TrackPage: NextPageWithLayout<PageParams> = ({trackId}) => {
                                                 {genre.name}
                                             </Link>
                                         )}
-                                    </p>
+                                    </div>
                                     :
                                     null
                             }
                         </div>
                     </div>
-                    <Image
-                        className={styles.image}
-                        priority={true}
-                        width={260}
-                        height={260}
-                        src={track.protectedDeletion ? albumsTrackImagePath(track) : trackImagePath(track)}
-                        alt={'track_logo'}
-                    />
+                    <div className={styles.imageContainer}>
+                        <Image
+                            className={styles.image}
+                            priority={true}
+                            width={260}
+                            height={260}
+                            src={track.protectedDeletion ? albumsTrackImagePath(track) : trackImagePath(track)}
+                            alt={'track_logo'}
+                        />
+                    </div>
                 </div>
-                <div className={styles.description}>
-                    {
-                        track.description ?
-                            <>
+                {
+                    track.description ?
+                        track.description.length > 200 ?
+                            <div className={styles.description}>
                                 <Popover overlayStyle={{width: 600}} content={track.description}>
                                     <InfoCircleOutlined/>
                                 </Popover>
                                 <p>DESCRIPTION: {useTextLength(track.description, 200)}</p>
-                            </>
+                            </div>
                             :
-                            null
-                    }
-                </div>
+                            <div className={styles.description}>
+                                <InfoCircleOutlined/>
+                                <p>DESCRIPTION: {track.description}</p>
+                            </div>
+                        :
+                        null
+                }
                 <div className={styles.scoresContainer}>
                     <div className={styles.scoresItem}>
                         <p className={styles.scoresItemLeft}>Favorites</p>
@@ -194,7 +201,7 @@ const TrackPage: NextPageWithLayout<PageParams> = ({trackId}) => {
                             :
                             null
                         }
-                        {player.isPlaying ?
+                        {player.isPlaying && player.currentTrack._id === track._id ?
                             <PauseOutlined className={styles.addButtonEmpty} onClick={handlePause}/>
                             :
                             <CaretRightOutlined className={styles.addButtonEmpty} onClick={handlePlay}/>
@@ -271,6 +278,7 @@ const TrackPage: NextPageWithLayout<PageParams> = ({trackId}) => {
                         />
                         <Button
                             style={{color: '#606060', border: '1px solid #404040'}}
+                            className={styles.commentButton}
                             ghost
                             onClick={() => {
                                 if (text.length !== 0) {
@@ -303,10 +311,19 @@ const TrackPage: NextPageWithLayout<PageParams> = ({trackId}) => {
                     <h1 className={styles.commentTitle}>Comments</h1>
                 </Divider>
                 <div className={styles.commentList}>
-                    {
+                    {track.comments.length !== 0 ?
                         track.comments.map(comment =>
                             <Comment key={comment._id} comment={comment} user={user}/>
                         )
+                        :
+                        <>
+                            <div className={styles.emptyCommentHeader}>
+                                <UserOutlined className={styles.emptyAvatar}/>
+                                <p>Admin</p>
+                            </div>
+                            <p className={styles.emptyCommentTitle}>Seems like no one leave comment here. You can be the
+                                first.</p>
+                        </>
                     }
                 </div>
             </div>

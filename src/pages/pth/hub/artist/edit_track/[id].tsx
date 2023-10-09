@@ -105,31 +105,36 @@ const EditTrackPage: NextPageWithLayout<Param> = ({trackId}) => {
             </div>
             <div className={styles.trackContainer}>
                 <div className={styles.trackInfoContainer}>
-                    <Image
-                        className={styles.image}
-                        width={100}
-                        height={100}
-                        priority={true}
-                        src={track.protectedDeletion ? albumsTrackImagePath(track) : trackImagePath(track)}
-                        alt={'track_logo'}
-                    />
-                    <p className={styles.trackName}>{useTextLength(track.name[1], 15)}</p>
-                    <div className={styles.scoreContainer}>
-                        <p className={styles.scoreTitle}>Listens</p>
-                        <p className={styles.scoreCounter}>{useScoreLength(track.listens)}</p>
+                    <div className={styles.imageContainer}>
+                        <Image
+                            className={styles.image}
+                            width={150}
+                            height={150}
+                            priority={true}
+                            src={track.protectedDeletion ? albumsTrackImagePath(track) : trackImagePath(track)}
+                            alt={'track_logo'}
+                        />
                     </div>
-                    <div className={styles.scoreContainer}>
-                        <p className={styles.scoreTitle}>Favorites</p>
-                        <p className={styles.scoreCounter}>{useScoreLength(track.favorites)}</p>
-                    </div>
-                    <div className={styles.scoreContainer}>
-                        <p className={styles.scoreTitle}>Comments count</p>
-                        <p className={styles.scoreCounter}>{useScoreLength(track.commentCount)}</p>
+                    <p className={styles.trackName}>{useTextLength(track.name[1], 35)}</p>
+                    <div className={styles.scoresContainer}>
+                        <p className={styles.scoresTitle}>Stats:</p>
+                        <div className={styles.scoreContainer}>
+                            <p className={styles.scoreTitle}>Listens</p>
+                            <p className={styles.scoreCounter}>{useScoreLength(track.listens)}</p>
+                        </div>
+                        <div className={styles.scoreContainer}>
+                            <p className={styles.scoreTitle}>Favorites</p>
+                            <p className={styles.scoreCounter}>{useScoreLength(track.favorites)}</p>
+                        </div>
+                        <div className={styles.scoreContainer}>
+                            <p className={styles.scoreTitle}>Comments count</p>
+                            <p className={styles.scoreCounter}>{useScoreLength(track.commentCount)}</p>
+                        </div>
                     </div>
                 </div>
                 <div className={styles.descriptionContainer}>
                     <div className={styles.genreList}>
-                        <p className={styles.description}>GENRES:</p>
+                        <p>GENRES:</p>
                         {track.genre.map(genre => <p key={genre._id} className={styles.genre}>{genre.name}</p>)}
                     </div>
                     <p className={styles.description}>DESCRIPTION: {track.description}</p>

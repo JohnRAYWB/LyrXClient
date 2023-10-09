@@ -83,12 +83,12 @@
 
 .tracksContainer {
     padding: 10px;
+    background-color: #0e0e0e;
     border-radius: 0 0 10px 10px;
     transition-duration: 300ms;
 }
 
 .tracksContainer:hover {
-    color: black;
-    background-color: rgba(54, 54, 54, 0.5);
+    background-color: rgba(54, 54, 54, .5);
     transition-duration: 300ms;
 }

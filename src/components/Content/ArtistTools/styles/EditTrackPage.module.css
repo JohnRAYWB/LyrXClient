@@ -45,25 +45,51 @@
 
 .trackInfoContainer {
     display: flex;
-    flex-flow: wrap row;
+    flex-flow: row;
     justify-content: space-around;
     align-items: center;
     gap: 10px;
 }
 
-.trackInfoContainer > * {
-    flex: 0 0 20%;
+.imageContainer {
+    display: flex;
+    align-items: center;
+    padding: 5px;
+    background-color: rgba(246, 65, 65, .5);
+    border-radius: 2px;
 }
 
 .image {
-    flex: 0;
+    transition-duration: 200ms;
+}
+
+.image:hover {
+    transform: scale(1.1);
+    transition-duration: 200ms;
 }
 
 .trackName {
-    flex: 0;
+    font-size: 16px;
     text-transform: uppercase;
     text-align: center;
     color: #999999;
+}
+
+.scoresContainer {
+    display: flex;
+    flex-flow: row;
+    flex: 0 0 50%;
+    justify-content: space-between;
+    align-items: center;
+    gap: 10px;
+    padding: 10px;
+    background-color: rgba(28, 28, 28, .6);
+    border-radius: 5px;
+}
+
+.scoresTitle {
+    text-transform: uppercase;
+    color: #d0d0d0;
 }
 
 .scoreContainer {
@@ -71,9 +97,7 @@
     flex-flow: row;
     justify-content: center;
     align-items: center;
-    gap: 1px;
-    padding: 10px 0;
-    background-color: #313131;
+    gap: 2px;
     border-radius: 10px;
 }
 
@@ -85,17 +109,27 @@
 
 .scoreCounter {
     padding: 5px 10px;
-    background-color: #F64141;
+    background-color: #0e0e0e;
+    border: 1px solid rgba(246, 65, 65, .5);
     border-radius: 0 10px 10px 0;
+    color: #d0d0d0;
+    transition-duration: 200ms;
+}
+
+.scoreCounter:hover {
+    color: #0e0e0e;
+    background-color: rgba(246, 65, 65, 1);
+    border: none;
+    transition-duration: 200ms;
 }
 
 .descriptionContainer {
     display: flex;
     flex-flow: column;
-    padding: 10px 20px;
+    padding: 10px 5px;
     gap: 20px;
     background-color: rgba(246, 65, 65, .3);
-    border-radius: 10px;
+    border-radius: 5px;
 }
 
 .genreList {
@@ -103,6 +137,9 @@
     flex-flow: row;
     align-items: center;
     gap: 10px;
+    padding: 10px;
+    color: white;
+    background-color: rgba(14,14,14, .5);
 }
 
 .genre {
@@ -114,16 +151,18 @@
 }
 
 .description {
+    padding: 10px;
     color: white;
+    background-color: rgba(14,14,14, .5);
 }
 
 .playerContainer {
     display: flex;
     flex-flow: row;
-    justify-content: center;
+    justify-content: space-evenly;
     align-items: center;
     gap: 20px;
-    padding: 10px;
+    padding: 5px;
     background-color: rgba(246, 65, 65, .3);
     border-radius: 10px;
 }

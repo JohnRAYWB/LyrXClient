@@ -15,8 +15,11 @@ interface Param {
 const PlayPause: React.FC<Param> = ({track, currentTrack, isPlaying, handlePlay, handlePause}) => {
 
     return (
-        isPlaying && track._id === currentTrack._id ?
-            <PauseCircleOutlined className={styles.playButton} onClick={handlePause}/>
+        track._id === currentTrack?._id ?
+            isPlaying ?
+                <PauseCircleOutlined className={styles.playButton} onClick={handlePause}/>
+                :
+                <PlayCircleOutlined className={styles.playButton} onClick={handlePause}/>
             :
             <PlayCircleOutlined className={styles.playButton} onClick={handlePlay}/>
 
