@@ -136,8 +136,10 @@ const Profile: React.FC<UserParam> = ({user, type}) => {
                         }
                         <div className={styles.infoContainer}>
                             <p className={styles.roles}>{roles}</p>
-                            <h1 className={styles.infoUsername}>{user.username}</h1>
-                            <h1 className={styles.infoEmail}>{user.email}</h1>
+                            <div className={styles.infoContacts}>
+                                <h1 className={styles.infoUsername}>{useTextLength(user.username, 25)}</h1>
+                                <h1 className={styles.infoEmail}>{useTextLength(user.email, 25)}</h1>
+                            </div>
                             <div className={styles.description}>
                                 {user.about ?
                                     user.about.length > 100 ?

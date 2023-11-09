@@ -1,6 +1,6 @@
 .main {
     display: flex;
-    flex-flow: row wrap;
+    flex-flow: wrap row;
     flex: 0 0 20%;
     gap: 30px;
 }

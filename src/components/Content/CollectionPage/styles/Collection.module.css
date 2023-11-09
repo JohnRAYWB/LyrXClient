@@ -45,7 +45,6 @@
 }
 
 .listContainer {
-    display: flex;
     padding: 20px 10px;
     background-color: #0e0e0e;
     border-radius: 0 0 10px 10px;

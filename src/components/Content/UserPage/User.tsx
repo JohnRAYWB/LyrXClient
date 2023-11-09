@@ -15,6 +15,7 @@ import {
 import RoleHandler from "@/components/Content/UserPage/components/RoleHandler";
 import UsersDetail from "@/components/Content/UserPage/components/UsersDetail";
 import BanHandler from "@/components/Content/UserPage/components/BanHandler";
+import useTextLength from "@/util/useTextLength";
 
 interface UserParam {
     user: userDto
@@ -65,14 +66,14 @@ const User: React.FC<UserParam> = ({user, type}) => {
                         user._id === loggedUser._id ?
                             <div className={styles.textInfo}>
                                 <p className={styles.textUsername}
-                                   onClick={() => router.push(`/pth/hub/profile`)}>{user.username}</p>
+                                   onClick={() => router.push(`/pth/hub/profile`)}>{useTextLength(user.username, 25)}</p>
                                 <p className={styles.textEmail}
                                    onClick={() => router.push(`/pth/hub/profile`)}>{user.email}</p>
                             </div>
                             :
                             <div className={styles.textInfo}>
                                 <p className={styles.textUsername}
-                                   onClick={() => router.push(`/pth/hub/users/${user._id}`)}>{user.username}</p>
+                                   onClick={() => router.push(`/pth/hub/users/${user._id}`)}>{useTextLength(user.username, 25)}</p>
                                 <p className={styles.textEmail}
                                    onClick={() => router.push(`/pth/hub/users/${user._id}`)}>{user.email}</p>
                             </div>

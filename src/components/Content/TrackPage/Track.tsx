@@ -80,10 +80,20 @@ const Track: React.FC<Track> = ({track, tracksList, currentTrack, currentIndex, 
         {
             label: [
                 (
-                    user._id === track.artist._id ?
-                        <Link href={`/pth/hub/profile`}>Go to artist</Link>
+                    track.artist._id ?
+                        user._id === track.artist._id ?
+                            <Link href={`/pth/hub/profile`}>Go to artist</Link>
+                            :
+                            <Link href={`/pth/hub/users/${track.artist._id}`}>
+                                Go to artist
+                            </Link>
                         :
-                        <Link href={`/pth/hub/users/${track.artist}`}>Go to artist</Link>
+                        user._id === track.artist ?
+                            <Link href={`/pth/hub/profile`}>Go to artist</Link>
+                            :
+                            <Link href={`/pth/hub/users/${track.artist}`}>
+                                Go to artist
+                            </Link>
                 )
             ],
             key: '0',
@@ -104,7 +114,7 @@ const Track: React.FC<Track> = ({track, tracksList, currentTrack, currentIndex, 
         dispatch(setPlayPause(true))
     }
     const handlePause = () => {
-        if(isPlaying) {
+        if (isPlaying) {
             dispatch(setPlayPause(false))
         } else {
             dispatch(setPlayPause(true))

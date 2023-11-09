@@ -92,7 +92,7 @@
     display: flex;
     flex: 1;
     flex-direction: column;
-    gap: 10px;
+    gap: 20px;
 }
 
 .roles {
@@ -101,10 +101,16 @@
     font-size: 14px;
 }
 
+.infoContacts {
+    display: flex;
+    flex-flow: column;
+    gap: 10px;
+}
+
 .infoUsername {
     text-transform: uppercase;
     color: white;
-    font-size: 30px;
+    font-size: 24px;
 }
 
 .infoEmail {

@@ -61,7 +61,7 @@ const CollectionHeader: React.FC<Items> = ({type, collection}) => {
                                       href={user._id !== collection.artist._id ?
                                           `/pth/hub/users/${collection.artist._id}`
                                           :
-                                          `/pth/hub/profile/${collection.artist._id}`
+                                          `/pth/hub/profile`
                                       }>
                                     {useTextLength(collection.name[0], 15)}
                                 </Link>
@@ -73,7 +73,7 @@ const CollectionHeader: React.FC<Items> = ({type, collection}) => {
                                       href={user._id !== collection.user._id ?
                                           `/pth/hub/users/${collection.user._id}`
                                           :
-                                          `/pth/hub/profile/${collection.user._id}`
+                                          `/pth/hub/profile`
                                       }>
                                     {useTextLength(collection.name[0], 15)}
                                 </Link>

@@ -42,7 +42,9 @@ const Playlist: NextPageWithLayout = () => {
                                 <LoadingOutlined className={styles.emptyList}/>
                             </div>
                             :
-                            <Collection items={searchingPlaylists} type={'playlist'}/>
+                            <div>
+                                <Collection items={searchingPlaylists} type={'playlist'}/>
+                            </div>
                         :
                         <Pagination
                             page={page}
