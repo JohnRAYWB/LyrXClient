@@ -8,3 +8,19 @@
     color: #888888;
     margin-top: 40px;
 }
+
+.searchContainer {
+    display: flex;
+    flex-flow: wrap row;
+    justify-content: center;
+    align-items: center;
+    gap: 30px;
+    padding: 25px 50px;
+    background-color: #1c1c1c;
+    border-radius: 10px;
+}
+
+.searchText {
+    font-size: 44px;
+    color: #777777;
+}

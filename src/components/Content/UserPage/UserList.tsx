@@ -4,13 +4,22 @@ import styles from "./styles/UserList.module.css"
 import User from "@/components/Content/UserPage/User";
 import {userDto} from "@/api/dto/user.dto";
 import {useFetchProfileQuery} from "@/store/api/UserApi";
+import {LoadingOutlined} from "@ant-design/icons";
 
 interface Users {
     users: userDto[]
     type: string
+    searchFetching?: boolean
 }
 
-const UserList: React.FC<Users> = ({users, type}) => {
+const UserList: React.FC<Users> = ({users, type, searchFetching}) => {
+
+    if(searchFetching) {
+        return <div className={styles.searchContainer}>
+            <p className={styles.searchText}>Search user</p>
+            <LoadingOutlined className={styles.searchText}/>
+        </div>
+    }
 
     const {data: loggedUser, isLoading} = useFetchProfileQuery()
 

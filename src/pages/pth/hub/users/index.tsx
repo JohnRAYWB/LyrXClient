@@ -5,15 +5,21 @@ import {NextPageWithLayout} from "@/pages/_app";
 import MainLayout from "@/components/screens/MainLayout/MainLayout";
 
 import UserList from "@/components/Content/UserPage/UserList";
-import {useFetchAllUserAndSearchQuery} from "@/store/api/UserApi";
+import {useFetchAllUserAndSearchQuery, useFetchAllUsersQuery} from "@/store/api/UserApi";
 import Search from "@/components/screens/MainLayout/Sider/components/Search";
+import Pagination from "@/util/Pagination";
 
 const Users: NextPageWithLayout = () => {
 
     const [query, setQuery] = useState('')
-    const {data: users, isLoading} = useFetchAllUserAndSearchQuery(query)
+    const [page, setPage] = useState(0)
 
-    if (isLoading) {
+    const {data: users, isLoading: usersLoading, isFetching: usersFetching} = useFetchAllUsersQuery(page)
+    const {data: searchUsers, isLoading: searchLoading, isFetching: searchFetching} = useFetchAllUserAndSearchQuery(query)
+
+    console.log(users)
+
+    if (usersLoading || searchLoading) {
         return <></>
     }
 
@@ -22,7 +28,12 @@ const Users: NextPageWithLayout = () => {
     }
     return (
         <MainLayout name={'Users'} searchElement={<Search onChange={searchHandle}/>}>
-            <UserList users={users} type={'users'}/>
+            {
+                query ?
+                    <UserList users={searchUsers} type={'users'} searchFetching={searchFetching}/>
+                    :
+                    <Pagination page={page} setPage={setPage} isFetching={usersFetching} children={<UserList users={users} type={'users'}/>}/>
+            }
         </MainLayout>
     )
 };

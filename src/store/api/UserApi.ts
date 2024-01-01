@@ -15,6 +15,20 @@ export const UserApi = apiSlice.injectEndpoints({
             }),
             providesTags: result => ['User']
         }),
+        fetchAllUsers: build.query<userDto[], number>({
+            query: (page) => ({
+                url: `users?limit=10&page=${page * 10}`
+            }),
+            serializeQueryArgs: ({endpointName}) => {
+                return endpointName
+            },
+            merge: (currentCache, newItem) => {
+                currentCache.push(...newItem)
+            },
+            forceRefetch({currentArg, previousArg}) {
+                return currentArg !== previousArg
+            }
+        }),
         fetchAllArtistsAndSearch: build.query<userDto[], string>({
             query: (query) => ({
                 url: `users/artists/search?username=${query}`
@@ -95,6 +109,7 @@ export const UserApi = apiSlice.injectEndpoints({
 
 export const {
     useFetchProfileQuery,
+    useFetchAllUsersQuery,
     useFetchAllUserAndSearchQuery,
     useFetchAllArtistsAndSearchQuery,
     useFetchUserByIdQuery,
